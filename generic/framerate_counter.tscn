@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2gk725ksvk3g"]
+
+[ext_resource type="Script" path="res://generic/script/framerate_counter.gd" id="1_sbdf2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jmm2a"]
+font_size = 24
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[node name="FPS Counter" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 64.0
+offset_bottom = 53.0
+text = "75"
+label_settings = SubResource("LabelSettings_jmm2a")
+script = ExtResource("1_sbdf2")
