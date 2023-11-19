@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbjr0inn7tyms"]
+
+[ext_resource type="Script" path="res://entities/collection/scripts/coin.gd" id="1_e5it7"]
+[ext_resource type="ArrayMesh" uid="uid://m7lekeef6oai" path="res://models/coins/10 coin.obj" id="2_eq8l8"]
+[ext_resource type="Material" uid="uid://pl0e37xs8boe" path="res://models/coins/materials/Material.tres" id="2_txk0o"]
+[ext_resource type="Material" uid="uid://5bqi4ynwkwef" path="res://models/coins/materials/Material.001.tres" id="3_hht2d"]
+[ext_resource type="AudioStream" uid="uid://bt7watlvqjm3u" path="res://audio/sfx/coin.wav" id="4_7ywbw"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pr344"]
+height = 0.1
+
+[node name="10 Coins" type="Area3D"]
+script = ExtResource("1_e5it7")
+coin = 10
+speed = 7.0
+
+[node name="10Coin" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, -2.11758e-22, 0, 2.11758e-22, 0.4, 0, 0, 0)
+mesh = ExtResource("2_eq8l8")
+surface_material_override/0 = ExtResource("2_txk0o")
+surface_material_override/1 = ExtResource("3_hht2d")
+surface_material_override/2 = ExtResource("2_txk0o")
+surface_material_override/3 = ExtResource("2_txk0o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_pr344")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_7ywbw")
+max_db = -2.0
+pitch_scale = 1.1
+bus = &"SFX"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

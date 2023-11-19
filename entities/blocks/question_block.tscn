@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://4h05mslciqcc"]
+
+[ext_resource type="Script" path="res://entities/blocks/scripts/question_block.gd" id="1_8gon6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pilgm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oo7i2"]
+
+[node name="QuestionBlock" type="CharacterBody3D" groups=["QuestionBlock"]]
+script = ExtResource("1_8gon6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_pilgm")
+
+[node name="Label3D" type="Label3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.505)
+text = "?"
+font_size = 128
+outline_size = 0
+
+[node name="Label3D2" type="Label3D" parent="MeshInstance3D/Label3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.505, 0, -0.505)
+text = "?"
+font_size = 128
+outline_size = 0
+
+[node name="Label3D3" type="Label3D" parent="MeshInstance3D/Label3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.41485e-08, 0, -1.01)
+text = "?"
+font_size = 128
+outline_size = 0
+
+[node name="Label3D4" type="Label3D" parent="MeshInstance3D/Label3D"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -0.505, 0, -0.505)
+text = "?"
+font_size = 128
+outline_size = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_oo7i2")

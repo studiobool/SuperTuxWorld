@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://ceklvmkfr711o"]
+
+[ext_resource type="Script" path="res://entities/collection/scripts/coin.gd" id="1_etbr5"]
+[ext_resource type="ArrayMesh" uid="uid://tsoiyhctwm34" path="res://models/coins/mesh/coin.tres" id="2_al4u1"]
+[ext_resource type="AudioStream" uid="uid://bt7watlvqjm3u" path="res://audio/sfx/coin.wav" id="2_toimh"]
+[ext_resource type="ArrayMesh" uid="uid://ddhfiorhyjyjp" path="res://models/coins/mesh/fish.tres" id="3_x2pqt"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qvkmq"]
+height = 0.1
+radius = 0.4
+
+[node name="Coin" type="Area3D"]
+script = ExtResource("1_etbr5")
+
+[node name="1 coin" type="Node3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, -3.55271e-15, 0, 3.55271e-15, 0.4, 0, 0, 0)
+
+[node name="Cylinder" type="MeshInstance3D" parent="1 coin"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = ExtResource("2_al4u1")
+skeleton = NodePath("")
+
+[node name="Plane" type="MeshInstance3D" parent="1 coin"]
+transform = Transform3D(0.56, 0, 0, 0, 0, -0.56, 0, 0.56, 0, 0, 0, 0)
+mesh = ExtResource("3_x2pqt")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_qvkmq")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_toimh")
+max_db = -2.0
+bus = &"SFX"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://d3kpv4ltmgjmp"]
+
+[ext_resource type="Texture2D" uid="uid://b5i3an3g7clx3" path="res://entities/enemies/walking_snowball/snowball_alt.png" id="1_4sj84"]
+
+[resource]
+resource_name = "Material"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_4sj84")
+texture_filter = 2

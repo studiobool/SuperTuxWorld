@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bw6s82wapkkjp"]
+
+[ext_resource type="Shader" path="res://materials/shaders/outline.gdshader" id="1_v0fb7"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_v0fb7")
+shader_parameter/outline_color = null
+shader_parameter/outline_width = 3.0

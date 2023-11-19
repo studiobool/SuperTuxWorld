@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://dtypmhv3ob47p"]
+
+[node name="TBLoader" type="TBLoader"]
+lighting_unwrap_uv2 = true
