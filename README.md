@@ -7,4 +7,3 @@ An open-source 3D platformer made in Godot 4.x
 - Sprint: Shift
 - Crouch: Ctrl
 - Crawl: Ctrl+Shift
-- Escape: Esc
