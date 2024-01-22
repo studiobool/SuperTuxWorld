@@ -1,0 +1,17 @@
+{
+	"disabled_build_options": {
+		"disable_2d_physics": true,
+		"openxr": false
+	},
+	"disabled_classes": [
+		"MissingNode",
+		"MissingResource",
+		"NavigationAgent2D",
+		"OpenXRAction",
+		"OpenXRActionMap",
+		"OpenXRActionSet",
+		"OpenXRIPBinding",
+		"OpenXRInteractionProfile"
+	],
+	"type": "build_profile"
+}

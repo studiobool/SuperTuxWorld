@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=3 uid="uid://bv1m3e5wajbfe"]
+
+[ext_resource type="PackedScene" uid="uid://bvixnslv5jrol" path="res://generic/debug_exit.tscn" id="1_o75bo"]
+[ext_resource type="PackedScene" uid="uid://dfkvw1e87wtpu" path="res://entities/player/player.tscn" id="4_g0bmp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yvqvn"]
+diffuse_mode = 3
+specular_mode = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b076o"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.498039, 0.498039, 0.498039, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mudl7"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jxwfx"]
+
+[sub_resource type="Sky" id="Sky_s8yd7"]
+sky_material = SubResource("ProceduralSkyMaterial_jxwfx")
+
+[sub_resource type="Environment" id="Environment_fqsny"]
+background_mode = 2
+sky = SubResource("Sky_s8yd7")
+
+[node name="LevelTest" type="Node3D"]
+
+[node name="DebugExit" parent="." instance=ExtResource("1_o75bo")]
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0, 0, 0)
+use_collision = true
+size = Vector3(75, 10, 75)
+material = SubResource("StandardMaterial3D_yvqvn")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGBox3D3"]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 9.75, 13.25, -5.06511e-08)
+use_collision = true
+size = Vector3(20, 0.5, 2.5)
+material = SubResource("StandardMaterial3D_b076o")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="CSGBox3D3/CSGBox3D7"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0.25, -2.25)
+use_collision = true
+size = Vector3(20, 0.5, 2.5)
+material = SubResource("StandardMaterial3D_b076o")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGBox3D3/CSGBox3D7/CSGBox3D8"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0.206806, -2.12597)
+use_collision = true
+size = Vector3(20, 0.5, 2.5)
+material = SubResource("StandardMaterial3D_b076o")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="CSGBox3D3/CSGBox3D7/CSGBox3D8/CSGBox3D7"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0.25, -2.25)
+use_collision = true
+size = Vector3(20, 0.5, 2.5)
+material = SubResource("StandardMaterial3D_b076o")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="CSGBox3D3/CSGBox3D7/CSGBox3D8/CSGBox3D7/CSGBox3D8"]
+transform = Transform3D(1, 0, 0, 0, 0.965925, -0.258819, 0, 0.258819, 0.965925, 0, 0.25, -2.25)
+use_collision = true
+size = Vector3(20, 0.5, 2.5)
+material = SubResource("StandardMaterial3D_b076o")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGBox3D3/CSGBox3D7/CSGBox3D8/CSGBox3D7/CSGBox3D8/CSGBox3D8"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0.206806, -2.12597)
+use_collision = true
+size = Vector3(20, 0.5, 2.5)
+material = SubResource("StandardMaterial3D_b076o")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="CSGBox3D3/CSGBox3D7/CSGBox3D8/CSGBox3D7/CSGBox3D8/CSGBox3D8/CSGBox3D7"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0.25, -2.25)
+use_collision = true
+size = Vector3(20, 0.5, 2.5)
+material = SubResource("StandardMaterial3D_b076o")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.25, 0)
+use_collision = true
+size = Vector3(20, 0.5, 20)
+material = SubResource("StandardMaterial3D_mudl7")
+
+[node name="Player" parent="." instance=ExtResource("4_g0bmp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 29, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.608761, -0.687064, -0.396677, 0, -0.5, 0.866025, -0.793353, -0.527203, -0.304381, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fqsny")

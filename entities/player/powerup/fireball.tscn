@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://clgl23vg4j3b1"]
+
+[ext_resource type="Script" path="res://entities/player/powerup/scripts/fireball.gd" id="1_f0nip"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qogyt"]
+rough = true
+bounce = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_3a6sn"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qwrjs"]
+radius = 0.25
+
+[node name="RigidBody3D" type="RigidBody3D"]
+mass = 2.0
+physics_material_override = SubResource("PhysicsMaterial_qogyt")
+script = ExtResource("1_f0nip")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_3a6sn")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_qwrjs")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -5)

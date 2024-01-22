@@ -1,6 +1,5 @@
-[gd_scene load_steps=24 format=3 uid="uid://bs8odnvyuqlwm"]
+[gd_scene load_steps=19 format=3 uid="uid://bs8odnvyuqlwm"]
 
-[ext_resource type="Shader" path="res://materials/shaders/water.gdshader" id="1_h3lnx"]
 [ext_resource type="PackedScene" uid="uid://dfkvw1e87wtpu" path="res://entities/player/player.tscn" id="2_1cfmr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mudl7"]
@@ -8,43 +7,10 @@ diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.25, 0.25, 0.25, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_e3ocu"]
-noise_type = 4
-domain_warp_enabled = true
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q5xex"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5qgel"]
-seamless = true
-seamless_blend_skirt = 1.0
-noise = SubResource("FastNoiseLite_e3ocu")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_7maj3"]
-noise_type = 4
-seed = 1
-frequency = 0.02
-domain_warp_enabled = true
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k5mls"]
-seamless = true
-seamless_blend_skirt = 0.5
-noise = SubResource("FastNoiseLite_7maj3")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_iwo6x"]
-render_priority = 0
-shader = ExtResource("1_h3lnx")
-shader_parameter/speed = 0.0
-shader_parameter/color = Color(0, 0.509804, 0.823529, 0.729412)
-shader_parameter/edge_color = Color(0.419608, 0.792157, 1, 1)
-shader_parameter/edge_scale = 0.25
-shader_parameter/near = 0.1
-shader_parameter/far = 100.0
-shader_parameter/wave_strengh = Vector2(0.5, 0.25)
-shader_parameter/wave_frequency = Vector2(6, 6)
-shader_parameter/time_factor = Vector2(0.5, 0.5)
-shader_parameter/noise1 = SubResource("NoiseTexture2D_5qgel")
-shader_parameter/noise2 = SubResource("NoiseTexture2D_k5mls")
-
-[sub_resource type="BoxMesh" id="BoxMesh_p7h87"]
-material = SubResource("ShaderMaterial_iwo6x")
+[sub_resource type="BoxMesh" id="BoxMesh_lpvyh"]
+material = SubResource("StandardMaterial3D_q5xex")
 size = Vector3(30, 5, 30)
 subdivide_width = 6
 subdivide_height = 6
@@ -115,7 +81,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13.3, 0)
 collision_layer = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("BoxMesh_p7h87")
+mesh = SubResource("BoxMesh_lpvyh")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]

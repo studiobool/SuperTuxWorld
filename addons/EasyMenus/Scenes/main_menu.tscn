@@ -1,0 +1,206 @@
+[gd_scene load_steps=9 format=3 uid="uid://dq6tvhqcy2aps"]
+
+[ext_resource type="Script" path="res://addons/EasyMenus/Scripts/main_menu_controller.gd" id="1_lbw7r"]
+[ext_resource type="Texture2D" uid="uid://upyyx1dyxlo0" path="res://icon.svg" id="2_pkwk6"]
+[ext_resource type="PackedScene" uid="uid://qlskttl1wjr7" path="res://addons/EasyMenus/Scenes/options_menu.tscn" id="2_pwqpr"]
+[ext_resource type="Script" path="res://addons/EasyMenus/Scenes/Node.gd" id="3_4y3ld"]
+[ext_resource type="Script" path="res://addons/controller_icons/objects/TextureRect.gd" id="5_6baj6"]
+[ext_resource type="Texture2D" uid="uid://bp58drjdgvxsi" path="res://addons/controller_icons/assets/key/enter_alt.png" id="5_p7gfk"]
+[ext_resource type="Texture2D" uid="uid://cnghdqiitl0fu" path="res://addons/controller_icons/assets/key/esc.png" id="7_y2cxx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hfbrj"]
+font_size = 20
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lbw7r")
+
+[node name="Content" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="Title" type="Label" parent="Content"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -117.5
+offset_top = 91.0
+offset_right = 117.5
+offset_bottom = 154.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 64
+text = "Game Title"
+horizontal_alignment = 1
+
+[node name="TextEdit" type="Label" parent="Content"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -48.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "v0.1.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Node" type="Node" parent="Content/TextEdit"]
+metadata/Version = "v0.1.0 - Not yet release-ready"
+
+[node name="MainMenu" type="HBoxContainer" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -544.0
+offset_top = -130.5
+offset_right = 544.0
+offset_bottom = 130.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+metadata/_edit_group_ = true
+
+[node name="StartGameButton" type="Button" parent="Content/MainMenu"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../OptionsButton")
+focus_next = NodePath("../OptionsButton")
+focus_previous = NodePath("../QuitButton")
+theme_override_font_sizes/font_size = 30
+text = "Start"
+icon = ExtResource("2_pkwk6")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Node" type="Node" parent="Content/MainMenu/StartGameButton"]
+script = ExtResource("3_4y3ld")
+
+[node name="OptionsButton" type="Button" parent="Content/MainMenu"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../StartGameButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../StartGameButton")
+theme_override_font_sizes/font_size = 30
+text = "Options"
+icon = ExtResource("2_pkwk6")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="QuitButton" type="Button" parent="Content/MainMenu"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../OptionsButton")
+focus_neighbor_bottom = NodePath("../StartGameButton")
+focus_next = NodePath("../StartGameButton")
+focus_previous = NodePath("../OptionsButton")
+theme_override_font_sizes/font_size = 30
+text = "Quit"
+icon = ExtResource("2_pkwk6")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="OptionsMenu" parent="." instance=ExtResource("2_pwqpr")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+process_mode = 3
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 56.0
+offset_bottom = 56.0
+texture = ExtResource("5_p7gfk")
+expand_mode = 1
+script = ExtResource("5_6baj6")
+path = "ui_accept"
+max_width = 32
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -16.0
+offset_right = 96.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Accept
+"
+label_settings = SubResource("LabelSettings_hfbrj")
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+process_mode = 3
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_left = 144.0
+offset_top = 24.0
+offset_right = 176.0
+offset_bottom = 56.0
+texture = ExtResource("7_y2cxx")
+expand_mode = 1
+script = ExtResource("5_6baj6")
+path = "ui_cancel"
+max_width = 32
+
+[node name="Label" type="Label" parent="TextureRect2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -16.0
+offset_right = 96.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Decline"
+label_settings = SubResource("LabelSettings_hfbrj")
+vertical_alignment = 1
+
+[connection signal="pressed" from="Content/MainMenu/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="Content/MainMenu/OptionsButton" to="." method="open_options"]
+[connection signal="pressed" from="Content/MainMenu/QuitButton" to="." method="quit"]
+[connection signal="close" from="OptionsMenu" to="." method="close_options"]

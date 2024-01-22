@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://dsbgpokpcft6r"]
+
+[ext_resource type="Script" path="res://entities/special/scripts/explosion.gd" id="1_7gono"]
+[ext_resource type="AudioStream" uid="uid://do8ce5bm3sl4b" path="res://audio/sfx/explosion.wav" id="2_3mahs"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ntkkt"]
+radius = 5.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_pnqsd"]
+radius = 5.0
+height = 10.0
+radial_segments = 16
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pn0f0"]
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_mqkx6"]
+radius = 4.0
+height = 8.0
+radial_segments = 16
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_13y67"]
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 0.0588235, 0.027451, 1)
+grow = true
+grow_amount = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qs0kp"]
+next_pass = SubResource("StandardMaterial3D_13y67")
+shading_mode = 0
+albedo_color = Color(1, 1, 0, 1)
+
+[node name="Area3D" type="Area3D"]
+script = ExtResource("1_7gono")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_ntkkt")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("SphereMesh_pnqsd")
+surface_material_override/0 = SubResource("StandardMaterial3D_pn0f0")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_mqkx6")
+surface_material_override/0 = SubResource("StandardMaterial3D_qs0kp")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_3mahs")
+unit_size = 20.0
+autoplay = true
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 12000.0
+attenuation_filter_db = -12.0

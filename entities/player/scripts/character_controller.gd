@@ -1,34 +1,40 @@
+class_name Player
 extends CharacterBody3D
 
 # Movement
-var SPEED = 6.0
-var is_crouching = false
-var is_crawling = false
-const CRAWL_SPEED = 2.5
-const CROUCH_SPEED = 4.0
-const WALK_SPEED = 5.5
-const SPRINT_SPEED = 11.0
-const JUMP_VELOCITY = 16.5
+var current_speed : float = 6.0
+var acceleration : float = 5
+var friction : float = 7.5
+var skid_friction : float = 14.0
+var is_crouching : bool = false
+var is_crawling : bool  = false
+
+# Coyote time variables
+@export var coyote_time: float = 0.15
+@export var coyote_float: float = 0.0525
+var coyote_timer: float = 0.0
+
+# Movement constants
+const crawl_speed : float = 3.0
+const walk_speed : float = 6.0
+const sprint_speed : float = 13.0
+const jump_velocity : float = 19.5
+
+# Movement onready variables
 @onready var stand_collider = $StandCollider
 @onready var crouch_collider = $CrouchCollider
 @onready var crawl_collider = $CrawlCollider
-@onready var coyote = $Coyote
-@onready var jump_buffer = $JumpBuffer
+@onready var floor_detect = $FloorDetect
 @onready var crouch_detection = $CrouchDetection
 @onready var crawl_detection = $CrawlDetection
+@onready var backflip = $Model/Backflip
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * 3.5
+# Gravity
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * 2
 
 # Camera
 @onready var spring_pivot = $SpringPivot
 @onready var spring_arm = $SpringPivot/SpringArm
-@export var cam_sensitivity = 0.0035
-@export var min_zoom = 2.0
-@export var max_zoom = 8.0
-@export var zoom_factor = 0.5
-@export var zoom_duration = 5
-var _zoom_level = 4.0
 
 # Camera position
 @onready var stand_position = $SpringPivot/Standing
@@ -41,9 +47,13 @@ var _zoom_level = 4.0
 const LERP_VAL = .125
 const MODEL_LERP = 8
 
+# Health
+@export var health = 4.0
+@onready var health_bar = $Control/Health
+
 # Coins
-var coins = 0
-@onready var coin_counter = $Control/ColorRect/Label
+@export var coins : int = 0
+@onready var coin_counter = $Control/Coins
 
 # Detectors
 @onready var jump_detect = $JumpDetect
@@ -51,149 +61,130 @@ var coins = 0
 
 # SFX
 @onready var jump_sound = $JumpSound
-
-func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-func _unhandled_input(event):
-	# Camera rotation
-	if event is InputEventMouseMotion:
-		spring_pivot.rotate_y(-event.relative.x * cam_sensitivity)
-		spring_arm.rotate_x(-event.relative.y * cam_sensitivity)
-		spring_arm.rotation.x = clamp(spring_arm.rotation.x, -PI/2.5, PI/4)
-	
-	# Camera zoom
-	if event.is_action_pressed("scroll_up"):
-		_zoom_level -= zoom_factor
-	if event.is_action_pressed("scroll_down"):
-		_zoom_level += zoom_factor
-	
+@onready var flip_sound = $FlipSound
 
 func _process(delta):
 	# Counts the amount of coins on a display text
 	coin_counter.text = str(coins)
+	health_bar.value = lerp(health_bar.value, health, 10 * delta)
 	
 	# Sprint logic
-	if Input.is_action_pressed("sprint"):
-		if is_crouching == false && is_crawling == false:
-			if is_crawling == true && is_on_floor():
-				SPEED = CRAWL_SPEED
-			else:
-				SPEED = SPRINT_SPEED
-	elif Input.is_action_pressed("crouch"):
-		if is_crawling == false && is_on_floor():
-			SPEED = CROUCH_SPEED
-	elif is_crouching == false && is_crawling == false:
-		SPEED = WALK_SPEED
+	if Input.is_action_pressed("sprint") && !is_crawling:
+		current_speed = sprint_speed
+	elif Input.is_action_pressed("crouch") && !is_crawling && is_on_floor():
+		current_speed = crawl_speed
+	elif !is_crawling:
+		current_speed = walk_speed
 	
 	# Sliding logic
-	if SPEED == CROUCH_SPEED || SPEED == CRAWL_SPEED:
-		floor_max_angle = 0
+	if is_crawling:
+		floor_max_angle = PI/48
 	else:
-		floor_max_angle = 1
+		floor_max_angle = PI/3
+	
+	# Handle coyote time (allowing jumps shortly after leaving the ground)
+	if !is_on_floor():
+		coyote_timer += delta
+	else:
+		coyote_timer = 0.0
 	
 	# Crouching
 	if Input.is_action_pressed("crouch"):
-		if Input.is_action_pressed("sprint"):
+		if !Input.is_action_pressed("sprint") && is_on_floor():
 			is_crawling = true
-			is_crouching = false
-			SPEED = CRAWL_SPEED
+			current_speed = crawl_speed
 			crawl_collider.set_deferred("disabled", false)  
-			crouch_collider.set_deferred("disabled", true)  
 			stand_collider.set_deferred("disabled", true)  
-			if is_on_floor():
-				spring_arm.transform.origin = lerp(spring_arm.transform.origin, crawl_position.transform.origin, MODEL_LERP * delta)
-				model.rotation.x = lerp(model.rotation.x, float(1.125), MODEL_LERP * delta)
-		else:
-			if !crawl_detection.is_colliding():
-				is_crawling = false
-				is_crouching = true
-				SPEED = CROUCH_SPEED
-				crawl_collider.set_deferred("disabled", true)  
-				crouch_collider.set_deferred("disabled", false)  
-				stand_collider.set_deferred("disabled", true)  
-				if is_on_floor():
-					spring_arm.transform.origin = lerp(spring_arm.transform.origin, crouch_position.transform.origin, MODEL_LERP * delta)
-					model.rotation.x = lerp(model.rotation.x, float(0.75), MODEL_LERP * delta)
+			spring_arm.transform.origin = lerp(spring_arm.transform.origin, crawl_position.transform.origin, MODEL_LERP * delta)
 	else:
-		if !crawl_detection.is_colliding():
-			if !crouch_detection.is_colliding():
-				is_crawling = false
-				is_crouching = false
-				crawl_collider.set_deferred("disabled", true)  
-				crouch_collider.set_deferred("disabled", true)  
-				stand_collider.set_deferred("disabled", false)  
-				spring_arm.transform.origin = lerp(spring_arm.transform.origin, stand_position.transform.origin, MODEL_LERP * delta)
-				model.rotation.x = lerp(model.rotation.x, float(0), MODEL_LERP * delta)
-	
+		if !crawl_detection.is_colliding() && is_on_floor():
+			is_crawling = false
+			crawl_collider.set_deferred("disabled", true)  
+			stand_collider.set_deferred("disabled", false) 
+			spring_arm.transform.origin = lerp(spring_arm.transform.origin, stand_position.transform.origin, MODEL_LERP * delta)
 
 func _physics_process(delta):
-	# Camera zoom
-	_zoom_level = clamp(_zoom_level, min_zoom, max_zoom)
-	spring_arm.spring_length = lerp(spring_arm.spring_length, _zoom_level, zoom_duration * delta)
-	
-	# Add the gravity.
-	if !is_on_floor():
-		velocity.y -= gravity * delta
-	
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") && (is_on_floor() || !coyote.is_stopped()):
-		coyote.stop()
-		velocity.y = JUMP_VELOCITY
-		jump_sound.play()
-	elif Input.is_action_just_pressed("jump") && !is_on_floor():
-		jump_buffer.start()
-	if Input.is_action_just_released("jump") && velocity.y > JUMP_VELOCITY / 2:
-		velocity.y = JUMP_VELOCITY / 2
-	
-	# Get the input direction && handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	# Get the input direction
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	direction = direction.rotated(Vector3.UP, spring_pivot.rotation.y)
-	if is_on_floor():
-		if direction:
-			velocity.x = lerp(velocity.x, direction.x * SPEED, delta * 11.5)
-			velocity.z = lerp(velocity.z, direction.z * SPEED, delta * 11.5)
-			model.rotation.y = lerp_angle(model.rotation.y, atan2(velocity.x, velocity.z), LERP_VAL)
-		else:
-			if SPEED == WALK_SPEED:
-				velocity.x = lerp(velocity.x, 0.0, delta * 14.0)
-				velocity.z = lerp(velocity.z, 0.0, delta * 14.0)
-			elif SPEED == SPRINT_SPEED:
-				velocity.x = lerp(velocity.x, 0.0, delta * 7.0)
-				velocity.z = lerp(velocity.z, 0.0, delta * 7.0)
-			elif !is_on_floor():
-				velocity.x = lerp(velocity.x, 0.0, delta * 4.5)
-				velocity.z = lerp(velocity.z, 0.0, delta * 4.5)
-			else:
-				velocity.x = lerp(velocity.x, 0.0, delta * 28.0)
-				velocity.z = lerp(velocity.z, 0.0, delta * 28.0)
-	else:
-		velocity.x = lerp(velocity.x, direction.x * SPEED, delta * 2.25)
-		velocity.z = lerp(velocity.z, direction.z * SPEED, delta * 2.25)
-		if direction:
-			model.rotation.y = lerp_angle(model.rotation.y, atan2(velocity.x, velocity.z), LERP_VAL)
 	
-	var was_on_floor = is_on_floor()
+	# Add the gravity.
+	if coyote_timer >= coyote_float:
+		velocity.y -= gravity * delta
+	
+	# Handle jump.
+	if Input.is_action_just_pressed("jump") && (is_on_floor() or coyote_timer < coyote_time):
+		if !is_crawling && velocity.y <= 0.0:
+			jump()
+		#else:
+		#	jump_sound.play()
+		#	flip_sound.play()
+		#	velocity += Vector3(_dir.x * 12, direction.y + jump_velocity * 1.5, _dir.z * 12)
+	
+	if Input.is_action_just_released("jump") && velocity.y > jump_velocity / 2:
+		if !is_crawling:
+			velocity.y = jump_velocity / 2
+	
+	movement(direction, delta)
+	
+	if velocity.x || velocity.z:
+		model.rotation.y = lerp_angle(model.rotation.y, atan2(velocity.x, velocity.z), LERP_VAL)
 	
 	move_and_slide()
 	
-	if was_on_floor && !is_on_floor():
-		coyote.start()
-	if is_on_floor() && !jump_buffer.is_stopped():
-		jump_buffer.stop()
-		velocity.y = JUMP_VELOCITY
+	animate(direction)
+
+func movement(direction, delta):
+	# Handle the movement/deceleration.
+	var is_skidding = false
+	if is_on_floor():
+		if direction:
+			velocity.x = lerp(velocity.x, direction.x * current_speed, acceleration * delta)
+			velocity.z = lerp(velocity.z, direction.z * current_speed, acceleration * delta)
+			# Check for skidding condition
+			if velocity.length() > current_speed:
+				is_skidding = true
+		else:
+			velocity.x = lerp(velocity.x, 0.0, friction * delta)
+			velocity.z = lerp(velocity.z, 0.0, friction * delta)
+	else:
+		if direction:
+			velocity.x = lerp(velocity.x, direction.x * current_speed, acceleration / 2.0 * delta)
+			velocity.z = lerp(velocity.z, direction.z * current_speed, acceleration / 2.0 * delta)
+		else:
+			velocity.x = lerp(velocity.x, 0.0, friction / 4 * delta)
+			velocity.z = lerp(velocity.z, 0.0, friction / 4 * delta)
+	if is_skidding:
+		velocity.x = lerp(velocity.x, 0.0, friction * delta)
+		velocity.z = lerp(velocity.z, 0.0, friction * delta)
+
+func animate(direction):
+	anim_tree.set("parameters/conditions/idle", velocity.length() <= 1.5 && is_on_floor())
+	anim_tree.set("parameters/conditions/fall", !is_on_floor() && velocity.y > 0.01)
+	anim_tree.set("parameters/conditions/walk", velocity.length() >= 1.5 && velocity.length() <= 8.0 && is_on_floor())
+	anim_tree.set("parameters/conditions/run", velocity.length() >= 8.0 && is_on_floor())
+
+func jump():
+	if !is_crawling:
 		jump_sound.play()
-	
-	anim_tree.set("parameters/conditions/idle", !direction && is_on_floor())
-	anim_tree.set("parameters/conditions/fall", !is_on_floor())
-	anim_tree.set("parameters/conditions/walk", direction && is_on_floor() && SPEED == WALK_SPEED)
-	anim_tree.set("parameters/conditions/run", direction && is_on_floor() && SPEED == SPRINT_SPEED)
-	
+		velocity.y = jump_velocity
 
 func _on_stomp_detect_body_entered(body):
-	if !is_on_floor():
-		if body.is_in_group("Enemy"):
-			body.dead()
-			velocity.y = JUMP_VELOCITY / 1.5
+	if !velocity.y == 0:
+		if body.is_in_group("Enemy") && body.state == 1:
+			body.stomp()
+			velocity.y = jump_velocity / 1.5
+
+func _on_touch_screen_button_pressed():
+	if is_on_floor():
+		jump()
+
+func _on_touch_screen_button_released():
+	if velocity.y > jump_velocity / 2:
+		velocity.y = jump_velocity / 2
+
+func hurt(damage,type,intensity,duration):
+	health -= damage
+	if type == 0:
+		Input.start_joy_vibration(0, intensity, intensity, duration)

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvixnslv5jrol"]
-
-[ext_resource type="Script" path="res://generic/script/debug_exit.gd" id="1_k7pa1"]
-
-[node name="DebugExit" type="Node"]
-script = ExtResource("1_k7pa1")

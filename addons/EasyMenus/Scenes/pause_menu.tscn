@@ -1,0 +1,157 @@
+[gd_scene load_steps=7 format=3 uid="uid://rw7gdui8lu3n"]
+
+[ext_resource type="Script" path="res://addons/EasyMenus/Scripts/pause_menu_controller.gd" id="1_5etq0"]
+[ext_resource type="PackedScene" uid="uid://qlskttl1wjr7" path="res://addons/EasyMenus/Scenes/options_menu.tscn" id="2_ejh0f"]
+[ext_resource type="Texture2D" uid="uid://bp58drjdgvxsi" path="res://addons/controller_icons/assets/key/enter_alt.png" id="3_3gn2d"]
+[ext_resource type="Script" path="res://addons/controller_icons/objects/TextureRect.gd" id="4_0ghd8"]
+[ext_resource type="Texture2D" uid="uid://cnghdqiitl0fu" path="res://addons/controller_icons/assets/key/esc.png" id="5_ou2g2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0ge0j"]
+font_size = 20
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5etq0")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="HSeparator2" type="HSeparator" parent="Content"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="PauseMenuLabel" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Pause Menu"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Content"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ResumeGameButton" type="Button" parent="Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Resume"
+
+[node name="OptionsButton" type="Button" parent="Content"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Options"
+
+[node name="BackToMenuButton" type="Button" parent="Content"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Back to Main Menu"
+
+[node name="QuitButton" type="Button" parent="Content"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Quit"
+
+[node name="OptionsMenu" parent="." instance=ExtResource("2_ejh0f")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+process_mode = 3
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 56.0
+offset_bottom = 56.0
+texture = ExtResource("3_3gn2d")
+expand_mode = 1
+script = ExtResource("4_0ghd8")
+path = "ui_accept"
+max_width = 32
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -16.0
+offset_right = 96.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Accept
+"
+label_settings = SubResource("LabelSettings_0ge0j")
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+process_mode = 3
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+offset_left = 144.0
+offset_top = 24.0
+offset_right = 176.0
+offset_bottom = 56.0
+texture = ExtResource("5_ou2g2")
+expand_mode = 1
+script = ExtResource("4_0ghd8")
+path = "ui_cancel"
+max_width = 32
+
+[node name="Label" type="Label" parent="TextureRect2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -16.0
+offset_right = 96.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Decline"
+label_settings = SubResource("LabelSettings_0ge0j")
+vertical_alignment = 1
+
+[connection signal="pressed" from="Content/ResumeGameButton" to="." method="_on_resume_game_button_pressed"]
+[connection signal="pressed" from="Content/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="Content/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]
+[connection signal="pressed" from="Content/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="close" from="OptionsMenu" to="." method="_on_options_menu_close"]
