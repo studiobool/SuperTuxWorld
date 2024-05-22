@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/EasyMenus/Scripts/menu_template_manager.gd" id="1_bu3n2"]
 [ext_resource type="PackedScene" uid="uid://bg6gj8kohejmb" path="res://addons/EasyMenus/Nodes/controller_echo_input_generator.tscn" id="2_n5r8f"]
-[ext_resource type="PackedScene" path="res://addons/EasyMenus/Nodes/startup_loader.tscn" id="3_nyn02"]
+[ext_resource type="PackedScene" uid="uid://c56b7kxfiaj3r" path="res://addons/EasyMenus/Nodes/startup_loader.tscn" id="3_nyn02"]
 
 [node name="MenuTemplateManager" type="Node"]
 process_mode = 3

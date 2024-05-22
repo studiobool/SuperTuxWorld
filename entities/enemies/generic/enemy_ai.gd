@@ -35,19 +35,19 @@ func _process(_delta):
 		rotation.y = lerp_angle(rotation.y, atan2(velocity.x, velocity.z), LERP_VAL)
 
 func _on_vision_detection_body_entered(body):
-	if body.name == "Player" && chase == false && state == 1:
+	if body.is_in_group("Player") && chase == false && state == 1:
 		player = body
 		chase = true
 		print("hola")
 
 func _on_chase_detection_body_exited(body):
-	if body.name == "Player":
+	if body.is_in_group("Player"):
 		player = null
 		chase = false
 		print("adios")
 
 func _on_player_detection_body_entered(body):
-	if body.name == "Player" && state == 1:
+	if body.is_in_group("Player") && state == 1:
 		var direction = (body.transform.origin - global_transform.origin).normalized()
 		body.velocity += Vector3(direction.x * 32, direction.y + 8, direction.z * 32)
 		body.hurt(DAMAGE,0,1.0,0.35)

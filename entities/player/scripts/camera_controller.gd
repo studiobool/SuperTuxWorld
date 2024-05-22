@@ -5,18 +5,17 @@ extends Node3D
 
 # Camera
 @onready var spring_arm = $SpringArm
-var cam_sensitivity : float = 0.0035
+var cam_sensitivity : float = 0.00275
 var mobile_cam_sensitivity : float = 0.007
 var joypad_sensitivity : float = 2.8
 var min_zoom : float = 2.0
 var max_zoom : float = 16.0
 var zoom_factor : float = 0.5
 var zoom_duration : float = 5
-var _zoom_level : float = 4.0
+@export var _zoom_level : float = 6.0
 @export var rotation_speed = 120
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	spring_arm.rotation.x = cam_rot.x
 	rotation.y = cam_rot.y
 	spring_arm.spring_length = _zoom_level
@@ -39,6 +38,11 @@ func handle_scroll_zoom(event):
 		_zoom_level += zoom_factor
 
 func _process(delta):
+	if !GlobalManager.is_paused:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
 	handle_camera_zoom(delta)
 
 func handle_camera_zoom(delta):
@@ -49,9 +53,9 @@ func handle_camera_zoom(delta):
 
 func _physics_process(delta):
 	# General camera rotation
-	spring_arm.rotation.x = lerp_angle(spring_arm.rotation.x, cam_rot.x, 8.0 * delta)
-	rotation.y = lerp_angle(rotation.y, cam_rot.y, 8.0 * delta)
-	cam_rot.x = clamp(cam_rot.x, -PI/2.5, PI/4)
+	spring_arm.rotation.x = lerp_angle(spring_arm.rotation.x, cam_rot.x, 12.5 * delta)
+	rotation.y = lerp_angle(rotation.y, cam_rot.y, 12.5 * delta)
+	cam_rot.x = clamp(cam_rot.x, -PI/2, PI/3)
 	rotation.z = 0.0
 	
 	# Camera zoom

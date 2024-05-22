@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://deoi2m7vcbo66"]
+
+[ext_resource type="Script" path="res://entities/player/powerup/scripts/fireb2.gd" id="1_dhr3p"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uksxu"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_woa3a"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_dhr3p")
+
+[node name="DestroyTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.3
+one_shot = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_uksxu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_woa3a")

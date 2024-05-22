@@ -73,7 +73,7 @@ custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 30
-text = "Back to Main Menu"
+text = "Back to main menu"
 
 [node name="QuitButton" type="Button" parent="Content"]
 custom_minimum_size = Vector2(350, 0)

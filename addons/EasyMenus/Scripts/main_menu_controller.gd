@@ -7,6 +7,8 @@ signal start_game_pressed
 
 func _ready():
 	start_game_button.grab_focus()
+	GlobalManager.is_paused = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func quit():
 	get_tree().quit()

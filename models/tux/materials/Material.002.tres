@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bb5f71l3k7wp3"]
+
+[ext_resource type="Texture2D" uid="uid://clbbffq7ctfab" path="res://models/tux/tux_eyes3.png" id="1_nmwj1"]
+
+[resource]
+resource_name = "Material.002"
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("1_nmwj1")
+texture_filter = 2

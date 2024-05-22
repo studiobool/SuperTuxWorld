@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dq6tvhqcy2aps"]
+[gd_scene load_steps=14 format=3 uid="uid://dq6tvhqcy2aps"]
 
 [ext_resource type="Script" path="res://addons/EasyMenus/Scripts/main_menu_controller.gd" id="1_lbw7r"]
 [ext_resource type="Texture2D" uid="uid://upyyx1dyxlo0" path="res://icon.svg" id="2_pkwk6"]
@@ -7,9 +7,22 @@
 [ext_resource type="Script" path="res://addons/controller_icons/objects/TextureRect.gd" id="5_6baj6"]
 [ext_resource type="Texture2D" uid="uid://bp58drjdgvxsi" path="res://addons/controller_icons/assets/key/enter_alt.png" id="5_p7gfk"]
 [ext_resource type="Texture2D" uid="uid://cnghdqiitl0fu" path="res://addons/controller_icons/assets/key/esc.png" id="7_y2cxx"]
+[ext_resource type="Texture2D" uid="uid://bilobfim0r32w" path="res://addons/qodot/textures/materials/grid_material.png" id="8_ut67x"]
+[ext_resource type="PackedScene" uid="uid://dq3owxfao7no5" path="res://entities/blocks/coin_question_block.tscn" id="9_emhcl"]
+[ext_resource type="Script" path="res://generic/script/menu_rotate.gd" id="10_rrxix"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hfbrj"]
 font_size = 20
+
+[sub_resource type="Environment" id="Environment_hwv4x"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_euhd8"]
+albedo_texture = ExtResource("8_ut67x")
+uv1_triplanar = true
+uv1_world_triplanar = true
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -19,6 +32,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lbw7r")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Content" type="Control" parent="."]
 unique_name_in_owner = true
@@ -44,7 +65,7 @@ theme_override_font_sizes/font_size = 64
 text = "Game Title"
 horizontal_alignment = 1
 
-[node name="TextEdit" type="Label" parent="Content"]
+[node name="Version" type="Label" parent="Content"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -57,12 +78,9 @@ offset_right = -24.0
 offset_bottom = -24.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "v0.1.0"
+text = "v0.0.2-dev"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Node" type="Node" parent="Content/TextEdit"]
-metadata/Version = "v0.1.0 - Not yet release-ready"
 
 [node name="MainMenu" type="HBoxContainer" parent="Content"]
 unique_name_in_owner = true
@@ -72,9 +90,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -544.0
+offset_left = -540.0
 offset_top = -130.5
-offset_right = 544.0
+offset_right = 540.0
 offset_bottom = 130.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -200,6 +218,125 @@ text = "Decline"
 label_settings = SubResource("LabelSettings_hfbrj")
 vertical_alignment = 1
 
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D"]
+environment = SubResource("Environment_hwv4x")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_energy = 0.5
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_bake_mode = 0
+sky_mode = 1
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
+use_collision = true
+size = Vector3(100, 12, 100)
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Node3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 6, 0)
+radius = 2.0
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Node3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 4, 5.5)
+radius = 4.0
+radial_segments = 24
+rings = 12
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="Node3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5, 2, 0.5)
+radius = 6.0
+radial_segments = 36
+rings = 18
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="Node3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 9.5, 14.5)
+operation = 2
+radius = 10.0
+radial_segments = 24
+rings = 12
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -11)
+use_collision = true
+size = Vector3(8, 2, 6)
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Node3D/CSGBox3D/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 0.92388, -0.382683, 0, 0.382683, 0.92388, 0, -0.935, 5.06)
+use_collision = true
+size = Vector3(8, 2, 5.287)
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Node3D/CSGBox3D/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 5.29075, -8)
+use_collision = true
+size = Vector3(8, 2, 16)
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Node3D/CSGBox3D/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -0.25)
+operation = 2
+use_collision = true
+size = Vector3(9, 2, 6)
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Node3D/CSGBox3D/CSGBox3D2/CSGBox3D5"]
+transform = Transform3D(1, 0, 0, 0, 0.92388, -0.382683, 0, 0.382683, 0.92388, 0, -0.935, 5.06)
+use_collision = true
+size = Vector3(9, 2, 5.287)
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Node3D/CSGBox3D/CSGBox3D2/CSGBox3D5"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 5.29075, -8)
+use_collision = true
+size = Vector3(9, 2, 16)
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 7, -8)
+radius = 4.0
+height = 4.0
+sides = 16
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
+visible = false
+use_collision = true
+flip_faces = true
+size = Vector3(100, 40, 100)
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="QuestionBlock" parent="Node3D" instance=ExtResource("9_emhcl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 4.5, 4.5)
+coin = 5
+
+[node name="QuestionBlock2" parent="Node3D" instance=ExtResource("9_emhcl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 4.5, 5.5)
+coin = 10
+
+[node name="QuestionBlock3" parent="Node3D" instance=ExtResource("9_emhcl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 4.5, 6.5)
+coin = 20
+
+[node name="Node3D2" type="Node3D" parent="."]
+transform = Transform3D(0.707107, -0.430459, 0.560985, 0, 0.793353, 0.608761, -0.707107, -0.430459, 0.560985, 0, 0, 0)
+script = ExtResource("10_rrxix")
+
+[node name="Camera" type="Camera3D" parent="Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 5.96046e-08, 1, 0, 0, 50)
+fov = 50.0
+
+[connection signal="start_game_pressed" from="." to="Content/MainMenu/StartGameButton/Node" method="_on_main_menu_start_game_pressed"]
 [connection signal="pressed" from="Content/MainMenu/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="Content/MainMenu/OptionsButton" to="." method="open_options"]
 [connection signal="pressed" from="Content/MainMenu/QuitButton" to="." method="quit"]

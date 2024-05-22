@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7y3ryplmnxp3"]
+
+[ext_resource type="Script" path="res://entities/special/scripts/shadow_raycast.gd" id="1_3mt5y"]
+[ext_resource type="CylinderMesh" uid="uid://b5kga3vei8oet" path="res://entities/player/shadow_mesh.tres" id="2_w3uge"]
+
+[node name="ShadowRaycast" type="RayCast3D" node_paths=PackedStringArray("shadow_mesh")]
+target_position = Vector3(0, -1.67772e+07, 0)
+script = ExtResource("1_3mt5y")
+shadow_mesh = NodePath("Shadow")
+
+[node name="Shadow" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_w3uge")

@@ -1,9 +1,10 @@
-[gd_scene load_steps=35 format=3 uid="uid://cu458ttpnqvj8"]
+[gd_scene load_steps=36 format=3 uid="uid://cu458ttpnqvj8"]
 
 [ext_resource type="Script" path="res://entities/enemies/generic/enemy_ai.gd" id="1_aq37d"]
 [ext_resource type="Script" path="res://entities/enemies/walking_snowball/snowball.gd" id="2_cfxd4"]
 [ext_resource type="Texture2D" uid="uid://87loekkjsigp" path="res://models/snowball/snow_walker_snowball.png" id="3_kk22q"]
 [ext_resource type="Material" uid="uid://d3kpv4ltmgjmp" path="res://entities/enemies/walking_snowball/mr.tres" id="4_mjbkb"]
+[ext_resource type="PackedScene" uid="uid://c7y3ryplmnxp3" path="res://entities/special/shadow_raycast.tscn" id="5_5y7it"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fd1m2"]
 animation = &"Dead"
@@ -327,6 +328,8 @@ radius = 5.0
 radius = 25.0
 
 [node name="Snowball" type="CharacterBody3D" groups=["Enemy"]]
+collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_aq37d")
 
 [node name="Logic" type="Node" parent="."]
@@ -338,7 +341,6 @@ transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
 [node name="AnimationTree" type="AnimationTree" parent="snow_walker"]
 tree_root = SubResource("AnimationNodeStateMachine_cft2r")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/conditions/dead = false
 parameters/conditions/idle = false
 parameters/conditions/move = false
@@ -350,14 +352,14 @@ bones/0/name = "Head"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 bones/0/enabled = true
-bones/0/position = Vector3(0, 0, 0)
-bones/0/rotation = Quaternion(0, 0, 0, 1)
+bones/0/position = Vector3(0, 0.0370716, 0)
+bones/0/rotation = Quaternion(0.0184505, 0, 0, 0.99983)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Head.001"
 bones/1/parent = -1
 bones/1/rest = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, 0)
 bones/1/enabled = true
-bones/1/position = Vector3(0, 0, 0)
+bones/1/position = Vector3(0, 0.0370716, 0)
 bones/1/rotation = Quaternion(1, 0, 0, 0)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Right Foot"
@@ -365,14 +367,14 @@ bones/2/parent = 1
 bones/2/rest = Transform3D(-0.642032, -0.314486, -0.699209, 0.708588, 0.104828, -0.697793, 0.292743, -0.943456, 0.155537, -0.4, 0.8, 0.3)
 bones/2/enabled = true
 bones/2/position = Vector3(-0.4, 0.8, 0.3)
-bones/2/rotation = Quaternion(-0.156207, -0.630738, 0.650527, 0.393171)
+bones/2/rotation = Quaternion(-0.141591, -0.654316, 0.626807, 0.398668)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "Left Foot"
 bones/3/parent = 1
 bones/3/rest = Transform3D(-0.675156, 0.314485, 0.667281, -0.673946, 0.104828, -0.731305, -0.299935, -0.943456, 0.141171, 0.4, 0.8, 0.3)
 bones/3/enabled = true
 bones/3/position = Vector3(0.4, 0.8, 0.3)
-bones/3/rotation = Quaternion(0.140397, -0.640081, 0.654121, -0.377771)
+bones/3/rotation = Quaternion(0.12636, -0.663784, 0.630054, -0.382695)
 bones/3/scale = Vector3(1, 1, 1)
 
 [node name="Bowtie" type="MeshInstance3D" parent="snow_walker/Armature/Skeleton3D"]
@@ -441,6 +443,9 @@ shape = SubResource("SphereShape3D_ju0ai")
 avoidance_enabled = true
 height = 2.0
 radius = 1.0
+
+[node name="ShadowRaycast" parent="." instance=ExtResource("5_5y7it")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [connection signal="body_entered" from="Player Detection" to="." method="_on_player_detection_body_entered"]
 [connection signal="body_entered" from="Vision Detection" to="." method="_on_vision_detection_body_entered"]

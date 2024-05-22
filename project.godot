@@ -10,19 +10,21 @@ config_version=5
 
 [application]
 
-config/name="SuperTuxWorld"
+config/name="SuperTux World"
 config/description="An open-source 3D platformer for Windows and Mac."
-run/main_scene="res://scenes/level/movement_test.tscn"
+config/version="0.0.2"
+run/main_scene="res://addons/EasyMenus/Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://images/splash.png"
 config/icon="res://icon.svg"
-boot_splash/minimum_display_time=9
+boot_splash/minimum_display_time=8
 
 [autoload]
 
 MenuTemplateManager="*res://addons/EasyMenus/Nodes/menu_template_manager.tscn"
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
+GlobalManager="*res://global_manager.gd"
 
 [debug]
 
@@ -37,7 +39,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/qodot/plugin.cfg")
+enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/proto_shape/plugin.cfg", "res://addons/qodot/plugin.cfg")
 
 [input]
 

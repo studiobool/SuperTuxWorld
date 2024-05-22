@@ -1,0 +1,214 @@
+[gd_scene load_steps=12 format=3 uid="uid://cisxrrtnp48gn"]
+
+[ext_resource type="PackedScene" uid="uid://bvixnslv5jrol" path="res://generic/debug_exit.tscn" id="1_tftif"]
+[ext_resource type="Texture2D" uid="uid://bilobfim0r32w" path="res://addons/qodot/textures/materials/grid_material.png" id="2_437w1"]
+[ext_resource type="PackedScene" uid="uid://dku7ub68jr34k" path="res://entities/player/player_map.tscn" id="3_drhsu"]
+[ext_resource type="PackedScene" uid="uid://dq3owxfao7no5" path="res://entities/blocks/coin_question_block.tscn" id="4_yssdo"]
+[ext_resource type="Texture2D" uid="uid://upyyx1dyxlo0" path="res://icon.svg" id="5_hx8ed"]
+[ext_resource type="Script" path="res://scenes/level/scripts/LevelArea.gd" id="5_smom2"]
+[ext_resource type="PackedScene" uid="uid://q8wkae6o2ur2" path="res://scenes/level/movement_test.tscn" id="6_8esgg"]
+
+[sub_resource type="Environment" id="Environment_hwv4x"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_euhd8"]
+albedo_texture = ExtResource("2_437w1")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_s2epq"]
+height = 4.0
+radius = 3.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_40pfm"]
+line_spacing = 0.0
+font_size = 17
+outline_size = 9
+outline_color = Color(0, 0, 0, 0.74902)
+shadow_size = 0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DebugExit" parent="." instance=ExtResource("1_tftif")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hwv4x")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_energy = 0.5
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_bake_mode = 0
+sky_mode = 1
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
+use_collision = true
+size = Vector3(100, 12, 100)
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 6, 0)
+radius = 2.0
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 4, 5.5)
+radius = 4.0
+radial_segments = 24
+rings = 12
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5, 2, 0.5)
+radius = 6.0
+radial_segments = 36
+rings = 18
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 9.5, 14.5)
+operation = 2
+radius = 10.0
+radial_segments = 48
+rings = 24
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -11)
+use_collision = true
+size = Vector3(8, 2, 6)
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 0.92388, -0.382683, 0, 0.382683, 0.92388, 0, -0.935, 5.06)
+use_collision = true
+size = Vector3(8, 2, 5.287)
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 5.29075, -8)
+use_collision = true
+size = Vector3(8, 2, 16)
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -0.25)
+operation = 2
+use_collision = true
+size = Vector3(9, 2, 6)
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2/CSGBox3D5"]
+transform = Transform3D(1, 0, 0, 0, 0.92388, -0.382683, 0, 0.382683, 0.92388, 0, -0.935, 5.06)
+use_collision = true
+size = Vector3(9, 2, 5.287)
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2/CSGBox3D5"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 5.29075, -8)
+use_collision = true
+size = Vector3(9, 2, 16)
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 7, -8)
+radius = 4.0
+height = 4.0
+sides = 16
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, -6.5, 14.5)
+use_collision = true
+size = Vector3(40, 1, 40)
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+visible = false
+use_collision = true
+flip_faces = true
+size = Vector3(100, 40, 100)
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="Player Map" parent="." groups=["Player"] instance=ExtResource("3_drhsu")]
+
+[node name="QuestionBlock" parent="." instance=ExtResource("4_yssdo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 4.5, 4.5)
+coin = 5
+
+[node name="QuestionBlock2" parent="." instance=ExtResource("4_yssdo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 4.5, 5.5)
+coin = 10
+
+[node name="QuestionBlock3" parent="." instance=ExtResource("4_yssdo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 4.5, 6.5)
+coin = 20
+
+[node name="LevelArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, -6, 15)
+script = ExtResource("5_smom2")
+level = ExtResource("6_8esgg")
+level_icon = ExtResource("5_hx8ed")
+level_name = "movment_test"
+
+[node name="LevelIcon" type="Sprite3D" parent="LevelArea"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5, 0)
+pixel_size = 0.02
+texture = ExtResource("5_hx8ed")
+
+[node name="LevelName" type="Label3D" parent="LevelArea/LevelIcon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -9.53674e-07)
+outline_modulate = Color(0, 0, 0, 0.74902)
+text = "movement_test"
+font_size = 128
+outline_size = 64
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("CylinderShape3D_s2epq")
+
+[node name="Control" type="Control" parent="LevelArea"]
+visible = false
+z_index = -1
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+
+[node name="Level Name" type="Label" parent="LevelArea/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -176.0
+offset_top = 112.0
+offset_right = -48.0
+offset_bottom = 136.0
+grow_horizontal = 0
+text = "movement_test"
+label_settings = SubResource("LabelSettings_40pfm")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Press to enter" type="Label" parent="LevelArea/Control/Level Name"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_top = 24.0
+offset_bottom = 48.0
+grow_horizontal = 0
+text = "Press F to Enter"
+label_settings = SubResource("LabelSettings_40pfm")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[connection signal="body_entered" from="LevelArea" to="LevelArea" method="_on_body_entered"]
+[connection signal="body_exited" from="LevelArea" to="LevelArea" method="_on_body_exited"]

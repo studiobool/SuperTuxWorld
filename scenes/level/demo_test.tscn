@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=3 uid="uid://ctwnbg88ixjan"]
+
+[ext_resource type="PackedScene" uid="uid://bvixnslv5jrol" path="res://generic/debug_exit.tscn" id="1_2vvnp"]
+[ext_resource type="Texture2D" uid="uid://bilobfim0r32w" path="res://addons/qodot/textures/materials/grid_material.png" id="2_xiwmf"]
+[ext_resource type="Script" path="res://addons/proto_shape/proto_ramp/proto_ramp.gd" id="3_cjas2"]
+[ext_resource type="PackedScene" uid="uid://dfkvw1e87wtpu" path="res://entities/player/player.tscn" id="3_xbsr8"]
+[ext_resource type="PackedScene" uid="uid://dq3owxfao7no5" path="res://entities/blocks/coin_question_block.tscn" id="4_vwd8k"]
+
+[sub_resource type="Environment" id="Environment_hwv4x"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_8apjd"]
+radius = 10.0
+height = 10.0
+radial_segments = 16
+rings = 4
+is_hemisphere = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_euhd8"]
+albedo_texture = ExtResource("2_xiwmf")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DebugExit" parent="." instance=ExtResource("1_2vvnp")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hwv4x")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_energy = 0.5
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_bake_mode = 0
+sky_mode = 1
+
+[node name="CSGBox3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(-1, 7.64274e-15, -1.04907e-07, 0, -1, -1.04907e-07, -8.74228e-08, -8.74228e-08, 1.2, -8.15946e-07, 0, -11.5833)
+use_collision = true
+mesh = SubResource("SphereMesh_8apjd")
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D2" type="CSGMesh3D" parent="."]
+transform = Transform3D(1.62921e-07, 5.02816e-08, -0.667, -8.74228e-08, -0.333, -1.00714e-07, -1, 2.91118e-08, -1.08668e-07, 1.36962e-06, 4, -36.5833)
+use_collision = true
+mesh = SubResource("SphereMesh_8apjd")
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D3" type="CSGMesh3D" parent="CSGBox3D2"]
+transform = Transform3D(1.15943e-07, -2.11698e-08, 0.8, 7.25263e-07, 1, -1.69799e-07, -1.199, 6.0489e-07, 9.85231e-08, 0.75, -1.96898e-07, 8.48927e-08)
+use_collision = true
+mesh = SubResource("SphereMesh_8apjd")
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D4" type="CSGMesh3D" parent="."]
+transform = Transform3D(3.25841e-07, 5.02816e-08, -1.334, -3.01992e-07, -0.333, -2.01428e-07, -2, 5.02816e-08, -2.17336e-07, 1.36962e-06, -11, -76.5833)
+use_collision = true
+mesh = SubResource("SphereMesh_8apjd")
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="CSGBox3D3" type="CSGMesh3D" parent="CSGBox3D4"]
+transform = Transform3D(1.15943e-07, -2.11698e-08, 0.8, 7.25263e-07, 1, -1.69799e-07, -1.199, 6.0489e-07, 9.85231e-08, 0.75, -1.96898e-07, 8.48927e-08)
+use_collision = true
+mesh = SubResource("SphereMesh_8apjd")
+material = SubResource("StandardMaterial3D_euhd8")
+
+[node name="ProtoRamp" type="CSGCombiner3D" parent="CSGBox3D4"]
+transform = Transform3D(8.14603e-08, -5.03571e-08, -0.1665, 4.5344e-07, -2.003, 1.50996e-07, -0.749625, -7.54979e-08, -4.06691e-08, -15.2916, -45.045, -4.40627e-06)
+script = ExtResource("3_cjas2")
+type = 0
+width = 10.001
+height = 10.001
+depth = 80.001
+anchor = 3
+anchor_fixed = true
+material = null
+
+[node name="Player" parent="." instance=ExtResource("3_xbsr8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+
+[node name="QuestionBlock" parent="." instance=ExtResource("4_vwd8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -4.5, 4.5)
+coin = 5
+
+[node name="QuestionBlock2" parent="." instance=ExtResource("4_vwd8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -4.5, 5.5)
+coin = 10
+
+[node name="QuestionBlock3" parent="." instance=ExtResource("4_vwd8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -4.5, 6.5)
+coin = 20

@@ -2,22 +2,22 @@ class_name Player
 extends CharacterBody3D
 
 # Movement
-var current_speed : float = 6.0
+var current_speed : float = 6
 var acceleration : float = 5
-var friction : float = 7.5
-var skid_friction : float = 14.0
-var is_crouching : bool = false
-var is_crawling : bool  = false
+var friction : float = 10
+var skid_friction : float = 14
+var is_crouching : bool
+var is_crawling : bool
 
 # Coyote time variables
-@export var coyote_time: float = 0.15
-@export var coyote_float: float = 0.0525
+@export var coyote_time: float = 0.2
+@export var coyote_float: float = 0.04
 var coyote_timer: float = 0.0
 
 # Movement constants
-const crawl_speed : float = 3.0
-const walk_speed : float = 6.0
-const sprint_speed : float = 13.0
+const crawl_speed : float = 3
+const walk_speed : float = 5
+const sprint_speed : float = 9
 const jump_velocity : float = 19.5
 
 # Movement onready variables
@@ -38,22 +38,25 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * 2
 
 # Camera position
 @onready var stand_position = $SpringPivot/Standing
-@onready var crouch_position = $SpringPivot/Crouching
+#@onready var crouch_position = $SpringPivot/Crouching
 @onready var crawl_position = $SpringPivot/Crawling
 
 # Model
-@onready var model = $Model
-@onready var anim_tree = $Model/AnimationTree
+@export var model : Node3D
+@export var anim_tree : AnimationTree
 const LERP_VAL = .125
 const MODEL_LERP = 8
 
 # Health
-@export var health = 4.0
+@export var health : float = 4
 @onready var health_bar = $Control/Health
 
 # Coins
 @export var coins : int = 0
 @onready var coin_counter = $Control/Coins
+
+# Fireball
+@onready var fireball_counter  = $Control/Fireballs
 
 # Detectors
 @onready var jump_detect = $JumpDetect
@@ -63,10 +66,17 @@ const MODEL_LERP = 8
 @onready var jump_sound = $JumpSound
 @onready var flip_sound = $FlipSound
 
+# Stomp
+var is_stomp : bool
+
+func _ready():
+	pass
+
 func _process(delta):
 	# Counts the amount of coins on a display text
 	coin_counter.text = str(coins)
 	health_bar.value = lerp(health_bar.value, health, 10 * delta)
+	#fireball_counter.text = str(is_stomp)
 	
 	# Sprint logic
 	if Input.is_action_pressed("sprint") && !is_crawling:
@@ -78,9 +88,13 @@ func _process(delta):
 	
 	# Sliding logic
 	if is_crawling:
+		floor_stop_on_slope = false
 		floor_max_angle = PI/48
+		floor_snap_length = 0.0
 	else:
-		floor_max_angle = PI/3
+		floor_stop_on_slope = true
+		floor_max_angle = PI/4
+		floor_snap_length = 0.1
 	
 	# Handle coyote time (allowing jumps shortly after leaving the ground)
 	if !is_on_floor():
@@ -102,6 +116,11 @@ func _process(delta):
 			crawl_collider.set_deferred("disabled", true)  
 			stand_collider.set_deferred("disabled", false) 
 			spring_arm.transform.origin = lerp(spring_arm.transform.origin, stand_position.transform.origin, MODEL_LERP * delta)
+	
+	if !GlobalManager.is_paused:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _physics_process(delta):
 	# Get the input direction
@@ -110,8 +129,13 @@ func _physics_process(delta):
 	direction = direction.rotated(Vector3.UP, spring_pivot.rotation.y)
 	
 	# Add the gravity.
-	if coyote_timer >= coyote_float:
-		velocity.y -= gravity * delta
+	if !is_on_floor() && coyote_timer >= coyote_float:
+		if !floor_detect.is_colliding() && Input.is_action_pressed("crouch"):
+			velocity.y -= (gravity * 1.5) * delta
+			is_stomp = true
+		else:
+			velocity.y -= gravity * delta
+			is_stomp = false
 	
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") && (is_on_floor() or coyote_timer < coyote_time):
@@ -119,8 +143,8 @@ func _physics_process(delta):
 			jump()
 		#else:
 		#	jump_sound.play()
-		#	flip_sound.play()
-		#	velocity += Vector3(_dir.x * 12, direction.y + jump_velocity * 1.5, _dir.z * 12)
+			#flip_sound.play()
+			#velocity += Vector3(_dir.x * 12, direction.y + jump_velocity * 1.5, _dir.z * 12)
 	
 	if Input.is_action_just_released("jump") && velocity.y > jump_velocity / 2:
 		if !is_crawling:
@@ -137,33 +161,22 @@ func _physics_process(delta):
 
 func movement(direction, delta):
 	# Handle the movement/deceleration.
-	var is_skidding = false
-	if is_on_floor():
-		if direction:
-			velocity.x = lerp(velocity.x, direction.x * current_speed, acceleration * delta)
-			velocity.z = lerp(velocity.z, direction.z * current_speed, acceleration * delta)
-			# Check for skidding condition
-			if velocity.length() > current_speed:
-				is_skidding = true
-		else:
-			velocity.x = lerp(velocity.x, 0.0, friction * delta)
-			velocity.z = lerp(velocity.z, 0.0, friction * delta)
-	else:
-		if direction:
-			velocity.x = lerp(velocity.x, direction.x * current_speed, acceleration / 2.0 * delta)
-			velocity.z = lerp(velocity.z, direction.z * current_speed, acceleration / 2.0 * delta)
-		else:
-			velocity.x = lerp(velocity.x, 0.0, friction / 4 * delta)
-			velocity.z = lerp(velocity.z, 0.0, friction / 4 * delta)
-	if is_skidding:
-		velocity.x = lerp(velocity.x, 0.0, friction * delta)
-		velocity.z = lerp(velocity.z, 0.0, friction * delta)
+	if direction && is_on_floor():
+		velocity.x = lerp(velocity.x, direction.x * current_speed, 15 * delta)
+		velocity.z = lerp(velocity.z, direction.z * current_speed, 15 * delta)
+	elif is_on_floor():
+		velocity.x = lerp(velocity.x, 0.0, 15 * delta)
+		velocity.z = lerp(velocity.z, 0.0, 15 * delta)
+	elif direction:
+		velocity.x = lerp(velocity.x, direction.x * current_speed, 5 * delta)
+		velocity.z = lerp(velocity.z, direction.z * current_speed, 5 * delta)
 
 func animate(direction):
-	anim_tree.set("parameters/conditions/idle", velocity.length() <= 1.5 && is_on_floor())
+	anim_tree.set("parameters/conditions/idle", !is_crawling && velocity.length() <= 1.5 && is_on_floor())
 	anim_tree.set("parameters/conditions/fall", !is_on_floor() && velocity.y > 0.01)
-	anim_tree.set("parameters/conditions/walk", velocity.length() >= 1.5 && velocity.length() <= 8.0 && is_on_floor())
+	anim_tree.set("parameters/conditions/walk", !is_crawling && velocity.length() >= 1.5 && velocity.length() <= 8.0 && is_on_floor())
 	anim_tree.set("parameters/conditions/run", velocity.length() >= 8.0 && is_on_floor())
+	anim_tree.set("parameters/conditions/crawl", is_crawling)
 
 func jump():
 	if !is_crawling:
@@ -188,3 +201,9 @@ func hurt(damage,type,intensity,duration):
 	health -= damage
 	if type == 0:
 		Input.start_joy_vibration(0, intensity, intensity, duration)
+
+func align_with_y(xform, new_y): 
+	xform.basis.y = new_y 
+	xform.basis.x = -xform.basis.z.cross(new_y) 
+	xform.basis = xform.basis.orthonormalized() 
+	return xform

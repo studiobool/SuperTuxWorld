@@ -59,8 +59,8 @@ material = SubResource("StandardMaterial3D_euhd8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 9.5, 14.5)
 operation = 2
 radius = 10.0
-radial_segments = 32
-rings = 16
+radial_segments = 48
+rings = 24
 material = SubResource("StandardMaterial3D_euhd8")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
@@ -107,8 +107,14 @@ height = 4.0
 sides = 16
 material = SubResource("StandardMaterial3D_euhd8")
 
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, -6.5, 14.5)
+use_collision = true
+size = Vector3(40, 1, 40)
+material = SubResource("StandardMaterial3D_euhd8")
+
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
 visible = false
 use_collision = true
 flip_faces = true
