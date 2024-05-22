@@ -39,7 +39,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/proto_shape/plugin.cfg", "res://addons/qodot/plugin.cfg")
+enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg")
 
 [input]
 
