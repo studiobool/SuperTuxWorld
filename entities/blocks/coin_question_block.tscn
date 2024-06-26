@@ -3,8 +3,7 @@
 [ext_resource type="Script" path="res://entities/blocks/scripts/coin_question_block.gd" id="1_7ras4"]
 [ext_resource type="AudioStream" uid="uid://bt7watlvqjm3u" path="res://audio/sfx/coin.wav" id="2_1lmyj"]
 [ext_resource type="Material" uid="uid://cqnqvj711rpho" path="res://entities/blocks/full.tres" id="2_geh8r"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_pilgm"]
+[ext_resource type="ArrayMesh" uid="uid://cqplyo1fsqng3" path="res://models/blocks/questionblock.obj" id="2_h8i1p"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oo7i2"]
 
@@ -16,11 +15,12 @@ script = ExtResource("1_7ras4")
 coin = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_pilgm")
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = ExtResource("2_h8i1p")
 surface_material_override/0 = ExtResource("2_geh8r")
 
 [node name="Label3D" type="Label3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.505)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.1)
 double_sided = false
 modulate = Color(0, 0, 0, 1)
 text = "?"
@@ -28,7 +28,7 @@ font_size = 128
 outline_size = 0
 
 [node name="Label3D2" type="Label3D" parent="MeshInstance3D/Label3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.505, 0, -0.505)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.1, 0, -1.075)
 double_sided = false
 modulate = Color(0, 0, 0, 1)
 text = "?"
@@ -36,7 +36,7 @@ font_size = 128
 outline_size = 0
 
 [node name="Label3D3" type="Label3D" parent="MeshInstance3D/Label3D"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.41485e-08, 0, -1.01)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -2.2)
 double_sided = false
 modulate = Color(0, 0, 0, 1)
 text = "?"
@@ -44,7 +44,7 @@ font_size = 128
 outline_size = 0
 
 [node name="Label3D4" type="Label3D" parent="MeshInstance3D/Label3D"]
-transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -0.505, 0, -0.505)
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -1.1, 0, -1.075)
 double_sided = false
 modulate = Color(0, 0, 0, 1)
 text = "?"

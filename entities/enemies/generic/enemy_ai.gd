@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+@onready var audio = $AudioStreamPlayer3D
 @export var SPEED = 5.0
 @export var DAMAGE = 1.0
 const LERP_VAL = .125
@@ -53,6 +54,7 @@ func _on_player_detection_body_entered(body):
 		body.hurt(DAMAGE,0,1.0,0.35)
 
 func stomp():
+	audio.play()
 	logic.oof()
 
 func dead():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dyy72k2cie2dq"]
+[gd_scene load_steps=40 format=3 uid="uid://dyy72k2cie2dq"]
 
 [ext_resource type="Script" path="res://entities/enemies/generic/enemy_ai.gd" id="1_sd7dl"]
 [ext_resource type="Script" path="res://entities/enemies/walking_snowball/snowbomb.gd" id="2_1mfxj"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b5i3an3g7clx3" path="res://entities/enemies/walking_snowball/snowball_alt.png" id="4_fldhp"]
 [ext_resource type="AudioStream" uid="uid://05ev5ly75xk3" path="res://audio/sfx/fizz.wav" id="5_7nbey"]
 [ext_resource type="PackedScene" uid="uid://c7y3ryplmnxp3" path="res://entities/special/shadow_raycast.tscn" id="6_y4fra"]
+[ext_resource type="AudioStream" uid="uid://bwlc1jqstcu03" path="res://audio/sfx/squish.wav" id="7_4pbo0"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_7ldxe"]
 
@@ -420,14 +421,14 @@ bones/0/name = "Head"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 bones/0/enabled = true
-bones/0/position = Vector3(0, 0.131121, 0)
-bones/0/rotation = Quaternion(0.0367657, 0, 0, 0.999324)
+bones/0/position = Vector3(0, 0.00173333, 0)
+bones/0/rotation = Quaternion(0.00332909, 0, 0, 0.999995)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Head.001"
 bones/1/parent = -1
 bones/1/rest = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, 0)
 bones/1/enabled = true
-bones/1/position = Vector3(0, 0.131121, 0)
+bones/1/position = Vector3(0, 0.00173333, 0)
 bones/1/rotation = Quaternion(1, 0, 0, 0)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Right Foot"
@@ -435,14 +436,14 @@ bones/2/parent = 1
 bones/2/rest = Transform3D(-0.642032, -0.314486, -0.699209, 0.708588, 0.104828, -0.697793, 0.292743, -0.943456, 0.155537, -0.4, 0.8, 0.3)
 bones/2/enabled = true
 bones/2/position = Vector3(-0.4, 0.8, 0.3)
-bones/2/rotation = Quaternion(-0.1269, -0.676825, 0.602432, 0.403584)
+bones/2/rotation = Quaternion(-0.153607, -0.63502, 0.646348, 0.394194)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "Left Foot"
 bones/3/parent = 1
 bones/3/rest = Transform3D(-0.675156, 0.314485, 0.667281, -0.673946, 0.104828, -0.731305, -0.299935, -0.943456, 0.141171, 0.4, 0.8, 0.3)
 bones/3/enabled = true
 bones/3/position = Vector3(0.4, 0.8, 0.3)
-bones/3/rotation = Quaternion(0.112264, -0.686406, 0.60533, -0.387064)
+bones/3/rotation = Quaternion(0.137899, -0.644386, 0.64988, -0.37869)
 bones/3/scale = Vector3(1, 1, 1)
 
 [node name="Bowtie" type="MeshInstance3D" parent="snow_walker/Armature/Skeleton3D"]
@@ -479,6 +480,12 @@ attenuation_filter_db = -12.0
 
 [node name="ShadowRaycast" parent="." instance=ExtResource("6_y4fra")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_4pbo0")
+max_db = -2.0
+max_polyphony = 128
+bus = &"SFX"
 
 [connection signal="body_entered" from="Player Detection" to="." method="_on_player_detection_body_entered"]
 [connection signal="body_entered" from="Player Detection" to="Logic" method="_on_player_detection_body_entered"]

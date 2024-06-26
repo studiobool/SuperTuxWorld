@@ -425,7 +425,6 @@ coin = 0
 
 [node name="QuestionBlock2" parent="." instance=ExtResource("8_54reo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 5, 7.25)
-coin = 1
 
 [node name="QuestionBlock3" parent="." instance=ExtResource("8_54reo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 5, 7.25)
