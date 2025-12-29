@@ -1,0 +1,406 @@
+[gd_scene load_steps=32 format=3 uid="uid://c3eabdsoeq4q2"]
+
+[ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="1_8sejj"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_xqgq3"]
+[ext_resource type="Script" uid="uid://oqd32ap8ky63" path="res://scripts/player/interact.gd" id="4_wg0fn"]
+[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="6_akcju"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="7_a8kll"]
+[ext_resource type="Script" uid="uid://cd7fcjsu2tl1e" path="res://debug_level.gd" id="8_bmnvl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6seei"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_dbxb2"]
+sky_material = SubResource("ProceduralSkyMaterial_6seei")
+
+[sub_resource type="Environment" id="Environment_ov2oi"]
+background_mode = 2
+sky = SubResource("Sky_dbxb2")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x6wp4"]
+size = Vector3(41, 3, 19)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dbxb2"]
+render_priority = 1
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0, 0.24705882, 0.49803922, 0.49803922)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_axgwx"]
+transparency = 1
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+albedo_texture = ExtResource("1_8sejj")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ys0t5"]
+next_pass = SubResource("StandardMaterial3D_axgwx")
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_julm7"]
+load_path = "res://.godot/imported/checker.png-d334a8ae07de292fd4162f184b9dd7bc.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8vdae"]
+transparency = 1
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+albedo_texture = SubResource("CompressedTexture2D_julm7")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6seei"]
+next_pass = SubResource("StandardMaterial3D_8vdae")
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_dbxb2"]
+script/source = "extends CharacterBody3D
+
+const WALK = 6.0
+const SPRINT = 9.0
+const CRAWL = 3.0
+var SPEED = 6.0
+const JUMP_VELOCITY = 16.0
+
+@onready var camera = $Camera
+@onready var model = $Model
+@onready var interact_raycast = $RayCast3D
+@onready var interact_marker = $Model/Marker3D
+
+var move_dir := Vector3.BACK
+
+@onready var stand_collision = $StandCollision
+@onready var crawl_collision = $CrawlCollision
+@onready var head_detection = $HeadDetection
+
+#func _ready() -> void:
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _physics_process(delta: float) -> void:
+	interact_raycast.global_rotation = model.global_rotation
+	
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * 4 * delta
+
+	# Handle jump.
+	if Input.is_action_just_pressed(\"jump\") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	if Input.is_action_pressed(\"sprint\") && !stand_collision.disabled:
+		SPEED = SPRINT
+	elif !stand_collision.disabled:
+		SPEED = WALK
+	else:
+		SPEED = CRAWL
+	
+	if Input.is_action_pressed(\"crawl\"):
+		stand_collision.disabled = true
+	elif !head_detection.is_colliding():
+		stand_collision.disabled = false
+	
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var input_dir := Input.get_vector(\"move_left\", \"move_right\", \"move_up\", \"move_down\")
+	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y))
+	direction = direction.rotated(Vector3.UP, camera.camera.global_rotation.y)
+	if direction:
+		velocity.x = lerp(velocity.x, direction.x * SPEED, delta * 8)
+		velocity.z = lerp(velocity.z, direction.z * SPEED, delta * 8)
+	else:
+		velocity.x = lerp(velocity.x, 0.0, delta * 12)
+		velocity.z = lerp(velocity.z, 0.0, delta * 12)
+	
+	move_and_slide()
+	
+	if direction.length() > 0.2:
+		move_dir = direction
+		var angle := Vector3.BACK.signed_angle_to(-move_dir, Vector3.UP)
+		model.rotation.y = lerp_angle(model.rotation.y, angle, delta * 16)
+	
+	if interact_raycast.get_collider() && interact_raycast.get_collider() is RigidBody3D:
+		if interact_raycast.get_collider().has_node(\"Interact\"):
+			#print(interact_raycast.get_collider())
+			pass
+"
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_axgwx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ov2oi"]
+albedo_color = Color(0.028750002, 0.025, 0.05, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_x6wp4"]
+top_radius = 0.0
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e86xl"]
+albedo_color = Color(1, 0.7490196, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_u53cx"]
+height = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p46d7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_julm7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6seei"]
+
+[sub_resource type="GDScript" id="GDScript_ov2oi"]
+script/source = "extends Node3D
+
+@onready var camera = $PhantomCamera3D
+@onready var springarm = $SpringArm3D
+@onready var master = self.get_parent()
+
+var cam_dir = Vector2.ZERO
+var cam_rot : Vector3
+var cam_rot2 : Vector3
+var cam_pos : Vector3
+var cam_pos2 : Vector3
+var cam_mouse_sens := 0.2
+var cam_input_dir := Vector2.ZERO
+
+func _ready() -> void:
+	cam_rot2.x = deg_to_rad(-22.5)
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _unhandled_input(event: InputEvent) -> void:
+	var cam_motion := (
+		event is InputEventMouseMotion and 
+		Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
+	)
+	if cam_motion:
+		cam_input_dir = event.relative * cam_mouse_sens
+		cam_rot2.x += -cam_input_dir.y * .02
+		cam_rot2.y += -cam_input_dir.x * .02
+
+func _physics_process(delta: float) -> void:
+	#cam_rot = camera.get_third_person_rotation()
+	#cam_pos = camera.get_follow_offset()
+	springarm.rotation = cam_rot
+	cam_rot2.x = clampf(cam_rot2.x, deg_to_rad(-62.5), deg_to_rad(25))
+	
+	#if !master.stand_collision.disabled:
+	#	cam_pos2.y = 1.5
+	#else:
+	#	cam_pos2.y = 0.5
+	
+	cam_dir.x = Input.get_action_strength(\"cam_right\") - Input.get_action_strength(\"cam_left\")
+	cam_dir.y = Input.get_action_strength(\"cam_down\") - Input.get_action_strength(\"cam_up\")
+	cam_rot2.x += -cam_dir.y * 4 * delta
+	cam_rot2.y += -cam_dir.x * 4 * delta
+	#cam_rot2.x += -cam_input_dir.y * 4
+	#cam_rot2.y += -cam_input_dir.x * 4
+	cam_rot.x = lerp_angle(cam_rot.x, cam_rot2.x, delta * 8)
+	cam_rot.y = lerp_angle(cam_rot.y, cam_rot2.y, delta * 8)
+	#cam_pos = lerp(cam_pos, cam_pos2, delta * 8)
+	
+	#camera.set_third_person_rotation(cam_rot)
+	#camera.set_follow_offset(cam_pos)
+"
+
+[sub_resource type="Resource" id="Resource_6seei"]
+script = ExtResource("7_a8kll")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dbxb2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ov2oi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ov2oi"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x6wp4"]
+size = Vector3(3, 3, 3)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ov2oi")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -32)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_x6wp4")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+cast_shadow = 0
+size = Vector3(41, 3, 19)
+material = SubResource("StandardMaterial3D_dbxb2")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+use_collision = true
+size = Vector3(200, 4, 200)
+material = SubResource("StandardMaterial3D_ys0t5")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -35)
+operation = 2
+use_collision = true
+size = Vector3(40, 3, 18)
+material = SubResource("StandardMaterial3D_ys0t5")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
+use_collision = true
+size = Vector3(10, 2, 10)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 4.5)
+operation = 2
+use_collision = true
+size = Vector3(8, 1, 1)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0.823, 4.59)
+operation = 2
+use_collision = true
+size = Vector3(4, 2, 5.5)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -1)
+operation = 2
+use_collision = true
+size = Vector3(10, 1.5, 6)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -10)
+use_collision = true
+size = Vector3(4, 2, 2)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -10)
+use_collision = true
+size = Vector3(10, 1, 10)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D4"]
+operation = 2
+use_collision = true
+size = Vector3(8, 1, 10)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+physics_interpolation_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="PhantomCameraHost" type="Node" parent="Camera3D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("2_xqgq3")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+collision_layer = 2
+collision_mask = 9
+script = SubResource("GDScript_dbxb2")
+
+[node name="Node" type="Node" parent="CharacterBody3D"]
+script = ExtResource("4_wg0fn")
+
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, 0, -2)
+
+[node name="Model" type="Node3D" parent="CharacterBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_axgwx")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ov2oi")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CharacterBody3D/Model"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1, -0.5)
+mesh = SubResource("CylinderMesh_x6wp4")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_e86xl")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="CharacterBody3D/Model"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.625, -0.125)
+mesh = SubResource("CapsuleMesh_u53cx")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_p46d7")
+
+[node name="Marker3D" type="Marker3D" parent="CharacterBody3D/Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -1)
+
+[node name="StandCollision" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_julm7")
+
+[node name="CrawlCollision" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_6seei")
+
+[node name="HeadDetection" type="RayCast3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 1, 0)
+
+[node name="Camera" type="Node3D" parent="CharacterBody3D"]
+script = SubResource("GDScript_ov2oi")
+
+[node name="PhantomCamera3D" type="Node3D" parent="CharacterBody3D/Camera" node_paths=PackedStringArray("follow_target", "look_at_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+top_level = true
+script = ExtResource("6_akcju")
+follow_mode = 1
+follow_target = NodePath("../SpringArm3D/Marker3D")
+look_at_mode = 1
+look_at_target = NodePath("../SpringArm3D/Marker3D")
+tween_resource = SubResource("Resource_6seei")
+tween_on_load = false
+follow_offset = Vector3(0, 1.5, 0)
+follow_damping_value = Vector3(0.3, 0.075, 0.3)
+follow_distance = 5.0
+spring_length = 5.0
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+spring_length = 5.0
+margin = 0.1
+
+[node name="Marker3D" type="Marker3D" parent="CharacterBody3D/Camera/SpringArm3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -10)
+collision_layer = 8
+collision_mask = 15
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_dbxb2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_ov2oi")
+
+[node name="Interact" type="Node" parent="RigidBody3D"]
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -20.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
+shape = SubResource("BoxShape3D_ov2oi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
+mesh = SubResource("BoxMesh_x6wp4")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("8_bmnvl")

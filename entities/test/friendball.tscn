@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://dgrddbfla8pos"]
+
+[ext_resource type="Script" uid="uid://ofe1ev0520hi" path="res://scripts/physound_test.gd" id="1_tkj4i"]
+[ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="2_2ovkb"]
+[ext_resource type="Script" uid="uid://b4qifsiug0k06" path="res://scripts/simple_rotate.gd" id="3_q2wmj"]
+[ext_resource type="AudioStream" uid="uid://boo20cqsuovhg" path="res://sounds/boing.ogg" id="4_vwuv1"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_35xd0"]
+bounce = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nsies"]
+radius = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_xkjb2"]
+radius = 3.0
+height = 6.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8sejj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xqgq3"]
+next_pass = SubResource("StandardMaterial3D_8sejj")
+transparency = 1
+albedo_color = Color(1, 0, 0, 1)
+albedo_texture = ExtResource("2_2ovkb")
+uv1_scale = Vector3(8, 4, 8)
+texture_filter = 2
+
+[node name="Friendball" type="RigidBody3D"]
+transform = Transform3D(0.9659259, 0.25881907, 0, -0.25881907, 0.9659259, 0, 0, 0, 1, 0, 0, 0)
+collision_layer = 8
+collision_mask = 63
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_35xd0")
+max_contacts_reported = 1
+script = ExtResource("1_tkj4i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_nsies")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_xkjb2")
+surface_material_override/0 = SubResource("StandardMaterial3D_xqgq3")
+script = ExtResource("3_q2wmj")
+rotate = Vector3(0, 4, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_vwuv1")
+volume_db = 80.0
+unit_size = 80.0
+max_db = 6.0
+max_polyphony = 4

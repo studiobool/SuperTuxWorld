@@ -1,7 +1,11 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://cqw17rjx6hp0k"]
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cbw16pbdvpctl"]
+
+[ext_resource type="Texture2D" uid="uid://bkf5xm5knrr8a" path="res://models/tux/tux4_belly.png" id="1_ap6um"]
 
 [resource]
 resource_name = "Material.003"
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.906332, 0.867688, 0.225945, 1)
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("1_ap6um")

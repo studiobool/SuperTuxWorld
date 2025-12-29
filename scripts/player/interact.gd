@@ -1,0 +1,50 @@
+extends Node3D
+
+@onready var master = self.get_parent()
+@onready var raycast = $RayCast3D
+@onready var marker = $Marker3D
+var object
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	# Drops object
+	if Input.is_action_just_pressed("interact") && object:
+		drop_object(master.velocity * 3)
+		marker.rotation = Vector3.ZERO
+	
+	# Drops object with more force
+	if Input.is_action_just_pressed("fire") && object:
+		var knockback = master.global_position - object.global_position
+		drop_object(-knockback * 12 + (master.velocity * 3))
+		marker.rotation = Vector3.ZERO
+	
+	# Detects if raycast finds object then if interacted grabs object
+	if raycast.get_collider() && raycast.get_collider() is RigidBody3D:
+		if raycast.get_collider().has_node("Interact"):
+			if Input.is_action_just_pressed("interact"):
+				if object == null:
+					marker.global_rotation = raycast.get_collider().global_rotation
+					raycast.get_collider().freeze = true
+					object = raycast.get_collider()
+					object.get_node("CollisionShape3D").disabled = true
+					master.object_collision.shape = object.get_node("CollisionShape3D").shape
+					master.object_collision.disabled = false
+
+func drop_object(force):
+	object.get_node("CollisionShape3D").disabled = false
+	# Some hack in case object collision hasn't been re-enabled
+	if object.get_node("CollisionShape3D").disabled == false:
+		object.freeze = false
+		master.object_collision.disabled = true
+		object.apply_central_impulse(force)
+		object = null
+	else:
+		print("dropping again")
+		drop_object(force)
+
+func _physics_process(_delta: float) -> void:
+	# Rotates in match with the character
+	global_rotation = master.model.global_rotation
+	if object:
+		object.global_position = marker.global_position
+		object.global_rotation = marker.global_rotation

@@ -1,0 +1,738 @@
+[gd_scene load_steps=85 format=3 uid="uid://d4kq1p13g0qwi"]
+
+[ext_resource type="AudioStream" uid="uid://cn2vhlkgv1bo4" path="res://music/placeholder/chord_song.ogg" id="1_e8l4c"]
+[ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="3_xh57e"]
+[ext_resource type="FontFile" uid="uid://cgcreoeye0gaf" path="res://fonts/SuperTux-Medium.ttf" id="4_1248k"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_6vvuk"]
+[ext_resource type="Texture2D" uid="uid://crnahqa8rcafk" path="res://images/hud/item_pocket_complete.png" id="7_peexq"]
+[ext_resource type="Texture2D" uid="uid://db0pshlkyrjct" path="res://images/hud/item_pocket_empty.png" id="8_fh1bg"]
+[ext_resource type="Texture2D" uid="uid://cyugmjyyqceqs" path="res://images/hud/item_pocket.png" id="9_ijojd"]
+[ext_resource type="Texture2D" uid="uid://drk2c83gaocwa" path="res://images/hud/coins-0.png" id="10_rb8ol"]
+[ext_resource type="Script" uid="uid://cpin7al4ul6mk" path="res://scripts/player/sfx.gd" id="11_8v6sv"]
+[ext_resource type="AudioStream" uid="uid://o3ncqk8r5sg3" path="res://sounds/jump.wav" id="12_w7741"]
+[ext_resource type="Script" uid="uid://oqd32ap8ky63" path="res://scripts/player/interact.gd" id="13_qbjoy"]
+[ext_resource type="Script" uid="uid://b07ixsd6phtmf" path="res://scripts/player/model.gd" id="14_nvubw"]
+[ext_resource type="PackedScene" uid="uid://bpa2kd0vcjeyc" path="res://models/tux/tux4.glb" id="15_txhyc"]
+[ext_resource type="Animation" uid="uid://dbkvj8vrlbcy2" path="res://models/tux/animations/Crawl Idle.res" id="16_vkpqs"]
+[ext_resource type="Animation" uid="uid://bkra8vftd6qfh" path="res://models/tux/animations/Crawl Walk.res" id="17_56whs"]
+[ext_resource type="Animation" uid="uid://cq8t7wb0jamtb" path="res://models/tux/animations/Default.res" id="18_3xtmu"]
+[ext_resource type="Animation" uid="uid://bc5a5tgkjhirq" path="res://models/tux/animations/Fall.res" id="19_l0w1f"]
+[ext_resource type="Animation" uid="uid://daonfnlix7w74" path="res://models/tux/animations/Idle 1.res" id="20_isls1"]
+[ext_resource type="Animation" uid="uid://cxc17wsngvfmc" path="res://models/tux/animations/Idle 2.res" id="21_6lfc8"]
+[ext_resource type="Animation" uid="uid://cr6rqjsf72wkb" path="res://models/tux/animations/Jump.res" id="22_2ovse"]
+[ext_resource type="Animation" uid="uid://7nk1bjrg4pyi" path="res://models/tux/animations/Run.res" id="23_3t682"]
+[ext_resource type="Animation" uid="uid://8gcou08uldw7" path="res://models/tux/animations/Walk.res" id="24_gkk3g"]
+[ext_resource type="Script" uid="uid://dkmhw5ine7hk8" path="res://scripts/player/camera.gd" id="25_q1sj8"]
+[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="26_p668s"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="27_fvfcc"]
+[ext_resource type="Script" uid="uid://cuffvge5ad4aa" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_3d.gd" id="28_yh0jx"]
+[ext_resource type="Script" uid="uid://cd7fcjsu2tl1e" path="res://debug_level.gd" id="29_0givf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6seei"]
+sky_top_color = Color(0.3019608, 0.5058824, 0.8039216, 1)
+sky_horizon_color = Color(0.5860507, 0.82383144, 0.99999994, 1)
+ground_bottom_color = Color(0.1479, 0.1857933, 0.29, 1)
+ground_horizon_color = Color(0.20010002, 0.38789493, 0.69, 1)
+
+[sub_resource type="Sky" id="Sky_dbxb2"]
+sky_material = SubResource("ProceduralSkyMaterial_6seei")
+
+[sub_resource type="Environment" id="Environment_ov2oi"]
+background_mode = 2
+sky = SubResource("Sky_dbxb2")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_axgwx"]
+transparency = 1
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+albedo_texture = ExtResource("3_xh57e")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ys0t5"]
+next_pass = SubResource("StandardMaterial3D_axgwx")
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_julm7"]
+load_path = "res://.godot/imported/checker.png-d334a8ae07de292fd4162f184b9dd7bc.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yvm0o"]
+transparency = 1
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+albedo_texture = SubResource("CompressedTexture2D_julm7")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6seei"]
+next_pass = SubResource("StandardMaterial3D_yvm0o")
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_3emuq"]
+script/source = "extends CharacterBody3D
+
+var direction : Vector3
+const WALK = 5.5
+const SPRINT = 8.75
+const CRAWL = 2.25
+var SPEED = 6.0
+const JUMP_VELOCITY = 12.0
+var holding_jump : bool
+var if_jumped : bool
+
+@onready var camera = $Camera
+@onready var model = $Model
+@onready var interact = $InteractionSystem
+@onready var sfx = $SFX
+
+var move_dir := Vector3.BACK
+
+@onready var stand_collision = $StandCollision
+@onready var crawl_collision = $CrawlCollision
+@onready var object_collision = $ObjectCollision
+@onready var head_detection = $HeadDetection
+@onready var floor_detection = $FloorDetection
+
+@export var coyote_time: float = 0.15
+@export var coyote_float: float = 0.03
+var coyote_timer: float = 0.0
+
+#func _ready() -> void:
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _process(delta: float) -> void:
+	if !is_on_floor():
+		coyote_timer += delta
+	else:
+		coyote_timer = 0.0
+
+func _physics_process(delta: float) -> void:
+	object_collision.global_position = interact.marker.global_position
+	object_collision.global_rotation = interact.marker.global_rotation
+	
+	# Add the gravity.
+	if not is_on_floor() && coyote_timer >= coyote_float:
+		if stand_collision.disabled && velocity.y <= -2:
+			velocity += get_gravity() * 7.5 * delta
+		else:
+			velocity += get_gravity() * 1.5 * delta
+	
+	# Handle jump.
+	if is_on_floor():
+		if_jumped = false
+	
+	var jump_move_boost = velocity.length() / 2
+	if Input.is_action_just_pressed(\"jump\") && (is_on_floor() or coyote_timer < coyote_time):
+		if velocity.y <= 0.0:
+			jump(Vector3(0, JUMP_VELOCITY + jump_move_boost, 0))
+			sfx._jump()
+			if_jumped = true
+	if Input.is_action_just_released(\"jump\") && velocity.y >= JUMP_VELOCITY / 2 && if_jumped:
+		velocity.y = (JUMP_VELOCITY + jump_move_boost) / 2
+	
+	if Input.is_action_pressed(\"jump\"):
+		holding_jump = true
+	else:
+		holding_jump = false
+
+	if Input.is_action_pressed(\"sprint\") && !stand_collision.disabled:
+		if is_on_floor():
+			SPEED = SPRINT
+	
+	elif !stand_collision.disabled:
+		SPEED = WALK
+	else:
+		SPEED = CRAWL
+	
+	if Input.is_action_pressed(\"crawl\") && SPEED != SPRINT:
+		stand_collision.disabled = true
+	elif !head_detection.is_colliding():
+		stand_collision.disabled = false
+	
+	if floor_detection.get_collider():
+		print(floor_detection.get_collider())
+	
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var input_dir := Input.get_vector(\"move_left\", \"move_right\", \"move_up\", \"move_down\")
+	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y))
+	direction = direction.rotated(Vector3.UP, camera.camera.global_rotation.y)
+	if direction:
+		velocity.x = lerp(velocity.x, direction.x * SPEED, delta * 8)
+		velocity.z = lerp(velocity.z, direction.z * SPEED, delta * 8)
+	elif is_on_floor():
+		velocity.x = lerp(velocity.x, 0.0, delta * 8)
+		velocity.z = lerp(velocity.z, 0.0, delta * 8)
+	else:
+		velocity.x = lerp(velocity.x, 0.0, delta)
+		velocity.z = lerp(velocity.z, 0.0, delta)
+	
+	_push_away_rigid_bodies()
+	move_and_slide()
+	
+
+func jump(vector):
+	velocity += vector
+
+func _push_away_rigid_bodies():
+	for i in get_slide_collision_count():
+		var c := get_slide_collision(i)
+		if c.get_collider() is RigidBody3D:
+			var push_dir = -c.get_normal()
+			# How much velocity the object needs to increase to match player velocity in the push direction
+			var velocity_diff_in_push_dir = self.velocity.dot(push_dir) - c.get_collider().linear_velocity.dot(push_dir)
+			# Only count velocity towards push dir, away from character
+			velocity_diff_in_push_dir = max(0., velocity_diff_in_push_dir)
+			# Objects with more mass than us should be harder to push. But doesn't really make sense to push faster than we are going
+			const MY_APPROX_MASS_KG = 60.0
+			var mass_ratio = min(1., MY_APPROX_MASS_KG / c.get_collider().mass)
+			# Optional add: Don't push object at all if it's 4x heavier or more
+			if mass_ratio < 0.25:
+				continue
+			# Don't push object from above/below
+			push_dir.y = 0
+			# 5.0 is a magic number, adjust to your needs
+			var push_force = mass_ratio * 5.0
+			c.get_collider().apply_impulse(push_dir * velocity_diff_in_push_dir * push_force, c.get_position() - c.get_collider().global_position)
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_rlrdj"]
+font = ExtResource("4_1248k")
+font_size = 18
+font_color = Color(0.95686275, 0.9607843, 0.5764706, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(1.5, 1.5)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_axgwx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ov2oi"]
+albedo_color = Color(0.028750002, 0.025, 0.05, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_x6wp4"]
+top_radius = 0.0
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e86xl"]
+albedo_color = Color(1, 0.7490196, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_u53cx"]
+height = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p46d7"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cunfg"]
+animation = &"Tux/Crawl Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gyumy"]
+animation = &"Tux/Crawl Walk"
+use_custom_timeline = true
+timeline_length = 2.444
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xd3sr"]
+animation = &"Tux/Fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7ynjx"]
+animation = &"Tux/Idle 1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_06ue2"]
+animation = &"Tux/Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rkm6k"]
+animation = &"Tux/Run"
+use_custom_timeline = true
+timeline_length = 0.571
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vuyj7"]
+animation = &"Tux/Walk"
+use_custom_timeline = true
+timeline_length = 0.909
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ak1ch"]
+xfade_time = 0.25
+advance_mode = 2
+advance_condition = &"fall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c3e3f"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ohipb"]
+xfade_time = 0.25
+advance_mode = 2
+advance_condition = &"fall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rlrdj"]
+xfade_time = 0.1
+reset = false
+advance_mode = 2
+advance_condition = &"run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cunfg"]
+xfade_time = 0.1
+reset = false
+advance_mode = 2
+advance_condition = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gyumy"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rc2k8"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cjfmb"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y2ja5"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tl5yp"]
+xfade_time = 0.05
+advance_mode = 2
+advance_condition = &"jump"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_00xdn"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vuyj7"]
+xfade_time = 0.1
+reset = false
+advance_mode = 2
+advance_condition = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j5txn"]
+xfade_time = 0.1
+reset = false
+advance_mode = 2
+advance_condition = &"fall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d6dwt"]
+xfade_time = 0.1
+reset = false
+advance_mode = 2
+advance_condition = &"run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qho1s"]
+xfade_time = 0.1
+reset = false
+advance_mode = 2
+advance_condition = &"fall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_usods"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"crawl_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h6sgf"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wvv3o"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"crawl_walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_16kel"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"crawl_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g3i8x"]
+xfade_time = 0.2
+advance_mode = 2
+advance_condition = &"jump"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b37n7"]
+xfade_time = 0.2
+advance_mode = 2
+advance_condition = &"crawl_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hbvpg"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"fall"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_j5txn"]
+states/crawl_idle/node = SubResource("AnimationNodeAnimation_cunfg")
+states/crawl_idle/position = Vector2(242, 353)
+states/crawl_walk/node = SubResource("AnimationNodeAnimation_gyumy")
+states/crawl_walk/position = Vector2(451, 357)
+states/fall/node = SubResource("AnimationNodeAnimation_xd3sr")
+states/fall/position = Vector2(466, 163)
+states/idle/node = SubResource("AnimationNodeAnimation_7ynjx")
+states/idle/position = Vector2(228, 218)
+states/jump/node = SubResource("AnimationNodeAnimation_06ue2")
+states/jump/position = Vector2(466, 100)
+states/run/node = SubResource("AnimationNodeAnimation_rkm6k")
+states/run/position = Vector2(716, 229)
+states/walk/node = SubResource("AnimationNodeAnimation_vuyj7")
+states/walk/position = Vector2(466, 7)
+transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_ak1ch"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_c3e3f"), "idle", "fall", SubResource("AnimationNodeStateMachineTransition_ohipb"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_rlrdj"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_cunfg"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_gyumy"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_rc2k8"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_cjfmb"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_y2ja5"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_tl5yp"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_00xdn"), "fall", "walk", SubResource("AnimationNodeStateMachineTransition_vuyj7"), "walk", "fall", SubResource("AnimationNodeStateMachineTransition_j5txn"), "fall", "run", SubResource("AnimationNodeStateMachineTransition_d6dwt"), "run", "fall", SubResource("AnimationNodeStateMachineTransition_qho1s"), "idle", "crawl_idle", SubResource("AnimationNodeStateMachineTransition_usods"), "crawl_idle", "idle", SubResource("AnimationNodeStateMachineTransition_h6sgf"), "crawl_idle", "crawl_walk", SubResource("AnimationNodeStateMachineTransition_wvv3o"), "crawl_walk", "crawl_idle", SubResource("AnimationNodeStateMachineTransition_16kel"), "crawl_idle", "jump", SubResource("AnimationNodeStateMachineTransition_g3i8x"), "fall", "crawl_idle", SubResource("AnimationNodeStateMachineTransition_b37n7"), "crawl_idle", "fall", SubResource("AnimationNodeStateMachineTransition_hbvpg")]
+graph_offset = Vector2(-253, 124)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xd3sr"]
+_data = {
+&"Crawl Idle": ExtResource("16_vkpqs"),
+&"Crawl Walk": ExtResource("17_56whs"),
+&"Default": ExtResource("18_3xtmu"),
+&"Fall": ExtResource("19_l0w1f"),
+&"Idle 1": ExtResource("20_isls1"),
+&"Idle 2": ExtResource("21_6lfc8"),
+&"Jump": ExtResource("22_2ovse"),
+&"Run": ExtResource("23_3t682"),
+&"Walk": ExtResource("24_gkk3g")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_julm7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6seei"]
+
+[sub_resource type="Resource" id="Resource_6seei"]
+script = ExtResource("27_fvfcc")
+
+[sub_resource type="Resource" id="Resource_33b6x"]
+script = ExtResource("28_yh0jx")
+randomize_noise_seed = 1
+metadata/_custom_type_script = "uid://cuffvge5ad4aa"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dbxb2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ov2oi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ov2oi"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x6wp4"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ohipb"]
+radius = 1.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_rlrdj"]
+radius = 1.5
+height = 3.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_e8l4c")
+volume_db = -4.0
+autoplay = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ov2oi")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+use_collision = true
+size = Vector3(200, 4, 200)
+material = SubResource("StandardMaterial3D_ys0t5")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -10)
+use_collision = true
+size = Vector3(10, 2, 10)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 4.5)
+operation = 2
+use_collision = true
+size = Vector3(8, 1, 1)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0.823, 4.59)
+operation = 2
+use_collision = true
+size = Vector3(4, 2, 5.5)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -1)
+operation = 2
+use_collision = true
+size = Vector3(10, 1.5, 6)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -10)
+use_collision = true
+size = Vector3(4, 2, 2)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="Label3D" type="Label3D" parent="CSGBox3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.01)
+render_priority = 1
+outline_render_priority = 0
+text = "WASD to move
+Space to jump
+Shift to sprint
+Ctrl to crawl"
+font = ExtResource("4_1248k")
+font_size = 48
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -10)
+use_collision = true
+size = Vector3(10, 1, 10)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D4"]
+operation = 2
+use_collision = true
+size = Vector3(8, 1, 10)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+physics_interpolation_mode = 1
+transform = Transform3D(0.99810785, 0.041551836, -0.045322638, -0.040140226, 0.99869347, 0.031623848, 0.04657745, -0.029744752, 0.99847174, 0, 1, 0)
+current = true
+
+[node name="PhantomCameraHost" type="Node" parent="Camera3D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("5_6vvuk")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+collision_layer = 2
+collision_mask = 9
+floor_max_angle = 1.0908308
+script = SubResource("GDScript_3emuq")
+
+[node name="Control" type="Control" parent="CharacterBody3D"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="CharacterBody3D/Control"]
+visible = false
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 80.0
+offset_bottom = 80.0
+texture = ExtResource("7_peexq")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CharacterBody3D/Control"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 80.0
+offset_bottom = 80.0
+value = 75.0
+fill_mode = 5
+texture_under = ExtResource("8_fh1bg")
+texture_progress = ExtResource("9_ijojd")
+
+[node name="Label" type="Label" parent="CharacterBody3D/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 48.0
+grow_horizontal = 0
+text = "0"
+label_settings = SubResource("LabelSettings_rlrdj")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="CharacterBody3D/Control/Label"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = -24.0
+offset_right = 1.0
+offset_bottom = 24.0
+grow_vertical = 2
+texture = ExtResource("10_rb8ol")
+
+[node name="SFX" type="Node3D" parent="CharacterBody3D"]
+script = ExtResource("11_8v6sv")
+
+[node name="jump" type="AudioStreamPlayer3D" parent="CharacterBody3D/SFX"]
+stream = ExtResource("12_w7741")
+volume_db = -2.0
+pitch_scale = 0.96
+
+[node name="InteractionSystem" type="Node3D" parent="CharacterBody3D"]
+script = ExtResource("13_qbjoy")
+
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, 0, -2)
+
+[node name="Model" type="Node3D" parent="CharacterBody3D"]
+script = ExtResource("14_nvubw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_axgwx")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ov2oi")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CharacterBody3D/Model"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1, -0.5)
+visible = false
+mesh = SubResource("CylinderMesh_x6wp4")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_e86xl")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="CharacterBody3D/Model"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.625, -0.125)
+visible = false
+mesh = SubResource("CapsuleMesh_u53cx")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_p46d7")
+
+[node name="Marker3D" type="Marker3D" parent="CharacterBody3D/Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -1)
+
+[node name="tux4" parent="CharacterBody3D/Model" instance=ExtResource("15_txhyc")]
+transform = Transform3D(-0.37, 0, -5.5868448e-08, 0, 0.37, 0, 5.5868448e-08, 0, -0.37, 0, 0, 0)
+
+[node name="AnimationTree" type="AnimationTree" parent="CharacterBody3D/Model"]
+root_node = NodePath("../tux4")
+tree_root = SubResource("AnimationNodeStateMachine_j5txn")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/crawl_idle = false
+parameters/conditions/crawl_walk = false
+parameters/conditions/fall = false
+parameters/conditions/idle = false
+parameters/conditions/jump = false
+parameters/conditions/run = false
+parameters/conditions/walk = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D/Model"]
+root_node = NodePath("../tux4")
+libraries = {
+&"Tux": SubResource("AnimationLibrary_xd3sr")
+}
+
+[node name="StandCollision" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_julm7")
+
+[node name="CrawlCollision" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_6seei")
+
+[node name="HeadDetection" type="RayCast3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 1, 0)
+
+[node name="Camera" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("25_q1sj8")
+
+[node name="PhantomCamera3D" type="Node3D" parent="CharacterBody3D/Camera"]
+top_level = true
+visible = false
+script = ExtResource("26_p668s")
+follow_mode = 1
+look_at_mode = 1
+tween_resource = SubResource("Resource_6seei")
+tween_on_load = false
+follow_offset = Vector3(0, 1.5, 0)
+follow_damping_value = Vector3(0.3, 0.075, 0.3)
+follow_distance = 5.0
+spring_length = 5.0
+noise = SubResource("Resource_33b6x")
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D/Camera"]
+collision_mask = 9
+spring_length = 4.5
+margin = 0.5
+
+[node name="Marker3D" type="Marker3D" parent="CharacterBody3D/Camera/SpringArm3D"]
+
+[node name="SpringPos" type="Marker3D" parent="CharacterBody3D/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Camera" type="Node3D" parent="CharacterBody3D/Camera"]
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Camera/Camera"]
+current = true
+fov = 80.0
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -10)
+collision_layer = 8
+collision_mask = 15
+mass = 3.0
+can_sleep = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_dbxb2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_ov2oi")
+
+[node name="Interact" type="Node" parent="RigidBody3D"]
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -20.5)
+collision_layer = 8
+collision_mask = 15
+mass = 48.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
+shape = SubResource("BoxShape3D_ov2oi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
+mesh = SubResource("BoxMesh_x6wp4")
+
+[node name="RigidBody3D3" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 1.5, -14.5)
+collision_layer = 8
+collision_mask = 15
+mass = 24.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3"]
+shape = SubResource("SphereShape3D_ohipb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3"]
+mesh = SubResource("SphereMesh_rlrdj")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("29_0givf")
