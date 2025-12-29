@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="SuperTuxWorld Rebooted"
+config/name="SuperTuxWorld"
+config/version="v0.0.1"
 run/main_scene="uid://d2f57wxwlcy7h"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://bv5nng458wah6"
 
 [autoload]
 
