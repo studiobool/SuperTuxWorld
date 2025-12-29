@@ -16,10 +16,6 @@ run/main_scene="uid://d2f57wxwlcy7h"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="uid://bv5nng458wah6"
 
-[autoload]
-
-PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
-
 [display]
 
 window/size/viewport_width=1366
@@ -35,10 +31,6 @@ movie_writer/mix_rate=44100
 movie_writer/video_quality=0.5
 movie_writer/movie_file="C:/Users/nates/Godot/Projects/Videos/stwr.avi"
 movie_writer/fps=30
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [input]
 

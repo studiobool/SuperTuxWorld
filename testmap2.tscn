@@ -274,25 +274,21 @@ material = SubResource("StandardMaterial3D_6seei")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -10)
 
 [node name="Label3D" type="Label3D" parent="billboard"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0.26500034)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 0.26500034)
 shaded = true
 render_priority = 1
 outline_render_priority = 0
-text = "E to interact
-Shift to sprint
-Ctrl to crawl"
+text = "Insert stuff here"
 font = ExtResource("3_xkjb2")
 font_size = 96
 outline_size = 24
 
 [node name="Label3D2" type="Label3D" parent="billboard"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 3.5, -0.26500034)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 4.5, -0.26500034)
 shaded = true
 render_priority = 1
 outline_render_priority = 0
-text = "E to interact
-Shift to sprint
-Ctrl to crawl"
+text = "Insert stuff here"
 font = ExtResource("3_xkjb2")
 font_size = 96
 outline_size = 24
