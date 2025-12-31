@@ -1,0 +1,277 @@
+[gd_scene load_steps=16 format=3 uid="uid://bh7o1bus4am2l"]
+
+[ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="1_78b5r"]
+[ext_resource type="Script" uid="uid://cd7fcjsu2tl1e" path="res://debug_level.gd" id="3_gm6wi"]
+[ext_resource type="Script" uid="uid://dkmhw5ine7hk8" path="res://scripts/player/camera.gd" id="3_vulod"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_axgwx"]
+transparency = 1
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+albedo_texture = ExtResource("1_78b5r")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ymwef"]
+next_pass = SubResource("StandardMaterial3D_axgwx")
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="GDScript" id="GDScript_gnqbt"]
+script/source = "extends CharacterBody3D
+
+var direction : Vector3
+const WALK = 6.5
+const SPRINT = 11.0
+const CRAWL = 3.25
+var SPEED = 6.0
+var ACCEL = 3.5
+var DECCEL = 5.25
+const JUMP_VELOCITY = 12.0
+var holding_jump : bool
+var if_jumped : bool
+
+@onready var camera = $Camera
+@onready var model = $Model
+
+var move_dir := Vector3.BACK
+
+@onready var stand_collision = $StandCollision
+@onready var crawl_collision = $CrawlCollision
+@onready var object_collision = $ObjectCollision
+@onready var head_detection = $HeadDetection
+@onready var floor_detection = $FloorDetection
+
+@export var coyote_time: float = 0.15
+@export var coyote_float: float = 0.03
+var coyote_timer: float = 0.0
+
+#func _ready() -> void:
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _process(delta: float) -> void:
+	if !is_on_floor():
+		coyote_timer += delta
+	else:
+		coyote_timer = 0.0
+
+func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor() && coyote_timer >= coyote_float:
+		if stand_collision.disabled && velocity.y <= -2:
+			velocity += get_gravity() * 7.5 * delta
+		else:
+			velocity += get_gravity() * 1.5 * delta
+	
+	# Handle jump.
+	if is_on_floor():
+		if_jumped = false
+	
+	var jump_move_boost = velocity.length() / 1.25
+	if Input.is_action_just_pressed(\"jump\") && (is_on_floor() or coyote_timer < coyote_time):
+		if velocity.y <= 0.0:
+			jump(Vector3(0, JUMP_VELOCITY + jump_move_boost, 0))
+			if_jumped = true
+	if Input.is_action_just_released(\"jump\") && velocity.y >= JUMP_VELOCITY / 2 && if_jumped:
+		velocity.y = (JUMP_VELOCITY + jump_move_boost) / 2
+	
+	if Input.is_action_pressed(\"jump\"):
+		holding_jump = true
+	else:
+		holding_jump = false
+
+	if Input.is_action_pressed(\"sprint\") && !stand_collision.disabled:
+		if is_on_floor():
+			SPEED = SPRINT
+	
+	elif !stand_collision.disabled:
+		SPEED = WALK
+	else:
+		SPEED = CRAWL
+	
+	if Input.is_action_pressed(\"crawl\") && SPEED != SPRINT:
+		stand_collision.disabled = true
+	elif !head_detection.is_colliding():
+		stand_collision.disabled = false
+	
+	if floor_detection.get_collider():
+		print(floor_detection.get_collider())
+	
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var input_dir := Input.get_vector(\"move_left\", \"move_right\", \"move_up\", \"move_down\")
+	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y))
+	direction = direction.rotated(Vector3.UP, camera.camera.global_rotation.y)
+	var friction : Vector2
+	friction.x = (ACCEL if direction.x else DECCEL) * delta
+	friction.y = (ACCEL if direction.z else DECCEL) * delta
+	if direction:
+		velocity.x = lerp(velocity.x, direction.x * SPEED, friction.x)
+		velocity.z = lerp(velocity.z, direction.z * SPEED, friction.y)
+	elif is_on_floor():
+		velocity.x = lerp(velocity.x, 0.0, delta)
+		velocity.z = lerp(velocity.z, 0.0, delta)
+	else:
+		velocity.x = lerp(velocity.x, 0.0, delta)
+		velocity.z = lerp(velocity.z, 0.0, delta)
+	
+	_push_away_rigid_bodies()
+	move_and_slide()
+	
+
+func jump(vector):
+	velocity += vector
+
+func _push_away_rigid_bodies():
+	for i in get_slide_collision_count():
+		var c := get_slide_collision(i)
+		if c.get_collider() is RigidBody3D:
+			var push_dir = -c.get_normal()
+			# How much velocity the object needs to increase to match player velocity in the push direction
+			var velocity_diff_in_push_dir = self.velocity.dot(push_dir) - c.get_collider().linear_velocity.dot(push_dir)
+			# Only count velocity towards push dir, away from character
+			velocity_diff_in_push_dir = max(0., velocity_diff_in_push_dir)
+			# Objects with more mass than us should be harder to push. But doesn't really make sense to push faster than we are going
+			const MY_APPROX_MASS_KG = 60.0
+			var mass_ratio = min(1., MY_APPROX_MASS_KG / c.get_collider().mass)
+			# Optional add: Don't push object at all if it's 4x heavier or more
+			if mass_ratio < 0.25:
+				continue
+			# Don't push object from above/below
+			push_dir.y = 0
+			# 5.0 is a magic number, adjust to your needs
+			var push_force = mass_ratio * 5.0
+			c.get_collider().apply_impulse(push_dir * velocity_diff_in_push_dir * push_force, c.get_position() - c.get_collider().global_position)
+"
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_axgwx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ov2oi"]
+albedo_color = Color(0.028750002, 0.025, 0.05, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_x6wp4"]
+top_radius = 0.0
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e86xl"]
+albedo_color = Color(1, 0.7490196, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_u53cx"]
+height = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p46d7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_julm7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6seei"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eyb6c"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.5, 0)
+use_collision = true
+size = Vector3(200, 15, 200)
+material = SubResource("StandardMaterial3D_ymwef")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.5, -15)
+size = Vector3(10, 10, 10)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGBox3D/CSGBox3D2"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 5, 5)
+operation = 2
+radius = 10.0
+height = 12.0
+sides = 32
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+size = Vector3(10, 10, 10)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -9.75)
+operation = 2
+size = Vector3(10, 2, 10.5)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.5, 0)
+operation = 2
+radius = 10.0
+radial_segments = 48
+rings = 24
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, -29.5)
+collision_layer = 2
+collision_mask = 25
+floor_max_angle = 0.0
+script = SubResource("GDScript_gnqbt")
+
+[node name="Model" type="Node3D" parent="Player"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_axgwx")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ov2oi")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player/Model"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1, -0.5)
+mesh = SubResource("CylinderMesh_x6wp4")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_e86xl")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Player/Model"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.625, -0.125)
+mesh = SubResource("CapsuleMesh_u53cx")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_p46d7")
+
+[node name="StandCollision" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_julm7")
+
+[node name="CrawlCollision" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_6seei")
+
+[node name="ObjectCollision" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -1.375)
+shape = SubResource("BoxShape3D_eyb6c")
+disabled = true
+
+[node name="HeadDetection" type="RayCast3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 1, 0)
+
+[node name="FloorDetection" type="RayCast3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, -0.75, 0)
+collision_mask = 17
+hit_from_inside = true
+collide_with_bodies = false
+
+[node name="Camera" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("3_vulod")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Player/Camera"]
+collision_mask = 9
+spring_length = 4.5
+margin = 0.5
+
+[node name="Marker3D" type="Marker3D" parent="Player/Camera/SpringArm3D"]
+
+[node name="SpringPos" type="Marker3D" parent="Player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Camera" type="Node3D" parent="Player/Camera"]
+
+[node name="Camera3D" type="Camera3D" parent="Player/Camera/Camera"]
+current = true
+fov = 80.0
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("3_gm6wi")

@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 			master.move_dir = master.direction
 		var angle := Vector3.BACK.signed_angle_to(-master.move_dir, Vector3.UP)
 		rotation.y = lerp_angle(master.model.rotation.y, angle, delta * 12)
-	if master.velocity.length() > 0.01 and master.direction.length() > 0.125:
+	if master.velocity.length() > 0.75:
 		if master.is_on_floor():
 			if master.velocity.length() >= 0.01:
 				state_machine.travel("walk")

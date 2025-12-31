@@ -1,6 +1,6 @@
 extends Area3D
 
-@export var bounce_power : Vector3 = Vector3(0, 90, 0)
+@export var bounce_power : Vector3 = Vector3(0, 100, 0)
 @onready var bounce_sound = $BounceSound
 
 

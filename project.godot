@@ -134,3 +134,7 @@ fire={
 3d/default_gravity=19.6
 2d/default_gravity=1960.0
 common/physics_interpolation=true
+
+[rendering]
+
+renderer/rendering_method="mobile"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://d1x8iynxnf8th"]
+[gd_scene load_steps=73 format=3 uid="uid://d1x8iynxnf8th"]
 
 [ext_resource type="Script" uid="uid://cu2mwjdhr8tay" path="res://scripts/player/movement.gd" id="1_t1t22"]
 [ext_resource type="Texture2D" uid="uid://crnahqa8rcafk" path="res://images/hud/item_pocket_complete.png" id="2_50fht"]
@@ -55,6 +55,34 @@ height = 1.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p46d7"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ghoj8"]
+animation = &"Tux/Idle 1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t1t22"]
+animation = &"Tux/Walk"
+use_custom_timeline = true
+timeline_length = 0.9
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_50fht"]
+animation = &"Tux/Run"
+use_custom_timeline = true
+timeline_length = 0.55
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 1
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_wuv6x"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_ghoj8")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_t1t22")
+blend_point_1/pos = 0.5
+blend_point_2/node = SubResource("AnimationNodeAnimation_50fht")
+blend_point_2/pos = 1.0
+min_space = 0.0
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eyb6c"]
 animation = &"Tux/Idle 1"
 
@@ -99,7 +127,7 @@ animation = &"Tux/Jump"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rkm6k"]
 animation = &"Tux/Run"
 use_custom_timeline = true
-timeline_length = 0.571
+timeline_length = 0.55
 stretch_time_scale = true
 start_offset = 0.0
 loop_mode = 1
@@ -107,7 +135,7 @@ loop_mode = 1
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vuyj7"]
 animation = &"Tux/Walk"
 use_custom_timeline = true
-timeline_length = 0.909
+timeline_length = 0.9
 stretch_time_scale = true
 start_offset = 0.0
 loop_mode = 1
@@ -227,8 +255,10 @@ advance_mode = 2
 advance_condition = &"fall"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_j5txn"]
+states/BlendSpace1D/node = SubResource("AnimationNodeBlendSpace1D_wuv6x")
+states/BlendSpace1D/position = Vector2(-80, 225)
 states/StateMachine/node = SubResource("AnimationNodeStateMachine_50fht")
-states/StateMachine/position = Vector2(73, 229)
+states/StateMachine/position = Vector2(-16, 94)
 states/crawl_idle/node = SubResource("AnimationNodeAnimation_cunfg")
 states/crawl_idle/position = Vector2(242, 353)
 states/crawl_walk/node = SubResource("AnimationNodeAnimation_gyumy")
@@ -244,7 +274,7 @@ states/run/position = Vector2(716, 229)
 states/walk/node = SubResource("AnimationNodeAnimation_vuyj7")
 states/walk/position = Vector2(466, 7)
 transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_ak1ch"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_c3e3f"), "idle", "fall", SubResource("AnimationNodeStateMachineTransition_ohipb"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_rlrdj"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_cunfg"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_gyumy"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_rc2k8"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_cjfmb"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_y2ja5"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_tl5yp"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_00xdn"), "fall", "walk", SubResource("AnimationNodeStateMachineTransition_vuyj7"), "walk", "fall", SubResource("AnimationNodeStateMachineTransition_j5txn"), "fall", "run", SubResource("AnimationNodeStateMachineTransition_d6dwt"), "run", "fall", SubResource("AnimationNodeStateMachineTransition_qho1s"), "idle", "crawl_idle", SubResource("AnimationNodeStateMachineTransition_usods"), "crawl_idle", "idle", SubResource("AnimationNodeStateMachineTransition_h6sgf"), "crawl_idle", "crawl_walk", SubResource("AnimationNodeStateMachineTransition_wvv3o"), "crawl_walk", "crawl_idle", SubResource("AnimationNodeStateMachineTransition_16kel"), "crawl_idle", "jump", SubResource("AnimationNodeStateMachineTransition_g3i8x"), "fall", "crawl_idle", SubResource("AnimationNodeStateMachineTransition_b37n7"), "crawl_idle", "fall", SubResource("AnimationNodeStateMachineTransition_hbvpg")]
-graph_offset = Vector2(-298, 58)
+graph_offset = Vector2(-485, 25)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xd3sr"]
 _data = {
@@ -378,20 +408,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_p46d7")
 [node name="tux4" parent="Model" instance=ExtResource("11_8q4fm")]
 transform = Transform3D(-0.37, 0, -5.5868448e-08, 0, 0.37, 0, 5.5868448e-08, 0, -0.37, 0, 0, 0)
 
-[node name="Skeleton3D" parent="Model/tux4/Armature" index="0"]
-bones/3/rotation = Quaternion(-0.008869325, 4.370967e-08, 3.876905e-10, 0.99996066)
-bones/4/rotation = Quaternion(0.65774214, 8.695675e-07, 8.1547944e-07, 0.7532433)
-bones/5/rotation = Quaternion(0.72942835, 7.8410875e-07, 8.9795776e-07, 0.6840573)
-bones/6/rotation = Quaternion(1.8634474e-07, -3.7102574e-09, 0.99042207, 0.1380736)
-bones/7/rotation = Quaternion(1.2433732e-09, -1.7894324e-08, -0.033444505, 0.9994406)
-bones/8/rotation = Quaternion(2.2801036e-07, 6.54878e-09, 0.99042207, -0.1380736)
-bones/9/rotation = Quaternion(-8.431067e-09, -2.0519994e-07, 0.033444505, 0.9994406)
-bones/10/rotation = Quaternion(-0.80883807, 2.570368e-08, 3.5355434e-08, 0.58803153)
-bones/11/rotation = Quaternion(0, -0.7071068, 0, 0.7071068)
-bones/12/rotation = Quaternion(-5.051286e-08, -1.6202115e-10, 0.67100537, 0.7414525)
-bones/13/rotation = Quaternion(0, 0.7071068, 0, 0.7071068)
-bones/14/rotation = Quaternion(-5.051286e-08, 1.6202115e-10, -0.67100537, 0.7414525)
-
 [node name="AnimationTree" type="AnimationTree" parent="Model"]
 root_node = NodePath("../tux4")
 tree_root = SubResource("AnimationNodeStateMachine_j5txn")
@@ -403,6 +419,7 @@ parameters/conditions/idle = false
 parameters/conditions/jump = false
 parameters/conditions/run = false
 parameters/conditions/walk = false
+parameters/BlendSpace1D/blend_position = 0.024957
 parameters/StateMachine/conditions/idle_2 = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Model"]
@@ -454,5 +471,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 [node name="Camera3D" type="Camera3D" parent="Camera/Camera"]
 current = true
 fov = 80.0
-
-[editable path="Model/tux4"]

@@ -1,12 +1,12 @@
 extends CharacterBody3D
 
 var direction : Vector3
-const WALK = 6.5
-const SPRINT = 11.0
+const WALK = 6.25
+const SPRINT = 13.0
 const CRAWL = 3.25
 var SPEED = 6.0
-var ACCEL = 3.5
-var DECCEL = 5.25
+var ACCEL = 3.75
+var DECCEL = 4.5
 const JUMP_VELOCITY = 12.0
 var holding_jump : bool
 var if_jumped : bool
@@ -46,20 +46,24 @@ func _physics_process(delta: float) -> void:
 		if stand_collision.disabled && velocity.y <= -2:
 			velocity += get_gravity() * 7.5 * delta
 		else:
-			velocity += get_gravity() * 1.5 * delta
+			if velocity.y >= -0.5:
+				velocity += get_gravity() * 1.5 * delta
+			else:
+				velocity += get_gravity() * 1.75 * delta
 	
 	# Handle jump.
 	if is_on_floor():
 		if_jumped = false
 	
-	var jump_move_boost = velocity.length() / 1.25
+	var jump_move_boost = velocity.length() / 1.5
 	if Input.is_action_just_pressed("jump") && (is_on_floor() or coyote_timer < coyote_time):
 		if velocity.y <= 0.0:
 			jump(Vector3(0, JUMP_VELOCITY + jump_move_boost, 0))
 			sfx._jump()
 			if_jumped = true
-	if Input.is_action_just_released("jump") && velocity.y >= JUMP_VELOCITY / 2 && if_jumped:
-		velocity.y = (JUMP_VELOCITY + jump_move_boost) / 2
+	if Input.is_action_just_released("jump") && if_jumped:
+		if velocity.y >= JUMP_VELOCITY / 2 or velocity.y >= JUMP_VELOCITY + jump_move_boost / 2:
+			velocity.y = (JUMP_VELOCITY + jump_move_boost) / 2
 	
 	if Input.is_action_pressed("jump"):
 		holding_jump = true

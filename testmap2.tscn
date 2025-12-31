@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://d2f57wxwlcy7h"]
+[gd_scene load_steps=44 format=3 uid="uid://d2f57wxwlcy7h"]
 
 [ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="1_8sejj"]
 [ext_resource type="AudioStream" uid="uid://gtf2msqqqws6" path="res://music/placeholder/sunset.ogg" id="1_35xd0"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://dnhh3onmos53s" path="res://sounds/trampoline.wav" id="6_nsies"]
 [ext_resource type="PackedScene" uid="uid://d1x8iynxnf8th" path="res://entities/player/player.tscn" id="6_xkjb2"]
 [ext_resource type="Script" uid="uid://cd7fcjsu2tl1e" path="res://debug_level.gd" id="8_bmnvl"]
+[ext_resource type="Script" uid="uid://pbmmentbwb75" path="res://scripts/special/unstable.gd" id="9_xqgq3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6seei"]
 sky_top_color = Color(0.3019608, 0.5058824, 0.8039216, 1)
@@ -23,7 +24,7 @@ background_mode = 2
 sky = SubResource("Sky_dbxb2")
 tonemap_mode = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_axgwx"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xqgq3"]
 transparency = 1
 albedo_color = Color(0.25, 0.25, 0.25, 1)
 albedo_texture = ExtResource("1_8sejj")
@@ -33,13 +34,13 @@ uv1_world_triplanar = true
 texture_filter = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ys0t5"]
-next_pass = SubResource("StandardMaterial3D_axgwx")
+next_pass = SubResource("StandardMaterial3D_xqgq3")
 albedo_color = Color(0.5, 0.5, 0.5, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_julm7"]
 load_path = "res://.godot/imported/checker.png-d334a8ae07de292fd4162f184b9dd7bc.s3tc.ctex"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8vdae"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_akcju"]
 transparency = 1
 albedo_color = Color(0.25, 0.25, 0.25, 1)
 albedo_texture = SubResource("CompressedTexture2D_julm7")
@@ -49,13 +50,13 @@ uv1_world_triplanar = true
 texture_filter = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6seei"]
-next_pass = SubResource("StandardMaterial3D_8vdae")
+next_pass = SubResource("StandardMaterial3D_akcju")
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8sejj"]
 load_path = "res://.godot/imported/checker.png-d334a8ae07de292fd4162f184b9dd7bc.s3tc.ctex"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xqgq3"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a8kll"]
 transparency = 1
 albedo_color = Color(0.25, 0.25, 0.25, 1)
 albedo_texture = SubResource("CompressedTexture2D_8sejj")
@@ -65,7 +66,7 @@ uv1_world_triplanar = true
 texture_filter = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_33b6x"]
-next_pass = SubResource("StandardMaterial3D_xqgq3")
+next_pass = SubResource("StandardMaterial3D_a8kll")
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fnhgr"]
@@ -138,6 +139,15 @@ radius = 0.75
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_nsies"]
 height = 0.75
 radius = 0.7
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8sejj"]
+size = Vector3(2.1, 2.1, 2.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bmnvl"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_owoh6"]
+size = Vector3(2, 2, 2)
 
 [node name="Node3D" type="Node3D"]
 
@@ -214,38 +224,44 @@ font = ExtResource("3_xkjb2")
 font_size = 48
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.003, 5, -41.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.003, 6, -41.5)
 use_collision = true
-size = Vector3(20, 10, 19)
+size = Vector3(20, 12, 19)
 material = SubResource("StandardMaterial3D_ys0t5")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, -4.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.5, -4)
 use_collision = true
-size = Vector3(20, 10, 14)
+size = Vector3(20, 13, 13)
+material = SubResource("StandardMaterial3D_ys0t5")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="CSGBox3D3"]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 9, -6.5)
+use_collision = true
+size = Vector3(20, 11.25, 14)
 material = SubResource("StandardMaterial3D_ys0t5")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, -30)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.5, -30.5)
 use_collision = true
-size = Vector3(20, 18, 15)
+size = Vector3(20, 31, 16)
 material = SubResource("StandardMaterial3D_ys0t5")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="CSGBox3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, -15.989998)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, -15.989998)
 use_collision = true
 size = Vector3(20, 7, 13)
 material = SubResource("StandardMaterial3D_ys0t5")
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="CSGBox3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.75, -7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.75, -7)
 operation = 2
 use_collision = true
 size = Vector3(2, 1.5, 19)
 material = SubResource("StandardMaterial3D_ys0t5")
 
 [node name="CSGBox3D9" type="CSGBox3D" parent="CSGBox3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -17)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -17)
 operation = 2
 use_collision = true
 size = Vector3(4, 4, 3)
@@ -392,4 +408,33 @@ stream = ExtResource("6_nsies")
 unit_size = 20.0
 attenuation_filter_cutoff_hz = 20500.0
 
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -3)
+collision_mask = 15
+script = ExtResource("9_xqgq3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_8sejj")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Area3D"]
+collision_mask = 15
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D/StaticBody3D2"]
+shape = SubResource("BoxShape3D_bmnvl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D/StaticBody3D2"]
+mesh = SubResource("BoxMesh_owoh6")
+
+[node name="CrackTimer" type="Timer" parent="Area3D"]
+wait_time = 0.3
+one_shot = true
+
+[node name="RespawnTimer" type="Timer" parent="Area3D"]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="body_entered" from="StaticBody3D/Area3D" to="StaticBody3D/Area3D" method="_on_body_entered"]
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area3D" to="Area3D" method="_on_body_exited"]
+[connection signal="timeout" from="Area3D/CrackTimer" to="Area3D" method="_on_crack_timer_timeout"]
+[connection signal="timeout" from="Area3D/RespawnTimer" to="Area3D" method="_on_respawn_timer_timeout"]
