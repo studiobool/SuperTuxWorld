@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://d2f57wxwlcy7h"]
+[gd_scene load_steps=43 format=3 uid="uid://d2f57wxwlcy7h"]
 
 [ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="1_8sejj"]
 [ext_resource type="AudioStream" uid="uid://gtf2msqqqws6" path="res://music/placeholder/sunset.ogg" id="1_35xd0"]
@@ -8,7 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://dnhh3onmos53s" path="res://sounds/trampoline.wav" id="6_nsies"]
 [ext_resource type="PackedScene" uid="uid://d1x8iynxnf8th" path="res://entities/player/player.tscn" id="6_xkjb2"]
 [ext_resource type="Script" uid="uid://cd7fcjsu2tl1e" path="res://debug_level.gd" id="8_bmnvl"]
-[ext_resource type="Script" uid="uid://pbmmentbwb75" path="res://scripts/special/unstable.gd" id="9_xqgq3"]
+[ext_resource type="PackedScene" uid="uid://n7lq77k1s5k6" path="res://entities/special/unstable_block.tscn" id="9_33b6x"]
+[ext_resource type="Script" uid="uid://ctg4eljyhams3" path="res://scripts/fps.gd" id="10_33b6x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6seei"]
 sky_top_color = Color(0.3019608, 0.5058824, 0.8039216, 1)
@@ -140,14 +141,15 @@ radius = 0.75
 height = 0.75
 radius = 0.7
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8sejj"]
-size = Vector3(2.1, 2.1, 2.1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_bmnvl"]
-size = Vector3(2, 2, 2)
-
-[sub_resource type="BoxMesh" id="BoxMesh_owoh6"]
-size = Vector3(2, 2, 2)
+[sub_resource type="LabelSettings" id="LabelSettings_xqgq3"]
+font = ExtResource("3_xkjb2")
+font_size = 18
+font_color = Color(0.95686275, 0.9607843, 0.5764706, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(1.5, 1.5)
 
 [node name="Node3D" type="Node3D"]
 
@@ -408,33 +410,31 @@ stream = ExtResource("6_nsies")
 unit_size = 20.0
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -3)
-collision_mask = 15
-script = ExtResource("9_xqgq3")
+[node name="Unstable" parent="." instance=ExtResource("9_33b6x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26, -58)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("BoxShape3D_8sejj")
+[node name="Unstable2" parent="." instance=ExtResource("9_33b6x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26, -56)
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="Area3D"]
-collision_mask = 15
+[node name="Unstable3" parent="." instance=ExtResource("9_33b6x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26, -59.5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D/StaticBody3D2"]
-shape = SubResource("BoxShape3D_bmnvl")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D/StaticBody3D2"]
-mesh = SubResource("BoxMesh_owoh6")
-
-[node name="CrackTimer" type="Timer" parent="Area3D"]
-wait_time = 0.3
-one_shot = true
-
-[node name="RespawnTimer" type="Timer" parent="Area3D"]
-wait_time = 5.0
-one_shot = true
+[node name="Label" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -48.0
+offset_right = -15.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "60"
+label_settings = SubResource("LabelSettings_xqgq3")
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("10_33b6x")
 
 [connection signal="body_entered" from="StaticBody3D/Area3D" to="StaticBody3D/Area3D" method="_on_body_entered"]
-[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
-[connection signal="body_exited" from="Area3D" to="Area3D" method="_on_body_exited"]
-[connection signal="timeout" from="Area3D/CrackTimer" to="Area3D" method="_on_crack_timer_timeout"]
-[connection signal="timeout" from="Area3D/RespawnTimer" to="Area3D" method="_on_respawn_timer_timeout"]

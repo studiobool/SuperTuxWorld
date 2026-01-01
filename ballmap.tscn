@@ -1,7 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://ddnu1dmdpb05j"]
+[gd_scene load_steps=20 format=3 uid="uid://ddnu1dmdpb05j"]
 
 [ext_resource type="AudioStream" uid="uid://gtf2msqqqws6" path="res://music/placeholder/sunset.ogg" id="1_persd"]
 [ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="3_uoylk"]
+[ext_resource type="FontFile" uid="uid://cgcreoeye0gaf" path="res://fonts/SuperTux-Medium.ttf" id="5_usvl8"]
+[ext_resource type="Script" uid="uid://ctg4eljyhams3" path="res://scripts/fps.gd" id="6_d42xk"]
 [ext_resource type="PackedScene" uid="uid://d1x8iynxnf8th" path="res://entities/player/player.tscn" id="6_mqdj3"]
 [ext_resource type="Script" uid="uid://cd7fcjsu2tl1e" path="res://debug_level.gd" id="7_gtvc3"]
 
@@ -79,6 +81,16 @@ size = Vector3(0.5, 5, 12)
 
 [sub_resource type="BoxMesh" id="BoxMesh_persd"]
 size = Vector3(0.5, 5, 12)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1xoy6"]
+font = ExtResource("5_usvl8")
+font_size = 18
+font_color = Color(0.95686275, 0.9607843, 0.5764706, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(1.5, 1.5)
 
 [node name="Node3D" type="Node3D"]
 
@@ -6817,3 +6829,21 @@ shape = SubResource("BoxShape3D_nw1iw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AnimationPlayer/AnimatableBody3D"]
 mesh = SubResource("BoxMesh_persd")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -48.0
+offset_right = -15.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "60"
+label_settings = SubResource("LabelSettings_1xoy6")
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("6_d42xk")

@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://n7lq77k1s5k6"]
+
+[ext_resource type="Script" uid="uid://pbmmentbwb75" path="res://scripts/special/unstable.gd" id="1_ebmwq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8sejj"]
+size = Vector3(2.05, 2.05, 2.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bmnvl"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_owoh6"]
+size = Vector3(2, 2, 2)
+
+[node name="Unstable" type="Area3D"]
+collision_mask = 15
+script = ExtResource("1_ebmwq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_8sejj")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+collision_mask = 15
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_bmnvl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+mesh = SubResource("BoxMesh_owoh6")
+
+[node name="CrackTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="CrackTimer" to="." method="_on_crack_timer_timeout"]
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]

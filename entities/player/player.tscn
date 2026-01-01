@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://d1x8iynxnf8th"]
+[gd_scene load_steps=67 format=3 uid="uid://d1x8iynxnf8th"]
 
 [ext_resource type="Script" uid="uid://cu2mwjdhr8tay" path="res://scripts/player/movement.gd" id="1_t1t22"]
 [ext_resource type="Texture2D" uid="uid://crnahqa8rcafk" path="res://images/hud/item_pocket_complete.png" id="2_50fht"]
@@ -37,23 +37,6 @@ inner_radius = 0.25
 outer_radius = 0.5
 rings = 32
 ring_segments = 16
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_axgwx"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ov2oi"]
-albedo_color = Color(0.028750002, 0.025, 0.05, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_x6wp4"]
-top_radius = 0.0
-height = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e86xl"]
-albedo_color = Color(1, 0.7490196, 0, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_u53cx"]
-height = 1.5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p46d7"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ghoj8"]
 animation = &"Tux/Idle 1"
@@ -297,7 +280,7 @@ _data = {
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
-collision_mask = 25
+collision_mask = 29
 floor_max_angle = 1.0908308
 script = ExtResource("1_t1t22")
 
@@ -383,27 +366,6 @@ collision_mask = 8
 
 [node name="Model" type="Node3D" parent="."]
 script = ExtResource("10_2soq1")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
-mesh = SubResource("CapsuleMesh_axgwx")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_ov2oi")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1, -0.5)
-visible = false
-mesh = SubResource("CylinderMesh_x6wp4")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_e86xl")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.625, -0.125)
-visible = false
-mesh = SubResource("CapsuleMesh_u53cx")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_p46d7")
 
 [node name="tux4" parent="Model" instance=ExtResource("11_8q4fm")]
 transform = Transform3D(-0.37, 0, -5.5868448e-08, 0, 0.37, 0, 5.5868448e-08, 0, -0.37, 0, 0, 0)
