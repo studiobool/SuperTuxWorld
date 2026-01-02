@@ -6,7 +6,7 @@ const SPRINT = 13.0
 const CRAWL = 3.25
 var SPEED = 6.0
 var ACCEL = 3.75
-var DECCEL = 4.5
+var DECCEL = 3.75
 const JUMP_VELOCITY = 12.0
 var holding_jump : bool
 var if_jumped : bool
