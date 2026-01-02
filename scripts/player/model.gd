@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 		if master.is_on_floor():
 			if master.velocity.length() >= 0.01:
 				state_machine.travel("walk")
-			if master.velocity.length() >= 7.5:
+			if master.velocity.length() >= 10.5:
 				state_machine.travel("run")
 			if master.stand_collision.disabled:
 				state_machine.travel("crawl_walk")
