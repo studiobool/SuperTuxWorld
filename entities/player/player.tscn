@@ -1,7 +1,9 @@
-[gd_scene load_steps=50 format=3 uid="uid://d1x8iynxnf8th"]
+[gd_scene load_steps=53 format=3 uid="uid://d1x8iynxnf8th"]
 
 [ext_resource type="Script" uid="uid://cu2mwjdhr8tay" path="res://scripts/player/movement.gd" id="1_t1t22"]
 [ext_resource type="Texture2D" uid="uid://crnahqa8rcafk" path="res://images/hud/item_pocket_complete.png" id="2_50fht"]
+[ext_resource type="Script" uid="uid://dtd7vqs3rc5w" path="res://entities/player/stats.gd" id="2_221hk"]
+[ext_resource type="Script" uid="uid://di7m3ciu8ev6k" path="res://entities/player/powerup.gd" id="2_ghoj8"]
 [ext_resource type="Texture2D" uid="uid://db0pshlkyrjct" path="res://images/hud/item_pocket_empty.png" id="3_wuv6x"]
 [ext_resource type="Texture2D" uid="uid://cyugmjyyqceqs" path="res://images/hud/item_pocket.png" id="4_qpopc"]
 [ext_resource type="FontFile" uid="uid://cgcreoeye0gaf" path="res://fonts/SuperTux-Medium.ttf" id="5_wq0jh"]
@@ -11,6 +13,7 @@
 [ext_resource type="Script" uid="uid://oqd32ap8ky63" path="res://scripts/player/interact.gd" id="9_vewsg"]
 [ext_resource type="Script" uid="uid://b07ixsd6phtmf" path="res://scripts/player/model.gd" id="10_2soq1"]
 [ext_resource type="PackedScene" uid="uid://bpa2kd0vcjeyc" path="res://models/tux/tux4.glb" id="11_8q4fm"]
+[ext_resource type="AudioStream" uid="uid://cmg1epj5t1x50" path="res://sounds/hurt.wav" id="11_t1t22"]
 [ext_resource type="Animation" uid="uid://dbkvj8vrlbcy2" path="res://models/tux/animations/Crawl Idle.res" id="12_np63p"]
 [ext_resource type="Animation" uid="uid://bkra8vftd6qfh" path="res://models/tux/animations/Crawl Walk.res" id="13_0eo6o"]
 [ext_resource type="Animation" uid="uid://cq8t7wb0jamtb" path="res://models/tux/animations/Default.res" id="14_ttr27"]
@@ -165,11 +168,17 @@ _data = {
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
-collision_mask = 29
+collision_mask = 157
 floor_max_angle = 1.0908308
 script = ExtResource("1_t1t22")
 
-[node name="Control" type="Control" parent="."]
+[node name="Powerup" type="Node" parent="."]
+script = ExtResource("2_ghoj8")
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("2_221hk")
+
+[node name="HUD" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -178,7 +187,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control"]
+[node name="TextureRect" type="TextureRect" parent="HUD"]
 visible = false
 layout_mode = 0
 offset_left = 8.0
@@ -187,7 +196,7 @@ offset_right = 80.0
 offset_bottom = 80.0
 texture = ExtResource("2_50fht")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control"]
+[node name="ItemPocket" type="TextureProgressBar" parent="HUD"]
 self_modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 0
 offset_left = 8.0
@@ -199,7 +208,7 @@ fill_mode = 5
 texture_under = ExtResource("3_wuv6x")
 texture_progress = ExtResource("4_qpopc")
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Label" type="Label" parent="HUD"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -214,7 +223,7 @@ label_settings = SubResource("LabelSettings_rlrdj")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="Control/Label"]
+[node name="TextureRect2" type="TextureRect" parent="HUD/Label"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -232,17 +241,27 @@ script = ExtResource("7_24ehl")
 [node name="jump" type="AudioStreamPlayer3D" parent="SFX"]
 stream = ExtResource("8_eyb6c")
 volume_db = -2.0
+unit_size = 5.0
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="hurt" type="AudioStreamPlayer3D" parent="SFX"]
+stream = ExtResource("11_t1t22")
+volume_db = -8.0
+unit_size = 5.0
 attenuation_filter_cutoff_hz = 20500.0
 
 [node name="InteractionSystem" type="Node3D" parent="."]
 script = ExtResource("9_vewsg")
 
 [node name="Marker3D" type="Marker3D" parent="InteractionSystem"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -1.375)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -1.25)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="InteractionSystem/Marker3D"]
 visible = false
 mesh = SubResource("TorusMesh_eyb6c")
+
+[node name="Marker3D2" type="Marker3D" parent="InteractionSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
 [node name="RayCast3D" type="RayCast3D" parent="InteractionSystem"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0.25, 0)
@@ -261,7 +280,7 @@ tree_root = SubResource("AnimationNodeStateMachine_j5txn")
 anim_player = NodePath("../AnimationPlayer")
 parameters/StateMachine/conditions/idle_2 = false
 parameters/crawl/blend_position = -7.800312e-05
-parameters/stand/blend_position = 0.0014925373
+parameters/stand/blend_position = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Model"]
 root_node = NodePath("../tux4")
@@ -278,7 +297,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("SphereShape3D_6seei")
 
 [node name="ObjectCollision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -1.375)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -1.25)
 shape = SubResource("BoxShape3D_eyb6c")
 disabled = true
 
@@ -312,3 +331,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 [node name="Camera3D" type="Camera3D" parent="Camera/Camera"]
 current = true
 fov = 80.0
+
+[node name="SafeTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="SafeTimer" to="." method="safe_timeout"]

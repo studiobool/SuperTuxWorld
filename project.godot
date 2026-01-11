@@ -127,6 +127,7 @@ fire={
 3d_physics/layer_4="Objects"
 3d_physics/layer_5="Ice"
 3d_physics/layer_6="Water"
+3d_physics/layer_8="Invisible"
 
 [physics]
 
@@ -139,3 +140,4 @@ common/physics_interpolation=true
 [rendering]
 
 renderer/rendering_method="mobile"
+shading/overrides/force_lambert_over_burley=true

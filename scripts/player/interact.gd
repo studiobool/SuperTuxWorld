@@ -3,19 +3,24 @@ extends Node3D
 @onready var master = self.get_parent()
 @onready var raycast = $RayCast3D
 @onready var marker = $Marker3D
+@onready var marker2 = $Marker3D2
 var object
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	# Drops object
 	if Input.is_action_just_pressed("interact") && object:
-		drop_object(master.velocity * 3)
+		drop_object(master.velocity * object.mass)
 		marker.rotation = Vector3.ZERO
 	
 	# Drops object with more force
 	if Input.is_action_just_pressed("fire") && object:
-		var knockback = master.global_position - object.global_position
-		drop_object(-knockback * 12 + (master.velocity * 3))
+		var knockback = marker2.global_position - object.global_position
+		var throw_force = object.get_node("Interact").throw_override
+		if throw_force:
+			drop_object((-knockback * throw_force) + (master.velocity * object.mass))
+		else:
+			drop_object((-knockback * object.mass * 6) + (master.velocity * object.mass))
 		marker.rotation = Vector3.ZERO
 	
 	# Detects if raycast finds object then if interacted grabs object

@@ -9,3 +9,7 @@ alpha_scissor_threshold = 0.5
 alpha_antialiasing_mode = 0
 cull_mode = 2
 albedo_texture = ExtResource("1_ap6um")
+distance_fade_min_distance = 1.5
+distance_fade_max_distance = 1.75
+stencil_flags = 2
+stencil_outline_thickness = 0.0

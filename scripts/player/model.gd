@@ -3,7 +3,6 @@ extends Node3D
 @onready var master = self.get_parent()
 @onready var animtree = $AnimationTree
 @onready var state_machine = animtree.get("parameters/playback")
-var move_state = remap(0.0, 0.0, 13.0, 0.0, 1.0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,8 +10,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	move_state = remap(master.velocity.length(), 0.0, 13.0, 0.0, 1.0)
-	animtree["parameters/stand/blend_position"] = move_state
+	var stand_state = remap(master.velocity.length(), 0.0, master.SPRINT, 0.0, 1.0)
+	animtree["parameters/stand/blend_position"] = stand_state
 	
 	if master.direction.length() > 0.125:
 		if master.velocity.length() > 0.5 && master.is_on_floor():
