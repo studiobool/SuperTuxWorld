@@ -1,4 +1,4 @@
-extends CharacterBody3D
+class_name Enemy extends CharacterBody3D
 
 var target : CharacterBody3D = null
 var direction: Vector3

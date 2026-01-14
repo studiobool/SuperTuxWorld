@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://d2f57wxwlcy7h"]
+[gd_scene load_steps=58 format=3 uid="uid://d2f57wxwlcy7h"]
 
 [ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="1_8sejj"]
 [ext_resource type="AudioStream" uid="uid://gtf2msqqqws6" path="res://music/placeholder/sunset.ogg" id="1_35xd0"]
@@ -42,21 +42,14 @@ texture_filter = 2
 next_pass = SubResource("StandardMaterial3D_xqgq3")
 albedo_color = Color(0.5, 0.5, 0.5, 1)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_julm7"]
-load_path = "res://.godot/imported/checker.png-d334a8ae07de292fd4162f184b9dd7bc.s3tc.ctex"
+[sub_resource type="BoxShape3D" id="BoxShape3D_akcju"]
+size = Vector3(11, 10, 11)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_akcju"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ynjx"]
+render_priority = 1
 transparency = 1
-albedo_color = Color(0.25, 0.25, 0.25, 1)
-albedo_texture = SubResource("CompressedTexture2D_julm7")
-uv1_scale = Vector3(0.5, 0.5, 0.5)
-uv1_triplanar = true
-uv1_world_triplanar = true
-texture_filter = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6seei"]
-next_pass = SubResource("StandardMaterial3D_akcju")
-albedo_color = Color(0, 0, 0, 1)
+cull_mode = 2
+albedo_color = Color(0, 0.24705882, 0.49803922, 0.49803922)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8sejj"]
 load_path = "res://.godot/imported/checker.png-d334a8ae07de292fd4162f184b9dd7bc.s3tc.ctex"
@@ -72,6 +65,22 @@ texture_filter = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_33b6x"]
 next_pass = SubResource("StandardMaterial3D_a8kll")
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_julm7"]
+load_path = "res://.godot/imported/checker.png-d334a8ae07de292fd4162f184b9dd7bc.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_akcju"]
+transparency = 1
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+albedo_texture = SubResource("CompressedTexture2D_julm7")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6seei"]
+next_pass = SubResource("StandardMaterial3D_akcju")
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fnhgr"]
@@ -218,53 +227,46 @@ directional_shadow_blend_splits = true
 environment = SubResource("Environment_ov2oi")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0)
 use_collision = true
-size = Vector3(200, 4, 200)
+size = Vector3(400, 40, 400)
 material = SubResource("StandardMaterial3D_ys0t5")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -10)
-use_collision = true
-size = Vector3(10, 2, 10)
-material = SubResource("StandardMaterial3D_6seei")
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 4.5)
-operation = 2
-use_collision = true
-size = Vector3(8, 1, 1)
-material = SubResource("StandardMaterial3D_6seei")
-
-[node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2"]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0.823, 4.59)
-operation = 2
-use_collision = true
-size = Vector3(4, 2, 5.5)
-material = SubResource("StandardMaterial3D_6seei")
-
-[node name="CSGBox3D7" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -1)
-operation = 2
-use_collision = true
-size = Vector3(10, 1.5, 6)
-material = SubResource("StandardMaterial3D_6seei")
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, -20)
 operation = 2
 use_collision = true
 size = Vector3(10, 4, 10)
 material = SubResource("StandardMaterial3D_ys0t5")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -10)
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 12)
+operation = 2
+use_collision = true
+size = Vector3(10, 10, 10)
+material = SubResource("StandardMaterial3D_ys0t5")
+
+[node name="Area3D3" type="Area3D" parent="CSGBox3D/CSGBox3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D/CSGBox3D5/Area3D3"]
+shape = SubResource("BoxShape3D_akcju")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D/CSGBox3D5/Area3D3"]
+cast_shadow = 0
+size = Vector3(11, 10, 11)
+material = SubResource("StandardMaterial3D_7ynjx")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23, -10)
 visible = false
 use_collision = true
 size = Vector3(4, 2, 2)
 material = SubResource("StandardMaterial3D_33b6x")
 
-[node name="Label3D" type="Label3D" parent="CSGBox3D/CSGBox3D4"]
+[node name="Label3D" type="Label3D" parent="CSGBox3D/CSGBox3D6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.01)
 render_priority = 1
 outline_render_priority = 0
@@ -275,6 +277,45 @@ Shift to sprint
 Ctrl to crawl"
 font = ExtResource("3_xkjb2")
 font_size = 48
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
+use_collision = true
+size = Vector3(10, 2, 10)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 4.5)
+operation = 2
+use_collision = true
+size = Vector3(8, 1, 1)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D5"]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0.823, 4.59)
+operation = 2
+use_collision = true
+size = Vector3(4, 2, 5.5)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGBox3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -1)
+operation = 2
+use_collision = true
+size = Vector3(10, 1.5, 6)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGBox3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+use_collision = true
+size = Vector3(10, 1, 10)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D5/CSGBox3D4"]
+operation = 2
+use_collision = true
+size = Vector3(8, 1, 10)
+material = SubResource("StandardMaterial3D_6seei")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.003, 7, -41.5)
@@ -326,18 +367,6 @@ use_collision = true
 collision_layer = 16
 size = Vector3(10, 4, 10)
 material = SubResource("StandardMaterial3D_fnhgr")
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -10)
-use_collision = true
-size = Vector3(10, 1, 10)
-material = SubResource("StandardMaterial3D_6seei")
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D4"]
-operation = 2
-use_collision = true
-size = Vector3(8, 1, 10)
-material = SubResource("StandardMaterial3D_6seei")
 
 [node name="billboard" parent="." instance=ExtResource("4_8sejj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -10)

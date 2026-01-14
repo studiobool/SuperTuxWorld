@@ -11,10 +11,6 @@ const SPRINT = 13.0
 const JUMP_VELOCITY = 5.0
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	#if not is_on_floor():
-	#	velocity += get_gravity() * delta
-	
 	if Input.is_action_pressed("sprint"):
 		SPEED = SPRINT
 	else:

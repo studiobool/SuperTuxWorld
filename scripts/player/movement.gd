@@ -1,4 +1,4 @@
-extends CharacterBody3D
+class_name Player extends CharacterBody3D
 
 var direction: Vector3
 const WALK = 6.25
@@ -27,6 +27,7 @@ var move_dir := Vector3.BACK
 @onready var object_collision = $ObjectCollision
 @onready var head_detection = $HeadDetection
 @onready var floor_detection = $FloorDetection
+@onready var water_detection = $WaterDetection
 
 @export var coyote_time: float = 0.15
 @export var coyote_float: float = 0.05
@@ -42,90 +43,12 @@ func _ready() -> void:
 	camera.cam_rot2.y = deg_to_rad(camera_rotation.y)
 
 func _process(delta: float) -> void:
-	if !is_on_floor():
-		coyote_timer += delta
-	else:
-		coyote_timer = 0.0
-	
 	item_pocket.value = stats.health
 
 func _physics_process(delta: float) -> void:
 	object_collision.global_position = interact.marker.global_position
 	object_collision.global_rotation = interact.marker.global_rotation
 	
-	# Add the gravity.
-	var gravity
-	if holding_jump:
-		gravity = (get_gravity() * power.grav_multi)
-	else:
-		gravity = get_gravity()
-	
-	if not is_on_floor() && coyote_timer >= coyote_float:
-		if stand_collision.disabled && velocity.y <= -2:
-			velocity += get_gravity() * 7.5 * delta
-		else:
-			if velocity.y >= -0.1:
-				velocity += get_gravity() * 1.5 * delta
-			else:
-				if holding_jump && power.is_wing:
-					velocity += gravity * delta
-				else:
-					velocity += get_gravity() * 1.75 * delta
-	
-	# Handle jump.
-	if is_on_floor():
-		if_jumped = false
-	
-	var jump_move_boost = velocity.length() / 1.5
-	if Input.is_action_just_pressed("jump") && (is_on_floor() or coyote_timer < coyote_time):
-		if velocity.y <= 0.0:
-			jump(Vector3(0, JUMP_VELOCITY + jump_move_boost * power.jump_multi, 0))
-			sfx._jump()
-			if_jumped = true
-	if Input.is_action_just_released("jump") && if_jumped:
-		if velocity.y >= (JUMP_VELOCITY + jump_move_boost * power.jump_multi) / 2:
-			velocity.y = (JUMP_VELOCITY + jump_move_boost * power.jump_multi) / 2
-	
-	holding_jump = Input.is_action_pressed("jump")
-
-	if Input.is_action_pressed("sprint") && !stand_collision.disabled:
-		if is_on_floor() or coyote_timer >= coyote_float:
-			SPEED = SPRINT
-	
-	elif !stand_collision.disabled:
-		SPEED = WALK
-	else:
-		SPEED = CRAWL
-	
-	if Input.is_action_pressed("crawl") && SPEED != SPRINT:
-		stand_collision.disabled = true
-	elif !head_detection.is_colliding():
-		stand_collision.disabled = false
-	
-	#if floor_detection.get_collider():
-	#	print(floor_detection.get_collider())
-	
-	# Get the input direction and handle the movement/deceleration.
-	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y))
-	direction = direction.rotated(Vector3.UP, camera.camera.rotation.y)
-	
-	var friction : Vector2
-	friction.x = (ACCEL if direction.x else DECCEL) * delta
-	friction.y = (ACCEL if direction.z else DECCEL) * delta
-	
-	if direction:
-		velocity.x = lerp(velocity.x, direction.x * SPEED, friction.x)
-		velocity.z = lerp(velocity.z, direction.z * SPEED, friction.y)
-	elif is_on_floor():
-		velocity.x = lerp(velocity.x, 0.0, friction.x)
-		velocity.z = lerp(velocity.z, 0.0, friction.y)
-	else:
-		velocity.x = lerp(velocity.x, 0.0, delta)
-		velocity.z = lerp(velocity.z, 0.0, delta)
-	
-	_push_away_rigid_bodies()
-	move_and_slide()
 
 func hurt(damage,vector):
 	if !temp_safe:

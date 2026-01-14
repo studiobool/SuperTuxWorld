@@ -1,11 +1,14 @@
-[gd_scene load_steps=53 format=3 uid="uid://d1x8iynxnf8th"]
+[gd_scene load_steps=56 format=3 uid="uid://d1x8iynxnf8th"]
 
 [ext_resource type="Script" uid="uid://cu2mwjdhr8tay" path="res://scripts/player/movement.gd" id="1_t1t22"]
 [ext_resource type="Texture2D" uid="uid://crnahqa8rcafk" path="res://images/hud/item_pocket_complete.png" id="2_50fht"]
 [ext_resource type="Script" uid="uid://dtd7vqs3rc5w" path="res://entities/player/stats.gd" id="2_221hk"]
 [ext_resource type="Script" uid="uid://di7m3ciu8ev6k" path="res://entities/player/powerup.gd" id="2_ghoj8"]
+[ext_resource type="Script" uid="uid://i76ybv2tpjgc" path="res://scripts/player/state_system/state_machine.gd" id="2_qpopc"]
+[ext_resource type="Script" uid="uid://bqvsodj20i3db" path="res://scripts/player/states/ground.gd" id="3_qpopc"]
 [ext_resource type="Texture2D" uid="uid://db0pshlkyrjct" path="res://images/hud/item_pocket_empty.png" id="3_wuv6x"]
 [ext_resource type="Texture2D" uid="uid://cyugmjyyqceqs" path="res://images/hud/item_pocket.png" id="4_qpopc"]
+[ext_resource type="Script" uid="uid://cee06fawo1moa" path="res://scripts/player/states/water.gd" id="4_wq0jh"]
 [ext_resource type="FontFile" uid="uid://cgcreoeye0gaf" path="res://fonts/SuperTux-Medium.ttf" id="5_wq0jh"]
 [ext_resource type="Texture2D" uid="uid://drk2c83gaocwa" path="res://images/hud/coins-0.png" id="6_gt4e4"]
 [ext_resource type="Script" uid="uid://cpin7al4ul6mk" path="res://scripts/player/sfx.gd" id="7_24ehl"]
@@ -172,11 +175,28 @@ collision_mask = 157
 floor_max_angle = 1.0908308
 script = ExtResource("1_t1t22")
 
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_qpopc")
+initial_state = NodePath("Ground")
+
+[node name="Ground" type="Node" parent="StateMachine"]
+script = ExtResource("3_qpopc")
+
+[node name="Water" type="Node" parent="StateMachine"]
+script = ExtResource("4_wq0jh")
+
 [node name="Powerup" type="Node" parent="."]
 script = ExtResource("2_ghoj8")
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("2_221hk")
+
+[node name="WaterDetection" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+target_position = Vector3(0, 0.1, 0)
+collision_mask = 32
+hit_from_inside = true
+collide_with_areas = true
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -308,7 +328,7 @@ target_position = Vector3(0, 1, 0)
 [node name="FloorDetection" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 target_position = Vector3(0, -0.75, 0)
-collision_mask = 17
+collision_mask = 16
 hit_from_inside = true
 collide_with_bodies = false
 
