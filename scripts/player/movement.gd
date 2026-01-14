@@ -18,6 +18,7 @@ var if_jumped: bool
 @onready var interact = $InteractionSystem
 @onready var sfx = $SFX
 @onready var stats = $Stats
+@onready var power = $Powerup
 
 var move_dir := Vector3.BACK
 
@@ -53,14 +54,23 @@ func _physics_process(delta: float) -> void:
 	object_collision.global_rotation = interact.marker.global_rotation
 	
 	# Add the gravity.
+	var gravity
+	if holding_jump:
+		gravity = (get_gravity() * power.grav_multi)
+	else:
+		gravity = get_gravity()
+	
 	if not is_on_floor() && coyote_timer >= coyote_float:
 		if stand_collision.disabled && velocity.y <= -2:
 			velocity += get_gravity() * 7.5 * delta
 		else:
-			if velocity.y >= -0.5:
+			if velocity.y >= -0.1:
 				velocity += get_gravity() * 1.5 * delta
 			else:
-				velocity += get_gravity() * 1.75 * delta
+				if holding_jump && power.is_wing:
+					velocity += gravity * delta
+				else:
+					velocity += get_gravity() * 1.75 * delta
 	
 	# Handle jump.
 	if is_on_floor():
@@ -69,12 +79,12 @@ func _physics_process(delta: float) -> void:
 	var jump_move_boost = velocity.length() / 1.5
 	if Input.is_action_just_pressed("jump") && (is_on_floor() or coyote_timer < coyote_time):
 		if velocity.y <= 0.0:
-			jump(Vector3(0, JUMP_VELOCITY + jump_move_boost, 0))
+			jump(Vector3(0, JUMP_VELOCITY + jump_move_boost * power.jump_multi, 0))
 			sfx._jump()
 			if_jumped = true
 	if Input.is_action_just_released("jump") && if_jumped:
-		if velocity.y >= (JUMP_VELOCITY + jump_move_boost) / 2:
-			velocity.y = (JUMP_VELOCITY + jump_move_boost) / 2
+		if velocity.y >= (JUMP_VELOCITY + jump_move_boost * power.jump_multi) / 2:
+			velocity.y = (JUMP_VELOCITY + jump_move_boost * power.jump_multi) / 2
 	
 	holding_jump = Input.is_action_pressed("jump")
 

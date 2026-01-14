@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c7ecyau8kue8m"]
+[gd_scene load_steps=34 format=3 uid="uid://c7ecyau8kue8m"]
 
 [ext_resource type="PackedScene" uid="uid://bwgeqim2wihbd" path="res://loading_hole.tscn" id="1_p3h5p"]
 [ext_resource type="AudioStream" uid="uid://dqunh1nunphr5" path="res://music/placeholder/snowfort.ogg" id="2_1jwmk"]
@@ -106,6 +106,9 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 4
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(1.5, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v0hut"]
+size = Vector3(2, 1, 40)
 
 [node name="Node3D" type="Node3D"]
 
@@ -271,6 +274,7 @@ collision_layer = 8
 collision_mask = 63
 mass = 40.0
 physics_material_override = SubResource("PhysicsMaterial_v0hut")
+can_sleep = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sphere"]
 shape = SubResource("SphereShape3D_35xd0")
@@ -289,6 +293,7 @@ collision_layer = 8
 collision_mask = 63
 mass = 40.0
 physics_material_override = SubResource("PhysicsMaterial_v0hut")
+can_sleep = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sphere2"]
 shape = SubResource("SphereShape3D_35xd0")
@@ -307,6 +312,7 @@ collision_layer = 8
 collision_mask = 63
 mass = 40.0
 physics_material_override = SubResource("PhysicsMaterial_v0hut")
+can_sleep = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sphere3"]
 shape = SubResource("SphereShape3D_35xd0")
@@ -325,6 +331,7 @@ collision_layer = 8
 collision_mask = 63
 mass = 40.0
 physics_material_override = SubResource("PhysicsMaterial_v0hut")
+can_sleep = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sphere4"]
 shape = SubResource("SphereShape3D_35xd0")
@@ -337,264 +344,268 @@ surface_material_override/0 = SubResource("StandardMaterial3D_p3h5p")
 script = ExtResource("5_v0hut")
 throw_override = 480.0
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.75, 1, -25)
-collision_layer = 8
-collision_mask = 63
-physics_material_override = SubResource("PhysicsMaterial_p3h5p")
-continuous_cd = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-mesh = SubResource("CylinderMesh_6qyjf")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-shape = SubResource("CylinderShape3D_57hie")
-
-[node name="RigidBody3D2" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.25, 1, -25)
-collision_layer = 8
-collision_mask = 63
-physics_material_override = SubResource("PhysicsMaterial_p3h5p")
-continuous_cd = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
-mesh = SubResource("CylinderMesh_6qyjf")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
-shape = SubResource("CylinderShape3D_57hie")
-
-[node name="RigidBody3D3" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.25, 1, -25)
-collision_layer = 8
-collision_mask = 63
-physics_material_override = SubResource("PhysicsMaterial_p3h5p")
-continuous_cd = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3"]
-mesh = SubResource("CylinderMesh_6qyjf")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3"]
-shape = SubResource("CylinderShape3D_57hie")
-
-[node name="RigidBody3D4" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.75, 1, -25)
-collision_layer = 8
-collision_mask = 63
-physics_material_override = SubResource("PhysicsMaterial_p3h5p")
-continuous_cd = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D4"]
-mesh = SubResource("CylinderMesh_6qyjf")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D4"]
-shape = SubResource("CylinderShape3D_57hie")
-
-[node name="RigidBody3D5" type="RigidBody3D" parent="."]
+[node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, -24.5)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, -0.5)
 collision_layer = 8
 collision_mask = 63
 physics_material_override = SubResource("PhysicsMaterial_p3h5p")
 continuous_cd = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D5"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D"]
 mesh = SubResource("CylinderMesh_6qyjf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D5"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D"]
 shape = SubResource("CylinderShape3D_57hie")
 
-[node name="RigidBody3D6" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 1, -24.5)
+[node name="RigidBody3D2" type="RigidBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, -0.5)
 collision_layer = 8
 collision_mask = 63
 physics_material_override = SubResource("PhysicsMaterial_p3h5p")
 continuous_cd = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D6"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D2"]
 mesh = SubResource("CylinderMesh_6qyjf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D6"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D2"]
 shape = SubResource("CylinderShape3D_57hie")
 
-[node name="RigidBody3D7" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 1, -24.5)
+[node name="RigidBody3D3" type="RigidBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 0, -0.5)
 collision_layer = 8
 collision_mask = 63
 physics_material_override = SubResource("PhysicsMaterial_p3h5p")
 continuous_cd = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D7"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D3"]
 mesh = SubResource("CylinderMesh_6qyjf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D7"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D3"]
 shape = SubResource("CylinderShape3D_57hie")
 
-[node name="RigidBody3D8" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.75, 1, -24)
+[node name="RigidBody3D4" type="RigidBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25, 0, -0.5)
 collision_layer = 8
 collision_mask = 63
 physics_material_override = SubResource("PhysicsMaterial_p3h5p")
 continuous_cd = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D8"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D4"]
 mesh = SubResource("CylinderMesh_6qyjf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D8"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D4"]
 shape = SubResource("CylinderShape3D_57hie")
 
-[node name="RigidBody3D9" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.25, 1, -24)
+[node name="RigidBody3D5" type="RigidBody3D" parent="Node3D"]
 collision_layer = 8
 collision_mask = 63
 physics_material_override = SubResource("PhysicsMaterial_p3h5p")
 continuous_cd = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D9"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D5"]
 mesh = SubResource("CylinderMesh_6qyjf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D9"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D5"]
 shape = SubResource("CylinderShape3D_57hie")
 
-[node name="RigidBody3D10" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, -23.5)
+[node name="RigidBody3D6" type="RigidBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
 collision_layer = 8
 collision_mask = 63
 physics_material_override = SubResource("PhysicsMaterial_p3h5p")
 continuous_cd = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D10"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D6"]
 mesh = SubResource("CylinderMesh_6qyjf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D10"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D6"]
 shape = SubResource("CylinderShape3D_57hie")
 
-[node name="RigidBody3D11" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.25, 1, -25)
+[node name="RigidBody3D7" type="RigidBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
 collision_layer = 8
 collision_mask = 63
 physics_material_override = SubResource("PhysicsMaterial_p3h5p")
 continuous_cd = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D11"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D7"]
 mesh = SubResource("CylinderMesh_6qyjf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D11"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D7"]
 shape = SubResource("CylinderShape3D_57hie")
 
-[node name="RigidBody3D12" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.75, 1, -25)
+[node name="RigidBody3D8" type="RigidBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, 0.5)
 collision_layer = 8
 collision_mask = 63
 physics_material_override = SubResource("PhysicsMaterial_p3h5p")
 continuous_cd = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D12"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D8"]
 mesh = SubResource("CylinderMesh_6qyjf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D12"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D8"]
 shape = SubResource("CylinderShape3D_57hie")
 
-[node name="RigidBody3D13" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75, 1, -25)
+[node name="RigidBody3D9" type="RigidBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0.5)
 collision_layer = 8
 collision_mask = 63
 physics_material_override = SubResource("PhysicsMaterial_p3h5p")
 continuous_cd = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D13"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D9"]
 mesh = SubResource("CylinderMesh_6qyjf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D13"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D9"]
 shape = SubResource("CylinderShape3D_57hie")
 
-[node name="RigidBody3D14" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.25, 1, -25)
+[node name="RigidBody3D10" type="RigidBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 collision_layer = 8
 collision_mask = 63
 physics_material_override = SubResource("PhysicsMaterial_p3h5p")
 continuous_cd = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D14"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D10"]
 mesh = SubResource("CylinderMesh_6qyjf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D14"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D10"]
 shape = SubResource("CylinderShape3D_57hie")
 
-[node name="RigidBody3D15" type="RigidBody3D" parent="."]
+[node name="Node3D2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, -24.5)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, -0.5)
 collision_layer = 8
 collision_mask = 63
 physics_material_override = SubResource("PhysicsMaterial_p3h5p")
 continuous_cd = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D15"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/RigidBody3D"]
 mesh = SubResource("CylinderMesh_6qyjf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D15"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/RigidBody3D"]
 shape = SubResource("CylinderShape3D_57hie")
 
-[node name="RigidBody3D16" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 1, -24.5)
+[node name="RigidBody3D2" type="RigidBody3D" parent="Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, -0.5)
 collision_layer = 8
 collision_mask = 63
 physics_material_override = SubResource("PhysicsMaterial_p3h5p")
 continuous_cd = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D16"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/RigidBody3D2"]
 mesh = SubResource("CylinderMesh_6qyjf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D16"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/RigidBody3D2"]
 shape = SubResource("CylinderShape3D_57hie")
 
-[node name="RigidBody3D17" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 1, -24.5)
+[node name="RigidBody3D3" type="RigidBody3D" parent="Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 0, -0.5)
 collision_layer = 8
 collision_mask = 63
 physics_material_override = SubResource("PhysicsMaterial_p3h5p")
 continuous_cd = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D17"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/RigidBody3D3"]
 mesh = SubResource("CylinderMesh_6qyjf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D17"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/RigidBody3D3"]
 shape = SubResource("CylinderShape3D_57hie")
 
-[node name="RigidBody3D18" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.25, 1, -24)
+[node name="RigidBody3D4" type="RigidBody3D" parent="Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25, 0, -0.5)
 collision_layer = 8
 collision_mask = 63
 physics_material_override = SubResource("PhysicsMaterial_p3h5p")
 continuous_cd = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D18"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/RigidBody3D4"]
 mesh = SubResource("CylinderMesh_6qyjf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D18"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/RigidBody3D4"]
 shape = SubResource("CylinderShape3D_57hie")
 
-[node name="RigidBody3D19" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.75, 1, -24)
+[node name="RigidBody3D5" type="RigidBody3D" parent="Node3D2"]
 collision_layer = 8
 collision_mask = 63
 physics_material_override = SubResource("PhysicsMaterial_p3h5p")
 continuous_cd = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D19"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/RigidBody3D5"]
 mesh = SubResource("CylinderMesh_6qyjf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D19"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/RigidBody3D5"]
 shape = SubResource("CylinderShape3D_57hie")
 
-[node name="RigidBody3D20" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, -23.5)
+[node name="RigidBody3D6" type="RigidBody3D" parent="Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
 collision_layer = 8
 collision_mask = 63
 physics_material_override = SubResource("PhysicsMaterial_p3h5p")
 continuous_cd = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D20"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/RigidBody3D6"]
 mesh = SubResource("CylinderMesh_6qyjf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D20"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/RigidBody3D6"]
+shape = SubResource("CylinderShape3D_57hie")
+
+[node name="RigidBody3D7" type="RigidBody3D" parent="Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
+collision_layer = 8
+collision_mask = 63
+physics_material_override = SubResource("PhysicsMaterial_p3h5p")
+continuous_cd = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/RigidBody3D7"]
+mesh = SubResource("CylinderMesh_6qyjf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/RigidBody3D7"]
+shape = SubResource("CylinderShape3D_57hie")
+
+[node name="RigidBody3D8" type="RigidBody3D" parent="Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, 0.5)
+collision_layer = 8
+collision_mask = 63
+physics_material_override = SubResource("PhysicsMaterial_p3h5p")
+continuous_cd = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/RigidBody3D8"]
+mesh = SubResource("CylinderMesh_6qyjf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/RigidBody3D8"]
+shape = SubResource("CylinderShape3D_57hie")
+
+[node name="RigidBody3D9" type="RigidBody3D" parent="Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0.5)
+collision_layer = 8
+collision_mask = 63
+physics_material_override = SubResource("PhysicsMaterial_p3h5p")
+continuous_cd = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/RigidBody3D9"]
+mesh = SubResource("CylinderMesh_6qyjf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/RigidBody3D9"]
+shape = SubResource("CylinderShape3D_57hie")
+
+[node name="RigidBody3D10" type="RigidBody3D" parent="Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+collision_layer = 8
+collision_mask = 63
+physics_material_override = SubResource("PhysicsMaterial_p3h5p")
+continuous_cd = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D2/RigidBody3D10"]
+mesh = SubResource("CylinderMesh_6qyjf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D2/RigidBody3D10"]
 shape = SubResource("CylinderShape3D_57hie")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
@@ -611,7 +622,7 @@ mesh = SubResource("BoxMesh_v0hut")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -6, 1, -31)
 collision_mask = 14
 script = ExtResource("8_5msds")
-bounce_power = Vector3(0, 0, 30)
+bounce_power = Vector3(0, 0, 15)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
@@ -670,7 +681,7 @@ mesh = SubResource("BoxMesh_v0hut")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 14, 1, -31)
 collision_mask = 14
 script = ExtResource("8_5msds")
-bounce_power = Vector3(0, 0, 30)
+bounce_power = Vector3(0, 0, 15)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
@@ -716,6 +727,28 @@ label_settings = SubResource("LabelSettings_v0hut")
 horizontal_alignment = 2
 vertical_alignment = 1
 script = ExtResource("11_kf0ay")
+
+[node name="Area3D3" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -0.25, -14)
+collision_layer = 8
+collision_mask = 8
+gravity_space_override = 1
+gravity_point_center = Vector3(0, 0, 1)
+gravity_direction = Vector3(0, 0, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D3"]
+shape = SubResource("BoxShape3D_v0hut")
+
+[node name="Area3D4" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -0.25, -14)
+collision_layer = 8
+collision_mask = 8
+gravity_space_override = 1
+gravity_point_center = Vector3(0, 0, 1)
+gravity_direction = Vector3(0, 0, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D4"]
+shape = SubResource("BoxShape3D_v0hut")
 
 [connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
 [connection signal="body_entered" from="Area3D2" to="Area3D2" method="_on_body_entered"]

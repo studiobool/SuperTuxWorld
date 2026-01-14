@@ -318,7 +318,7 @@ script = ExtResource("21_2h0qb")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="Camera"]
 collision_mask = 9
-spring_length = 4.5
+spring_length = 5.0
 margin = 0.5
 
 [node name="Marker3D" type="Marker3D" parent="Camera/SpringArm3D"]
@@ -333,6 +333,7 @@ current = true
 fov = 80.0
 
 [node name="SafeTimer" type="Timer" parent="."]
+wait_time = 1.7999999999999998
 one_shot = true
 
 [connection signal="timeout" from="SafeTimer" to="." method="safe_timeout"]

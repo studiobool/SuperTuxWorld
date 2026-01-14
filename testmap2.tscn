@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://d2f57wxwlcy7h"]
+[gd_scene load_steps=56 format=3 uid="uid://d2f57wxwlcy7h"]
 
 [ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="1_8sejj"]
 [ext_resource type="AudioStream" uid="uid://gtf2msqqqws6" path="res://music/placeholder/sunset.ogg" id="1_35xd0"]
@@ -27,6 +27,7 @@ sky_material = SubResource("ProceduralSkyMaterial_6seei")
 background_mode = 2
 sky = SubResource("Sky_dbxb2")
 tonemap_mode = 2
+glow_blend_mode = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xqgq3"]
 transparency = 1
@@ -143,6 +144,31 @@ radius = 0.75
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_nsies"]
 height = 0.75
 radius = 0.7
+
+[sub_resource type="GDScript" id="GDScript_akcju"]
+script/source = "extends Area3D
+
+@export var knock_power : float = 25
+@export var damage : float = 25
+
+
+func _on_body_entered(body: Node3D) -> void:
+	if body.has_method(\"hurt\"):
+		var knockback = body.global_position - global_position
+		knockback = Vector3(knockback.x, knockback.y * 0.5, knockback.z)
+		body.hurt(damage,knockback * knock_power)
+"
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xd3sr"]
+points = PackedVector3Array(-0.89740354, -0.95738035, -0.38891235, 0.028608503, 0.9190707, 0.028608503, 0.057298016, 0.69027895, 0.1437856, 0.75007147, -0.9602419, -0.63013524, 0.18088457, -0.96547383, 0.96547383, -0.77222264, -0.9504851, 0.59396017, 0.934011, -0.96421343, 0.3012695, -0.18106353, -0.9654202, -0.9654202, -0.028608503, 0.9190707, -0.028608503, -0.3012695, -0.96421343, 0.934011, -0.96547383, -0.96547383, 0.18088457, 0.3012695, -0.96421343, -0.934011, 0.59396017, -0.9504851, 0.77222264, 0.96547383, -0.96547383, -0.18088457, -0.59396017, -0.9504851, -0.77222264, 0.028608503, 0.9190707, -0.028608503, -0.028608503, 0.9190707, 0.028608503, 0.7722721, -0.95077515, 0.59414136, -0.5939637, -0.9504908, 0.77222717, -0.96547, -0.96547, -0.18088385, 0.51580274, -0.8596114, -0.77361435, 0.8974068, -0.9573839, -0.38891375, -0.77222717, -0.9504908, -0.5939637, -0.1156395, -0.86784, 0.92584103, 0.11546439, -0.8678862, -0.9258903, 0.92584103, -0.86784, 0.1156395, -0.8974068, -0.9573839, 0.38891375, -0.38891375, -0.9573839, -0.8974068, 0.44991708, -0.95997345, 0.86995244, -0.44991553, -0.9599702, 0.86994946, 0.7413988, -0.6843956, 0.39920098, -0.9258541, -0.8678522, 0.11564114)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_akcju"]
+top_radius = 0.0
+bottom_radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owoh6"]
+metallic = 1.0
+roughness = 0.13
 
 [sub_resource type="LabelSettings" id="LabelSettings_ltrhx"]
 font = ExtResource("3_xkjb2")
@@ -437,6 +463,27 @@ stream = ExtResource("6_nsies")
 unit_size = 20.0
 attenuation_filter_cutoff_hz = 20500.0
 
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -52)
+collision_mask = 14
+script = SubResource("GDScript_akcju")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 1, 0)
+shape = SubResource("ConvexPolygonShape3D_xd3sr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Area3D2"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_akcju")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_owoh6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("ConvexPolygonShape3D_xd3sr")
+
 [node name="Unstable" parent="." instance=ExtResource("9_33b6x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 28, -58)
 
@@ -545,3 +592,4 @@ hit_from_inside = true
 collide_with_bodies = false
 
 [connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
+[connection signal="body_entered" from="Area3D2" to="Area3D2" method="_on_body_entered"]

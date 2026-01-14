@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://cghuqq1xaod4h"]
+[gd_scene load_steps=15 format=3 uid="uid://cghuqq1xaod4h"]
 
+[ext_resource type="AudioStream" uid="uid://dfemyqn2jygh7" path="res://music/placeholder/crystalmine_main.ogg" id="1_ek4n2"]
 [ext_resource type="Script" uid="uid://ddnm2tyn5xcej" path="res://scripts/player/swim_test.gd" id="1_uay1u"]
 [ext_resource type="Script" uid="uid://cd7fcjsu2tl1e" path="res://debug_level.gd" id="2_os3k0"]
 
@@ -99,6 +100,11 @@ func _physics_process(delta: float) -> void:
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_irdy1")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_ek4n2")
+volume_db = -4.0
+autoplay = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
