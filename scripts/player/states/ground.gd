@@ -1,5 +1,10 @@
 extends PlayerState
 
+@export var state_name : String
+
+func enter(previous_state_path: String, data := {}) -> void:
+	player.state = state_name
+
 func physics_update(delta: float) -> void:
 	if !player.is_on_floor():
 		player.coyote_timer += delta
@@ -55,8 +60,12 @@ func physics_update(delta: float) -> void:
 	elif !player.head_detection.is_colliding():
 		player.stand_collision.disabled = false
 	
-	#if floor_detection.get_collider():
-	#	print(floor_detection.get_collider())
+	if player.floor_detection.is_colliding():
+		player.ACCEL = player.ICE_ACCEL
+		player.DECCEL = player.ICE_DECCEL
+	else:
+		player.ACCEL = player.DEFAULT_ACCEL
+		player.DECCEL = player.DEFAULT_ACCEL
 	
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")

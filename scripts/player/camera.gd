@@ -42,7 +42,7 @@ func _physics_process(delta: float) -> void:
 	
 	if !master.stand_collision.disabled:
 		springpos.position.y = 0.5
-	elif master.is_on_floor():
+	elif master.is_on_floor() or master.state == "Water":
 		springpos.position.y = -0.5
 	
 	cam_dir.x = Input.get_action_strength("cam_right") - Input.get_action_strength("cam_left")

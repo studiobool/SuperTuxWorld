@@ -70,6 +70,11 @@ animation = &"Tux/Crawl Idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qpopc"]
 animation = &"Tux/Crawl Walk"
+use_custom_timeline = true
+timeline_length = 2.0
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 1
 
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_wq0jh"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_wuv6x")
@@ -148,7 +153,7 @@ states/jump/position = Vector2(332, 179)
 states/stand/node = SubResource("AnimationNodeBlendSpace1D_wuv6x")
 states/stand/position = Vector2(200, 179)
 transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_ak1ch"), "Start", "stand", SubResource("AnimationNodeStateMachineTransition_gt4e4"), "stand", "crawl", SubResource("AnimationNodeStateMachineTransition_24ehl"), "crawl", "stand", SubResource("AnimationNodeStateMachineTransition_bwdx1"), "stand", "jump", SubResource("AnimationNodeStateMachineTransition_eyb6c"), "fall", "stand", SubResource("AnimationNodeStateMachineTransition_221hk"), "stand", "fall", SubResource("AnimationNodeStateMachineTransition_50fht")]
-graph_offset = Vector2(-406, 93)
+graph_offset = Vector2(-419, 131)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xd3sr"]
 _data = {
@@ -181,9 +186,11 @@ initial_state = NodePath("Ground")
 
 [node name="Ground" type="Node" parent="StateMachine"]
 script = ExtResource("3_qpopc")
+state_name = "Ground"
 
 [node name="Water" type="Node" parent="StateMachine"]
 script = ExtResource("4_wq0jh")
+state_name = "Water"
 
 [node name="Powerup" type="Node" parent="."]
 script = ExtResource("2_ghoj8")
@@ -326,11 +333,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 target_position = Vector3(0, 1, 0)
 
 [node name="FloorDetection" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-target_position = Vector3(0, -0.75, 0)
+target_position = Vector3(0, -0.1, 0)
 collision_mask = 16
 hit_from_inside = true
-collide_with_bodies = false
 
 [node name="Camera" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

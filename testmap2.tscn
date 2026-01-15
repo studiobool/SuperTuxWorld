@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://d2f57wxwlcy7h"]
+[gd_scene load_steps=60 format=3 uid="uid://d2f57wxwlcy7h"]
 
 [ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="1_8sejj"]
 [ext_resource type="AudioStream" uid="uid://gtf2msqqqws6" path="res://music/placeholder/sunset.ogg" id="1_35xd0"]
@@ -43,7 +43,7 @@ next_pass = SubResource("StandardMaterial3D_xqgq3")
 albedo_color = Color(0.5, 0.5, 0.5, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_akcju"]
-size = Vector3(11, 10, 11)
+size = Vector3(21, 15, 21)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ynjx"]
 render_priority = 1
@@ -82,6 +82,12 @@ texture_filter = 2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6seei"]
 next_pass = SubResource("StandardMaterial3D_akcju")
 albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_akcju"]
+friction = 0.05
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a8kll"]
+size = Vector3(20, 4, 10)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fnhgr"]
 albedo_color = Color(0, 0.7490196, 1, 1)
@@ -236,27 +242,35 @@ material = SubResource("StandardMaterial3D_ys0t5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, -20)
 operation = 2
 use_collision = true
-size = Vector3(10, 4, 10)
+size = Vector3(20, 4, 10)
 material = SubResource("StandardMaterial3D_ys0t5")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.5, 15)
 operation = 2
 use_collision = true
-size = Vector3(10, 10, 10)
+size = Vector3(20, 15, 20)
 material = SubResource("StandardMaterial3D_ys0t5")
 
 [node name="Area3D3" type="Area3D" parent="CSGBox3D/CSGBox3D5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 collision_layer = 32
-collision_mask = 32
+collision_mask = 40
+gravity_space_override = 1
+gravity_point_center = Vector3(0, 0.96, 0)
+gravity_direction = Vector3(0, 0.96, 0)
+gravity = 19.6
+linear_damp_space_override = 1
+linear_damp = 0.5
+angular_damp_space_override = 1
+angular_damp = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D/CSGBox3D5/Area3D3"]
 shape = SubResource("BoxShape3D_akcju")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D/CSGBox3D5/Area3D3"]
 cast_shadow = 0
-size = Vector3(11, 10, 11)
+size = Vector3(21, 15, 21)
 material = SubResource("StandardMaterial3D_7ynjx")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D"]
@@ -361,11 +375,19 @@ use_collision = true
 size = Vector3(2, 1.5, 19)
 material = SubResource("StandardMaterial3D_ys0t5")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -20)
-use_collision = true
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -20)
 collision_layer = 16
-size = Vector3(10, 4, 10)
+collision_mask = 16
+physics_material_override = SubResource("PhysicsMaterial_akcju")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_a8kll")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="StaticBody3D"]
+collision_layer = 16
+collision_mask = 16
+size = Vector3(20, 4, 10)
 material = SubResource("StandardMaterial3D_fnhgr")
 
 [node name="billboard" parent="." instance=ExtResource("4_8sejj")]
@@ -434,7 +456,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_8sejj")
 script = ExtResource("7_ltrhx")
 
 [node name="RigidBody3D2" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -20.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -20.5)
 collision_layer = 8
 collision_mask = 63
 mass = 48.0
@@ -446,7 +468,7 @@ shape = SubResource("BoxShape3D_ov2oi")
 mesh = SubResource("BoxMesh_x6wp4")
 
 [node name="RigidBody3D3" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 1.5, -14.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 2.5, -16.5)
 collision_layer = 8
 collision_mask = 63
 mass = 24.0

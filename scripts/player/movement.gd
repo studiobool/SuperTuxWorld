@@ -1,12 +1,15 @@
 class_name Player extends CharacterBody3D
 
 var direction: Vector3
-const WALK = 6.25
+const WALK = 6.5
 const SPRINT = 13.0
 const CRAWL = 3.25
 var SPEED = 6.0
 var ACCEL = 3.75
 var DECCEL = 3.75
+const DEFAULT_ACCEL = 3.75
+const ICE_ACCEL = 1.25
+const ICE_DECCEL = 1.25
 var JUMP_VELOCITY = 12.0
 var holding_jump: bool
 var if_jumped: bool
@@ -37,6 +40,8 @@ var coyote_timer: float = 0.0
 @onready var safe_timer = $SafeTimer
 var temp_safe : bool
 
+var state : String
+
 func _ready() -> void:
 	model.rotation.y = deg_to_rad(player_rotation)
 	camera.cam_rot2.x = deg_to_rad(camera_rotation.x)
@@ -48,7 +53,6 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	object_collision.global_position = interact.marker.global_position
 	object_collision.global_rotation = interact.marker.global_rotation
-	
 
 func hurt(damage,vector):
 	if !temp_safe:

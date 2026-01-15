@@ -1,6 +1,13 @@
 extends PlayerState
 
+@export var state_name : String
+
+func enter(previous_state_path: String, data := {}) -> void:
+	player.state = state_name
+
 func physics_update(delta: float) -> void:
+	player.stand_collision.disabled = true
+	
 	if Input.is_action_pressed("sprint"):
 		player.SPEED = player.SPRINT
 	else:
@@ -22,10 +29,10 @@ func physics_update(delta: float) -> void:
 		player.velocity.z = lerp(player.velocity.z, 0.0, friction.y)
 	
 	# Handle jump.
-	var vertical_dir = Input.get_axis("crawl", "jump")
-	var vertical_friction = (player.ACCEL if vertical_dir else player.DECCEL) * delta
-	if vertical_dir:
-		player.velocity.y = lerp(player.velocity.y, vertical_dir * player.SPEED, vertical_friction)
+	player.direction.y = Input.get_axis("crawl", "jump")
+	var vertical_friction = (player.ACCEL if player.direction.y else player.DECCEL) * delta
+	if player.direction.y:
+		player.velocity.y = lerp(player.velocity.y, player.direction.y * player.SPEED, vertical_friction)
 	else:
 		player.velocity.y = lerp(player.velocity.y, 0.0, vertical_friction)
 	
