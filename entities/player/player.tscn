@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://d1x8iynxnf8th"]
+[gd_scene load_steps=63 format=3 uid="uid://d1x8iynxnf8th"]
 
 [ext_resource type="Script" uid="uid://cu2mwjdhr8tay" path="res://scripts/player/movement.gd" id="1_t1t22"]
 [ext_resource type="Texture2D" uid="uid://crnahqa8rcafk" path="res://images/hud/item_pocket_complete.png" id="2_50fht"]
@@ -27,6 +27,8 @@
 [ext_resource type="Animation" uid="uid://7nk1bjrg4pyi" path="res://models/tux/animations/Run.res" id="19_r633c"]
 [ext_resource type="Animation" uid="uid://8gcou08uldw7" path="res://models/tux/animations/Walk.res" id="20_pacje"]
 [ext_resource type="Script" uid="uid://dkmhw5ine7hk8" path="res://scripts/player/camera.gd" id="21_2h0qb"]
+[ext_resource type="Animation" uid="uid://hj03wkbxwgfo" path="res://models/tux/animations/Swim Idle.res" id="27_gt4e4"]
+[ext_resource type="Animation" uid="uid://4emxh1xf2b5s" path="res://models/tux/animations/Swimming.res" id="28_24ehl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rlrdj"]
 font = ExtResource("5_wq0jh")
@@ -119,6 +121,25 @@ blend_point_2/pos = 1.0
 min_space = 0.0
 sync = true
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gt4e4"]
+animation = &"Tux/Swim Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bwdx1"]
+animation = &"Tux/Swimming"
+use_custom_timeline = true
+timeline_length = 2.0
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 1
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_bwdx1"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_gt4e4")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_bwdx1")
+blend_point_1/pos = 0.2
+min_space = 0.0
+max_space = 0.2
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ak1ch"]
 xfade_time = 0.25
 
@@ -141,6 +162,12 @@ xfade_time = 0.13
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_50fht"]
 xfade_time = 0.25
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vewsg"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2soq1"]
+xfade_time = 0.1
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_j5txn"]
 states/StateMachine/node = SubResource("AnimationNodeStateMachine_50fht")
 states/StateMachine/position = Vector2(-16, 94)
@@ -152,8 +179,10 @@ states/jump/node = SubResource("AnimationNodeAnimation_06ue2")
 states/jump/position = Vector2(332, 179)
 states/stand/node = SubResource("AnimationNodeBlendSpace1D_wuv6x")
 states/stand/position = Vector2(200, 179)
-transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_ak1ch"), "Start", "stand", SubResource("AnimationNodeStateMachineTransition_gt4e4"), "stand", "crawl", SubResource("AnimationNodeStateMachineTransition_24ehl"), "crawl", "stand", SubResource("AnimationNodeStateMachineTransition_bwdx1"), "stand", "jump", SubResource("AnimationNodeStateMachineTransition_eyb6c"), "fall", "stand", SubResource("AnimationNodeStateMachineTransition_221hk"), "stand", "fall", SubResource("AnimationNodeStateMachineTransition_50fht")]
-graph_offset = Vector2(-419, 131)
+states/swim/node = SubResource("AnimationNodeBlendSpace1D_bwdx1")
+states/swim/position = Vector2(40, 310)
+transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_ak1ch"), "Start", "stand", SubResource("AnimationNodeStateMachineTransition_gt4e4"), "stand", "crawl", SubResource("AnimationNodeStateMachineTransition_24ehl"), "crawl", "stand", SubResource("AnimationNodeStateMachineTransition_bwdx1"), "stand", "jump", SubResource("AnimationNodeStateMachineTransition_eyb6c"), "fall", "stand", SubResource("AnimationNodeStateMachineTransition_221hk"), "stand", "fall", SubResource("AnimationNodeStateMachineTransition_50fht"), "stand", "swim", SubResource("AnimationNodeStateMachineTransition_vewsg"), "swim", "stand", SubResource("AnimationNodeStateMachineTransition_2soq1")]
+graph_offset = Vector2(-442, 121)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xd3sr"]
 _data = {
@@ -165,6 +194,8 @@ _data = {
 &"Idle 2": ExtResource("17_geky7"),
 &"Jump": ExtResource("18_qwspa"),
 &"Run": ExtResource("19_r633c"),
+&"Swim Idle": ExtResource("27_gt4e4"),
+&"Swimming": ExtResource("28_24ehl"),
 &"Walk": ExtResource("20_pacje")
 }
 
@@ -308,6 +339,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/StateMachine/conditions/idle_2 = false
 parameters/crawl/blend_position = -7.800312e-05
 parameters/stand/blend_position = 0.0
+parameters/swim/blend_position = 0.051268656
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Model"]
 root_node = NodePath("../tux4")

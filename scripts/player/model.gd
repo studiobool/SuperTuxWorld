@@ -16,6 +16,9 @@ func _process(delta: float) -> void:
 	var crawl_state = remap(master.velocity.length(), 0.0, master.CRAWL, 0.0, 0.1)
 	animtree["parameters/crawl/blend_position"] = crawl_state
 	
+	var swim_state = remap(master.velocity.length(), 0.0, master.SPRINT, 0.0, 0.2)
+	animtree["parameters/swim/blend_position"] = swim_state
+	
 	if master.state == "Ground":
 		rotation.x = lerp(master.model.rotation.x, 0.0, delta * 12)
 		if master.direction.length() > 0.125:
@@ -39,7 +42,7 @@ func _process(delta: float) -> void:
 			state_machine.travel("fall")
 	
 	if master.state == "Water":
-		state_machine.travel("crawl")
+		state_machine.travel("swim")
 		if master.direction.length() > 0.125:
 			if master.velocity.length() > 0.1:
 				master.move_dir.x = master.velocity.x
