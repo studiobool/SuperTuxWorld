@@ -7,6 +7,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	player.stand_collision.disabled = true
+	player.PLAYER_COLLIDER = player.crawl_collision
 	
 	if Input.is_action_pressed("sprint"):
 		player.SPEED = player.SPRINT
@@ -37,7 +38,7 @@ func physics_update(delta: float) -> void:
 		player.velocity.y = lerp(player.velocity.y, 0.0, vertical_friction)
 	
 	player._push_away_rigid_bodies()
-	player.move_and_slide()
+	#player.move_and_slide()
 	
 	if !player.water_detection.is_colliding():
 		finished.emit(GROUND)

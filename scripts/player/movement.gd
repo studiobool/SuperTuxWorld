@@ -1,8 +1,8 @@
-class_name Player extends CharacterBody3D
+class_name Player extends StairsCharacterBody3D
 
 var direction: Vector3
 const WALK = 6.5
-const SPRINT = 13.0
+const SPRINT = 13.5
 const CRAWL = 3.25
 var SPEED = 6.0
 var ACCEL = 3.75
@@ -51,6 +51,7 @@ func _process(delta: float) -> void:
 	item_pocket.value = stats.health
 
 func _physics_process(delta: float) -> void:
+	super(delta)
 	object_collision.global_position = interact.marker.global_position
 	object_collision.global_rotation = interact.marker.global_rotation
 

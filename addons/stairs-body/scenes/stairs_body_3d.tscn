@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7fj5b4j7njx4"]
+
+[ext_resource type="Script" path="res://addons/stairs-body/stairs_character_body_3d.gd" id="1_wx21j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t7df6"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_l1q00"]
+
+[node name="StairsBody3D" type="CharacterBody3D" node_paths=PackedStringArray("PLAYER_COLLIDER")]
+floor_stop_on_slope = false
+floor_snap_length = 0.5
+script = ExtResource("1_wx21j")
+PLAYER_COLLIDER = NodePath("Collision")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_t7df6")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_l1q00")

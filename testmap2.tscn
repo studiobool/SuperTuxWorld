@@ -305,6 +305,20 @@ use_collision = true
 size = Vector3(8, 1, 1)
 material = SubResource("StandardMaterial3D_6seei")
 
+[node name="CSGBox3D9" type="CSGBox3D" parent="CSGBox3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)
+operation = 2
+use_collision = true
+size = Vector3(8, 1, 1)
+material = SubResource("StandardMaterial3D_6seei")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="CSGBox3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+operation = 2
+use_collision = true
+size = Vector3(8, 1, 1)
+material = SubResource("StandardMaterial3D_6seei")
+
 [node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D5"]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0.823, 4.59)
 operation = 2

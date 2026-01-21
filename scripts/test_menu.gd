@@ -1,0 +1,26 @@
+extends VBoxContainer
+
+@export var hole_transition : Control
+@onready var timer = $Timer
+var go_to_scene : String
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func select_level(scene: String) -> void:
+	hole_transition.hole_in()
+	timer.start()
+	go_to_scene = scene
+
+func _on_timer_timeout() -> void:
+	get_tree().change_scene_to_file(go_to_scene)
+
+func exit() -> void:
+	get_tree().quit()

@@ -52,8 +52,10 @@ func physics_update(delta: float) -> void:
 	
 	elif !player.stand_collision.disabled:
 		player.SPEED = player.WALK
+		player.PLAYER_COLLIDER = player.stand_collision
 	else:
 		player.SPEED = player.CRAWL
+		player.PLAYER_COLLIDER = player.crawl_collision
 	
 	if Input.is_action_pressed("crawl") && player.SPEED != player.SPRINT:
 		player.stand_collision.disabled = true
@@ -87,7 +89,7 @@ func physics_update(delta: float) -> void:
 		player.velocity.z = lerp(player.velocity.z, 0.0, delta)
 	
 	player._push_away_rigid_bodies()
-	player.move_and_slide()
+	#player.move_and_slide()
 	
 	
 	if player.water_detection.is_colliding():

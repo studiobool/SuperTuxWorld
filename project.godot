@@ -32,6 +32,10 @@ movie_writer/video_quality=0.5
 movie_writer/movie_file="C:/Users/nates/Godot/Projects/Videos/stwr.avi"
 movie_writer/fps=30
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/StyleboxFancy/plugin.cfg")
+
 [input]
 
 cam_left={

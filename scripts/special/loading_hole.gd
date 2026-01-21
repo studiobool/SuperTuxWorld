@@ -5,6 +5,7 @@ extends Control
 @export var test_in : bool
 @export var test_out : bool
 @export var time : float
+var holed : bool
 
 func _ready() -> void:
 	test_timer.wait_time = time
@@ -20,13 +21,16 @@ func _ready() -> void:
 		visible = false
 
 func hole_in():
+	holed = false
 	visible = true
 	anim_player.play("hole-in")
 	
 func hole_out():
+	holed = false
 	visible = true
 	anim_player.play("hole-out")
 
 func animation_finished(anim_name: StringName) -> void:
 	if anim_name == "hole-out":
 		visible = false
+	holed = true

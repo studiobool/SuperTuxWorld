@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://d1x8iynxnf8th"]
+[gd_scene load_steps=64 format=3 uid="uid://d1x8iynxnf8th"]
 
 [ext_resource type="Script" uid="uid://cu2mwjdhr8tay" path="res://scripts/player/movement.gd" id="1_t1t22"]
 [ext_resource type="Texture2D" uid="uid://crnahqa8rcafk" path="res://images/hud/item_pocket_complete.png" id="2_50fht"]
@@ -27,8 +27,8 @@
 [ext_resource type="Animation" uid="uid://7nk1bjrg4pyi" path="res://models/tux/animations/Run.res" id="19_r633c"]
 [ext_resource type="Animation" uid="uid://8gcou08uldw7" path="res://models/tux/animations/Walk.res" id="20_pacje"]
 [ext_resource type="Script" uid="uid://dkmhw5ine7hk8" path="res://scripts/player/camera.gd" id="21_2h0qb"]
-[ext_resource type="Animation" uid="uid://hj03wkbxwgfo" path="res://models/tux/animations/Swim Idle.res" id="27_gt4e4"]
-[ext_resource type="Animation" uid="uid://4emxh1xf2b5s" path="res://models/tux/animations/Swimming.res" id="28_24ehl"]
+[ext_resource type="Animation" uid="uid://bqt151akxby6u" path="res://models/tux/animations/Swim Idle.res" id="27_gt4e4"]
+[ext_resource type="Animation" uid="uid://b2o4oo3owme8c" path="res://models/tux/animations/Swimming.res" id="28_24ehl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rlrdj"]
 font = ExtResource("5_wq0jh")
@@ -163,10 +163,10 @@ xfade_time = 0.13
 xfade_time = 0.25
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vewsg"]
-xfade_time = 0.1
+xfade_time = 0.25
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2soq1"]
-xfade_time = 0.1
+xfade_time = 0.25
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_j5txn"]
 states/StateMachine/node = SubResource("AnimationNodeStateMachine_50fht")
@@ -205,11 +205,15 @@ _data = {
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eyb6c"]
 
-[node name="Player" type="CharacterBody3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_gt4e4"]
+radius = 0.04
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("PLAYER_COLLIDER")]
 collision_layer = 2
 collision_mask = 157
 floor_max_angle = 1.0908308
 script = ExtResource("1_t1t22")
+PLAYER_COLLIDER = NodePath("StandCollision")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_qpopc")
@@ -389,8 +393,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 current = true
 fov = 80.0
 
+[node name="Area3D" type="Area3D" parent="Camera/Camera"]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera/Camera/Area3D"]
+shape = SubResource("SphereShape3D_gt4e4")
+
+[node name="Control" type="Control" parent="Camera"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Camera/Control"]
+z_index = -10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0.20833337, 0.5, 0.24705882)
+
 [node name="SafeTimer" type="Timer" parent="."]
 wait_time = 1.7999999999999998
 one_shot = true
 
+[connection signal="area_entered" from="Camera/Camera/Area3D" to="Camera" method="submerge"]
+[connection signal="area_exited" from="Camera/Camera/Area3D" to="Camera" method="emerge"]
 [connection signal="timeout" from="SafeTimer" to="." method="safe_timeout"]

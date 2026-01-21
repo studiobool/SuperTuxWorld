@@ -4,6 +4,7 @@ extends Node3D
 @onready var springarm = $SpringArm3D
 @onready var marker = $SpringArm3D/Marker3D
 @onready var springpos = $SpringPos
+@onready var underwater = $Control
 @onready var master = self.get_parent()
 
 var cam_dir = Vector2.ZERO
@@ -16,6 +17,7 @@ var cam_input_dir := Vector2.ZERO
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	top_level = true
 	springarm.top_level = true
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -29,6 +31,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		cam_rot2.y += -cam_input_dir.x * .02
 
 func _physics_process(delta: float) -> void:
+	global_position = master.global_position + Vector3(0, 1, 0)
 	#cam_rot = camera.get_third_person_rotation()
 	#cam_pos = camera.get_follow_offset()
 	#camera.global_position = lerp(camera.global_position, marker.global_position, delta * 8)
@@ -59,3 +62,9 @@ func _physics_process(delta: float) -> void:
 	
 	#camera.set_third_person_rotation(cam_rot)
 	#camera.set_follow_offset(cam_pos)
+
+func emerge(area: Area3D) -> void:
+	underwater.visible = false
+
+func submerge(area: Area3D) -> void:
+	underwater.visible = true

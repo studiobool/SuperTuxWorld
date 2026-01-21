@@ -1,0 +1,76 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://clipe71g8mne1"]
+
+[ext_resource type="StyleBox" uid="uid://danhnge14s1ky" path="res://theme/files/button_hover-pressed.tres" id="1_5dl7e"]
+[ext_resource type="Texture2D" uid="uid://dmba54dp4nma5" path="res://images/menu/checkbox-checked.png" id="2_gia4r"]
+[ext_resource type="FontFile" uid="uid://cgcreoeye0gaf" path="res://fonts/SuperTux-Medium.ttf" id="2_m4njd"]
+[ext_resource type="Texture2D" uid="uid://dht5xidgn3p1m" path="res://images/menu/checkbox-unchecked.png" id="3_1aus5"]
+[ext_resource type="Texture2D" uid="uid://byewx7rwi68cd" path="res://images/menu/arrow-left.png" id="4_1pkk7"]
+[ext_resource type="Texture2D" uid="uid://u525hm3eg0n0" path="res://images/menu/arrow-right.png" id="5_jhc20"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5dl7e"]
+bg_color = Color(0, 0, 0, 0)
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1pkk7"]
+bg_color = Color(0.24499999, 0.2975, 0.35, 0.49803922)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.114700004, 0.21235, 0.31, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 12.0
+expand_margin_top = 12.0
+expand_margin_right = 12.0
+expand_margin_bottom = 12.0
+
+[resource]
+default_font = ExtResource("2_m4njd")
+default_font_size = 18
+Button/colors/font_hover_color = Color(0.39999998, 0.65000004, 1, 1)
+Button/colors/font_hover_pressed_color = Color(0.4, 0.6509804, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0.4, 0.6509804, 1, 1)
+Button/colors/font_shadow_color = Color(0, 0, 0, 1)
+Button/constants/line_spacing = -2
+Button/constants/outline_size = 4
+Button/constants/shadow_offset_x = 2
+Button/constants/shadow_offset_y = 2
+Button/constants/shadow_outline_size = 4
+Button/styles/disabled = SubResource("StyleBoxFlat_5dl7e")
+Button/styles/focus = SubResource("StyleBoxFlat_5dl7e")
+Button/styles/hover = ExtResource("1_5dl7e")
+Button/styles/normal = SubResource("StyleBoxFlat_5dl7e")
+Button/styles/pressed = ExtResource("1_5dl7e")
+CheckButton/icons/checked = ExtResource("2_gia4r")
+CheckButton/icons/checked_disabled = ExtResource("2_gia4r")
+CheckButton/icons/checked_disabled_mirrored = ExtResource("2_gia4r")
+CheckButton/icons/checked_mirrored = ExtResource("2_gia4r")
+CheckButton/icons/unchecked = ExtResource("3_1aus5")
+CheckButton/icons/unchecked_disabled = ExtResource("3_1aus5")
+CheckButton/icons/unchecked_disabled_mirrored = ExtResource("3_1aus5")
+CheckButton/icons/unchecked_mirrored = ExtResource("3_1aus5")
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 4
+Label/constants/shadow_offset_x = 2
+Label/constants/shadow_offset_y = 2
+Label/constants/shadow_outline_size = 4
+Panel/styles/panel = SubResource("StyleBoxFlat_1pkk7")
+TabBar/icons/decrement = ExtResource("4_1pkk7")
+TabBar/icons/decrement_highlight = ExtResource("4_1pkk7")
+TabBar/icons/increment = ExtResource("5_jhc20")
+TabBar/icons/increment_highlight = ExtResource("5_jhc20")
+Tree/icons/arrow_collapsed = ExtResource("5_jhc20")
+Tree/icons/arrow_collapsed_mirrored = ExtResource("4_1pkk7")
+Tree/icons/checked = ExtResource("2_gia4r")
+Tree/icons/checked_disabled = ExtResource("2_gia4r")
+Tree/icons/unchecked = ExtResource("3_1aus5")
+Tree/icons/unchecked_disabled = ExtResource("3_1aus5")
