@@ -121,6 +121,8 @@ time = 0.5
 stream = ExtResource("2_1jwmk")
 volume_db = -4.0
 autoplay = true
+bus = &"Music"
+playback_type = 1
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.49999997, -0.75000006, 0.4330127, 0, 0.49999997, 0.86602545, -0.86602545, -0.4330127, 0.24999997, 0, 0, 0)
@@ -631,6 +633,7 @@ shape = SubResource("CylinderShape3D_jadr7")
 [node name="BounceSound" type="AudioStreamPlayer3D" parent="Area3D"]
 stream = ExtResource("9_wqot7")
 unit_size = 20.0
+bus = &"SFX"
 attenuation_filter_cutoff_hz = 20500.0
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="Area3D"]
@@ -690,6 +693,7 @@ shape = SubResource("CylinderShape3D_jadr7")
 [node name="BounceSound" type="AudioStreamPlayer3D" parent="Area3D2"]
 stream = ExtResource("9_wqot7")
 unit_size = 20.0
+bus = &"SFX"
 attenuation_filter_cutoff_hz = 20500.0
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="Area3D2"]

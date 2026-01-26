@@ -10,9 +10,10 @@ var DECCEL = 3.75
 const DEFAULT_ACCEL = 3.75
 const ICE_ACCEL = 1.25
 const ICE_DECCEL = 1.25
-var JUMP_VELOCITY = 12.0
+var JUMP_VELOCITY = 18.0
 var holding_jump: bool
 var if_jumped: bool
+var if_pound: bool
 
 @export var player_rotation :float
 @export var camera_rotation :Vector2 = Vector2(-22.5, 0)
@@ -37,6 +38,7 @@ var move_dir := Vector3.BACK
 var coyote_timer: float = 0.0
 
 @onready var item_pocket = $HUD/ItemPocket
+@onready var coin_counter = $HUD/Label
 @onready var safe_timer = $SafeTimer
 var temp_safe : bool
 
@@ -49,6 +51,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	item_pocket.value = stats.health
+	coin_counter.text = str(stats.coins)
 
 func _physics_process(delta: float) -> void:
 	super(delta)

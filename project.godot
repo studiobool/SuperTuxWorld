@@ -137,7 +137,7 @@ fire={
 
 2d/physics_engine="Dummy"
 3d/physics_engine="Jolt Physics"
-3d/default_gravity=19.6
+3d/default_gravity=24.5
 2d/default_gravity=1960.0
 common/physics_interpolation=true
 

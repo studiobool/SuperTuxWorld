@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://d1x8iynxnf8th"]
+[gd_scene load_steps=65 format=3 uid="uid://d1x8iynxnf8th"]
 
 [ext_resource type="Script" uid="uid://cu2mwjdhr8tay" path="res://scripts/player/movement.gd" id="1_t1t22"]
 [ext_resource type="Texture2D" uid="uid://crnahqa8rcafk" path="res://images/hud/item_pocket_complete.png" id="2_50fht"]
@@ -21,6 +21,7 @@
 [ext_resource type="Animation" uid="uid://bkra8vftd6qfh" path="res://models/tux/animations/Crawl Walk.res" id="13_0eo6o"]
 [ext_resource type="Animation" uid="uid://cq8t7wb0jamtb" path="res://models/tux/animations/Default.res" id="14_ttr27"]
 [ext_resource type="Animation" uid="uid://bc5a5tgkjhirq" path="res://models/tux/animations/Fall.res" id="15_13wue"]
+[ext_resource type="AudioStream" uid="uid://beeo1q7wkrn53" path="res://sounds/splash.wav" id="15_24ehl"]
 [ext_resource type="Animation" uid="uid://daonfnlix7w74" path="res://models/tux/animations/Idle 1.res" id="16_wy7bt"]
 [ext_resource type="Animation" uid="uid://cxc17wsngvfmc" path="res://models/tux/animations/Idle 2.res" id="17_geky7"]
 [ext_resource type="Animation" uid="uid://cr6rqjsf72wkb" path="res://models/tux/animations/Jump.res" id="18_qwspa"]
@@ -304,12 +305,21 @@ script = ExtResource("7_24ehl")
 stream = ExtResource("8_eyb6c")
 volume_db = -2.0
 unit_size = 5.0
+bus = &"SFX"
 attenuation_filter_cutoff_hz = 20500.0
 
 [node name="hurt" type="AudioStreamPlayer3D" parent="SFX"]
 stream = ExtResource("11_t1t22")
 volume_db = -8.0
 unit_size = 5.0
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="splash" type="AudioStreamPlayer3D" parent="SFX"]
+stream = ExtResource("15_24ehl")
+volume_db = -2.0
+unit_size = 5.0
+bus = &"SFX"
 attenuation_filter_cutoff_hz = 20500.0
 
 [node name="InteractionSystem" type="Node3D" parent="."]

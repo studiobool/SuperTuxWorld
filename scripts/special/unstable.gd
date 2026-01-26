@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
-	if body is CharacterBody3D && body.collision_layer == 2:
+	if body is Player:
 		crack_timer.start()
 	inside = true
 

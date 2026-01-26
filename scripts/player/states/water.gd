@@ -4,15 +4,16 @@ extends PlayerState
 
 func enter(previous_state_path: String, data := {}) -> void:
 	player.state = state_name
+	player.sfx._splash()
 
 func physics_update(delta: float) -> void:
 	player.stand_collision.disabled = true
 	player.PLAYER_COLLIDER = player.crawl_collision
 	
 	if Input.is_action_pressed("sprint"):
-		player.SPEED = player.SPRINT
+		player.SPEED = player.SPRINT * 1.25
 	else:
-		player.SPEED = player.WALK
+		player.SPEED = player.WALK * 1.25
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -41,4 +42,7 @@ func physics_update(delta: float) -> void:
 	#player.move_and_slide()
 	
 	if !player.water_detection.is_colliding():
+		if player.velocity.length() >= 0.0:
+			var boost = player.velocity / 2
+			player.jump(boost)
 		finished.emit(GROUND)

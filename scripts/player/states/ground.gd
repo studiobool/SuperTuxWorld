@@ -18,6 +18,12 @@ func physics_update(delta: float) -> void:
 	else:
 		gravity = player.get_gravity()
 	
+	if player.stand_collision.disabled:
+		if player.velocity.y <= -23:
+			player.if_pound = true
+	else:
+		player.if_pound = false
+	
 	if not player.is_on_floor() && player.coyote_timer >= player.coyote_float:
 		if player.stand_collision.disabled && player.velocity.y <= -2:
 			player.velocity += player.get_gravity() * 7.5 * delta
@@ -34,7 +40,7 @@ func physics_update(delta: float) -> void:
 	if player.is_on_floor():
 		player.if_jumped = false
 	
-	var jump_move_boost = player.velocity.length() / 1.5
+	var jump_move_boost = player.velocity.length() / 3
 	if Input.is_action_just_pressed("jump") && (player.is_on_floor() or player.water_detection.is_colliding() or player.coyote_timer < player.coyote_time):
 		if player.velocity.y <= 0.0:
 			player.jump(Vector3(0, player.JUMP_VELOCITY + jump_move_boost * player.power.jump_multi, 0))
