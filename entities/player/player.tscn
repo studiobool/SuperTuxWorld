@@ -359,6 +359,12 @@ parameters/swim/blend_position = 0.051268656
 root_node = NodePath("../tux4")
 libraries/Tux = SubResource("AnimationLibrary_xd3sr")
 
+[node name="EdgeDetection" type="RayCast3D" parent="Model" unique_id=1190798850]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.625)
+target_position = Vector3(0, -0.1, 0)
+collision_mask = 17
+hit_from_inside = true
+
 [node name="StandCollision" type="CollisionShape3D" parent="." unique_id=1218756770]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_julm7")
@@ -386,7 +392,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("21_2h0qb")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="Camera" unique_id=126555363]
-collision_mask = 9
+collision_mask = 25
 spring_length = 5.0
 margin = 0.5
 

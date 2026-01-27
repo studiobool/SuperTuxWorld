@@ -75,6 +75,10 @@ func physics_update(delta: float) -> void:
 		player.ACCEL = player.DEFAULT_ACCEL
 		player.DECCEL = player.DEFAULT_ACCEL
 	
+	if !player.direction && player.is_on_floor() && !player.edge_detection.is_colliding() && player.velocity.length() >= 1.0:
+		if !player.floor_detection.is_colliding():
+			player.DECCEL = player.DECCEL * 3
+	
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	player.direction = (player.transform.basis * Vector3(input_dir.x, 0, input_dir.y))

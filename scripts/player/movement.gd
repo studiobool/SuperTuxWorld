@@ -31,6 +31,7 @@ var move_dir := Vector3.BACK
 @onready var object_collision = $ObjectCollision
 @onready var head_detection = $HeadDetection
 @onready var floor_detection = $FloorDetection
+@onready var edge_detection = $Model/EdgeDetection
 @onready var water_detection = $WaterDetection
 
 @export var coyote_time: float = 0.15

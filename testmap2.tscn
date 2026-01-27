@@ -15,7 +15,9 @@
 [ext_resource type="Script" uid="uid://r8gd6nldjyjs" path="res://scripts/npcs/enemies/snowball/generic.gd" id="13_akcju"]
 [ext_resource type="Script" uid="uid://dit3b1j8vgb1t" path="res://scripts/interactive/bonus_block.gd" id="14_a8kll"]
 [ext_resource type="Script" uid="uid://1in0bsqb658g" path="res://scripts/interactive/bonus_extend/coin_block.gd" id="14_bmnvl"]
+[ext_resource type="Material" uid="uid://dx3xb3or5f7bo" path="res://materials/empty_bonus_block.tres" id="15_7ynjx"]
 [ext_resource type="AudioStream" uid="uid://b0oyjjlhu3rmw" path="res://sounds/coin.wav" id="15_owoh6"]
+[ext_resource type="Material" uid="uid://qsnvpe3brhhr" path="res://materials/full_bonus_block.tres" id="16_06ue2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6seei"]
 sky_top_color = Color(0.3019608, 0.5058824, 0.8039216, 1)
@@ -681,17 +683,21 @@ collision_mask = 17
 hit_from_inside = true
 collide_with_bodies = false
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=896511818]
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=896511818 node_paths=PackedStringArray("mesh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -31.249998)
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("14_bmnvl")
+mesh = NodePath("MeshInstance3D")
+empty_mat = ExtResource("15_7ynjx")
+full_mat = ExtResource("16_06ue2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=1226728381]
 shape = SubResource("BoxShape3D_bmnvl")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2" unique_id=1023388926]
 mesh = SubResource("BoxMesh_owoh6")
+surface_material_override/0 = ExtResource("16_06ue2")
 
 [node name="Area3D" type="Area3D" parent="StaticBody3D2" unique_id=1738252610]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
@@ -722,20 +728,25 @@ debug_color = Color(0, 0.5950001, 0.7, 1)
 [node name="CoinSound" type="AudioStreamPlayer3D" parent="StaticBody3D2" unique_id=262987850]
 stream = ExtResource("15_owoh6")
 unit_size = 5.0
+max_polyphony = 4
 bus = &"SFX"
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=1705710498]
+[node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=1705710498 node_paths=PackedStringArray("mesh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, -38.25)
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("14_bmnvl")
 coins = 2
+mesh = NodePath("MeshInstance3D")
+empty_mat = ExtResource("15_7ynjx")
+full_mat = ExtResource("16_06ue2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3" unique_id=1070507898]
 shape = SubResource("BoxShape3D_bmnvl")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3" unique_id=499605310]
+material_override = ExtResource("16_06ue2")
 mesh = SubResource("BoxMesh_owoh6")
 
 [node name="Area3D" type="Area3D" parent="StaticBody3D3" unique_id=1856930995]
@@ -767,6 +778,7 @@ debug_color = Color(0, 0.5950001, 0.7, 1)
 [node name="CoinSound" type="AudioStreamPlayer3D" parent="StaticBody3D3" unique_id=60982499]
 stream = ExtResource("15_owoh6")
 unit_size = 5.0
+max_polyphony = 4
 bus = &"SFX"
 attenuation_filter_cutoff_hz = 20500.0
 
