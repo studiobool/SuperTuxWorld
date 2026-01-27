@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjllyogejq4do"]
+[gd_scene format=3 uid="uid://cjllyogejq4do"]
 
 [ext_resource type="Theme" uid="uid://clipe71g8mne1" path="res://theme/supertux.tres" id="1_yow63"]
 [ext_resource type="Texture2D" uid="uid://bhab70nvljhht" path="res://images/menu/frame.png" id="2_15mky"]
 [ext_resource type="PackedScene" uid="uid://bwgeqim2wihbd" path="res://loading_hole.tscn" id="3_fx0a5"]
 [ext_resource type="Script" uid="uid://dwo3p8g7qf2s6" path="res://scripts/test_menu.gd" id="3_j7aup"]
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" unique_id=338083596]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_yow63")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2073555246]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -24,7 +24,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2116995812]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,7 +34,7 @@ grow_vertical = 2
 texture = ExtResource("2_15mky")
 expand_mode = 1
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=234800042]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -48,7 +48,7 @@ offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel" node_paths=PackedStringArray("hole_transition")]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=824817584 node_paths=PackedStringArray("hole_transition")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -60,23 +60,23 @@ alignment = 1
 script = ExtResource("3_j7aup")
 hole_transition = NodePath("../../Control")
 
-[node name="Timer" type="Timer" parent="Panel/VBoxContainer"]
+[node name="Timer" type="Timer" parent="Panel/VBoxContainer" unique_id=1124213921]
 one_shot = true
 
-[node name="Button" type="Button" parent="Panel/VBoxContainer"]
+[node name="Button" type="Button" parent="Panel/VBoxContainer" unique_id=1674800477]
 layout_mode = 2
 text = "Testroom Prototype"
 
-[node name="Button2" type="Button" parent="Panel/VBoxContainer"]
+[node name="Button2" type="Button" parent="Panel/VBoxContainer" unique_id=1224347726]
 layout_mode = 2
 text = "Bowling Test"
 
-[node name="Button3" type="Button" parent="Panel/VBoxContainer"]
+[node name="Button3" type="Button" parent="Panel/VBoxContainer" unique_id=514697740]
 layout_mode = 2
 text = "Quit
 "
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1787980631]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -93,7 +93,7 @@ This game comes with ABSOLUTELY NO WARRANTY. This is free software, and you are 
 redistribute it under certain conditions: see the licence file for details."
 vertical_alignment = 2
 
-[node name="Control" parent="." instance=ExtResource("3_fx0a5")]
+[node name="Control" parent="." unique_id=799532373 instance=ExtResource("3_fx0a5")]
 layout_mode = 1
 
 [connection signal="timeout" from="Panel/VBoxContainer/Timer" to="Panel/VBoxContainer" method="_on_timer_timeout"]

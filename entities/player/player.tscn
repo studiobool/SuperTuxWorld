@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://d1x8iynxnf8th"]
+[gd_scene format=3 uid="uid://d1x8iynxnf8th"]
 
 [ext_resource type="Script" uid="uid://cu2mwjdhr8tay" path="res://scripts/player/movement.gd" id="1_t1t22"]
 [ext_resource type="Texture2D" uid="uid://crnahqa8rcafk" path="res://images/hud/item_pocket_complete.png" id="2_50fht"]
@@ -209,39 +209,39 @@ _data = {
 [sub_resource type="SphereShape3D" id="SphereShape3D_gt4e4"]
 radius = 0.04
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("PLAYER_COLLIDER")]
+[node name="Player" type="CharacterBody3D" unique_id=1056028366 node_paths=PackedStringArray("PLAYER_COLLIDER")]
 collision_layer = 2
 collision_mask = 157
 floor_max_angle = 1.0908308
 script = ExtResource("1_t1t22")
 PLAYER_COLLIDER = NodePath("StandCollision")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" parent="." unique_id=420090281 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_qpopc")
 initial_state = NodePath("Ground")
 
-[node name="Ground" type="Node" parent="StateMachine"]
+[node name="Ground" type="Node" parent="StateMachine" unique_id=276688183]
 script = ExtResource("3_qpopc")
 state_name = "Ground"
 
-[node name="Water" type="Node" parent="StateMachine"]
+[node name="Water" type="Node" parent="StateMachine" unique_id=353126098]
 script = ExtResource("4_wq0jh")
 state_name = "Water"
 
-[node name="Powerup" type="Node" parent="."]
+[node name="Powerup" type="Node" parent="." unique_id=1724381056]
 script = ExtResource("2_ghoj8")
 
-[node name="Stats" type="Node" parent="."]
+[node name="Stats" type="Node" parent="." unique_id=1761239611]
 script = ExtResource("2_221hk")
 
-[node name="WaterDetection" type="RayCast3D" parent="."]
+[node name="WaterDetection" type="RayCast3D" parent="." unique_id=1802414695]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 target_position = Vector3(0, 0.1, 0)
 collision_mask = 32
 hit_from_inside = true
 collide_with_areas = true
 
-[node name="HUD" type="Control" parent="."]
+[node name="HUD" type="Control" parent="." unique_id=1012220413]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -250,7 +250,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="HUD"]
+[node name="TextureRect" type="TextureRect" parent="HUD" unique_id=1109743]
 visible = false
 layout_mode = 0
 offset_left = 8.0
@@ -259,7 +259,7 @@ offset_right = 80.0
 offset_bottom = 80.0
 texture = ExtResource("2_50fht")
 
-[node name="ItemPocket" type="TextureProgressBar" parent="HUD"]
+[node name="ItemPocket" type="TextureProgressBar" parent="HUD" unique_id=1915719387]
 self_modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 0
 offset_left = 8.0
@@ -271,7 +271,7 @@ fill_mode = 5
 texture_under = ExtResource("3_wuv6x")
 texture_progress = ExtResource("4_qpopc")
 
-[node name="Label" type="Label" parent="HUD"]
+[node name="Label" type="Label" parent="HUD" unique_id=409299282]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -286,7 +286,7 @@ label_settings = SubResource("LabelSettings_rlrdj")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="HUD/Label"]
+[node name="TextureRect2" type="TextureRect" parent="HUD/Label" unique_id=2147430669]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -298,55 +298,55 @@ offset_bottom = 24.0
 grow_vertical = 2
 texture = ExtResource("6_gt4e4")
 
-[node name="SFX" type="Node3D" parent="."]
+[node name="SFX" type="Node3D" parent="." unique_id=1614157857]
 script = ExtResource("7_24ehl")
 
-[node name="jump" type="AudioStreamPlayer3D" parent="SFX"]
+[node name="jump" type="AudioStreamPlayer3D" parent="SFX" unique_id=1825964931]
 stream = ExtResource("8_eyb6c")
 volume_db = -2.0
 unit_size = 5.0
 bus = &"SFX"
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="hurt" type="AudioStreamPlayer3D" parent="SFX"]
+[node name="hurt" type="AudioStreamPlayer3D" parent="SFX" unique_id=1230156235]
 stream = ExtResource("11_t1t22")
 volume_db = -8.0
 unit_size = 5.0
 bus = &"SFX"
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="splash" type="AudioStreamPlayer3D" parent="SFX"]
+[node name="splash" type="AudioStreamPlayer3D" parent="SFX" unique_id=954451798]
 stream = ExtResource("15_24ehl")
 volume_db = -2.0
 unit_size = 5.0
 bus = &"SFX"
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="InteractionSystem" type="Node3D" parent="."]
+[node name="InteractionSystem" type="Node3D" parent="." unique_id=406795534]
 script = ExtResource("9_vewsg")
 
-[node name="Marker3D" type="Marker3D" parent="InteractionSystem"]
+[node name="Marker3D" type="Marker3D" parent="InteractionSystem" unique_id=270356348]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -1.25)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="InteractionSystem/Marker3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InteractionSystem/Marker3D" unique_id=1845809191]
 visible = false
 mesh = SubResource("TorusMesh_eyb6c")
 
-[node name="Marker3D2" type="Marker3D" parent="InteractionSystem"]
+[node name="Marker3D2" type="Marker3D" parent="InteractionSystem" unique_id=274214160]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
-[node name="RayCast3D" type="RayCast3D" parent="InteractionSystem"]
+[node name="RayCast3D" type="RayCast3D" parent="InteractionSystem" unique_id=1752913390]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0.25, 0)
 target_position = Vector3(0, 0, -2)
 collision_mask = 8
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." unique_id=1536461129]
 script = ExtResource("10_2soq1")
 
-[node name="tux4" parent="Model" instance=ExtResource("11_8q4fm")]
+[node name="tux4" parent="Model" unique_id=1175685930 instance=ExtResource("11_8q4fm")]
 transform = Transform3D(-0.37, 0, -5.5868448e-08, 0, 0.37, 0, 5.5868448e-08, 0, -0.37, 0, 0, 0)
 
-[node name="AnimationTree" type="AnimationTree" parent="Model"]
+[node name="AnimationTree" type="AnimationTree" parent="Model" unique_id=181198420]
 root_node = NodePath("../tux4")
 tree_root = SubResource("AnimationNodeStateMachine_j5txn")
 anim_player = NodePath("../AnimationPlayer")
@@ -355,62 +355,60 @@ parameters/crawl/blend_position = -7.800312e-05
 parameters/stand/blend_position = 0.0
 parameters/swim/blend_position = 0.051268656
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Model"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Model" unique_id=362826490]
 root_node = NodePath("../tux4")
-libraries = {
-&"Tux": SubResource("AnimationLibrary_xd3sr")
-}
+libraries/Tux = SubResource("AnimationLibrary_xd3sr")
 
-[node name="StandCollision" type="CollisionShape3D" parent="."]
+[node name="StandCollision" type="CollisionShape3D" parent="." unique_id=1218756770]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_julm7")
 
-[node name="CrawlCollision" type="CollisionShape3D" parent="."]
+[node name="CrawlCollision" type="CollisionShape3D" parent="." unique_id=1875604695]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("SphereShape3D_6seei")
 
-[node name="ObjectCollision" type="CollisionShape3D" parent="."]
+[node name="ObjectCollision" type="CollisionShape3D" parent="." unique_id=1791735284]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -1.25)
 shape = SubResource("BoxShape3D_eyb6c")
 disabled = true
 
-[node name="HeadDetection" type="RayCast3D" parent="."]
+[node name="HeadDetection" type="RayCast3D" parent="." unique_id=1550186728]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 target_position = Vector3(0, 1, 0)
 
-[node name="FloorDetection" type="RayCast3D" parent="."]
+[node name="FloorDetection" type="RayCast3D" parent="." unique_id=1041627120]
 target_position = Vector3(0, -0.1, 0)
 collision_mask = 16
 hit_from_inside = true
 
-[node name="Camera" type="Node3D" parent="."]
+[node name="Camera" type="Node3D" parent="." unique_id=1016314012]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("21_2h0qb")
 
-[node name="SpringArm3D" type="SpringArm3D" parent="Camera"]
+[node name="SpringArm3D" type="SpringArm3D" parent="Camera" unique_id=126555363]
 collision_mask = 9
 spring_length = 5.0
 margin = 0.5
 
-[node name="Marker3D" type="Marker3D" parent="Camera/SpringArm3D"]
+[node name="Marker3D" type="Marker3D" parent="Camera/SpringArm3D" unique_id=1062690774]
 
-[node name="SpringPos" type="Marker3D" parent="Camera"]
+[node name="SpringPos" type="Marker3D" parent="Camera" unique_id=1155736863]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Camera" type="Node3D" parent="Camera"]
+[node name="Camera" type="Node3D" parent="Camera" unique_id=1771005642]
 
-[node name="Camera3D" type="Camera3D" parent="Camera/Camera"]
+[node name="Camera3D" type="Camera3D" parent="Camera/Camera" unique_id=825008445]
 current = true
 fov = 80.0
 
-[node name="Area3D" type="Area3D" parent="Camera/Camera"]
+[node name="Area3D" type="Area3D" parent="Camera/Camera" unique_id=2086152998]
 collision_layer = 0
 collision_mask = 32
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera/Camera/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera/Camera/Area3D" unique_id=1287619462]
 shape = SubResource("SphereShape3D_gt4e4")
 
-[node name="Control" type="Control" parent="Camera"]
+[node name="Control" type="Control" parent="Camera" unique_id=294128354]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -420,7 +418,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ColorRect" type="ColorRect" parent="Camera/Control"]
+[node name="ColorRect" type="ColorRect" parent="Camera/Control" unique_id=1887565457]
 z_index = -10
 layout_mode = 1
 anchors_preset = 15
@@ -431,7 +429,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0.20833337, 0.5, 0.24705882)
 
-[node name="SafeTimer" type="Timer" parent="."]
+[node name="SafeTimer" type="Timer" parent="." unique_id=492361109]
 wait_time = 1.7999999999999998
 one_shot = true
 

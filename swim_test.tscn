@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cghuqq1xaod4h"]
+[gd_scene format=3 uid="uid://cghuqq1xaod4h"]
 
 [ext_resource type="AudioStream" uid="uid://dfemyqn2jygh7" path="res://music/placeholder/crystalmine_main.ogg" id="1_ek4n2"]
 [ext_resource type="Script" uid="uid://ddnm2tyn5xcej" path="res://scripts/player/swim_test.gd" id="1_uay1u"]
@@ -96,85 +96,85 @@ func _physics_process(delta: float) -> void:
 	#camera.set_follow_offset(cam_pos)
 "
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=821192418]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1959554863]
 environment = SubResource("Environment_irdy1")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1857438285]
 stream = ExtResource("1_ek4n2")
 volume_db = -4.0
 autoplay = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1906767406]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
 use_collision = true
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=188283603]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1, -2)
 use_collision = true
 size = Vector3(2, 2, 2)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1060672001]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -7, 6)
 use_collision = true
 size = Vector3(3, 3, 3)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=60699412]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, -1, 6, 0)
 use_collision = true
 size = Vector3(8, 4, 8)
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=630980691]
 transform = Transform3D(0.70710677, 0.68301266, 0.1830127, -0.6123724, 0.720916, -0.3244693, -0.35355338, 0.117362455, 0.9280227, -1, -12, 0)
 use_collision = true
 size = Vector3(8, 4, 8)
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=388581692]
 collision_layer = 2
 collision_mask = 29
 script = ExtResource("1_uay1u")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="CharacterBody3D"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CharacterBody3D" unique_id=947807912]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("CapsuleMesh_l3bxx")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_uay1u")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="CharacterBody3D"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="CharacterBody3D" unique_id=1730845603]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.5, -0.5)
 mesh = SubResource("CylinderMesh_os3k0")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ek4n2")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="CharacterBody3D"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="CharacterBody3D" unique_id=998869886]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.125, -0.125)
 mesh = SubResource("CapsuleMesh_irdy1")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_bt4wp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1751159707]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("SphereShape3D_x6h0k")
 
-[node name="Camera" type="Node3D" parent="CharacterBody3D"]
+[node name="Camera" type="Node3D" parent="CharacterBody3D" unique_id=1994903045]
 script = SubResource("GDScript_l3bxx")
 
-[node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D/Camera"]
+[node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D/Camera" unique_id=1582373024]
 collision_mask = 9
 spring_length = 4.5
 margin = 0.5
 
-[node name="Marker3D" type="Marker3D" parent="CharacterBody3D/Camera/SpringArm3D"]
+[node name="Marker3D" type="Marker3D" parent="CharacterBody3D/Camera/SpringArm3D" unique_id=1158039654]
 
-[node name="SpringPos" type="Marker3D" parent="CharacterBody3D/Camera"]
+[node name="SpringPos" type="Marker3D" parent="CharacterBody3D/Camera" unique_id=798599654]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Camera" type="Node3D" parent="CharacterBody3D/Camera"]
+[node name="Camera" type="Node3D" parent="CharacterBody3D/Camera" unique_id=484787064]
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Camera/Camera"]
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Camera/Camera" unique_id=365122691]
 current = true
 fov = 80.0
 
-[node name="Node" type="Node" parent="."]
+[node name="Node" type="Node" parent="." unique_id=2093161854]
 script = ExtResource("2_os3k0")

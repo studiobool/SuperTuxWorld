@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://n7lq77k1s5k6"]
+[gd_scene format=3 uid="uid://n7lq77k1s5k6"]
 
 [ext_resource type="Script" uid="uid://pbmmentbwb75" path="res://scripts/special/unstable.gd" id="1_ebmwq"]
 
@@ -11,27 +11,27 @@ size = Vector3(2, 2, 2)
 [sub_resource type="BoxMesh" id="BoxMesh_owoh6"]
 size = Vector3(2, 2, 2)
 
-[node name="Unstable" type="Area3D"]
+[node name="Unstable" type="Area3D" unique_id=2035534030]
 collision_mask = 15
 script = ExtResource("1_ebmwq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=662170570]
 shape = SubResource("BoxShape3D_8sejj")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=1666398424]
 collision_mask = 15
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=105969862]
 shape = SubResource("BoxShape3D_bmnvl")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2" unique_id=1445058183]
 mesh = SubResource("BoxMesh_owoh6")
 
-[node name="CrackTimer" type="Timer" parent="."]
+[node name="CrackTimer" type="Timer" parent="." unique_id=2025779386]
 wait_time = 0.3
 one_shot = true
 
-[node name="RespawnTimer" type="Timer" parent="."]
+[node name="RespawnTimer" type="Timer" parent="." unique_id=57505306]
 wait_time = 5.0
 one_shot = true
 

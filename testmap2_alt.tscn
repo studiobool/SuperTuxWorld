@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://d4kq1p13g0qwi"]
+[gd_scene format=3 uid="uid://d4kq1p13g0qwi"]
 
 [ext_resource type="AudioStream" uid="uid://cn2vhlkgv1bo4" path="res://music/placeholder/chord_song.ogg" id="1_e8l4c"]
 [ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="3_xh57e"]
@@ -436,60 +436,60 @@ radius = 1.5
 radius = 1.5
 height = 3.0
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=701828428]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1830254616]
 stream = ExtResource("1_e8l4c")
 volume_db = -4.0
 autoplay = true
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1702921435]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1723861091]
 environment = SubResource("Environment_ov2oi")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1645620147]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 use_collision = true
 size = Vector3(200, 4, 200)
 material = SubResource("StandardMaterial3D_ys0t5")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D" unique_id=283228934]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -10)
 use_collision = true
 size = Vector3(10, 2, 10)
 material = SubResource("StandardMaterial3D_6seei")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2" unique_id=609621863]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 4.5)
 operation = 2
 use_collision = true
 size = Vector3(8, 1, 1)
 material = SubResource("StandardMaterial3D_6seei")
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2"]
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2" unique_id=1871430406]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0.823, 4.59)
 operation = 2
 use_collision = true
 size = Vector3(4, 2, 5.5)
 material = SubResource("StandardMaterial3D_6seei")
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2"]
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2" unique_id=1516018004]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -1)
 operation = 2
 use_collision = true
 size = Vector3(10, 1.5, 6)
 material = SubResource("StandardMaterial3D_6seei")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1490384813]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -10)
 use_collision = true
 size = Vector3(4, 2, 2)
 material = SubResource("StandardMaterial3D_6seei")
 
-[node name="Label3D" type="Label3D" parent="CSGBox3D3"]
+[node name="Label3D" type="Label3D" parent="CSGBox3D3" unique_id=437448488]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.01)
 render_priority = 1
 outline_render_priority = 0
@@ -500,36 +500,36 @@ Ctrl to crawl"
 font = ExtResource("4_1248k")
 font_size = 48
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=124250314]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -10)
 use_collision = true
 size = Vector3(10, 1, 10)
 material = SubResource("StandardMaterial3D_6seei")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D4"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D4" unique_id=54027153]
 operation = 2
 use_collision = true
 size = Vector3(8, 1, 10)
 material = SubResource("StandardMaterial3D_6seei")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1961620191]
 physics_interpolation_mode = 1
 transform = Transform3D(0.99810785, 0.041551836, -0.045322638, -0.040140226, 0.99869347, 0.031623848, 0.04657745, -0.029744752, 0.99847174, 0, 1, 0)
 current = true
 
-[node name="PhantomCameraHost" type="Node" parent="Camera3D"]
+[node name="PhantomCameraHost" type="Node" parent="Camera3D" unique_id=1521865260]
 process_priority = 300
 process_physics_priority = 300
 script = ExtResource("5_6vvuk")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1295353821]
 collision_layer = 2
 collision_mask = 9
 floor_max_angle = 1.0908308
 script = SubResource("GDScript_3emuq")
 
-[node name="Control" type="Control" parent="CharacterBody3D"]
+[node name="Control" type="Control" parent="CharacterBody3D" unique_id=1704805727]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -538,7 +538,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="CharacterBody3D/Control"]
+[node name="TextureRect" type="TextureRect" parent="CharacterBody3D/Control" unique_id=1158252853]
 visible = false
 layout_mode = 0
 offset_left = 8.0
@@ -547,7 +547,7 @@ offset_right = 80.0
 offset_bottom = 80.0
 texture = ExtResource("7_peexq")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="CharacterBody3D/Control"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CharacterBody3D/Control" unique_id=1267160641]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
@@ -558,7 +558,7 @@ fill_mode = 5
 texture_under = ExtResource("8_fh1bg")
 texture_progress = ExtResource("9_ijojd")
 
-[node name="Label" type="Label" parent="CharacterBody3D/Control"]
+[node name="Label" type="Label" parent="CharacterBody3D/Control" unique_id=807147139]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -573,7 +573,7 @@ label_settings = SubResource("LabelSettings_rlrdj")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="CharacterBody3D/Control/Label"]
+[node name="TextureRect2" type="TextureRect" parent="CharacterBody3D/Control/Label" unique_id=580524598]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -585,52 +585,52 @@ offset_bottom = 24.0
 grow_vertical = 2
 texture = ExtResource("10_rb8ol")
 
-[node name="SFX" type="Node3D" parent="CharacterBody3D"]
+[node name="SFX" type="Node3D" parent="CharacterBody3D" unique_id=1193996096]
 script = ExtResource("11_8v6sv")
 
-[node name="jump" type="AudioStreamPlayer3D" parent="CharacterBody3D/SFX"]
+[node name="jump" type="AudioStreamPlayer3D" parent="CharacterBody3D/SFX" unique_id=428889946]
 stream = ExtResource("12_w7741")
 volume_db = -2.0
 pitch_scale = 0.96
 
-[node name="InteractionSystem" type="Node3D" parent="CharacterBody3D"]
+[node name="InteractionSystem" type="Node3D" parent="CharacterBody3D" unique_id=1071412614]
 script = ExtResource("13_qbjoy")
 
-[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D"]
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D" unique_id=179917227]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 target_position = Vector3(0, 0, -2)
 
-[node name="Model" type="Node3D" parent="CharacterBody3D"]
+[node name="Model" type="Node3D" parent="CharacterBody3D" unique_id=111788964]
 script = ExtResource("14_nvubw")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Model"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Model" unique_id=438899085]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 visible = false
 mesh = SubResource("CapsuleMesh_axgwx")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ov2oi")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="CharacterBody3D/Model"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CharacterBody3D/Model" unique_id=1380386335]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1, -0.5)
 visible = false
 mesh = SubResource("CylinderMesh_x6wp4")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_e86xl")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="CharacterBody3D/Model"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="CharacterBody3D/Model" unique_id=562018506]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.625, -0.125)
 visible = false
 mesh = SubResource("CapsuleMesh_u53cx")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_p46d7")
 
-[node name="Marker3D" type="Marker3D" parent="CharacterBody3D/Model"]
+[node name="Marker3D" type="Marker3D" parent="CharacterBody3D/Model" unique_id=107162145]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -1)
 
-[node name="tux4" parent="CharacterBody3D/Model" instance=ExtResource("15_txhyc")]
+[node name="tux4" parent="CharacterBody3D/Model" unique_id=962952339 instance=ExtResource("15_txhyc")]
 transform = Transform3D(-0.37, 0, -5.5868448e-08, 0, 0.37, 0, 5.5868448e-08, 0, -0.37, 0, 0, 0)
 
-[node name="AnimationTree" type="AnimationTree" parent="CharacterBody3D/Model"]
+[node name="AnimationTree" type="AnimationTree" parent="CharacterBody3D/Model" unique_id=1133598439]
 root_node = NodePath("../tux4")
 tree_root = SubResource("AnimationNodeStateMachine_j5txn")
 anim_player = NodePath("../AnimationPlayer")
@@ -642,29 +642,27 @@ parameters/conditions/jump = false
 parameters/conditions/run = false
 parameters/conditions/walk = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D/Model"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D/Model" unique_id=574125999]
 root_node = NodePath("../tux4")
-libraries = {
-&"Tux": SubResource("AnimationLibrary_xd3sr")
-}
+libraries/Tux = SubResource("AnimationLibrary_xd3sr")
 
-[node name="StandCollision" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="StandCollision" type="CollisionShape3D" parent="CharacterBody3D" unique_id=643831987]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_julm7")
 
-[node name="CrawlCollision" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CrawlCollision" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1328602661]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("SphereShape3D_6seei")
 
-[node name="HeadDetection" type="RayCast3D" parent="CharacterBody3D"]
+[node name="HeadDetection" type="RayCast3D" parent="CharacterBody3D" unique_id=1057930797]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 target_position = Vector3(0, 1, 0)
 
-[node name="Camera" type="Node3D" parent="CharacterBody3D"]
+[node name="Camera" type="Node3D" parent="CharacterBody3D" unique_id=743757547]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("25_q1sj8")
 
-[node name="PhantomCamera3D" type="Node3D" parent="CharacterBody3D/Camera"]
+[node name="PhantomCamera3D" type="Node3D" parent="CharacterBody3D/Camera" unique_id=1546764785]
 top_level = true
 visible = false
 script = ExtResource("26_p668s")
@@ -679,60 +677,60 @@ spring_length = 5.0
 noise = SubResource("Resource_33b6x")
 metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
-[node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D/Camera"]
+[node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D/Camera" unique_id=1438022203]
 collision_mask = 9
 spring_length = 4.5
 margin = 0.5
 
-[node name="Marker3D" type="Marker3D" parent="CharacterBody3D/Camera/SpringArm3D"]
+[node name="Marker3D" type="Marker3D" parent="CharacterBody3D/Camera/SpringArm3D" unique_id=2133417895]
 
-[node name="SpringPos" type="Marker3D" parent="CharacterBody3D/Camera"]
+[node name="SpringPos" type="Marker3D" parent="CharacterBody3D/Camera" unique_id=2095004987]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Camera" type="Node3D" parent="CharacterBody3D/Camera"]
+[node name="Camera" type="Node3D" parent="CharacterBody3D/Camera" unique_id=181138145]
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Camera/Camera"]
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Camera/Camera" unique_id=519188675]
 current = true
 fov = 80.0
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1109227434]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -10)
 collision_layer = 8
 collision_mask = 15
 mass = 3.0
 can_sleep = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=889869528]
 shape = SubResource("BoxShape3D_dbxb2")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=2013116822]
 mesh = SubResource("BoxMesh_ov2oi")
 
-[node name="Interact" type="Node" parent="RigidBody3D"]
+[node name="Interact" type="Node" parent="RigidBody3D" unique_id=531896290]
 
-[node name="RigidBody3D2" type="RigidBody3D" parent="."]
+[node name="RigidBody3D2" type="RigidBody3D" parent="." unique_id=1470540534]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -20.5)
 collision_layer = 8
 collision_mask = 15
 mass = 48.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2" unique_id=485958695]
 shape = SubResource("BoxShape3D_ov2oi")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2" unique_id=553166557]
 mesh = SubResource("BoxMesh_x6wp4")
 
-[node name="RigidBody3D3" type="RigidBody3D" parent="."]
+[node name="RigidBody3D3" type="RigidBody3D" parent="." unique_id=534607982]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 1.5, -14.5)
 collision_layer = 8
 collision_mask = 15
 mass = 24.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3" unique_id=2112480912]
 shape = SubResource("SphereShape3D_ohipb")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3" unique_id=1378147704]
 mesh = SubResource("SphereMesh_rlrdj")
 
-[node name="Node" type="Node" parent="."]
+[node name="Node" type="Node" parent="." unique_id=1060278148]
 script = ExtResource("29_0givf")

@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bxb7mb8smrutr"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bxb7mb8smrutr"]
 
 [ext_resource type="Texture2D" uid="uid://cvigxxy38jop0" path="res://models/tux/tux4_eyes.png" id="1_w3cor"]
 

@@ -617,18 +617,15 @@ shape = SubResource("SphereShape3D_akcju")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Model" unique_id=129826661]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 mesh = SubResource("SphereMesh_ltrhx")
-skeleton = NodePath("")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="CharacterBody3D/Model" unique_id=1081604847]
 transform = Transform3D(-1, 0, -1.3113416e-07, 0, 1, 0, 8.742278e-08, 0, -1.5, 0.3, -0.5999985, -0.099998474)
 mesh = SubResource("SphereMesh_akcju")
-skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_bmnvl")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="CharacterBody3D/Model" unique_id=76982367]
 transform = Transform3D(-1, 0, -1.3113416e-07, 0, 1, 0, 8.742278e-08, 0, -1.5, -0.3, -0.5999985, -0.099998474)
 mesh = SubResource("SphereMesh_akcju")
-skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_bmnvl")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="CharacterBody3D" unique_id=726756851]

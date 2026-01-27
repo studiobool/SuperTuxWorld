@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dgrddbfla8pos"]
+[gd_scene format=3 uid="uid://dgrddbfla8pos"]
 
 [ext_resource type="Script" uid="uid://ofe1ev0520hi" path="res://scripts/physound_test.gd" id="1_tkj4i"]
 [ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="2_2ovkb"]
@@ -25,7 +25,7 @@ albedo_texture = ExtResource("2_2ovkb")
 uv1_scale = Vector3(8, 4, 8)
 texture_filter = 2
 
-[node name="Friendball" type="RigidBody3D"]
+[node name="Friendball" type="RigidBody3D" unique_id=230784938]
 transform = Transform3D(0.9659259, 0.25881907, 0, -0.25881907, 0.9659259, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 8
 collision_mask = 63
@@ -34,16 +34,16 @@ physics_material_override = SubResource("PhysicsMaterial_35xd0")
 max_contacts_reported = 1
 script = ExtResource("1_tkj4i")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=239786542]
 shape = SubResource("SphereShape3D_nsies")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=884021369]
 mesh = SubResource("SphereMesh_xkjb2")
 surface_material_override/0 = SubResource("StandardMaterial3D_xqgq3")
 script = ExtResource("3_q2wmj")
 rotate = Vector3(0, 4, 0)
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1889633152]
 stream = ExtResource("4_vwuv1")
 volume_db = 80.0
 unit_size = 80.0

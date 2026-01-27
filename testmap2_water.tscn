@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://mdfqx4l7gdg6"]
+[gd_scene format=3 uid="uid://mdfqx4l7gdg6"]
 
 [ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="1_jayvn"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_o1jsc"]
@@ -99,16 +99,16 @@ size = Vector3(4, 1, 4)
 [sub_resource type="BoxMesh" id="BoxMesh_nsies"]
 size = Vector3(4, 1, 4)
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=1131643771]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1154915648]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1004110704]
 environment = SubResource("Environment_ov2oi")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=366422953]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -32)
 collision_layer = 16
 collision_mask = 10
@@ -116,154 +116,154 @@ gravity_space_override = 1
 gravity_point_center = Vector3(0.125, 1.25, 0)
 gravity_direction = Vector3(0.125, 1.25, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=671850182]
 shape = SubResource("BoxShape3D_x6wp4")
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="Area3D"]
+[node name="CSGBox3D6" type="CSGBox3D" parent="Area3D" unique_id=1745276932]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
 cast_shadow = 0
 size = Vector3(91, 3.5, 19)
 material = SubResource("StandardMaterial3D_dbxb2")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=957987663]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 use_collision = true
 size = Vector3(200, 4, 200)
 material = SubResource("StandardMaterial3D_ys0t5")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D" unique_id=890133792]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -35)
 operation = 2
 use_collision = true
 size = Vector3(90, 3.5, 18)
 material = SubResource("StandardMaterial3D_ys0t5")
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D"]
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D" unique_id=1908813829]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -35)
 operation = 2
 use_collision = true
 size = Vector3(90, 3.5, 18)
 material = SubResource("StandardMaterial3D_ys0t5")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1307375088]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
 use_collision = true
 size = Vector3(10, 2, 10)
 material = SubResource("StandardMaterial3D_6seei")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D2"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D2" unique_id=1564885552]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 4.5)
 operation = 2
 use_collision = true
 size = Vector3(8, 1, 1)
 material = SubResource("StandardMaterial3D_6seei")
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D2"]
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D2" unique_id=1976901408]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0.823, 4.59)
 operation = 2
 use_collision = true
 size = Vector3(4, 2, 5.5)
 material = SubResource("StandardMaterial3D_6seei")
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="CSGBox3D2"]
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGBox3D2" unique_id=838608091]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -1)
 operation = 2
 use_collision = true
 size = Vector3(10, 1.5, 6)
 material = SubResource("StandardMaterial3D_6seei")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=598898687]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -10)
 use_collision = true
 size = Vector3(4, 2, 2)
 material = SubResource("StandardMaterial3D_6seei")
 
-[node name="Label3D" type="Label3D" parent="CSGBox3D3"]
+[node name="Label3D" type="Label3D" parent="CSGBox3D3" unique_id=1614396827]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.01)
 text = "W-A-S-D to move
 Space to jump
 Shift to sprint
 Ctrl to crawl"
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=1934517417]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -10)
 use_collision = true
 size = Vector3(10, 1, 10)
 material = SubResource("StandardMaterial3D_6seei")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D4"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D4" unique_id=3456016]
 operation = 2
 use_collision = true
 size = Vector3(8, 1, 10)
 material = SubResource("StandardMaterial3D_6seei")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=977223407]
 physics_interpolation_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 visible = false
 
-[node name="PhantomCameraHost" type="Node" parent="Camera3D"]
+[node name="PhantomCameraHost" type="Node" parent="Camera3D" unique_id=1075260956]
 process_priority = 300
 process_physics_priority = 300
 script = ExtResource("2_o1jsc")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1313561200]
 collision_layer = 2
 collision_mask = 9
 floor_max_angle = 1.0908308
 script = ExtResource("3_sbv3e")
 
-[node name="Node" type="Node" parent="CharacterBody3D"]
+[node name="Node" type="Node" parent="CharacterBody3D" unique_id=1147560214]
 script = ExtResource("4_kmq6a")
 
-[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D"]
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D" unique_id=727054250]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 target_position = Vector3(0, 0, -2)
 
-[node name="Model" type="Node3D" parent="CharacterBody3D"]
+[node name="Model" type="Node3D" parent="CharacterBody3D" unique_id=1475795211]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Model"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Model" unique_id=1988592948]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_axgwx")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ov2oi")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="CharacterBody3D/Model"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CharacterBody3D/Model" unique_id=1211224971]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1, -0.5)
 mesh = SubResource("CylinderMesh_x6wp4")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_e86xl")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="CharacterBody3D/Model"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="CharacterBody3D/Model" unique_id=627855403]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.625, -0.125)
 mesh = SubResource("CapsuleMesh_u53cx")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_p46d7")
 
-[node name="Marker3D" type="Marker3D" parent="CharacterBody3D/Model"]
+[node name="Marker3D" type="Marker3D" parent="CharacterBody3D/Model" unique_id=587568874]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -1)
 
-[node name="StandCollision" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="StandCollision" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1167410044]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_julm7")
 
-[node name="CrawlCollision" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CrawlCollision" type="CollisionShape3D" parent="CharacterBody3D" unique_id=2059061561]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("SphereShape3D_6seei")
 
-[node name="HeadDetection" type="RayCast3D" parent="CharacterBody3D"]
+[node name="HeadDetection" type="RayCast3D" parent="CharacterBody3D" unique_id=1289639215]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 target_position = Vector3(0, 1, 0)
 
-[node name="Camera" type="Node3D" parent="CharacterBody3D"]
+[node name="Camera" type="Node3D" parent="CharacterBody3D" unique_id=1179926579]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("5_vqeva")
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Camera"]
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Camera" unique_id=55643816]
 current = true
 
-[node name="PhantomCamera3D" type="Node3D" parent="CharacterBody3D/Camera" node_paths=PackedStringArray("follow_target", "look_at_target")]
+[node name="PhantomCamera3D" type="Node3D" parent="CharacterBody3D/Camera" unique_id=1203799559 node_paths=PackedStringArray("follow_target", "look_at_target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 top_level = true
 visible = false
@@ -280,42 +280,42 @@ follow_distance = 5.0
 spring_length = 5.0
 metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
-[node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D/Camera"]
+[node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D/Camera" unique_id=2114034872]
 spring_length = 5.0
 margin = 0.1
 
-[node name="Marker3D" type="Marker3D" parent="CharacterBody3D/Camera/SpringArm3D"]
+[node name="Marker3D" type="Marker3D" parent="CharacterBody3D/Camera/SpringArm3D" unique_id=1884058314]
 
-[node name="SpringPos" type="Marker3D" parent="CharacterBody3D/Camera"]
+[node name="SpringPos" type="Marker3D" parent="CharacterBody3D/Camera" unique_id=1829448143]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1042155936]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -10)
 collision_layer = 8
 collision_mask = 15
 can_sleep = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=63963938]
 shape = SubResource("BoxShape3D_dbxb2")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=599086247]
 mesh = SubResource("BoxMesh_ov2oi")
 
-[node name="Interact" type="Node" parent="RigidBody3D"]
+[node name="Interact" type="Node" parent="RigidBody3D" unique_id=2095514284]
 
-[node name="RigidBody3D2" type="RigidBody3D" parent="."]
+[node name="RigidBody3D2" type="RigidBody3D" parent="." unique_id=1384539124]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -20.5)
 collision_layer = 8
 collision_mask = 15
 mass = 3.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2" unique_id=1631554433]
 shape = SubResource("BoxShape3D_ov2oi")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2" unique_id=735710281]
 mesh = SubResource("BoxMesh_x6wp4")
 
-[node name="RigidBody3D3" type="RigidBody3D" parent="."]
+[node name="RigidBody3D3" type="RigidBody3D" parent="." unique_id=674023527]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -34.5)
 collision_layer = 8
 collision_mask = 15
@@ -324,11 +324,11 @@ axis_lock_angular_y = true
 axis_lock_angular_z = true
 mass = 100.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3" unique_id=1088419550]
 shape = SubResource("BoxShape3D_nsies")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3" unique_id=1661328246]
 mesh = SubResource("BoxMesh_nsies")
 
-[node name="Node" type="Node" parent="."]
+[node name="Node" type="Node" parent="." unique_id=375848071]
 script = ExtResource("8_0nh6t")
