@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://clipe71g8mne1"]
+[gd_resource type="Theme" format=3 uid="uid://clipe71g8mne1"]
 
 [ext_resource type="StyleBox" uid="uid://danhnge14s1ky" path="res://theme/files/button_hover-pressed.tres" id="1_5dl7e"]
 [ext_resource type="Texture2D" uid="uid://dmba54dp4nma5" path="res://images/menu/checkbox-checked.png" id="2_gia4r"]

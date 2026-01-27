@@ -1,6 +1,7 @@
 extends BonusBlock
 
 @export var coins : int = 1
+@onready var sound = $CoinSound
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,5 +15,6 @@ func _process(delta: float) -> void:
 func _block_hit(body):
 	print(body)
 	if coins >= 1:
+		sound.play()
 		body.stats.coins += 1
 		coins -= 1
