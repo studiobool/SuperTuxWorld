@@ -87,13 +87,14 @@ offset_right = 622.0
 offset_bottom = -7.0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 10
-text = "SuperTuxWorld v0.0.2 dev
+text = "SuperTuxWorld v0.0.3 dev
 Copyright (c) 2022-2026 studiobool
 This game comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to
 redistribute it under certain conditions: see the licence file for details."
 vertical_alignment = 2
 
 [node name="Control" parent="." unique_id=799532373 instance=ExtResource("3_fx0a5")]
+visible = false
 layout_mode = 1
 
 [connection signal="timeout" from="Panel/VBoxContainer/Timer" to="Panel/VBoxContainer" method="_on_timer_timeout"]
