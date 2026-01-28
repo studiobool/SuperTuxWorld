@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 			else:
 				state_machine.travel("crawl")
 		
-		if master.velocity.y >= 0.01:
+		if (master.if_jumped or master.holding_jump) && master.velocity.y >= 0.01:
 			state_machine.travel("jump")
 		
 		if master.velocity.y <= -0.01:

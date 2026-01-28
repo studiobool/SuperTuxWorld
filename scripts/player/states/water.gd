@@ -8,12 +8,17 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	player.stand_collision.disabled = true
-	player.PLAYER_COLLIDER = player.crawl_collision
+	player.crawl_collision.disabled = true
+	player.water_collision.disabled = false
+	player.PLAYER_COLLIDER = player.water_collision
+	player.water_collision.global_rotation = player.model.global_rotation + Vector3.MODEL_LEFT
 	
 	if Input.is_action_pressed("sprint"):
 		player.SPEED = player.SPRINT * 1.25
+		player.is_sprinting = true
 	else:
 		player.SPEED = player.WALK * 1.25
+		player.is_sprinting = false
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.

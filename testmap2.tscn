@@ -14,10 +14,12 @@
 [ext_resource type="Script" uid="uid://ctg4eljyhams3" path="res://scripts/fps.gd" id="10_33b6x"]
 [ext_resource type="Script" uid="uid://r8gd6nldjyjs" path="res://scripts/npcs/enemies/snowball/generic.gd" id="13_akcju"]
 [ext_resource type="Script" uid="uid://dit3b1j8vgb1t" path="res://scripts/interactive/bonus_block.gd" id="14_a8kll"]
-[ext_resource type="Script" uid="uid://1in0bsqb658g" path="res://scripts/interactive/bonus_extend/coin_block.gd" id="14_bmnvl"]
-[ext_resource type="Material" uid="uid://dx3xb3or5f7bo" path="res://materials/empty_bonus_block.tres" id="15_7ynjx"]
-[ext_resource type="AudioStream" uid="uid://b0oyjjlhu3rmw" path="res://sounds/coin.wav" id="15_owoh6"]
-[ext_resource type="Material" uid="uid://qsnvpe3brhhr" path="res://materials/full_bonus_block.tres" id="16_06ue2"]
+[ext_resource type="PackedScene" uid="uid://b61lj5p7p1spc" path="res://entities/interactive/bonus_block.tscn" id="14_owoh6"]
+[ext_resource type="Texture2D" uid="uid://cf8f38qhjhbsg" path="res://textures/orange_empty.png" id="15_7ynjx"]
+[ext_resource type="Texture2D" uid="uid://dkcmvof2w81f7" path="res://textures/purple_empty.png" id="15_rkm6k"]
+[ext_resource type="Texture2D" uid="uid://78rxsah4ddx2" path="res://textures/orange-0.png" id="16_06ue2"]
+[ext_resource type="Texture2D" uid="uid://bm70mflgmeu1l" path="res://textures/purple-0.png" id="16_vuyj7"]
+[ext_resource type="PackedScene" uid="uid://ccuo1f5km66sq" path="res://entities/interactive/coin.tscn" id="19_06ue2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6seei"]
 sky_top_color = Color(0.3019608, 0.5058824, 0.8039216, 1)
@@ -61,7 +63,7 @@ albedo_color = Color(0.5, 0.5, 0.5, 1)
 size = Vector3(21, 15, 21)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ynjx"]
-render_priority = 1
+render_priority = 2
 transparency = 1
 cull_mode = 2
 albedo_color = Color(0, 0.24705882, 0.49803922, 0.49803922)
@@ -226,6 +228,46 @@ size = Vector3(0.333, 0.333, 0.167)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xd3sr"]
 albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ak1ch"]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("15_rkm6k")
+roughness = 0.1
+uv1_scale = Vector3(0.675, 0.675, 0.675)
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c3e3f"]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("16_vuyj7")
+roughness = 0.1
+uv1_scale = Vector3(0.675, 0.675, 0.675)
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkm6k"]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("15_7ynjx")
+roughness = 0.1
+uv1_scale = Vector3(0.675, 0.675, 0.675)
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vuyj7"]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("16_06ue2")
+roughness = 0.1
+uv1_scale = Vector3(0.675, 0.675, 0.675)
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bmnvl"]
 size = Vector3(1.5, 1.5, 1.5)
@@ -527,7 +569,8 @@ script = ExtResource("8_bmnvl")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=475702118]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -29)
-collision_mask = 14
+collision_layer = 4
+collision_mask = 15
 script = ExtResource("5_35xd0")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Area3D" unique_id=1301389790]
@@ -560,7 +603,8 @@ attenuation_filter_cutoff_hz = 20500.0
 
 [node name="Area3D2" type="Area3D" parent="." unique_id=1477468384]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -52)
-collision_mask = 14
+collision_layer = 4
+collision_mask = 15
 script = SubResource("GDScript_akcju")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=224224684]
@@ -581,12 +625,15 @@ shape = SubResource("ConvexPolygonShape3D_xd3sr")
 
 [node name="Unstable" parent="." unique_id=1987556805 instance=ExtResource("9_33b6x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 28, -58)
+collision_layer = 4
 
 [node name="Unstable2" parent="." unique_id=1089504958 instance=ExtResource("9_33b6x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 28, -56)
+collision_layer = 4
 
 [node name="Unstable3" parent="." unique_id=1845879249 instance=ExtResource("9_33b6x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 28, -59.5)
+collision_layer = 4
 
 [node name="Label" type="Label" parent="." unique_id=1004327333]
 anchors_preset = 3
@@ -683,104 +730,32 @@ collision_mask = 17
 hit_from_inside = true
 collide_with_bodies = false
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=896511818 node_paths=PackedStringArray("mesh")]
+[node name="BonusBlock" parent="." unique_id=613419284 instance=ExtResource("14_owoh6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -31.249998)
-collision_layer = 4
-collision_mask = 15
-script = ExtResource("14_bmnvl")
-mesh = NodePath("MeshInstance3D")
-empty_mat = ExtResource("15_7ynjx")
-full_mat = ExtResource("16_06ue2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=1226728381]
-shape = SubResource("BoxShape3D_bmnvl")
+[node name="BonusBlock3" parent="." unique_id=2078986331 instance=ExtResource("14_owoh6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 6, -31.249998)
+coins = 3
+empty_mat = SubResource("StandardMaterial3D_ak1ch")
+full_mat = SubResource("StandardMaterial3D_c3e3f")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2" unique_id=1023388926]
-mesh = SubResource("BoxMesh_owoh6")
-surface_material_override/0 = ExtResource("16_06ue2")
-
-[node name="Area3D" type="Area3D" parent="StaticBody3D2" unique_id=1738252610]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
-collision_layer = 4
-collision_mask = 15
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2/Area3D" unique_id=613750270]
-shape = SubResource("BoxShape3D_owoh6")
-debug_color = Color(0, 0.5950001, 0.7, 1)
-
-[node name="Area3D2" type="Area3D" parent="StaticBody3D2" unique_id=1316435259]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
-collision_layer = 4
-collision_mask = 15
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2/Area3D2" unique_id=1517546161]
-shape = SubResource("BoxShape3D_owoh6")
-debug_color = Color(0, 0.5950001, 0.7, 1)
-
-[node name="Area3D3" type="Area3D" parent="StaticBody3D2" unique_id=1449551022]
-collision_layer = 4
-collision_mask = 15
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2/Area3D3" unique_id=1789213226]
-shape = SubResource("BoxShape3D_xd3sr")
-debug_color = Color(0, 0.5950001, 0.7, 1)
-
-[node name="CoinSound" type="AudioStreamPlayer3D" parent="StaticBody3D2" unique_id=262987850]
-stream = ExtResource("15_owoh6")
-unit_size = 5.0
-max_polyphony = 4
-bus = &"SFX"
-attenuation_filter_cutoff_hz = 20500.0
-
-[node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=1705710498 node_paths=PackedStringArray("mesh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, -38.25)
-collision_layer = 4
-collision_mask = 15
-script = ExtResource("14_bmnvl")
+[node name="BonusBlock4" parent="." unique_id=398010296 instance=ExtResource("14_owoh6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 6, -31.249998)
 coins = 2
-mesh = NodePath("MeshInstance3D")
-empty_mat = ExtResource("15_7ynjx")
-full_mat = ExtResource("16_06ue2")
+empty_mat = SubResource("StandardMaterial3D_rkm6k")
+full_mat = SubResource("StandardMaterial3D_vuyj7")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3" unique_id=1070507898]
-shape = SubResource("BoxShape3D_bmnvl")
+[node name="BonusBlock2" parent="." unique_id=589237229 instance=ExtResource("14_owoh6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, -38.25)
+coins = 2
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3" unique_id=499605310]
-material_override = ExtResource("16_06ue2")
-mesh = SubResource("BoxMesh_owoh6")
+[node name="BonusBlock5" parent="." unique_id=882929346 instance=ExtResource("14_owoh6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 20, -38.25)
+coins = 0
 
-[node name="Area3D" type="Area3D" parent="StaticBody3D3" unique_id=1856930995]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
-collision_layer = 4
-collision_mask = 15
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3/Area3D" unique_id=651839786]
-shape = SubResource("BoxShape3D_owoh6")
-debug_color = Color(0, 0.5950001, 0.7, 1)
-
-[node name="Area3D2" type="Area3D" parent="StaticBody3D3" unique_id=364239147]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
-collision_layer = 4
-collision_mask = 15
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3/Area3D2" unique_id=1586113604]
-shape = SubResource("BoxShape3D_owoh6")
-debug_color = Color(0, 0.5950001, 0.7, 1)
-
-[node name="Area3D3" type="Area3D" parent="StaticBody3D3" unique_id=391905637]
-collision_layer = 4
-collision_mask = 15
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3/Area3D3" unique_id=638826334]
-shape = SubResource("BoxShape3D_xd3sr")
-debug_color = Color(0, 0.5950001, 0.7, 1)
-
-[node name="CoinSound" type="AudioStreamPlayer3D" parent="StaticBody3D3" unique_id=60982499]
-stream = ExtResource("15_owoh6")
-unit_size = 5.0
-max_polyphony = 4
-bus = &"SFX"
-attenuation_filter_cutoff_hz = 20500.0
+[node name="BonusBlock6" parent="." unique_id=99690186 instance=ExtResource("14_owoh6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 20, -38.25)
+coins = 0
 
 [node name="StaticBody3D4" type="StaticBody3D" parent="." unique_id=1830073278]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.000001, 24.249998)
@@ -820,14 +795,29 @@ collision_mask = 15
 shape = SubResource("BoxShape3D_xd3sr")
 debug_color = Color(0, 0.5950001, 0.7, 1)
 
+[node name="Coin" parent="." unique_id=174786375 instance=ExtResource("19_06ue2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 1, -3.5)
+
+[node name="Coin2" parent="." unique_id=222913284 instance=ExtResource("19_06ue2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -3.5)
+
+[node name="Coin3" parent="." unique_id=1589923883 instance=ExtResource("19_06ue2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25, 1, -3.5)
+
+[node name="Coin4" parent="." unique_id=331398621 instance=ExtResource("19_06ue2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, -56)
+
+[node name="Coin5" parent="." unique_id=1281571900 instance=ExtResource("19_06ue2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, -59.5)
+
+[node name="Coin6" parent="." unique_id=1602570848 instance=ExtResource("19_06ue2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -52)
+
+[node name="Coin7" parent="." unique_id=1818305887 instance=ExtResource("19_06ue2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.25, -52)
+
 [connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
 [connection signal="body_entered" from="Area3D2" to="Area3D2" method="_on_body_entered"]
-[connection signal="body_entered" from="StaticBody3D2/Area3D" to="StaticBody3D2" method="hit_below"]
-[connection signal="body_entered" from="StaticBody3D2/Area3D2" to="StaticBody3D2" method="hit_above"]
-[connection signal="body_entered" from="StaticBody3D2/Area3D3" to="StaticBody3D2" method="hit_swim"]
-[connection signal="body_entered" from="StaticBody3D3/Area3D" to="StaticBody3D3" method="hit_below"]
-[connection signal="body_entered" from="StaticBody3D3/Area3D2" to="StaticBody3D3" method="hit_above"]
-[connection signal="body_entered" from="StaticBody3D3/Area3D3" to="StaticBody3D3" method="hit_swim"]
 [connection signal="body_entered" from="StaticBody3D4/Area3D" to="StaticBody3D4" method="hit_below"]
 [connection signal="body_entered" from="StaticBody3D4/Area3D2" to="StaticBody3D4" method="hit_above"]
 [connection signal="body_entered" from="StaticBody3D4/Area3D3" to="StaticBody3D4" method="hit_swim"]

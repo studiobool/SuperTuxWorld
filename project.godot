@@ -145,3 +145,4 @@ common/physics_interpolation=true
 
 renderer/rendering_method="mobile"
 shading/overrides/force_lambert_over_burley=true
+anti_aliasing/quality/use_debanding=true

@@ -11,6 +11,7 @@ const DEFAULT_ACCEL = 3.75
 const ICE_ACCEL = 1.25
 const ICE_DECCEL = 1.25
 var JUMP_VELOCITY = 18.0
+var is_sprinting : bool
 var holding_jump: bool
 var if_jumped: bool
 var if_pound: bool
@@ -29,6 +30,7 @@ var move_dir := Vector3.BACK
 @onready var stand_collision = $StandCollision
 @onready var crawl_collision = $CrawlCollision
 @onready var object_collision = $ObjectCollision
+@onready var water_collision = $WaterCollision
 @onready var head_detection = $HeadDetection
 @onready var floor_detection = $FloorDetection
 @onready var edge_detection = $Model/EdgeDetection

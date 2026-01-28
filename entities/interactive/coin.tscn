@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://ccuo1f5km66sq"]
+
+[ext_resource type="Script" uid="uid://cix1m632p80gp" path="res://scripts/interactive/coin.gd" id="1_wdp8y"]
+[ext_resource type="ArrayMesh" uid="uid://nep1ggb30pam" path="res://models/coin/coin.obj" id="2_n7paw"]
+[ext_resource type="AudioStream" uid="uid://b0oyjjlhu3rmw" path="res://sounds/coin.wav" id="3_cugq6"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rkm6k"]
+height = 0.75
+
+[node name="Coin" type="Area3D" unique_id=174786375 node_paths=PackedStringArray("mesh")]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("1_wdp8y")
+mesh = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=899272282]
+mesh = ExtResource("2_n7paw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=470523358]
+shape = SubResource("CylinderShape3D_rkm6k")
+
+[node name="CoinSound" type="AudioStreamPlayer3D" parent="." unique_id=1430643858]
+stream = ExtResource("3_cugq6")
+unit_size = 5.0
+max_polyphony = 4
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 20500.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
