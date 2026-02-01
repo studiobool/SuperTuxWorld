@@ -8,8 +8,9 @@
 height = 0.75
 
 [node name="Coin" type="Area3D" unique_id=174786375 node_paths=PackedStringArray("mesh")]
-collision_layer = 4
-collision_mask = 15
+collision_layer = 0
+collision_mask = 2
+monitorable = false
 script = ExtResource("1_wdp8y")
 mesh = NodePath("MeshInstance3D")
 

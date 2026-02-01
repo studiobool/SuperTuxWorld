@@ -1,4 +1,3 @@
-@tool
 class_name CoinBlock extends BonusBlock
 
 @export var coins : int = 1
@@ -10,13 +9,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	_apply_material()
 	if coins >= 1:
 		is_usable = true
 	else:
 		is_usable = false
-		_apply_material()
 
-func is_hit(body, hit):
+func is_hit(body, _hit):
 	if is_usable:
 		sound.play()
 		body.stats.coins += 1

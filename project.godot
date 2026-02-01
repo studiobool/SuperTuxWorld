@@ -39,7 +39,7 @@ movie_writer/fps=30
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/StyleboxFancy/plugin.cfg")
+enabled=PackedStringArray("res://addons/StyleboxFancy/plugin.cfg", "res://addons/voronoishatter/plugin.cfg")
 
 [input]
 
@@ -144,11 +144,11 @@ fire={
 2d/physics_engine="Dummy"
 3d/physics_engine="Jolt Physics"
 3d/default_gravity=24.5
-2d/default_gravity=1960.0
 common/physics_interpolation=true
 
 [rendering]
 
 renderer/rendering_method="mobile"
+reflections/sky_reflections/texture_array_reflections=false
 shading/overrides/force_lambert_over_burley=true
 anti_aliasing/quality/use_debanding=true

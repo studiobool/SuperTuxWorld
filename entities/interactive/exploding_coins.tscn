@@ -2,6 +2,7 @@
 
 [ext_resource type="ArrayMesh" uid="uid://nep1ggb30pam" path="res://models/coin/coin.obj" id="1_jrcdb"]
 [ext_resource type="Script" uid="uid://caivu06kgpdk2" path="res://scripts/interactive/PhysCoin.gd" id="1_qyqnv"]
+[ext_resource type="AudioStream" uid="uid://d230weatwoe7w" path="res://sounds/coin2.ogg" id="2_hrvmv"]
 [ext_resource type="AudioStream" uid="uid://b0oyjjlhu3rmw" path="res://sounds/coin.wav" id="2_umvub"]
 [ext_resource type="Script" uid="uid://cix1m632p80gp" path="res://scripts/interactive/Coin.gd" id="3_5oku1"]
 [ext_resource type="Script" uid="uid://xkl8igiu6fg7" path="res://scripts/ExplodeForce.gd" id="3_lwgo2"]
@@ -26,10 +27,12 @@ collision_layer = 256
 collision_mask = 319
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+can_sleep = false
 continuous_cd = true
-linear_velocity = Vector3(0, 12, 0)
+linear_velocity = Vector3(0, 6, 0)
 angular_damp = 0.5
 script = ExtResource("1_qyqnv")
+sound = ExtResource("2_hrvmv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin" unique_id=175862560]
 mesh = ExtResource("1_jrcdb")
@@ -39,8 +42,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 shape = SubResource("CylinderShape3D_aitf6")
 
 [node name="Coin" type="Area3D" parent="PhysCoin" unique_id=174786375 node_paths=PackedStringArray("mesh")]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 15
+monitorable = false
 script = ExtResource("3_5oku1")
 mesh = NodePath("../MeshInstance3D")
 rotate = false
@@ -61,10 +65,12 @@ collision_layer = 256
 collision_mask = 319
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+can_sleep = false
 continuous_cd = true
-linear_velocity = Vector3(0, 12, 0)
+linear_velocity = Vector3(0, 6, 0)
 angular_damp = 0.5
 script = ExtResource("1_qyqnv")
+sound = ExtResource("2_hrvmv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin2" unique_id=1432543814]
 mesh = ExtResource("1_jrcdb")
@@ -74,8 +80,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 shape = SubResource("CylinderShape3D_aitf6")
 
 [node name="Coin" type="Area3D" parent="PhysCoin2" unique_id=884378740 node_paths=PackedStringArray("mesh")]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 15
+monitorable = false
 script = ExtResource("3_5oku1")
 mesh = NodePath("../MeshInstance3D")
 rotate = false
@@ -96,10 +103,12 @@ collision_layer = 256
 collision_mask = 319
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+can_sleep = false
 continuous_cd = true
-linear_velocity = Vector3(0, 12, 0)
+linear_velocity = Vector3(0, 6, 0)
 angular_damp = 0.5
 script = ExtResource("1_qyqnv")
+sound = ExtResource("2_hrvmv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin3" unique_id=46374549]
 mesh = ExtResource("1_jrcdb")
@@ -109,8 +118,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 shape = SubResource("CylinderShape3D_aitf6")
 
 [node name="Coin" type="Area3D" parent="PhysCoin3" unique_id=340490629 node_paths=PackedStringArray("mesh")]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 15
+monitorable = false
 script = ExtResource("3_5oku1")
 mesh = NodePath("../MeshInstance3D")
 rotate = false
@@ -131,10 +141,12 @@ collision_layer = 256
 collision_mask = 319
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+can_sleep = false
 continuous_cd = true
-linear_velocity = Vector3(0, 12, 0)
+linear_velocity = Vector3(0, 6, 0)
 angular_damp = 0.5
 script = ExtResource("1_qyqnv")
+sound = ExtResource("2_hrvmv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin4" unique_id=685531941]
 mesh = ExtResource("1_jrcdb")
@@ -144,8 +156,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 shape = SubResource("CylinderShape3D_aitf6")
 
 [node name="Coin" type="Area3D" parent="PhysCoin4" unique_id=1276695372 node_paths=PackedStringArray("mesh")]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 15
+monitorable = false
 script = ExtResource("3_5oku1")
 mesh = NodePath("../MeshInstance3D")
 rotate = false
@@ -166,10 +179,12 @@ collision_layer = 256
 collision_mask = 319
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+can_sleep = false
 continuous_cd = true
-linear_velocity = Vector3(0, 12, 0)
+linear_velocity = Vector3(0, 6, 0)
 angular_damp = 0.5
 script = ExtResource("1_qyqnv")
+sound = ExtResource("2_hrvmv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin5" unique_id=1591190964]
 mesh = ExtResource("1_jrcdb")
@@ -179,8 +194,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 shape = SubResource("CylinderShape3D_aitf6")
 
 [node name="Coin" type="Area3D" parent="PhysCoin5" unique_id=798336708 node_paths=PackedStringArray("mesh")]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 15
+monitorable = false
 script = ExtResource("3_5oku1")
 mesh = NodePath("../MeshInstance3D")
 rotate = false
@@ -201,10 +217,12 @@ collision_layer = 256
 collision_mask = 319
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+can_sleep = false
 continuous_cd = true
-linear_velocity = Vector3(0, 12, 0)
+linear_velocity = Vector3(0, 6, 0)
 angular_damp = 0.5
 script = ExtResource("1_qyqnv")
+sound = ExtResource("2_hrvmv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin6" unique_id=1825773928]
 mesh = ExtResource("1_jrcdb")
@@ -214,8 +232,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 shape = SubResource("CylinderShape3D_aitf6")
 
 [node name="Coin" type="Area3D" parent="PhysCoin6" unique_id=1946211256 node_paths=PackedStringArray("mesh")]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 15
+monitorable = false
 script = ExtResource("3_5oku1")
 mesh = NodePath("../MeshInstance3D")
 rotate = false
@@ -236,10 +255,12 @@ collision_layer = 256
 collision_mask = 319
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+can_sleep = false
 continuous_cd = true
-linear_velocity = Vector3(0, 12, 0)
+linear_velocity = Vector3(0, 6, 0)
 angular_damp = 0.5
 script = ExtResource("1_qyqnv")
+sound = ExtResource("2_hrvmv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin7" unique_id=1971002128]
 mesh = ExtResource("1_jrcdb")
@@ -249,8 +270,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 shape = SubResource("CylinderShape3D_aitf6")
 
 [node name="Coin" type="Area3D" parent="PhysCoin7" unique_id=286118778 node_paths=PackedStringArray("mesh")]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 15
+monitorable = false
 script = ExtResource("3_5oku1")
 mesh = NodePath("../MeshInstance3D")
 rotate = false
@@ -271,10 +293,12 @@ collision_layer = 256
 collision_mask = 319
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+can_sleep = false
 continuous_cd = true
-linear_velocity = Vector3(0, 12, 0)
+linear_velocity = Vector3(0, 6, 0)
 angular_damp = 0.5
 script = ExtResource("1_qyqnv")
+sound = ExtResource("2_hrvmv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin8" unique_id=1562229106]
 mesh = ExtResource("1_jrcdb")
@@ -284,8 +308,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 shape = SubResource("CylinderShape3D_aitf6")
 
 [node name="Coin" type="Area3D" parent="PhysCoin8" unique_id=2096412505 node_paths=PackedStringArray("mesh")]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 15
+monitorable = false
 script = ExtResource("3_5oku1")
 mesh = NodePath("../MeshInstance3D")
 rotate = false
@@ -306,10 +331,12 @@ collision_layer = 256
 collision_mask = 319
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+can_sleep = false
 continuous_cd = true
-linear_velocity = Vector3(0, 12, 0)
+linear_velocity = Vector3(0, 6, 0)
 angular_damp = 0.5
 script = ExtResource("1_qyqnv")
+sound = ExtResource("2_hrvmv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin9" unique_id=1983052390]
 mesh = ExtResource("1_jrcdb")
@@ -319,8 +346,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 shape = SubResource("CylinderShape3D_aitf6")
 
 [node name="Coin" type="Area3D" parent="PhysCoin9" unique_id=1505719920 node_paths=PackedStringArray("mesh")]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 15
+monitorable = false
 script = ExtResource("3_5oku1")
 mesh = NodePath("../MeshInstance3D")
 rotate = false
@@ -341,10 +369,12 @@ collision_layer = 256
 collision_mask = 319
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+can_sleep = false
 continuous_cd = true
-linear_velocity = Vector3(0, 12, 0)
+linear_velocity = Vector3(0, 6, 0)
 angular_damp = 0.5
 script = ExtResource("1_qyqnv")
+sound = ExtResource("2_hrvmv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin10" unique_id=1305325608]
 mesh = ExtResource("1_jrcdb")
@@ -354,8 +384,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 shape = SubResource("CylinderShape3D_aitf6")
 
 [node name="Coin" type="Area3D" parent="PhysCoin10" unique_id=82239677 node_paths=PackedStringArray("mesh")]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 15
+monitorable = false
 script = ExtResource("3_5oku1")
 mesh = NodePath("../MeshInstance3D")
 rotate = false

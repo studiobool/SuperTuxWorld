@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://b2r10k4tbwuid"]
+
+[ext_resource type="Script" uid="uid://bae0kmoe33t34" path="res://scripts/interactive/interact_extend/WoodenBlock.gd" id="1_87p0a"]
+[ext_resource type="Material" uid="uid://c7mtjk4tlka16" path="res://materials/wooden_brick.tres" id="2_87p0a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_87p0a"]
+size = Vector3(1.5, 1.5, 1.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_87p0a"]
+size = Vector3(1.5, 1.5, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xg2e1"]
+size = Vector3(1.49, 1.5, 1.49)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vqn34"]
+size = Vector3(1.6, 1.6, 1.6)
+
+[node name="WoodenBlock" type="StaticBody3D" unique_id=613419284]
+collision_layer = 5
+collision_mask = 15
+script = ExtResource("1_87p0a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1214806408]
+shape = SubResource("BoxShape3D_87p0a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=617522294]
+mesh = SubResource("BoxMesh_87p0a")
+surface_material_override/0 = ExtResource("2_87p0a")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1000279701]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+collision_layer = 0
+collision_mask = 14
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1261027697]
+shape = SubResource("BoxShape3D_xg2e1")
+debug_color = Color(0, 0.5950001, 0.7, 1)
+
+[node name="Area3D2" type="Area3D" parent="." unique_id=752781959]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+collision_layer = 0
+collision_mask = 14
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=1769521464]
+shape = SubResource("BoxShape3D_xg2e1")
+debug_color = Color(0, 0.5950001, 0.7, 1)
+
+[node name="Area3D3" type="Area3D" parent="." unique_id=1473219905]
+collision_layer = 0
+collision_mask = 14
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D3" unique_id=1810566011]
+shape = SubResource("BoxShape3D_vqn34")
+debug_color = Color(0, 0.5950001, 0.7, 1)
+
+[connection signal="body_entered" from="Area3D" to="." method="hit_below"]
+[connection signal="body_entered" from="Area3D2" to="." method="hit_above"]
+[connection signal="body_entered" from="Area3D3" to="." method="hit_water"]

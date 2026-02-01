@@ -1,0 +1,906 @@
+[gd_scene format=3 uid="uid://8pvky867seyp"]
+
+[ext_resource type="PackedScene" uid="uid://bwgeqim2wihbd" path="res://loading_hole.tscn" id="1_0lyc5"]
+[ext_resource type="AudioStream" uid="uid://gtf2msqqqws6" path="res://music/placeholder/sunset.ogg" id="2_td7at"]
+[ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="3_4ek4j"]
+[ext_resource type="FontFile" uid="uid://cgcreoeye0gaf" path="res://fonts/SuperTux-Medium.ttf" id="4_avfka"]
+[ext_resource type="PackedScene" uid="uid://d1x8iynxnf8th" path="res://entities/player/player.tscn" id="6_665ig"]
+[ext_resource type="Script" uid="uid://cd7fcjsu2tl1e" path="res://debug_level.gd" id="8_iw3ip"]
+[ext_resource type="Script" uid="uid://ctg4eljyhams3" path="res://scripts/Framecounter.gd" id="12_sarhw"]
+[ext_resource type="PackedScene" uid="uid://b2r10k4tbwuid" path="res://entities/interactive/blocks/extends/WoodenBlock.tscn" id="21_pg3d8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6seei"]
+sky_top_color = Color(0.3019608, 0.5058824, 0.8039216, 1)
+sky_horizon_color = Color(0.5860507, 0.82383144, 0.99999994, 1)
+ground_bottom_color = Color(0.1479, 0.1857933, 0.29, 1)
+ground_horizon_color = Color(0.20010002, 0.38789493, 0.69, 1)
+
+[sub_resource type="Sky" id="Sky_dbxb2"]
+sky_material = SubResource("ProceduralSkyMaterial_6seei")
+
+[sub_resource type="Environment" id="Environment_ov2oi"]
+background_mode = 2
+sky = SubResource("Sky_dbxb2")
+tonemap_mode = 1
+tonemap_exposure = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_06ue2"]
+render_priority = -1
+transparency = 1
+albedo_color = Color(0, 0, 0, 0.49803922)
+albedo_texture = ExtResource("3_4ek4j")
+uv1_scale = Vector3(2, 2, 2)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xqgq3"]
+render_priority = -2
+next_pass = SubResource("StandardMaterial3D_06ue2")
+transparency = 1
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+albedo_texture = ExtResource("3_4ek4j")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ys0t5"]
+render_priority = -2
+next_pass = SubResource("StandardMaterial3D_xqgq3")
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ltrhx"]
+font = ExtResource("4_avfka")
+font_size = 18
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(1.5, 1.5)
+
+[node name="Node3D" type="Node3D" unique_id=2037493938]
+
+[node name="Control" parent="." unique_id=872589410 instance=ExtResource("1_0lyc5")]
+visible = false
+z_index = 1
+time = 0.625
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=749794955]
+stream = ExtResource("2_td7at")
+volume_db = -4.0
+autoplay = true
+bus = &"Music"
+playback_type = 1
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=819993617]
+transform = Transform3D(0.49999997, -0.75000006, 0.4330127, 0, 0.49999997, 0.86602545, -0.86602545, -0.4330127, 0.24999997, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_blend_splits = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2099599865]
+environment = SubResource("Environment_ov2oi")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1729782781]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0)
+use_collision = true
+size = Vector3(400, 40, 400)
+material = SubResource("StandardMaterial3D_ys0t5")
+
+[node name="Player" parent="." unique_id=689663030 instance=ExtResource("6_665ig")]
+
+[node name="Label" type="Label" parent="." unique_id=1004327333]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -48.0
+offset_right = -15.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "60"
+label_settings = SubResource("LabelSettings_ltrhx")
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("12_sarhw")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1554603217]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -9)
+
+[node name="Node3D" type="Node3D" parent="Node3D" unique_id=1225521326]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0.19999981)
+
+[node name="WoodenBlock" parent="Node3D/Node3D" unique_id=1376171848 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3.8000002)
+
+[node name="WoodenBlock2" parent="Node3D/Node3D" unique_id=613419284 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3.8000002)
+
+[node name="WoodenBlock3" parent="Node3D/Node3D" unique_id=113477357 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.8000002)
+
+[node name="WoodenBlock4" parent="Node3D/Node3D" unique_id=385684810 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3.8000002)
+
+[node name="WoodenBlock5" parent="Node3D/Node3D" unique_id=1235372928 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3.8000002)
+
+[node name="WoodenBlock6" parent="Node3D/Node3D" unique_id=1397112906 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1.8000002)
+
+[node name="WoodenBlock7" parent="Node3D/Node3D" unique_id=1033869193 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1.8000002)
+
+[node name="WoodenBlock8" parent="Node3D/Node3D" unique_id=569102050 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8000002)
+
+[node name="WoodenBlock9" parent="Node3D/Node3D" unique_id=382596669 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.8000002)
+
+[node name="WoodenBlock10" parent="Node3D/Node3D" unique_id=493173411 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1.8000002)
+
+[node name="WoodenBlock11" parent="Node3D/Node3D" unique_id=733541792 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.19999981)
+
+[node name="WoodenBlock12" parent="Node3D/Node3D" unique_id=736729535 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -0.19999981)
+
+[node name="WoodenBlock13" parent="Node3D/Node3D" unique_id=2092880295 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19999981)
+
+[node name="WoodenBlock14" parent="Node3D/Node3D" unique_id=260534230 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -0.19999981)
+
+[node name="WoodenBlock15" parent="Node3D/Node3D" unique_id=1877582749 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -0.19999981)
+
+[node name="WoodenBlock16" parent="Node3D/Node3D" unique_id=793656335 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2.1999998)
+
+[node name="WoodenBlock17" parent="Node3D/Node3D" unique_id=1841005585 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2.1999998)
+
+[node name="WoodenBlock18" parent="Node3D/Node3D" unique_id=743113364 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1999998)
+
+[node name="WoodenBlock19" parent="Node3D/Node3D" unique_id=1337347366 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2.1999998)
+
+[node name="WoodenBlock20" parent="Node3D/Node3D" unique_id=27622955 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2.1999998)
+
+[node name="WoodenBlock21" parent="Node3D/Node3D" unique_id=1734771828 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4.2)
+
+[node name="WoodenBlock22" parent="Node3D/Node3D" unique_id=251917163 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4.2)
+
+[node name="WoodenBlock23" parent="Node3D/Node3D" unique_id=1403330897 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.2)
+
+[node name="WoodenBlock24" parent="Node3D/Node3D" unique_id=671814968 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4.2)
+
+[node name="WoodenBlock25" parent="Node3D/Node3D" unique_id=1147876252 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4.2)
+
+[node name="Node3D2" type="Node3D" parent="Node3D" unique_id=67501274]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.19999981)
+
+[node name="WoodenBlock" parent="Node3D/Node3D2" unique_id=1723893493 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3.8000002)
+
+[node name="WoodenBlock2" parent="Node3D/Node3D2" unique_id=361801239 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3.8000002)
+
+[node name="WoodenBlock3" parent="Node3D/Node3D2" unique_id=1087027551 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.8000002)
+
+[node name="WoodenBlock4" parent="Node3D/Node3D2" unique_id=245461649 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3.8000002)
+
+[node name="WoodenBlock5" parent="Node3D/Node3D2" unique_id=158651958 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3.8000002)
+
+[node name="WoodenBlock6" parent="Node3D/Node3D2" unique_id=134879135 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1.8000002)
+
+[node name="WoodenBlock7" parent="Node3D/Node3D2" unique_id=1733381713 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1.8000002)
+
+[node name="WoodenBlock8" parent="Node3D/Node3D2" unique_id=1249708112 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8000002)
+
+[node name="WoodenBlock9" parent="Node3D/Node3D2" unique_id=645739959 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.8000002)
+
+[node name="WoodenBlock10" parent="Node3D/Node3D2" unique_id=347132931 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1.8000002)
+
+[node name="WoodenBlock11" parent="Node3D/Node3D2" unique_id=1337596763 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.19999981)
+
+[node name="WoodenBlock12" parent="Node3D/Node3D2" unique_id=818556630 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -0.19999981)
+
+[node name="WoodenBlock13" parent="Node3D/Node3D2" unique_id=420687778 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19999981)
+
+[node name="WoodenBlock14" parent="Node3D/Node3D2" unique_id=233473111 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -0.19999981)
+
+[node name="WoodenBlock15" parent="Node3D/Node3D2" unique_id=679227143 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -0.19999981)
+
+[node name="WoodenBlock16" parent="Node3D/Node3D2" unique_id=1770128038 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2.1999998)
+
+[node name="WoodenBlock17" parent="Node3D/Node3D2" unique_id=1202239277 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2.1999998)
+
+[node name="WoodenBlock18" parent="Node3D/Node3D2" unique_id=1481837957 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1999998)
+
+[node name="WoodenBlock19" parent="Node3D/Node3D2" unique_id=2111140975 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2.1999998)
+
+[node name="WoodenBlock20" parent="Node3D/Node3D2" unique_id=1464978720 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2.1999998)
+
+[node name="WoodenBlock21" parent="Node3D/Node3D2" unique_id=1382326382 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4.2)
+
+[node name="WoodenBlock22" parent="Node3D/Node3D2" unique_id=1461499978 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4.2)
+
+[node name="WoodenBlock23" parent="Node3D/Node3D2" unique_id=407164574 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.2)
+
+[node name="WoodenBlock24" parent="Node3D/Node3D2" unique_id=468896514 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4.2)
+
+[node name="WoodenBlock25" parent="Node3D/Node3D2" unique_id=1025539865 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4.2)
+
+[node name="Node3D2" type="Node3D" parent="." unique_id=320213798]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -19)
+
+[node name="Node3D" type="Node3D" parent="Node3D2" unique_id=866016100]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0.19999981)
+
+[node name="WoodenBlock" parent="Node3D2/Node3D" unique_id=2055764354 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3.8000002)
+
+[node name="WoodenBlock2" parent="Node3D2/Node3D" unique_id=1072652769 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3.8000002)
+
+[node name="WoodenBlock3" parent="Node3D2/Node3D" unique_id=1499490271 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.8000002)
+
+[node name="WoodenBlock4" parent="Node3D2/Node3D" unique_id=1641816848 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3.8000002)
+
+[node name="WoodenBlock5" parent="Node3D2/Node3D" unique_id=964406182 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3.8000002)
+
+[node name="WoodenBlock6" parent="Node3D2/Node3D" unique_id=1488693923 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1.8000002)
+
+[node name="WoodenBlock7" parent="Node3D2/Node3D" unique_id=646818344 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1.8000002)
+
+[node name="WoodenBlock8" parent="Node3D2/Node3D" unique_id=445781163 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8000002)
+
+[node name="WoodenBlock9" parent="Node3D2/Node3D" unique_id=292325 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.8000002)
+
+[node name="WoodenBlock10" parent="Node3D2/Node3D" unique_id=745226487 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1.8000002)
+
+[node name="WoodenBlock11" parent="Node3D2/Node3D" unique_id=212928987 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.19999981)
+
+[node name="WoodenBlock12" parent="Node3D2/Node3D" unique_id=1444911400 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -0.19999981)
+
+[node name="WoodenBlock13" parent="Node3D2/Node3D" unique_id=1226763487 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19999981)
+
+[node name="WoodenBlock14" parent="Node3D2/Node3D" unique_id=162793694 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -0.19999981)
+
+[node name="WoodenBlock15" parent="Node3D2/Node3D" unique_id=1512304565 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -0.19999981)
+
+[node name="WoodenBlock16" parent="Node3D2/Node3D" unique_id=184282555 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2.1999998)
+
+[node name="WoodenBlock17" parent="Node3D2/Node3D" unique_id=61580378 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2.1999998)
+
+[node name="WoodenBlock18" parent="Node3D2/Node3D" unique_id=2121721557 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1999998)
+
+[node name="WoodenBlock19" parent="Node3D2/Node3D" unique_id=357188453 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2.1999998)
+
+[node name="WoodenBlock20" parent="Node3D2/Node3D" unique_id=1050649674 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2.1999998)
+
+[node name="WoodenBlock21" parent="Node3D2/Node3D" unique_id=200082917 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4.2)
+
+[node name="WoodenBlock22" parent="Node3D2/Node3D" unique_id=352463151 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4.2)
+
+[node name="WoodenBlock23" parent="Node3D2/Node3D" unique_id=700324901 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.2)
+
+[node name="WoodenBlock24" parent="Node3D2/Node3D" unique_id=392170451 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4.2)
+
+[node name="WoodenBlock25" parent="Node3D2/Node3D" unique_id=860211325 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4.2)
+
+[node name="Node3D2" type="Node3D" parent="Node3D2" unique_id=1639184741]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.19999981)
+
+[node name="WoodenBlock" parent="Node3D2/Node3D2" unique_id=573573885 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3.8000002)
+
+[node name="WoodenBlock2" parent="Node3D2/Node3D2" unique_id=2135602357 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3.8000002)
+
+[node name="WoodenBlock3" parent="Node3D2/Node3D2" unique_id=1910028993 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.8000002)
+
+[node name="WoodenBlock4" parent="Node3D2/Node3D2" unique_id=1781055885 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3.8000002)
+
+[node name="WoodenBlock5" parent="Node3D2/Node3D2" unique_id=620486334 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3.8000002)
+
+[node name="WoodenBlock6" parent="Node3D2/Node3D2" unique_id=1285092485 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1.8000002)
+
+[node name="WoodenBlock7" parent="Node3D2/Node3D2" unique_id=1593457665 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1.8000002)
+
+[node name="WoodenBlock8" parent="Node3D2/Node3D2" unique_id=1885044760 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8000002)
+
+[node name="WoodenBlock9" parent="Node3D2/Node3D2" unique_id=1310189060 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.8000002)
+
+[node name="WoodenBlock10" parent="Node3D2/Node3D2" unique_id=1272971818 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1.8000002)
+
+[node name="WoodenBlock11" parent="Node3D2/Node3D2" unique_id=1275153885 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.19999981)
+
+[node name="WoodenBlock12" parent="Node3D2/Node3D2" unique_id=446683000 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -0.19999981)
+
+[node name="WoodenBlock13" parent="Node3D2/Node3D2" unique_id=1409492674 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19999981)
+
+[node name="WoodenBlock14" parent="Node3D2/Node3D2" unique_id=463028448 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -0.19999981)
+
+[node name="WoodenBlock15" parent="Node3D2/Node3D2" unique_id=482161612 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -0.19999981)
+
+[node name="WoodenBlock16" parent="Node3D2/Node3D2" unique_id=517882334 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2.1999998)
+
+[node name="WoodenBlock17" parent="Node3D2/Node3D2" unique_id=1277807526 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2.1999998)
+
+[node name="WoodenBlock18" parent="Node3D2/Node3D2" unique_id=1769993475 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1999998)
+
+[node name="WoodenBlock19" parent="Node3D2/Node3D2" unique_id=155942826 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2.1999998)
+
+[node name="WoodenBlock20" parent="Node3D2/Node3D2" unique_id=1536967413 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2.1999998)
+
+[node name="WoodenBlock21" parent="Node3D2/Node3D2" unique_id=1071124775 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4.2)
+
+[node name="WoodenBlock22" parent="Node3D2/Node3D2" unique_id=1954772070 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4.2)
+
+[node name="WoodenBlock23" parent="Node3D2/Node3D2" unique_id=1495392459 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.2)
+
+[node name="WoodenBlock24" parent="Node3D2/Node3D2" unique_id=632962655 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4.2)
+
+[node name="WoodenBlock25" parent="Node3D2/Node3D2" unique_id=1600715210 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4.2)
+
+[node name="Node3D3" type="Node3D" parent="." unique_id=2097353618]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -19)
+
+[node name="Node3D" type="Node3D" parent="Node3D3" unique_id=888486160]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0.19999981)
+
+[node name="WoodenBlock" parent="Node3D3/Node3D" unique_id=287275394 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3.8000002)
+
+[node name="WoodenBlock2" parent="Node3D3/Node3D" unique_id=1058948705 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3.8000002)
+
+[node name="WoodenBlock3" parent="Node3D3/Node3D" unique_id=2122086292 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.8000002)
+
+[node name="WoodenBlock4" parent="Node3D3/Node3D" unique_id=1299777782 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3.8000002)
+
+[node name="WoodenBlock5" parent="Node3D3/Node3D" unique_id=1295359897 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3.8000002)
+
+[node name="WoodenBlock6" parent="Node3D3/Node3D" unique_id=767564244 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1.8000002)
+
+[node name="WoodenBlock7" parent="Node3D3/Node3D" unique_id=712548354 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1.8000002)
+
+[node name="WoodenBlock8" parent="Node3D3/Node3D" unique_id=1442107741 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8000002)
+
+[node name="WoodenBlock9" parent="Node3D3/Node3D" unique_id=1063752909 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.8000002)
+
+[node name="WoodenBlock10" parent="Node3D3/Node3D" unique_id=64185146 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1.8000002)
+
+[node name="WoodenBlock11" parent="Node3D3/Node3D" unique_id=785596408 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.19999981)
+
+[node name="WoodenBlock12" parent="Node3D3/Node3D" unique_id=853972568 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -0.19999981)
+
+[node name="WoodenBlock13" parent="Node3D3/Node3D" unique_id=54171443 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19999981)
+
+[node name="WoodenBlock14" parent="Node3D3/Node3D" unique_id=98401448 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -0.19999981)
+
+[node name="WoodenBlock15" parent="Node3D3/Node3D" unique_id=927071866 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -0.19999981)
+
+[node name="WoodenBlock16" parent="Node3D3/Node3D" unique_id=1778448580 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2.1999998)
+
+[node name="WoodenBlock17" parent="Node3D3/Node3D" unique_id=346547275 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2.1999998)
+
+[node name="WoodenBlock18" parent="Node3D3/Node3D" unique_id=1840705627 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1999998)
+
+[node name="WoodenBlock19" parent="Node3D3/Node3D" unique_id=1139267958 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2.1999998)
+
+[node name="WoodenBlock20" parent="Node3D3/Node3D" unique_id=417018115 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2.1999998)
+
+[node name="WoodenBlock21" parent="Node3D3/Node3D" unique_id=582189256 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4.2)
+
+[node name="WoodenBlock22" parent="Node3D3/Node3D" unique_id=1540645582 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4.2)
+
+[node name="WoodenBlock23" parent="Node3D3/Node3D" unique_id=468285106 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.2)
+
+[node name="WoodenBlock24" parent="Node3D3/Node3D" unique_id=877007899 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4.2)
+
+[node name="WoodenBlock25" parent="Node3D3/Node3D" unique_id=1133577232 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4.2)
+
+[node name="Node3D2" type="Node3D" parent="Node3D3" unique_id=1240972152]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.19999981)
+
+[node name="WoodenBlock" parent="Node3D3/Node3D2" unique_id=393282403 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3.8000002)
+
+[node name="WoodenBlock2" parent="Node3D3/Node3D2" unique_id=637303702 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3.8000002)
+
+[node name="WoodenBlock3" parent="Node3D3/Node3D2" unique_id=1917214193 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.8000002)
+
+[node name="WoodenBlock4" parent="Node3D3/Node3D2" unique_id=1266291245 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3.8000002)
+
+[node name="WoodenBlock5" parent="Node3D3/Node3D2" unique_id=436630178 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3.8000002)
+
+[node name="WoodenBlock6" parent="Node3D3/Node3D2" unique_id=695657517 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1.8000002)
+
+[node name="WoodenBlock7" parent="Node3D3/Node3D2" unique_id=1608523632 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1.8000002)
+
+[node name="WoodenBlock8" parent="Node3D3/Node3D2" unique_id=75852611 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8000002)
+
+[node name="WoodenBlock9" parent="Node3D3/Node3D2" unique_id=1757515863 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.8000002)
+
+[node name="WoodenBlock10" parent="Node3D3/Node3D2" unique_id=1109453078 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1.8000002)
+
+[node name="WoodenBlock11" parent="Node3D3/Node3D2" unique_id=103172613 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.19999981)
+
+[node name="WoodenBlock12" parent="Node3D3/Node3D2" unique_id=1930911232 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -0.19999981)
+
+[node name="WoodenBlock13" parent="Node3D3/Node3D2" unique_id=663550285 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19999981)
+
+[node name="WoodenBlock14" parent="Node3D3/Node3D2" unique_id=1939594505 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -0.19999981)
+
+[node name="WoodenBlock15" parent="Node3D3/Node3D2" unique_id=1723680533 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -0.19999981)
+
+[node name="WoodenBlock16" parent="Node3D3/Node3D2" unique_id=643821821 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2.1999998)
+
+[node name="WoodenBlock17" parent="Node3D3/Node3D2" unique_id=1113862744 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2.1999998)
+
+[node name="WoodenBlock18" parent="Node3D3/Node3D2" unique_id=2039531861 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1999998)
+
+[node name="WoodenBlock19" parent="Node3D3/Node3D2" unique_id=1255160864 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2.1999998)
+
+[node name="WoodenBlock20" parent="Node3D3/Node3D2" unique_id=256330488 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2.1999998)
+
+[node name="WoodenBlock21" parent="Node3D3/Node3D2" unique_id=1494916926 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4.2)
+
+[node name="WoodenBlock22" parent="Node3D3/Node3D2" unique_id=1279856851 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4.2)
+
+[node name="WoodenBlock23" parent="Node3D3/Node3D2" unique_id=192476650 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.2)
+
+[node name="WoodenBlock24" parent="Node3D3/Node3D2" unique_id=1472574650 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4.2)
+
+[node name="WoodenBlock25" parent="Node3D3/Node3D2" unique_id=2090686100 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4.2)
+
+[node name="Node3D4" type="Node3D" parent="." unique_id=590914938]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, -19)
+
+[node name="Node3D" type="Node3D" parent="Node3D4" unique_id=1772128572]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0.19999981)
+
+[node name="WoodenBlock" parent="Node3D4/Node3D" unique_id=1848531401 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3.8000002)
+
+[node name="WoodenBlock2" parent="Node3D4/Node3D" unique_id=995834243 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3.8000002)
+
+[node name="WoodenBlock3" parent="Node3D4/Node3D" unique_id=499910709 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.8000002)
+
+[node name="WoodenBlock4" parent="Node3D4/Node3D" unique_id=1776696331 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3.8000002)
+
+[node name="WoodenBlock5" parent="Node3D4/Node3D" unique_id=485782975 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3.8000002)
+
+[node name="WoodenBlock6" parent="Node3D4/Node3D" unique_id=1552427200 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1.8000002)
+
+[node name="WoodenBlock7" parent="Node3D4/Node3D" unique_id=180499904 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1.8000002)
+
+[node name="WoodenBlock8" parent="Node3D4/Node3D" unique_id=1990226863 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8000002)
+
+[node name="WoodenBlock9" parent="Node3D4/Node3D" unique_id=1064813130 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.8000002)
+
+[node name="WoodenBlock10" parent="Node3D4/Node3D" unique_id=1651867998 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1.8000002)
+
+[node name="WoodenBlock11" parent="Node3D4/Node3D" unique_id=1410472032 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.19999981)
+
+[node name="WoodenBlock12" parent="Node3D4/Node3D" unique_id=468242666 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -0.19999981)
+
+[node name="WoodenBlock13" parent="Node3D4/Node3D" unique_id=871044999 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19999981)
+
+[node name="WoodenBlock14" parent="Node3D4/Node3D" unique_id=1984104029 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -0.19999981)
+
+[node name="WoodenBlock15" parent="Node3D4/Node3D" unique_id=625988163 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -0.19999981)
+
+[node name="WoodenBlock16" parent="Node3D4/Node3D" unique_id=456317014 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2.1999998)
+
+[node name="WoodenBlock17" parent="Node3D4/Node3D" unique_id=23747744 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2.1999998)
+
+[node name="WoodenBlock18" parent="Node3D4/Node3D" unique_id=1433653223 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1999998)
+
+[node name="WoodenBlock19" parent="Node3D4/Node3D" unique_id=1073245968 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2.1999998)
+
+[node name="WoodenBlock20" parent="Node3D4/Node3D" unique_id=1978518171 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2.1999998)
+
+[node name="WoodenBlock21" parent="Node3D4/Node3D" unique_id=432619011 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4.2)
+
+[node name="WoodenBlock22" parent="Node3D4/Node3D" unique_id=1576627925 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4.2)
+
+[node name="WoodenBlock23" parent="Node3D4/Node3D" unique_id=656047003 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.2)
+
+[node name="WoodenBlock24" parent="Node3D4/Node3D" unique_id=1489766676 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4.2)
+
+[node name="WoodenBlock25" parent="Node3D4/Node3D" unique_id=1713090141 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4.2)
+
+[node name="Node3D2" type="Node3D" parent="Node3D4" unique_id=1606099171]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.19999981)
+
+[node name="WoodenBlock" parent="Node3D4/Node3D2" unique_id=1163984881 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3.8000002)
+
+[node name="WoodenBlock2" parent="Node3D4/Node3D2" unique_id=1207952930 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3.8000002)
+
+[node name="WoodenBlock3" parent="Node3D4/Node3D2" unique_id=1861005430 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.8000002)
+
+[node name="WoodenBlock4" parent="Node3D4/Node3D2" unique_id=538936065 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3.8000002)
+
+[node name="WoodenBlock5" parent="Node3D4/Node3D2" unique_id=175078445 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3.8000002)
+
+[node name="WoodenBlock6" parent="Node3D4/Node3D2" unique_id=1998638120 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1.8000002)
+
+[node name="WoodenBlock7" parent="Node3D4/Node3D2" unique_id=537387151 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1.8000002)
+
+[node name="WoodenBlock8" parent="Node3D4/Node3D2" unique_id=825940183 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8000002)
+
+[node name="WoodenBlock9" parent="Node3D4/Node3D2" unique_id=1901653415 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.8000002)
+
+[node name="WoodenBlock10" parent="Node3D4/Node3D2" unique_id=1182419709 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1.8000002)
+
+[node name="WoodenBlock11" parent="Node3D4/Node3D2" unique_id=1428089193 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.19999981)
+
+[node name="WoodenBlock12" parent="Node3D4/Node3D2" unique_id=1478775105 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -0.19999981)
+
+[node name="WoodenBlock13" parent="Node3D4/Node3D2" unique_id=1536419827 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19999981)
+
+[node name="WoodenBlock14" parent="Node3D4/Node3D2" unique_id=1642454058 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -0.19999981)
+
+[node name="WoodenBlock15" parent="Node3D4/Node3D2" unique_id=374080441 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -0.19999981)
+
+[node name="WoodenBlock16" parent="Node3D4/Node3D2" unique_id=561080284 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2.1999998)
+
+[node name="WoodenBlock17" parent="Node3D4/Node3D2" unique_id=1041146044 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2.1999998)
+
+[node name="WoodenBlock18" parent="Node3D4/Node3D2" unique_id=1680572902 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1999998)
+
+[node name="WoodenBlock19" parent="Node3D4/Node3D2" unique_id=2022305349 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2.1999998)
+
+[node name="WoodenBlock20" parent="Node3D4/Node3D2" unique_id=291827339 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2.1999998)
+
+[node name="WoodenBlock21" parent="Node3D4/Node3D2" unique_id=1587616203 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4.2)
+
+[node name="WoodenBlock22" parent="Node3D4/Node3D2" unique_id=1445965052 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4.2)
+
+[node name="WoodenBlock23" parent="Node3D4/Node3D2" unique_id=1538154198 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.2)
+
+[node name="WoodenBlock24" parent="Node3D4/Node3D2" unique_id=647009599 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4.2)
+
+[node name="WoodenBlock25" parent="Node3D4/Node3D2" unique_id=2112241379 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4.2)
+
+[node name="Node3D5" type="Node3D" parent="." unique_id=2084580349]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, -19)
+
+[node name="Node3D" type="Node3D" parent="Node3D5" unique_id=1202707477]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0.19999981)
+
+[node name="WoodenBlock" parent="Node3D5/Node3D" unique_id=1069478365 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3.8000002)
+
+[node name="WoodenBlock2" parent="Node3D5/Node3D" unique_id=1381972760 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3.8000002)
+
+[node name="WoodenBlock3" parent="Node3D5/Node3D" unique_id=216591769 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.8000002)
+
+[node name="WoodenBlock4" parent="Node3D5/Node3D" unique_id=1572349472 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3.8000002)
+
+[node name="WoodenBlock5" parent="Node3D5/Node3D" unique_id=130470908 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3.8000002)
+
+[node name="WoodenBlock6" parent="Node3D5/Node3D" unique_id=2102705232 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1.8000002)
+
+[node name="WoodenBlock7" parent="Node3D5/Node3D" unique_id=186008698 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1.8000002)
+
+[node name="WoodenBlock8" parent="Node3D5/Node3D" unique_id=1442186510 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8000002)
+
+[node name="WoodenBlock9" parent="Node3D5/Node3D" unique_id=1161950827 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.8000002)
+
+[node name="WoodenBlock10" parent="Node3D5/Node3D" unique_id=1348543443 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1.8000002)
+
+[node name="WoodenBlock11" parent="Node3D5/Node3D" unique_id=1506852032 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.19999981)
+
+[node name="WoodenBlock12" parent="Node3D5/Node3D" unique_id=830308605 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -0.19999981)
+
+[node name="WoodenBlock13" parent="Node3D5/Node3D" unique_id=495224052 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19999981)
+
+[node name="WoodenBlock14" parent="Node3D5/Node3D" unique_id=79131269 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -0.19999981)
+
+[node name="WoodenBlock15" parent="Node3D5/Node3D" unique_id=119656605 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -0.19999981)
+
+[node name="WoodenBlock16" parent="Node3D5/Node3D" unique_id=1491623455 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2.1999998)
+
+[node name="WoodenBlock17" parent="Node3D5/Node3D" unique_id=1053491960 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2.1999998)
+
+[node name="WoodenBlock18" parent="Node3D5/Node3D" unique_id=880637484 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1999998)
+
+[node name="WoodenBlock19" parent="Node3D5/Node3D" unique_id=1310899424 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2.1999998)
+
+[node name="WoodenBlock20" parent="Node3D5/Node3D" unique_id=558997566 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2.1999998)
+
+[node name="WoodenBlock21" parent="Node3D5/Node3D" unique_id=82255903 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4.2)
+
+[node name="WoodenBlock22" parent="Node3D5/Node3D" unique_id=560275804 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4.2)
+
+[node name="WoodenBlock23" parent="Node3D5/Node3D" unique_id=1256747572 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.2)
+
+[node name="WoodenBlock24" parent="Node3D5/Node3D" unique_id=394547574 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4.2)
+
+[node name="WoodenBlock25" parent="Node3D5/Node3D" unique_id=645610762 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4.2)
+
+[node name="Node3D2" type="Node3D" parent="Node3D5" unique_id=570117715]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.19999981)
+
+[node name="WoodenBlock" parent="Node3D5/Node3D2" unique_id=1563095991 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3.8000002)
+
+[node name="WoodenBlock2" parent="Node3D5/Node3D2" unique_id=1506259030 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3.8000002)
+
+[node name="WoodenBlock3" parent="Node3D5/Node3D2" unique_id=7165816 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.8000002)
+
+[node name="WoodenBlock4" parent="Node3D5/Node3D2" unique_id=327499356 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3.8000002)
+
+[node name="WoodenBlock5" parent="Node3D5/Node3D2" unique_id=165956408 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3.8000002)
+
+[node name="WoodenBlock6" parent="Node3D5/Node3D2" unique_id=815552878 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1.8000002)
+
+[node name="WoodenBlock7" parent="Node3D5/Node3D2" unique_id=1674564278 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1.8000002)
+
+[node name="WoodenBlock8" parent="Node3D5/Node3D2" unique_id=802667974 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8000002)
+
+[node name="WoodenBlock9" parent="Node3D5/Node3D2" unique_id=229539084 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.8000002)
+
+[node name="WoodenBlock10" parent="Node3D5/Node3D2" unique_id=2048029805 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1.8000002)
+
+[node name="WoodenBlock11" parent="Node3D5/Node3D2" unique_id=2035338276 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.19999981)
+
+[node name="WoodenBlock12" parent="Node3D5/Node3D2" unique_id=2069133780 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -0.19999981)
+
+[node name="WoodenBlock13" parent="Node3D5/Node3D2" unique_id=777239832 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19999981)
+
+[node name="WoodenBlock14" parent="Node3D5/Node3D2" unique_id=577540274 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -0.19999981)
+
+[node name="WoodenBlock15" parent="Node3D5/Node3D2" unique_id=1039613438 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -0.19999981)
+
+[node name="WoodenBlock16" parent="Node3D5/Node3D2" unique_id=1991596510 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2.1999998)
+
+[node name="WoodenBlock17" parent="Node3D5/Node3D2" unique_id=1740568787 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2.1999998)
+
+[node name="WoodenBlock18" parent="Node3D5/Node3D2" unique_id=820153801 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1999998)
+
+[node name="WoodenBlock19" parent="Node3D5/Node3D2" unique_id=997559294 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2.1999998)
+
+[node name="WoodenBlock20" parent="Node3D5/Node3D2" unique_id=2046271711 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2.1999998)
+
+[node name="WoodenBlock21" parent="Node3D5/Node3D2" unique_id=1726465434 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4.2)
+
+[node name="WoodenBlock22" parent="Node3D5/Node3D2" unique_id=463899309 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4.2)
+
+[node name="WoodenBlock23" parent="Node3D5/Node3D2" unique_id=688615136 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.2)
+
+[node name="WoodenBlock24" parent="Node3D5/Node3D2" unique_id=1892152445 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4.2)
+
+[node name="WoodenBlock25" parent="Node3D5/Node3D2" unique_id=892369757 instance=ExtResource("21_pg3d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4.2)
+
+[node name="Node" type="Node" parent="." unique_id=58827972]
+script = ExtResource("8_iw3ip")

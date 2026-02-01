@@ -13,13 +13,14 @@
 [ext_resource type="PackedScene" uid="uid://n7lq77k1s5k6" path="res://entities/special/unstable_block.tscn" id="9_33b6x"]
 [ext_resource type="Script" uid="uid://ctg4eljyhams3" path="res://scripts/Framecounter.gd" id="10_33b6x"]
 [ext_resource type="Script" uid="uid://r8gd6nldjyjs" path="res://scripts/npcs/enemies/snowball/generic.gd" id="13_akcju"]
-[ext_resource type="PackedScene" uid="uid://b61lj5p7p1spc" path="res://entities/interactive/bonus_block.tscn" id="14_owoh6"]
+[ext_resource type="PackedScene" uid="uid://b61lj5p7p1spc" path="res://entities/interactive/blocks/extends/coins/CoinBlock.tscn" id="14_owoh6"]
 [ext_resource type="Texture2D" uid="uid://cf8f38qhjhbsg" path="res://textures/orange_empty.png" id="15_7ynjx"]
 [ext_resource type="Texture2D" uid="uid://dkcmvof2w81f7" path="res://textures/purple_empty.png" id="15_rkm6k"]
 [ext_resource type="Texture2D" uid="uid://78rxsah4ddx2" path="res://textures/orange-0.png" id="16_06ue2"]
 [ext_resource type="Texture2D" uid="uid://bm70mflgmeu1l" path="res://textures/purple-0.png" id="16_vuyj7"]
 [ext_resource type="PackedScene" uid="uid://ccuo1f5km66sq" path="res://entities/interactive/coin.tscn" id="19_06ue2"]
-[ext_resource type="PackedScene" uid="uid://d1n057rotli5v" path="res://entities/interactive/explode_bonus_block.tscn" id="21_vuyj7"]
+[ext_resource type="PackedScene" uid="uid://b2r10k4tbwuid" path="res://entities/interactive/blocks/extends/WoodenBlock.tscn" id="21_ak1ch"]
+[ext_resource type="PackedScene" uid="uid://d1n057rotli5v" path="res://entities/interactive/blocks/extends/coins/ExplodeCoinsBlock.tscn" id="21_vuyj7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6seei"]
 sky_top_color = Color(0.3019608, 0.5058824, 0.8039216, 1)
@@ -563,7 +564,7 @@ script = ExtResource("8_bmnvl")
 [node name="Area3D" type="Area3D" parent="." unique_id=475702118]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -29)
 collision_layer = 4
-collision_mask = 15
+collision_mask = 14
 script = ExtResource("5_35xd0")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Area3D" unique_id=1301389790]
@@ -597,7 +598,7 @@ attenuation_filter_cutoff_hz = 20500.0
 [node name="Area3D2" type="Area3D" parent="." unique_id=1477468384]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -52)
 collision_layer = 4
-collision_mask = 15
+collision_mask = 14
 script = SubResource("GDScript_akcju")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=224224684]
@@ -745,10 +746,12 @@ coins = 2
 [node name="BonusBlock5" parent="." unique_id=882929346 instance=ExtResource("14_owoh6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 20, -38.25)
 coins = 0
+is_usable = false
 
 [node name="BonusBlock6" parent="." unique_id=99690186 instance=ExtResource("14_owoh6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 20, -38.25)
 coins = 0
+is_usable = false
 
 [node name="BonusBlock7" parent="." unique_id=934162436 instance=ExtResource("14_owoh6")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -6.000001, 24.249998)
@@ -780,6 +783,39 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.7,
 
 [node name="ExplodeBonusBlock2" parent="." unique_id=1424025412 instance=ExtResource("21_vuyj7")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.8, 5.25, 44.5)
+
+[node name="ExplodeBonusBlock3" parent="." unique_id=527745184 instance=ExtResource("21_vuyj7")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.050000012, -7.25, 15)
+
+[node name="WoodenBlock" parent="." unique_id=1376171848 instance=ExtResource("21_ak1ch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -2)
+
+[node name="WoodenBlock2" parent="." unique_id=738620462 instance=ExtResource("21_ak1ch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -2)
+
+[node name="WoodenBlock3" parent="." unique_id=615100633 instance=ExtResource("21_ak1ch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 8, -2)
+
+[node name="WoodenBlock4" parent="." unique_id=1219838564 instance=ExtResource("21_ak1ch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 8, -3.5)
+
+[node name="WoodenBlock5" parent="." unique_id=203372334 instance=ExtResource("21_ak1ch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -3.5)
+
+[node name="WoodenBlock6" parent="." unique_id=138385698 instance=ExtResource("21_ak1ch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 8, -3.5)
+
+[node name="WoodenBlock7" parent="." unique_id=1874034927 instance=ExtResource("21_ak1ch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 8, -2)
+
+[node name="WoodenBlock8" parent="." unique_id=665506444 instance=ExtResource("21_ak1ch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 8, -0.5)
+
+[node name="WoodenBlock9" parent="." unique_id=157208629 instance=ExtResource("21_ak1ch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -0.5)
+
+[node name="WoodenBlock10" parent="." unique_id=2121281397 instance=ExtResource("21_ak1ch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 8, -0.5)
 
 [connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
 [connection signal="body_entered" from="Area3D2" to="Area3D2" method="_on_body_entered"]

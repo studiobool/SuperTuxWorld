@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cquvqtch7ygcr"]
+
+[ext_resource type="Texture2D" uid="uid://qio4yxmdjgbj" path="res://textures/brick0.png" id="1_wn2bu"]
+
+[resource]
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("1_wn2bu")
+uv1_scale = Vector3(0.675, 0.675, 0.675)
+uv1_offset = Vector3(-0.5, -0.5, -0.5)
+uv1_triplanar = true

@@ -1,4 +1,3 @@
-@tool
 class_name ExplodeBonusBlock extends BonusBlock
 
 const exploding_coins = preload("res://entities/interactive/exploding_coins.tscn")
@@ -6,6 +5,9 @@ const exploding_coins = preload("res://entities/interactive/exploding_coins.tscn
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	_apply_material()
+
+func _process(_delta: float) -> void:
 	_apply_material()
 
 func is_hit(body, hit):
@@ -18,4 +20,3 @@ func is_hit(body, hit):
 		sound.play()
 		add_child(instance)
 		is_usable = false
-		_apply_material()
