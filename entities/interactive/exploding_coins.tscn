@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dl30su4kxff0k"]
 
 [ext_resource type="ArrayMesh" uid="uid://nep1ggb30pam" path="res://models/coin/coin.obj" id="1_jrcdb"]
-[ext_resource type="Script" uid="uid://caivu06kgpdk2" path="res://scripts/interactive/bonus_extend/PhysCoin.gd" id="1_qyqnv"]
+[ext_resource type="Script" uid="uid://caivu06kgpdk2" path="res://scripts/interactive/PhysCoin.gd" id="1_qyqnv"]
 [ext_resource type="AudioStream" uid="uid://b0oyjjlhu3rmw" path="res://sounds/coin.wav" id="2_umvub"]
 [ext_resource type="Script" uid="uid://cix1m632p80gp" path="res://scripts/interactive/Coin.gd" id="3_5oku1"]
 [ext_resource type="Script" uid="uid://xkl8igiu6fg7" path="res://scripts/ExplodeForce.gd" id="3_lwgo2"]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b61lj5p7p1spc"]
 
-[ext_resource type="Script" uid="uid://1in0bsqb658g" path="res://scripts/interactive/bonus_extend/CoinBlock.gd" id="1_ehfnw"]
+[ext_resource type="Script" uid="uid://1in0bsqb658g" path="res://scripts/interactive/interact_extend/bonus_extend/CoinBlock.gd" id="1_ehfnw"]
 [ext_resource type="Material" uid="uid://dx3xb3or5f7bo" path="res://materials/empty_bonus_block.tres" id="2_skbnm"]
 [ext_resource type="Material" uid="uid://qsnvpe3brhhr" path="res://materials/full_bonus_block.tres" id="3_5pfr1"]
 [ext_resource type="AudioStream" uid="uid://b0oyjjlhu3rmw" path="res://sounds/coin.wav" id="4_j0857"]
