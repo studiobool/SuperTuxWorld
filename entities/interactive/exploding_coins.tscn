@@ -1,0 +1,391 @@
+[gd_scene format=3 uid="uid://dl30su4kxff0k"]
+
+[ext_resource type="ArrayMesh" uid="uid://nep1ggb30pam" path="res://models/coin/coin.obj" id="1_jrcdb"]
+[ext_resource type="Script" uid="uid://caivu06kgpdk2" path="res://scripts/interactive/bonus_extend/PhysCoin.gd" id="1_qyqnv"]
+[ext_resource type="AudioStream" uid="uid://b0oyjjlhu3rmw" path="res://sounds/coin.wav" id="2_umvub"]
+[ext_resource type="Script" uid="uid://cix1m632p80gp" path="res://scripts/interactive/Coin.gd" id="3_5oku1"]
+[ext_resource type="Script" uid="uid://xkl8igiu6fg7" path="res://scripts/ExplodeForce.gd" id="3_lwgo2"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qyqnv"]
+bounce = 0.25
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_aitf6"]
+height = 0.167
+radius = 0.42584997
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5oku1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1h64e"]
+radius = 1.0
+
+[node name="Node3D" type="Node3D" unique_id=1639463832]
+
+[node name="PhysCoin" type="RigidBody3D" parent="." unique_id=14015069]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999998, 0, 0, 0)
+collision_layer = 256
+collision_mask = 319
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+continuous_cd = true
+linear_velocity = Vector3(0, 12, 0)
+angular_damp = 0.5
+script = ExtResource("1_qyqnv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin" unique_id=175862560]
+mesh = ExtResource("1_jrcdb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin" unique_id=833092303]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_aitf6")
+
+[node name="Coin" type="Area3D" parent="PhysCoin" unique_id=174786375 node_paths=PackedStringArray("mesh")]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("3_5oku1")
+mesh = NodePath("../MeshInstance3D")
+rotate = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin/Coin" unique_id=470523358]
+shape = SubResource("SphereShape3D_5oku1")
+
+[node name="CoinSound" type="AudioStreamPlayer3D" parent="PhysCoin/Coin" unique_id=1430643858]
+stream = ExtResource("2_umvub")
+unit_size = 5.0
+max_polyphony = 4
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="PhysCoin2" type="RigidBody3D" parent="." unique_id=601178173]
+transform = Transform3D(0.9999999, 0, 0, 0, -4.3711385e-08, 0.9999998, 0, -0.9999998, -4.3711378e-08, 0, 0, 0)
+collision_layer = 256
+collision_mask = 319
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+continuous_cd = true
+linear_velocity = Vector3(0, 12, 0)
+angular_damp = 0.5
+script = ExtResource("1_qyqnv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin2" unique_id=1432543814]
+mesh = ExtResource("1_jrcdb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin2" unique_id=305895623]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_aitf6")
+
+[node name="Coin" type="Area3D" parent="PhysCoin2" unique_id=884378740 node_paths=PackedStringArray("mesh")]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("3_5oku1")
+mesh = NodePath("../MeshInstance3D")
+rotate = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin2/Coin" unique_id=751741625]
+shape = SubResource("SphereShape3D_5oku1")
+
+[node name="CoinSound" type="AudioStreamPlayer3D" parent="PhysCoin2/Coin" unique_id=1397588748]
+stream = ExtResource("2_umvub")
+unit_size = 5.0
+max_polyphony = 4
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="PhysCoin3" type="RigidBody3D" parent="." unique_id=2135712786]
+transform = Transform3D(-4.371138e-08, 0, 0.99999976, 0, 0.9999999, 0, -0.9999999, 0, -4.3711378e-08, 0, 0, 0)
+collision_layer = 256
+collision_mask = 319
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+continuous_cd = true
+linear_velocity = Vector3(0, 12, 0)
+angular_damp = 0.5
+script = ExtResource("1_qyqnv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin3" unique_id=46374549]
+mesh = ExtResource("1_jrcdb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin3" unique_id=345380301]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_aitf6")
+
+[node name="Coin" type="Area3D" parent="PhysCoin3" unique_id=340490629 node_paths=PackedStringArray("mesh")]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("3_5oku1")
+mesh = NodePath("../MeshInstance3D")
+rotate = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin3/Coin" unique_id=579253513]
+shape = SubResource("SphereShape3D_5oku1")
+
+[node name="CoinSound" type="AudioStreamPlayer3D" parent="PhysCoin3/Coin" unique_id=698432408]
+stream = ExtResource("2_umvub")
+unit_size = 5.0
+max_polyphony = 4
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="PhysCoin4" type="RigidBody3D" parent="." unique_id=205343527]
+transform = Transform3D(-4.3711385e-08, -0.9999998, -4.371137e-08, 0, -4.3711374e-08, 0.99999976, -0.9999998, 4.3711378e-08, 1.9106848e-15, 0, 0, 0)
+collision_layer = 256
+collision_mask = 319
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+continuous_cd = true
+linear_velocity = Vector3(0, 12, 0)
+angular_damp = 0.5
+script = ExtResource("1_qyqnv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin4" unique_id=685531941]
+mesh = ExtResource("1_jrcdb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin4" unique_id=1281291299]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_aitf6")
+
+[node name="Coin" type="Area3D" parent="PhysCoin4" unique_id=1276695372 node_paths=PackedStringArray("mesh")]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("3_5oku1")
+mesh = NodePath("../MeshInstance3D")
+rotate = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin4/Coin" unique_id=450911799]
+shape = SubResource("SphereShape3D_5oku1")
+
+[node name="CoinSound" type="AudioStreamPlayer3D" parent="PhysCoin4/Coin" unique_id=934250940]
+stream = ExtResource("2_umvub")
+unit_size = 5.0
+max_polyphony = 4
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="PhysCoin5" type="RigidBody3D" parent="." unique_id=2097088425]
+transform = Transform3D(0.70710665, 0.70710665, 0, -0.7071067, 0.7071067, 0, 0, 0, 0.99999976, 0, 0, 0)
+collision_layer = 256
+collision_mask = 319
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+continuous_cd = true
+linear_velocity = Vector3(0, 12, 0)
+angular_damp = 0.5
+script = ExtResource("1_qyqnv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin5" unique_id=1591190964]
+mesh = ExtResource("1_jrcdb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin5" unique_id=1304776508]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_aitf6")
+
+[node name="Coin" type="Area3D" parent="PhysCoin5" unique_id=798336708 node_paths=PackedStringArray("mesh")]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("3_5oku1")
+mesh = NodePath("../MeshInstance3D")
+rotate = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin5/Coin" unique_id=118657893]
+shape = SubResource("SphereShape3D_5oku1")
+
+[node name="CoinSound" type="AudioStreamPlayer3D" parent="PhysCoin5/Coin" unique_id=787876402]
+stream = ExtResource("2_umvub")
+unit_size = 5.0
+max_polyphony = 4
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="PhysCoin6" type="RigidBody3D" parent="." unique_id=1780682556]
+transform = Transform3D(0.7071067, -3.0908613e-08, 0.70710665, -0.70710665, -3.090861e-08, 0.7071066, 0, -0.99999976, -4.3711367e-08, 0, 0, 0)
+collision_layer = 256
+collision_mask = 319
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+continuous_cd = true
+linear_velocity = Vector3(0, 12, 0)
+angular_damp = 0.5
+script = ExtResource("1_qyqnv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin6" unique_id=1825773928]
+mesh = ExtResource("1_jrcdb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin6" unique_id=541449108]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_aitf6")
+
+[node name="Coin" type="Area3D" parent="PhysCoin6" unique_id=1946211256 node_paths=PackedStringArray("mesh")]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("3_5oku1")
+mesh = NodePath("../MeshInstance3D")
+rotate = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin6/Coin" unique_id=1814765127]
+shape = SubResource("SphereShape3D_5oku1")
+
+[node name="CoinSound" type="AudioStreamPlayer3D" parent="PhysCoin6/Coin" unique_id=221019000]
+stream = ExtResource("2_umvub")
+unit_size = 5.0
+max_polyphony = 4
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="PhysCoin7" type="RigidBody3D" parent="." unique_id=204157092]
+transform = Transform3D(-3.090861e-08, 0.7071067, 0.7071066, 3.090861e-08, 0.7071067, -0.7071066, -0.9999999, 0, -4.3711374e-08, 0, 0, 0)
+collision_layer = 256
+collision_mask = 319
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+continuous_cd = true
+linear_velocity = Vector3(0, 12, 0)
+angular_damp = 0.5
+script = ExtResource("1_qyqnv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin7" unique_id=1971002128]
+mesh = ExtResource("1_jrcdb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin7" unique_id=1783184388]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_aitf6")
+
+[node name="Coin" type="Area3D" parent="PhysCoin7" unique_id=286118778 node_paths=PackedStringArray("mesh")]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("3_5oku1")
+mesh = NodePath("../MeshInstance3D")
+rotate = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin7/Coin" unique_id=1393961040]
+shape = SubResource("SphereShape3D_5oku1")
+
+[node name="CoinSound" type="AudioStreamPlayer3D" parent="PhysCoin7/Coin" unique_id=485343300]
+stream = ExtResource("2_umvub")
+unit_size = 5.0
+max_polyphony = 4
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="PhysCoin8" type="RigidBody3D" parent="." unique_id=996183147]
+transform = Transform3D(-3.090861e-08, -0.70710665, 0.7071065, 3.0908613e-08, 0.7071066, 0.70710665, -0.99999976, 4.371137e-08, 1.9106844e-15, 0, 0, 0)
+collision_layer = 256
+collision_mask = 319
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+continuous_cd = true
+linear_velocity = Vector3(0, 12, 0)
+angular_damp = 0.5
+script = ExtResource("1_qyqnv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin8" unique_id=1562229106]
+mesh = ExtResource("1_jrcdb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin8" unique_id=1116596491]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_aitf6")
+
+[node name="Coin" type="Area3D" parent="PhysCoin8" unique_id=2096412505 node_paths=PackedStringArray("mesh")]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("3_5oku1")
+mesh = NodePath("../MeshInstance3D")
+rotate = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin8/Coin" unique_id=1471899055]
+shape = SubResource("SphereShape3D_5oku1")
+
+[node name="CoinSound" type="AudioStreamPlayer3D" parent="PhysCoin8/Coin" unique_id=1170648978]
+stream = ExtResource("2_umvub")
+unit_size = 5.0
+max_polyphony = 4
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="PhysCoin9" type="RigidBody3D" parent="." unique_id=2117223187]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.70710653, 0.70710665, 0, -0.70710665, 0.70710653, 0, 0, 0)
+collision_layer = 256
+collision_mask = 319
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+continuous_cd = true
+linear_velocity = Vector3(0, 12, 0)
+angular_damp = 0.5
+script = ExtResource("1_qyqnv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin9" unique_id=1983052390]
+mesh = ExtResource("1_jrcdb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin9" unique_id=256958407]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_aitf6")
+
+[node name="Coin" type="Area3D" parent="PhysCoin9" unique_id=1505719920 node_paths=PackedStringArray("mesh")]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("3_5oku1")
+mesh = NodePath("../MeshInstance3D")
+rotate = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin9/Coin" unique_id=1475407038]
+shape = SubResource("SphereShape3D_5oku1")
+
+[node name="CoinSound" type="AudioStreamPlayer3D" parent="PhysCoin9/Coin" unique_id=1216885434]
+stream = ExtResource("2_umvub")
+unit_size = 5.0
+max_polyphony = 4
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="PhysCoin10" type="RigidBody3D" parent="." unique_id=1147496421]
+transform = Transform3D(0.9999999, 0, 0, 0, -0.7071067, 0.7071065, 0, -0.7071065, -0.7071067, 0, 0, 0)
+collision_layer = 256
+collision_mask = 319
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_qyqnv")
+continuous_cd = true
+linear_velocity = Vector3(0, 12, 0)
+angular_damp = 0.5
+script = ExtResource("1_qyqnv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PhysCoin10" unique_id=1305325608]
+mesh = ExtResource("1_jrcdb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin10" unique_id=957989973]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_aitf6")
+
+[node name="Coin" type="Area3D" parent="PhysCoin10" unique_id=82239677 node_paths=PackedStringArray("mesh")]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("3_5oku1")
+mesh = NodePath("../MeshInstance3D")
+rotate = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysCoin10/Coin" unique_id=1600908515]
+shape = SubResource("SphereShape3D_5oku1")
+
+[node name="CoinSound" type="AudioStreamPlayer3D" parent="PhysCoin10/Coin" unique_id=2068430078]
+stream = ExtResource("2_umvub")
+unit_size = 5.0
+max_polyphony = 4
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="Area3D3" type="Area3D" parent="." unique_id=877080308]
+collision_layer = 0
+collision_mask = 256
+collision_priority = 2.0
+script = ExtResource("3_lwgo2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D3" unique_id=895803160]
+shape = SubResource("SphereShape3D_1h64e")
+
+[connection signal="body_entered" from="PhysCoin/Coin" to="PhysCoin/Coin" method="_on_body_entered"]
+[connection signal="body_entered" from="PhysCoin2/Coin" to="PhysCoin2/Coin" method="_on_body_entered"]
+[connection signal="body_entered" from="PhysCoin3/Coin" to="PhysCoin3/Coin" method="_on_body_entered"]
+[connection signal="body_entered" from="PhysCoin4/Coin" to="PhysCoin4/Coin" method="_on_body_entered"]
+[connection signal="body_entered" from="PhysCoin5/Coin" to="PhysCoin5/Coin" method="_on_body_entered"]
+[connection signal="body_entered" from="PhysCoin6/Coin" to="PhysCoin6/Coin" method="_on_body_entered"]
+[connection signal="body_entered" from="PhysCoin7/Coin" to="PhysCoin7/Coin" method="_on_body_entered"]
+[connection signal="body_entered" from="PhysCoin8/Coin" to="PhysCoin8/Coin" method="_on_body_entered"]
+[connection signal="body_entered" from="PhysCoin9/Coin" to="PhysCoin9/Coin" method="_on_body_entered"]
+[connection signal="body_entered" from="PhysCoin10/Coin" to="PhysCoin10/Coin" method="_on_body_entered"]

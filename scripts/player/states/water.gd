@@ -14,10 +14,10 @@ func physics_update(delta: float) -> void:
 	player.water_collision.global_rotation = player.model.global_rotation + Vector3.MODEL_LEFT
 	
 	if Input.is_action_pressed("sprint"):
-		player.SPEED = player.SPRINT * 1.25
+		player.speed = player.SPRINT * 1.25
 		player.is_sprinting = true
 	else:
-		player.SPEED = player.WALK * 1.25
+		player.speed = player.WALK * 1.25
 		player.is_sprinting = false
 	
 	# Get the input direction and handle the movement/deceleration.
@@ -26,20 +26,20 @@ func physics_update(delta: float) -> void:
 	player.direction = (player.transform.basis * Vector3(input_dir.x, 0, input_dir.y))
 	player.direction = player.direction.rotated(Vector3.UP, player.camera.camera.global_rotation.y)
 	var friction : Vector2
-	friction.x = (player.ACCEL if player.direction.x else player.DECCEL) * delta
-	friction.y = (player.ACCEL if player.direction.z else player.DECCEL) * delta
+	friction.x = (player.acceleration if player.direction.x else player.deceleration) * delta
+	friction.y = (player.acceleration if player.direction.z else player.deceleration) * delta
 	if player.direction:
-		player.velocity.x = lerp(player.velocity.x, player.direction.x * player.SPEED, friction.x)
-		player.velocity.z = lerp(player.velocity.z, player.direction.z * player.SPEED, friction.y)
+		player.velocity.x = lerp(player.velocity.x, player.direction.x * player.speed, friction.x)
+		player.velocity.z = lerp(player.velocity.z, player.direction.z * player.speed, friction.y)
 	else:
 		player.velocity.x = lerp(player.velocity.x, 0.0, friction.x)
 		player.velocity.z = lerp(player.velocity.z, 0.0, friction.y)
 	
 	# Handle jump.
 	player.direction.y = Input.get_axis("crawl", "jump")
-	var vertical_friction = (player.ACCEL if player.direction.y else player.DECCEL) * delta
+	var vertical_friction = (player.acceleration if player.direction.y else player.deceleration) * delta
 	if player.direction.y:
-		player.velocity.y = lerp(player.velocity.y, player.direction.y * player.SPEED, vertical_friction)
+		player.velocity.y = lerp(player.velocity.y, player.direction.y * player.speed, vertical_friction)
 	else:
 		player.velocity.y = lerp(player.velocity.y, 0.0, vertical_friction)
 	

@@ -1,9 +1,9 @@
-[gd_scene format=3 uid="uid://b61lj5p7p1spc"]
+[gd_scene format=3 uid="uid://d1n057rotli5v"]
 
-[ext_resource type="Script" uid="uid://1in0bsqb658g" path="res://scripts/interactive/bonus_extend/CoinBlock.gd" id="1_ehfnw"]
-[ext_resource type="Material" uid="uid://dx3xb3or5f7bo" path="res://materials/empty_bonus_block.tres" id="2_skbnm"]
-[ext_resource type="Material" uid="uid://qsnvpe3brhhr" path="res://materials/full_bonus_block.tres" id="3_5pfr1"]
-[ext_resource type="AudioStream" uid="uid://b0oyjjlhu3rmw" path="res://sounds/coin.wav" id="4_j0857"]
+[ext_resource type="Script" uid="uid://bsdkd268t5v6h" path="res://scripts/interactive/bonus_extend/ExplodeCoinBlock.gd" id="1_b1h2g"]
+[ext_resource type="Material" uid="uid://dx3xb3or5f7bo" path="res://materials/empty_bonus_block.tres" id="2_00t3l"]
+[ext_resource type="Material" uid="uid://qsnvpe3brhhr" path="res://materials/full_bonus_block.tres" id="3_opj8l"]
+[ext_resource type="AudioStream" uid="uid://b0oyjjlhu3rmw" path="res://sounds/coin.wav" id="4_iyt0o"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bmnvl"]
 size = Vector3(1.5, 1.5, 1.5)
@@ -109,20 +109,20 @@ _data = {
 &"hit_below": SubResource("Animation_rkm6k")
 }
 
-[node name="BonusBlock" type="StaticBody3D" unique_id=613419284 node_paths=PackedStringArray("mesh")]
+[node name="ExplodeBonusBlock" type="StaticBody3D" unique_id=613419284 node_paths=PackedStringArray("mesh")]
 collision_layer = 5
 collision_mask = 15
-script = ExtResource("1_ehfnw")
+script = ExtResource("1_b1h2g")
 mesh = NodePath("MeshInstance3D")
-empty_mat = ExtResource("2_skbnm")
-full_mat = ExtResource("3_5pfr1")
+empty_mat = ExtResource("2_00t3l")
+full_mat = ExtResource("3_opj8l")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1214806408]
 shape = SubResource("BoxShape3D_bmnvl")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=617522294]
 mesh = SubResource("BoxMesh_owoh6")
-surface_material_override/0 = ExtResource("3_5pfr1")
+surface_material_override/0 = ExtResource("3_opj8l")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1000279701]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
@@ -151,7 +151,7 @@ shape = SubResource("BoxShape3D_xd3sr")
 debug_color = Color(0, 0.5950001, 0.7, 1)
 
 [node name="CoinSound" type="AudioStreamPlayer3D" parent="." unique_id=1354539798]
-stream = ExtResource("4_j0857")
+stream = ExtResource("4_iyt0o")
 unit_size = 5.0
 max_polyphony = 4
 bus = &"SFX"

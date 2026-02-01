@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="1_78b5r"]
 [ext_resource type="Script" uid="uid://cd7fcjsu2tl1e" path="res://debug_level.gd" id="3_gm6wi"]
-[ext_resource type="Script" uid="uid://dkmhw5ine7hk8" path="res://scripts/player/camera.gd" id="3_vulod"]
+[ext_resource type="Script" uid="uid://dkmhw5ine7hk8" path="res://scripts/player/Camera.gd" id="3_vulod"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_axgwx"]
 transparency = 1

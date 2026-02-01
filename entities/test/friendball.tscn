@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dgrddbfla8pos"]
 
-[ext_resource type="Script" uid="uid://ofe1ev0520hi" path="res://scripts/physound_test.gd" id="1_tkj4i"]
+[ext_resource type="Script" uid="uid://ofe1ev0520hi" path="res://scripts/PhysoundTest.gd" id="1_tkj4i"]
 [ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="2_2ovkb"]
-[ext_resource type="Script" uid="uid://b4qifsiug0k06" path="res://scripts/simple_rotate.gd" id="3_q2wmj"]
+[ext_resource type="Script" uid="uid://b4qifsiug0k06" path="res://scripts/SimpleRotate.gd" id="3_q2wmj"]
 [ext_resource type="AudioStream" uid="uid://boo20cqsuovhg" path="res://sounds/boing.ogg" id="4_vwuv1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_35xd0"]

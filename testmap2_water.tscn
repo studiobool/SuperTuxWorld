@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="1_jayvn"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_o1jsc"]
-[ext_resource type="Script" uid="uid://cu2mwjdhr8tay" path="res://scripts/player/movement.gd" id="3_sbv3e"]
-[ext_resource type="Script" uid="uid://oqd32ap8ky63" path="res://scripts/player/interact.gd" id="4_kmq6a"]
-[ext_resource type="Script" uid="uid://dkmhw5ine7hk8" path="res://scripts/player/camera.gd" id="5_vqeva"]
+[ext_resource type="Script" uid="uid://cu2mwjdhr8tay" path="res://scripts/player/Movement.gd" id="3_sbv3e"]
+[ext_resource type="Script" uid="uid://oqd32ap8ky63" path="res://scripts/player/Interact.gd" id="4_kmq6a"]
+[ext_resource type="Script" uid="uid://dkmhw5ine7hk8" path="res://scripts/player/Camera.gd" id="5_vqeva"]
 [ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="6_pan4k"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="7_xw562"]
 [ext_resource type="Script" uid="uid://cd7fcjsu2tl1e" path="res://debug_level.gd" id="8_0nh6t"]

@@ -3,7 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://gtf2msqqqws6" path="res://music/placeholder/sunset.ogg" id="1_persd"]
 [ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="3_uoylk"]
 [ext_resource type="FontFile" uid="uid://cgcreoeye0gaf" path="res://fonts/SuperTux-Medium.ttf" id="5_usvl8"]
-[ext_resource type="Script" uid="uid://ctg4eljyhams3" path="res://scripts/fps.gd" id="6_d42xk"]
+[ext_resource type="Script" uid="uid://ctg4eljyhams3" path="res://scripts/Framecounter.gd" id="6_d42xk"]
 [ext_resource type="PackedScene" uid="uid://d1x8iynxnf8th" path="res://entities/player/player.tscn" id="6_mqdj3"]
 [ext_resource type="Script" uid="uid://cd7fcjsu2tl1e" path="res://debug_level.gd" id="7_gtvc3"]
 

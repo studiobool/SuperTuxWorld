@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://clipe71g8mne1" path="res://theme/supertux.tres" id="1_yow63"]
 [ext_resource type="Texture2D" uid="uid://bhab70nvljhht" path="res://images/menu/frame.png" id="2_15mky"]
 [ext_resource type="PackedScene" uid="uid://bwgeqim2wihbd" path="res://loading_hole.tscn" id="3_fx0a5"]
-[ext_resource type="Script" uid="uid://dwo3p8g7qf2s6" path="res://scripts/test_menu.gd" id="3_j7aup"]
+[ext_resource type="Script" uid="uid://dwo3p8g7qf2s6" path="res://scripts/TestMenu.gd" id="3_j7aup"]
 
 [node name="Control" type="Control" unique_id=338083596]
 layout_mode = 3
@@ -96,6 +96,7 @@ vertical_alignment = 2
 [node name="Control" parent="." unique_id=799532373 instance=ExtResource("3_fx0a5")]
 visible = false
 layout_mode = 1
+time = 0.375
 
 [connection signal="timeout" from="Panel/VBoxContainer/Timer" to="Panel/VBoxContainer" method="_on_timer_timeout"]
 [connection signal="pressed" from="Panel/VBoxContainer/Button" to="Panel/VBoxContainer" method="select_level" binds= ["res://testmap2.tscn"]]

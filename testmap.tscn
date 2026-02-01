@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="1_8sejj"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_xqgq3"]
-[ext_resource type="Script" uid="uid://oqd32ap8ky63" path="res://scripts/player/interact.gd" id="4_wg0fn"]
+[ext_resource type="Script" uid="uid://oqd32ap8ky63" path="res://scripts/player/Interact.gd" id="4_wg0fn"]
 [ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="6_akcju"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="7_a8kll"]
 [ext_resource type="Script" uid="uid://cd7fcjsu2tl1e" path="res://debug_level.gd" id="8_bmnvl"]

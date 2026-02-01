@@ -1,7 +1,8 @@
 @tool
 extends BonusBlock
 
-@export var coins : int = 1
+var coins : int = 1
+const exploding_coins = preload("res://entities/interactive/exploding_coins.tscn")
 @export var mesh : MeshInstance3D
 @export var empty_mat : StandardMaterial3D
 @export var full_mat : StandardMaterial3D
@@ -23,12 +24,14 @@ func _process(_delta: float) -> void:
 	_apply_material()
 
 func _block_hit(body, hit):
-	print(body)
-	if coins >= 1:
+	if coins:
+		var instance = exploding_coins.instantiate()
 		if hit == "below":
 			animation.play("hit_below")
+			instance.position.y = 1.0
 		elif hit == "above":
 			animation.play("hit_above")
+			instance.position.y = -1.0
 		sound.play()
-		body.stats.coins += 1
+		add_child(instance)
 		coins -= 1

@@ -8,9 +8,12 @@ func _on_body_entered(body: Node3D) -> void:
 	bounce_sound.play()
 	if body is RigidBody3D:
 		body.apply_impulse(bounce_power * body.mass)
-	if body.has_method("jump"):
-		body.if_jumped = true
-		if body.holding_jump:
-			body.jump(bounce_power)
+	if body is CharacterBody3D:
+		if body is Player:
+			body.if_jumped = true
+			if body.holding_jump:
+				body.jump(bounce_power)
+			else:
+				body.jump(bounce_power / 1.25)
 		else:
 			body.jump(bounce_power / 1.25)

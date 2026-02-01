@@ -1,23 +1,34 @@
 class_name Player extends StairsCharacterBody3D
 
-var direction: Vector3
+# Movement constants
 const WALK = 6.5
 const SPRINT = 13.5
 const CRAWL = 3.25
-var SPEED = 6.0
-var ACCEL = 3.75
-var DECCEL = 3.75
 const DEFAULT_ACCEL = 3.75
 const ICE_ACCEL = 1.25
-const ICE_DECCEL = 1.25
-var JUMP_VELOCITY = 18.0
+const ICE_DECEL = 0.75
+const MIN_POUND_THRESHOLD := -18.0
+
+# Movement stuff
+var direction: Vector3
+var move_dir:= Vector3.BACK
+var speed: float
+var acceleration: float = 3.75
+var deceleration: float = 3.75
+var jump_velocity: float = 18.0
+
+# Movement booleans
 var is_sprinting : bool
 var holding_jump: bool
 var if_jumped: bool
 var if_pound: bool
+var has_pounded_floor: bool
 
-@export var player_rotation :float
-@export var camera_rotation :Vector2 = Vector2(-22.5, 0)
+# Ready variables
+@export var player_rotation: float
+@export var camera_rotation: Vector2 = Vector2(-22.5, 0)
+
+# Nodes
 @onready var camera = $Camera
 @onready var model = $Model
 @onready var interact = $InteractionSystem
@@ -25,28 +36,39 @@ var if_pound: bool
 @onready var stats = $Stats
 @onready var power = $Powerup
 
-var move_dir := Vector3.BACK
-
+# Collision nodes
 @onready var stand_collision = $StandCollision
 @onready var crawl_collision = $CrawlCollision
-@onready var object_collision = $ObjectCollision
 @onready var water_collision = $WaterCollision
+
+# Detection nodes
 @onready var head_detection = $HeadDetection
 @onready var floor_detection = $FloorDetection
 @onready var edge_detection = $Model/EdgeDetection
 @onready var water_detection = $WaterDetection
 
-@export var coyote_time: float = 0.15
+# Coyote time variables
+@export var coyote_time: float = 0.1
 @export var coyote_float: float = 0.05
 var coyote_timer: float = 0.0
 
+# Jump buffer variables
+@export var jump_buffer_time: float = 0.2
+var jump_buffer_timer: float = 0.0
+var jump_buffer_pressed: bool
+
+# HUD nodes
 @onready var item_pocket = $HUD/ItemPocket
 @onready var coin_counter = $HUD/Label
+
+# Timer nodes
 @onready var safe_timer = $SafeTimer
+@onready var pound_timer = $PoundTimer
 var temp_safe : bool
 
 var state : String
 
+# Sets player and camera rotation (workaround)
 func _ready() -> void:
 	model.rotation.y = deg_to_rad(player_rotation)
 	camera.cam_rot2.x = deg_to_rad(camera_rotation.x)
@@ -55,11 +77,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	item_pocket.value = stats.health
 	coin_counter.text = str(stats.coins)
-
-func _physics_process(delta: float) -> void:
-	super(delta)
-	object_collision.global_position = interact.marker.global_position
-	object_collision.global_rotation = interact.marker.global_rotation
 
 func hurt(damage,vector):
 	if !temp_safe:
@@ -95,3 +112,6 @@ func _push_away_rigid_bodies():
 
 func safe_timeout() -> void:
 	temp_safe = false
+
+func pound_timeout() -> void:
+	has_pounded_floor = false

@@ -4,10 +4,19 @@ extends Node3D
 @onready var raycast = $RayCast3D
 @onready var marker = $Marker3D
 @onready var marker2 = $Marker3D2
+@export var track : Node3D
+@export var object_collision: CollisionShape3D
 var object
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	if master.state == "Water":
+		marker.position.y = 0
+		marker2.position.y = 0
+	else:
+		marker.position.y = .75
+		marker2.position.y = .75
+	
 	# Drops object
 	if Input.is_action_just_pressed("interact") && object:
 		drop_object(master.velocity * object.mass)
@@ -32,15 +41,15 @@ func _process(_delta: float) -> void:
 					raycast.get_collider().freeze = true
 					object = raycast.get_collider()
 					object.get_node("CollisionShape3D").disabled = true
-					master.object_collision.shape = object.get_node("CollisionShape3D").shape
-					master.object_collision.disabled = false
+					object_collision.shape = object.get_node("CollisionShape3D").shape
+					object_collision.disabled = false
 
 func drop_object(force):
 	object.get_node("CollisionShape3D").disabled = false
 	# Some hack in case object collision hasn't been re-enabled
 	if object.get_node("CollisionShape3D").disabled == false:
 		object.freeze = false
-		master.object_collision.disabled = true
+		object_collision.disabled = true
 		object.apply_central_impulse(force)
 		object = null
 	else:
@@ -50,6 +59,9 @@ func drop_object(force):
 func _physics_process(_delta: float) -> void:
 	# Rotates in match with the character
 	global_rotation = master.model.global_rotation
+	object_collision.global_position = marker.global_position
+	object_collision.global_rotation = marker.global_rotation
 	if object:
 		object.global_position = marker.global_position
 		object.global_rotation = marker.global_rotation
+	

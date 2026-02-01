@@ -15,7 +15,7 @@ func _block_hit(body, hit: String):
 
 func hit_below(body: Node3D) -> void:
 	if body is Player:
-		if body.is_on_ceiling():
+		if body.is_on_ceiling() && body.velocity.y >= -1:
 			_block_hit(body, "below")
 
 func hit_above(body: Node3D) -> void:
@@ -25,7 +25,7 @@ func hit_above(body: Node3D) -> void:
 
 func hit_water(body: Node3D) -> void:
 	if body is Player:
-		if body.state == "Water" && body.velocity.length() >= 0.2 && body.is_sprinting:
+		if body.state == "Water" && body.velocity.length() >= 0.3 && body.is_sprinting:
 			print("w")
-			body.sfx._bricK()
+			body.sfx._brick()
 			_block_hit(body, "water")

@@ -4,6 +4,8 @@ extends Node3D
 @onready var springarm = $SpringArm3D
 @onready var marker = $SpringArm3D/Marker3D
 @onready var springpos = $SpringPos
+@onready var pos_min = $SpringPos/SpringPosMin
+@onready var pos_max = $SpringPos/SpringPosMax
 @onready var underwater = $Control
 @onready var master = self.get_parent()
 
@@ -36,14 +38,15 @@ func _physics_process(delta: float) -> void:
 	#cam_pos = camera.get_follow_offset()
 	#camera.global_position = lerp(camera.global_position, marker.global_position, delta * 8)
 	springarm.global_position.x = lerp(springarm.global_position.x, global_position.x, delta * 12)
-	springarm.global_position.y = lerp(springarm.global_position.y, springpos.global_position.y, delta * 10)
+	springarm.global_position.y = lerp(springarm.global_position.y, springpos.global_position.y, delta * 12)
+	springarm.global_position.y = clamp(springarm.global_position.y, pos_min.global_position.y, pos_max.global_position.y)
 	springarm.global_position.z = lerp(springarm.global_position.z, global_position.z, delta * 12)
 	camera.global_position = marker.global_position
 	camera.global_rotation = marker.global_rotation
 	springarm.rotation = cam_rot
 	cam_rot2.x = clampf(cam_rot2.x, deg_to_rad(-85), deg_to_rad(45))
 	
-	if !master.stand_collision.disabled:
+	if !master.stand_collision.disabled or !master.is_on_floor():
 		springpos.position.y = 0.5
 	elif master.is_on_floor() or master.state == "Water":
 		springpos.position.y = -0.5
