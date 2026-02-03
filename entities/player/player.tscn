@@ -15,22 +15,60 @@
 [ext_resource type="AudioStream" uid="uid://l0kbqkp078os" path="res://sounds/bigjump.wav" id="8_eyb6c"]
 [ext_resource type="Script" uid="uid://oqd32ap8ky63" path="res://scripts/player/Interact.gd" id="9_vewsg"]
 [ext_resource type="Script" uid="uid://b07ixsd6phtmf" path="res://scripts/player/Model.gd" id="10_2soq1"]
+[ext_resource type="Texture2D" uid="uid://dx7hwabbm4sxt" path="res://images/powerups/fire_flower-0.png" id="10_vewsg"]
 [ext_resource type="PackedScene" uid="uid://bpa2kd0vcjeyc" path="res://models/tux/tux4.glb" id="11_8q4fm"]
 [ext_resource type="AudioStream" uid="uid://cmg1epj5t1x50" path="res://sounds/hurt.wav" id="11_t1t22"]
+[ext_resource type="Texture2D" uid="uid://bqx2icrgmhfgl" path="res://images/powerups/fire_flower-2.png" id="11_wy7bt"]
+[ext_resource type="Texture2D" uid="uid://f1j4ac04w4uc" path="res://images/powerups/fire_flower-3.png" id="12_geky7"]
 [ext_resource type="Animation" uid="uid://dbkvj8vrlbcy2" path="res://models/tux/animations/Crawl Idle.res" id="12_np63p"]
 [ext_resource type="Animation" uid="uid://bkra8vftd6qfh" path="res://models/tux/animations/Crawl Walk.res" id="13_0eo6o"]
+[ext_resource type="Texture2D" uid="uid://2c183o6po84d" path="res://images/powerups/fire_flower-1.png" id="13_qwspa"]
+[ext_resource type="Texture2D" uid="uid://p5xa27od1ejv" path="res://images/powerups/air_flower-0.png" id="14_r633c"]
 [ext_resource type="Animation" uid="uid://cq8t7wb0jamtb" path="res://models/tux/animations/Default.res" id="14_ttr27"]
 [ext_resource type="Animation" uid="uid://bc5a5tgkjhirq" path="res://models/tux/animations/Fall.res" id="15_13wue"]
 [ext_resource type="AudioStream" uid="uid://beeo1q7wkrn53" path="res://sounds/splash.wav" id="15_24ehl"]
 [ext_resource type="AudioStream" uid="uid://b6gwjw2myrfxn" path="res://sounds/brick.wav" id="15_bwdx1"]
+[ext_resource type="Texture2D" uid="uid://vwtr2ucrpmvs" path="res://images/powerups/air_flower-1.png" id="15_pacje"]
+[ext_resource type="Texture2D" uid="uid://crl4cckvy748h" path="res://images/powerups/air_flower-2.png" id="16_2h0qb"]
 [ext_resource type="Animation" uid="uid://daonfnlix7w74" path="res://models/tux/animations/Idle 1.res" id="16_wy7bt"]
 [ext_resource type="Animation" uid="uid://cxc17wsngvfmc" path="res://models/tux/animations/Idle 2.res" id="17_geky7"]
+[ext_resource type="Texture2D" uid="uid://b7nq1vne1ety5" path="res://images/powerups/air_flower-3.png" id="17_mmk7k"]
 [ext_resource type="Animation" uid="uid://cr6rqjsf72wkb" path="res://models/tux/animations/Jump.res" id="18_qwspa"]
 [ext_resource type="Animation" uid="uid://7nk1bjrg4pyi" path="res://models/tux/animations/Run.res" id="19_r633c"]
 [ext_resource type="Animation" uid="uid://8gcou08uldw7" path="res://models/tux/animations/Walk.res" id="20_pacje"]
 [ext_resource type="Script" uid="uid://dkmhw5ine7hk8" path="res://scripts/player/Camera.gd" id="21_2h0qb"]
 [ext_resource type="Animation" uid="uid://bqt151akxby6u" path="res://models/tux/animations/Swim Idle.res" id="27_gt4e4"]
 [ext_resource type="Animation" uid="uid://b2o4oo3owme8c" path="res://models/tux/animations/Swimming.res" id="28_24ehl"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_g3pa7"]
+frames = 6
+frame_0/texture = ExtResource("10_vewsg")
+frame_0/duration = 0.8
+frame_1/texture = ExtResource("11_wy7bt")
+frame_1/duration = 0.12
+frame_2/texture = ExtResource("11_wy7bt")
+frame_2/duration = 0.12
+frame_3/texture = ExtResource("12_geky7")
+frame_3/duration = 0.12
+frame_4/texture = ExtResource("11_wy7bt")
+frame_4/duration = 0.12
+frame_5/texture = ExtResource("13_qwspa")
+frame_5/duration = 0.12
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_7otdo"]
+frames = 6
+frame_0/texture = ExtResource("14_r633c")
+frame_0/duration = 0.8
+frame_1/texture = ExtResource("15_pacje")
+frame_1/duration = 0.12
+frame_2/texture = ExtResource("16_2h0qb")
+frame_2/duration = 0.12
+frame_3/texture = ExtResource("17_mmk7k")
+frame_3/duration = 0.12
+frame_4/texture = ExtResource("16_2h0qb")
+frame_4/duration = 0.12
+frame_5/texture = ExtResource("15_pacje")
+frame_5/duration = 0.12
 
 [sub_resource type="LabelSettings" id="LabelSettings_rlrdj"]
 font = ExtResource("5_wq0jh")
@@ -262,7 +300,7 @@ offset_bottom = 80.0
 texture = ExtResource("2_50fht")
 
 [node name="ItemPocket" type="TextureProgressBar" parent="HUD" unique_id=1915719387]
-self_modulate = Color(1, 1, 1, 0.49803922)
+modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
@@ -272,6 +310,42 @@ value = 75.0
 fill_mode = 5
 texture_under = ExtResource("3_wuv6x")
 texture_progress = ExtResource("4_qpopc")
+
+[node name="FireFlower" type="TextureRect" parent="HUD/ItemPocket" unique_id=778577575]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AnimatedTexture_g3pa7")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="AirFlower" type="TextureRect" parent="HUD/ItemPocket" unique_id=1449700330]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AnimatedTexture_7otdo")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="Label" type="Label" parent="HUD" unique_id=409299282]
 layout_mode = 1
