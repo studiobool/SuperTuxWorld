@@ -24,7 +24,7 @@ radius = 1.0
 [node name="PhysCoin" type="RigidBody3D" parent="." unique_id=14015069]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999998, 0, 0, 0)
 collision_layer = 256
-collision_mask = 319
+collision_mask = 305
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
 can_sleep = false
@@ -62,7 +62,7 @@ attenuation_filter_cutoff_hz = 20500.0
 [node name="PhysCoin2" type="RigidBody3D" parent="." unique_id=601178173]
 transform = Transform3D(0.9999999, 0, 0, 0, -4.3711385e-08, 0.9999998, 0, -0.9999998, -4.3711378e-08, 0, 0, 0)
 collision_layer = 256
-collision_mask = 319
+collision_mask = 305
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
 can_sleep = false
@@ -100,7 +100,7 @@ attenuation_filter_cutoff_hz = 20500.0
 [node name="PhysCoin3" type="RigidBody3D" parent="." unique_id=2135712786]
 transform = Transform3D(-4.371138e-08, 0, 0.99999976, 0, 0.9999999, 0, -0.9999999, 0, -4.3711378e-08, 0, 0, 0)
 collision_layer = 256
-collision_mask = 319
+collision_mask = 305
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
 can_sleep = false
@@ -138,7 +138,7 @@ attenuation_filter_cutoff_hz = 20500.0
 [node name="PhysCoin4" type="RigidBody3D" parent="." unique_id=205343527]
 transform = Transform3D(-4.3711385e-08, -0.9999998, -4.371137e-08, 0, -4.3711374e-08, 0.99999976, -0.9999998, 4.3711378e-08, 1.9106848e-15, 0, 0, 0)
 collision_layer = 256
-collision_mask = 319
+collision_mask = 305
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
 can_sleep = false
@@ -176,7 +176,7 @@ attenuation_filter_cutoff_hz = 20500.0
 [node name="PhysCoin5" type="RigidBody3D" parent="." unique_id=2097088425]
 transform = Transform3D(0.70710665, 0.70710665, 0, -0.7071067, 0.7071067, 0, 0, 0, 0.99999976, 0, 0, 0)
 collision_layer = 256
-collision_mask = 319
+collision_mask = 305
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
 can_sleep = false
@@ -214,7 +214,7 @@ attenuation_filter_cutoff_hz = 20500.0
 [node name="PhysCoin6" type="RigidBody3D" parent="." unique_id=1780682556]
 transform = Transform3D(0.7071067, -3.0908613e-08, 0.70710665, -0.70710665, -3.090861e-08, 0.7071066, 0, -0.99999976, -4.3711367e-08, 0, 0, 0)
 collision_layer = 256
-collision_mask = 319
+collision_mask = 305
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
 can_sleep = false
@@ -252,7 +252,7 @@ attenuation_filter_cutoff_hz = 20500.0
 [node name="PhysCoin7" type="RigidBody3D" parent="." unique_id=204157092]
 transform = Transform3D(-3.090861e-08, 0.7071067, 0.7071066, 3.090861e-08, 0.7071067, -0.7071066, -0.9999999, 0, -4.3711374e-08, 0, 0, 0)
 collision_layer = 256
-collision_mask = 319
+collision_mask = 305
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
 can_sleep = false
@@ -290,7 +290,7 @@ attenuation_filter_cutoff_hz = 20500.0
 [node name="PhysCoin8" type="RigidBody3D" parent="." unique_id=996183147]
 transform = Transform3D(-3.090861e-08, -0.70710665, 0.7071065, 3.0908613e-08, 0.7071066, 0.70710665, -0.99999976, 4.371137e-08, 1.9106844e-15, 0, 0, 0)
 collision_layer = 256
-collision_mask = 319
+collision_mask = 305
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
 can_sleep = false
@@ -328,7 +328,7 @@ attenuation_filter_cutoff_hz = 20500.0
 [node name="PhysCoin9" type="RigidBody3D" parent="." unique_id=2117223187]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.70710653, 0.70710665, 0, -0.70710665, 0.70710653, 0, 0, 0)
 collision_layer = 256
-collision_mask = 319
+collision_mask = 305
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
 can_sleep = false
@@ -366,7 +366,7 @@ attenuation_filter_cutoff_hz = 20500.0
 [node name="PhysCoin10" type="RigidBody3D" parent="." unique_id=1147496421]
 transform = Transform3D(0.9999999, 0, 0, 0, -0.7071067, 0.7071065, 0, -0.7071065, -0.7071067, 0, 0, 0)
 collision_layer = 256
-collision_mask = 319
+collision_mask = 305
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_qyqnv")
 can_sleep = false

@@ -1,15 +1,12 @@
 @tool
 class_name BonusBlock extends InteractBlock
 
+var tween
 @export var is_usable: bool = true
 @export var mesh: MeshInstance3D
 @export var empty_mat: StandardMaterial3D
 @export var full_mat: StandardMaterial3D
 @onready var animation = $AnimationPlayer
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	_apply_material()
 
 func _apply_material() -> void:
 	if is_usable:
@@ -24,10 +21,17 @@ func _process(_delta: float) -> void:
 func _block_hit(body, hit):
 	if is_usable:
 		if hit == "below":
-			animation.play("hit_below")
+			animate(Vector3(0, 0.3, 0))
 		elif hit == "above":
-			animation.play("hit_above")
+			animate(Vector3(0, -0.3, 0))
 		is_hit(body, hit)
 
 func is_hit(body, hit):
 	pass
+
+func animate(pos):
+	if tween:
+		tween.kill()
+	tween = create_tween()
+	tween.tween_property(mesh, "position", pos, 0.02)
+	tween.tween_property(mesh, "position", Vector3(0, 0, 0), 0.2)

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://botrdianktva8"
-path.bptc="res://.godot/imported/empty.png-4550676ddda09419c6eb3446d3130830.bptc.ctex"
+uid="uid://c04nvxo5d8bgu"
+path.bptc="res://.godot/imported/full-0.png-fd0aca65a548d0d747495badd651dcaf.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/empty.png"
-dest_files=["res://.godot/imported/empty.png-4550676ddda09419c6eb3446d3130830.bptc.ctex"]
+source_file="res://textures/bonus_block/blue/full-0.png"
+dest_files=["res://.godot/imported/full-0.png-fd0aca65a548d0d747495badd651dcaf.bptc.ctex"]
 
 [params]
 

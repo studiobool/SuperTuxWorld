@@ -1,0 +1,33 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dv87r68s1cq05"]
+
+[ext_resource type="Texture2D" uid="uid://bm70mflgmeu1l" path="res://textures/bonus_block/purple/purple-0.png" id="1_ah2iv"]
+[ext_resource type="Texture2D" uid="uid://gmo25gtwlbwm" path="res://textures/bonus_block/purple/purple-1.png" id="2_tb883"]
+[ext_resource type="Texture2D" uid="uid://dytpj0kjlrswc" path="res://textures/bonus_block/purple/purple-2.png" id="3_pkdg8"]
+[ext_resource type="Texture2D" uid="uid://dmcnr6w08167n" path="res://textures/bonus_block/purple/purple-3.png" id="4_e5uth"]
+[ext_resource type="Texture2D" uid="uid://qx1ng68bayxw" path="res://textures/bonus_block/purple/purple-4.png" id="5_0brgm"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_dyg62"]
+frames = 8
+frame_0/texture = ExtResource("1_ah2iv")
+frame_0/duration = 0.8
+frame_1/texture = ExtResource("2_tb883")
+frame_1/duration = 0.12
+frame_2/texture = ExtResource("3_pkdg8")
+frame_2/duration = 0.12
+frame_3/texture = ExtResource("4_e5uth")
+frame_3/duration = 0.12
+frame_4/texture = ExtResource("5_0brgm")
+frame_4/duration = 0.12
+frame_5/texture = ExtResource("4_e5uth")
+frame_5/duration = 0.12
+frame_6/texture = ExtResource("3_pkdg8")
+frame_6/duration = 0.12
+frame_7/texture = ExtResource("2_tb883")
+frame_7/duration = 0.12
+
+[resource]
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = SubResource("AnimatedTexture_dyg62")
+roughness = 0.1
+uv1_scale = Vector3(3, 2, 2)

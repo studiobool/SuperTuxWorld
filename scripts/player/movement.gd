@@ -74,7 +74,7 @@ func _ready() -> void:
 	camera.cam_rot2.x = deg_to_rad(camera_rotation.x)
 	camera.cam_rot2.y = deg_to_rad(camera_rotation.y)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	item_pocket.value = stats.health
 	coin_counter.text = str(stats.coins)
 
@@ -112,6 +112,3 @@ func _push_away_rigid_bodies():
 
 func safe_timeout() -> void:
 	temp_safe = false
-
-func pound_timeout() -> void:
-	has_pounded_floor = false

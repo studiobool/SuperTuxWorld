@@ -1,0 +1,33 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://qsnvpe3brhhr"]
+
+[ext_resource type="Texture2D" uid="uid://c04nvxo5d8bgu" path="res://textures/bonus_block/blue/full-0.png" id="1_w0cjx"]
+[ext_resource type="Texture2D" uid="uid://4bn6aedsc8tt" path="res://textures/bonus_block/blue/full-1.png" id="2_wd81h"]
+[ext_resource type="Texture2D" uid="uid://xi0v6d0u0sbb" path="res://textures/bonus_block/blue/full-2.png" id="3_tqswc"]
+[ext_resource type="Texture2D" uid="uid://6ce6cm2410om" path="res://textures/bonus_block/blue/full-3.png" id="4_n5vdu"]
+[ext_resource type="Texture2D" uid="uid://dugl07l05ijc7" path="res://textures/bonus_block/blue/full-4.png" id="5_nnvts"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_dmtdy"]
+frames = 8
+frame_0/texture = ExtResource("1_w0cjx")
+frame_0/duration = 0.8
+frame_1/texture = ExtResource("2_wd81h")
+frame_1/duration = 0.12
+frame_2/texture = ExtResource("3_tqswc")
+frame_2/duration = 0.12
+frame_3/texture = ExtResource("4_n5vdu")
+frame_3/duration = 0.12
+frame_4/texture = ExtResource("5_nnvts")
+frame_4/duration = 0.12
+frame_5/texture = ExtResource("4_n5vdu")
+frame_5/duration = 0.12
+frame_6/texture = ExtResource("3_tqswc")
+frame_6/duration = 0.12
+frame_7/texture = ExtResource("2_wd81h")
+frame_7/duration = 0.12
+
+[resource]
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = SubResource("AnimatedTexture_dmtdy")
+roughness = 0.1
+uv1_scale = Vector3(3, 2, 2)

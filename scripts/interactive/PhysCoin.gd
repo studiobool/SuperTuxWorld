@@ -6,13 +6,13 @@ extends RigidBody3D
 var old_vel : float
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !mesh.visible:
 		collision.disabled = true
 		freeze = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var diff = linear_velocity.y - old_vel
 	if diff > 1:
 		_play_audio()

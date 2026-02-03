@@ -10,7 +10,7 @@ size = Vector3(1.5, 1.5, 1.5)
 size = Vector3(1.5, 1.5, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xg2e1"]
-size = Vector3(1.49, 1.5, 1.49)
+size = Vector3(1.475, 0.1, 1.475)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vqn34"]
 size = Vector3(1.6, 1.6, 1.6)
@@ -27,23 +27,23 @@ shape = SubResource("BoxShape3D_87p0a")
 mesh = SubResource("BoxMesh_87p0a")
 surface_material_override/0 = ExtResource("2_87p0a")
 
-[node name="Area3D" type="Area3D" parent="." unique_id=1000279701]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+[node name="Area3D" type="Area3D" parent="." unique_id=1917714996]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
 collision_layer = 0
 collision_mask = 14
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1261027697]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=795720861]
 shape = SubResource("BoxShape3D_xg2e1")
 debug_color = Color(0, 0.5950001, 0.7, 1)
 
-[node name="Area3D2" type="Area3D" parent="." unique_id=752781959]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+[node name="Area3D2" type="Area3D" parent="." unique_id=1617406957]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 collision_layer = 0
 collision_mask = 14
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=1769521464]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=988063952]
 shape = SubResource("BoxShape3D_xg2e1")
 debug_color = Color(0, 0.5950001, 0.7, 1)
 

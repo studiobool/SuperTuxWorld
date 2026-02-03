@@ -61,6 +61,7 @@ script = ExtResource("3_j7aup")
 hole_transition = NodePath("../../Control")
 
 [node name="Timer" type="Timer" parent="Panel/VBoxContainer" unique_id=1124213921]
+wait_time = 0.75
 one_shot = true
 
 [node name="Button" type="Button" parent="Panel/VBoxContainer" unique_id=1674800477]

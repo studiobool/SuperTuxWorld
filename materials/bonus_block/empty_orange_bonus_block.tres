@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b70qfrw4mj1uu"]
+
+[ext_resource type="Texture2D" uid="uid://cf8f38qhjhbsg" path="res://textures/bonus_block/orange/orange_empty.png" id="1_2nlsb"]
+
+[resource]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("1_2nlsb")
+roughness = 0.1
+uv1_scale = Vector3(3, 2, 2)

@@ -35,13 +35,15 @@ func physics_update(delta: float) -> void:
 		player.if_pound = false
 	
 	if player.if_pound:
-		if player.is_on_floor():
+		if player.is_on_floor() && !player.has_pounded_floor:
 			player.has_pounded_floor = true
+			player.pound_timer.start()
 			player.jump(player.velocity + Vector3(0, 12, 0))
 			player.sfx._brick()
 	
-	if player.has_pounded_floor && !player.is_on_floor():
-		player.pound_timer.start()
+	if player.pound_timer.is_stopped():
+		if player.is_on_floor():
+			player.has_pounded_floor = false
 	
 	if not player.is_on_floor() && player.coyote_timer >= player.coyote_time:
 		if player.stand_collision.disabled && !player.has_pounded_floor:

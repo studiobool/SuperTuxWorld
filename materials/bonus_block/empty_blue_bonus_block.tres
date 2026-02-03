@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dx3xb3or5f7bo"]
+
+[ext_resource type="Texture2D" uid="uid://botrdianktva8" path="res://textures/bonus_block/blue/empty.png" id="1_5plm0"]
+
+[resource]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("1_5plm0")
+roughness = 0.1
+uv1_scale = Vector3(3, 2, 2)

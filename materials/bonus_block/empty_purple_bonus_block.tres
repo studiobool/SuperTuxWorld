@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://f37qhtbdbqkr"]
+
+[ext_resource type="Texture2D" uid="uid://dkcmvof2w81f7" path="res://textures/bonus_block/purple/purple_empty.png" id="1_dp6ao"]
+
+[resource]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("1_dp6ao")
+roughness = 0.1
+uv1_scale = Vector3(3, 2, 2)

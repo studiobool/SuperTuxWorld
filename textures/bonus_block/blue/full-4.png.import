@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cf8f38qhjhbsg"
-path.bptc="res://.godot/imported/orange_empty.png-3043393273a11284230172bd5f4feb7a.bptc.ctex"
+uid="uid://dugl07l05ijc7"
+path.bptc="res://.godot/imported/full-4.png-cdd7f3f9d70ff703dd61e89f3dd4c7a1.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/orange_empty.png"
-dest_files=["res://.godot/imported/orange_empty.png-3043393273a11284230172bd5f4feb7a.bptc.ctex"]
+source_file="res://textures/bonus_block/blue/full-4.png"
+dest_files=["res://.godot/imported/full-4.png-cdd7f3f9d70ff703dd61e89f3dd4c7a1.bptc.ctex"]
 
 [params]
 

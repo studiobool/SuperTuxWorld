@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if collision.disabled == true:
 		mesh.visible = false
 	else:
@@ -32,5 +32,5 @@ func _on_respawn_timer_timeout() -> void:
 	collision.disabled = false
 
 
-func _on_body_exited(body: Node3D) -> void:
+func _on_body_exited(_body: Node3D) -> void:
 	inside = false

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://d1n057rotli5v"]
 
 [ext_resource type="Script" uid="uid://bsdkd268t5v6h" path="res://scripts/interactive/interact_extend/bonus_extend/ExplodeCoinBlock.gd" id="1_b1h2g"]
-[ext_resource type="Material" uid="uid://dx3xb3or5f7bo" path="res://materials/empty_bonus_block.tres" id="2_00t3l"]
-[ext_resource type="Material" uid="uid://qsnvpe3brhhr" path="res://materials/full_bonus_block.tres" id="3_opj8l"]
+[ext_resource type="Material" uid="uid://dx3xb3or5f7bo" path="res://materials/bonus_block/empty_blue_bonus_block.tres" id="2_00t3l"]
+[ext_resource type="Material" uid="uid://qsnvpe3brhhr" path="res://materials/bonus_block/blue_bonus_block.tres" id="3_opj8l"]
 [ext_resource type="AudioStream" uid="uid://cjhhuqptyro4a" path="res://sounds/upgrade.wav" id="4_twjym"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bmnvl"]
@@ -12,7 +12,7 @@ size = Vector3(1.5, 1.5, 1.5)
 size = Vector3(1.5, 1.5, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_twjym"]
-size = Vector3(1.49, 1.5, 1.49)
+size = Vector3(1.475, 0.1, 1.475)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hldpc"]
 size = Vector3(1.55, 1.55, 1.55)
@@ -123,7 +123,7 @@ mesh = SubResource("BoxMesh_owoh6")
 surface_material_override/0 = ExtResource("3_opj8l")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1000279701]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
 collision_layer = 0
 collision_mask = 14
 monitorable = false
@@ -133,7 +133,7 @@ shape = SubResource("BoxShape3D_twjym")
 debug_color = Color(0, 0.5950001, 0.7, 1)
 
 [node name="Area3D2" type="Area3D" parent="." unique_id=752781959]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 collision_layer = 0
 collision_mask = 14
 monitorable = false

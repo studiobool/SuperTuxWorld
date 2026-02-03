@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dclkfs4he627e"]
 
 [ext_resource type="Script" uid="uid://bb8fo5pocb512" path="res://scripts/interactive/interact_extend/BonusBlock.gd" id="1_84ham"]
-[ext_resource type="Material" uid="uid://dx3xb3or5f7bo" path="res://materials/empty_bonus_block.tres" id="2_qjdql"]
-[ext_resource type="Material" uid="uid://qsnvpe3brhhr" path="res://materials/full_bonus_block.tres" id="3_cmyne"]
+[ext_resource type="Material" uid="uid://dx3xb3or5f7bo" path="res://materials/bonus_block/empty_blue_bonus_block.tres" id="2_qjdql"]
+[ext_resource type="Material" uid="uid://qsnvpe3brhhr" path="res://materials/bonus_block/blue_bonus_block.tres" id="3_cmyne"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bmnvl"]
 size = Vector3(1.5, 1.5, 1.5)

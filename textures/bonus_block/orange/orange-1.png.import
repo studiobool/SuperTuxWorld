@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c04nvxo5d8bgu"
-path.bptc="res://.godot/imported/full-0.png-89a9ad3473cb41785641aec2445225ac.bptc.ctex"
+uid="uid://npsk4moqwp0n"
+path.bptc="res://.godot/imported/orange-1.png-3af9fa684c385587e0d32156e77560fd.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/full-0.png"
-dest_files=["res://.godot/imported/full-0.png-89a9ad3473cb41785641aec2445225ac.bptc.ctex"]
+source_file="res://textures/bonus_block/orange/orange-1.png"
+dest_files=["res://.godot/imported/orange-1.png-3af9fa684c385587e0d32156e77560fd.bptc.ctex"]
 
 [params]
 

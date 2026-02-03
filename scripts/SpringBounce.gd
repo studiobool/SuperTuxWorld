@@ -11,6 +11,7 @@ func _on_body_entered(body: Node3D) -> void:
 	if body is CharacterBody3D:
 		if body is Player:
 			body.if_jumped = true
+			body.velocity.y = 0
 			if body.holding_jump:
 				body.jump(bounce_power)
 			else:

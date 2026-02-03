@@ -458,10 +458,9 @@ wait_time = 1.7999999999999998
 one_shot = true
 
 [node name="PoundTimer" type="Timer" parent="." unique_id=282680117]
-wait_time = 0.05
+wait_time = 0.1
 one_shot = true
 
 [connection signal="area_entered" from="Camera/Camera/Area3D" to="Camera" method="submerge"]
 [connection signal="area_exited" from="Camera/Camera/Area3D" to="Camera" method="emerge"]
 [connection signal="timeout" from="SafeTimer" to="." method="safe_timeout"]
-[connection signal="timeout" from="PoundTimer" to="." method="pound_timeout"]

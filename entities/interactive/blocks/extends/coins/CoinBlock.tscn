@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b61lj5p7p1spc"]
 
 [ext_resource type="Script" uid="uid://1in0bsqb658g" path="res://scripts/interactive/interact_extend/bonus_extend/CoinBlock.gd" id="1_ehfnw"]
-[ext_resource type="Material" uid="uid://dx3xb3or5f7bo" path="res://materials/empty_bonus_block.tres" id="2_skbnm"]
-[ext_resource type="Material" uid="uid://qsnvpe3brhhr" path="res://materials/full_bonus_block.tres" id="3_5pfr1"]
+[ext_resource type="Material" uid="uid://dx3xb3or5f7bo" path="res://materials/bonus_block/empty_blue_bonus_block.tres" id="2_skbnm"]
+[ext_resource type="Material" uid="uid://qsnvpe3brhhr" path="res://materials/bonus_block/blue_bonus_block.tres" id="3_5pfr1"]
 [ext_resource type="AudioStream" uid="uid://b0oyjjlhu3rmw" path="res://sounds/coin.wav" id="4_j0857"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bmnvl"]
@@ -11,8 +11,8 @@ size = Vector3(1.5, 1.5, 1.5)
 [sub_resource type="BoxMesh" id="BoxMesh_owoh6"]
 size = Vector3(1.5, 1.5, 1.5)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_owoh6"]
-size = Vector3(1.49, 1.5, 1.49)
+[sub_resource type="BoxShape3D" id="BoxShape3D_8qlkf"]
+size = Vector3(1.475, 0.1, 1.475)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xd3sr"]
 size = Vector3(1.55, 1.55, 1.55)
@@ -122,22 +122,24 @@ shape = SubResource("BoxShape3D_bmnvl")
 mesh = SubResource("BoxMesh_owoh6")
 surface_material_override/0 = ExtResource("3_5pfr1")
 
-[node name="Area3D" type="Area3D" parent="." unique_id=1000279701]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+[node name="Area3D" type="Area3D" parent="." unique_id=2002681280]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
 collision_layer = 0
 collision_mask = 14
+monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1261027697]
-shape = SubResource("BoxShape3D_owoh6")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1989639989]
+shape = SubResource("BoxShape3D_8qlkf")
 debug_color = Color(0, 0.5950001, 0.7, 1)
 
-[node name="Area3D2" type="Area3D" parent="." unique_id=752781959]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+[node name="Area3D2" type="Area3D" parent="." unique_id=2063085905]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 collision_layer = 0
 collision_mask = 14
+monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=780755760]
-shape = SubResource("BoxShape3D_owoh6")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=1592881983]
+shape = SubResource("BoxShape3D_8qlkf")
 debug_color = Color(0, 0.5950001, 0.7, 1)
 
 [node name="Area3D3" type="Area3D" parent="." unique_id=1473219905]
