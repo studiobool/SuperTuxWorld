@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://botrdianktva8" path="res://textures/bonus_block/blue/empty.png" id="1_5plm0"]
 
 [resource]
-transparency = 1
+transparency = 4
 diffuse_mode = 3
 specular_mode = 1
 albedo_texture = ExtResource("1_5plm0")

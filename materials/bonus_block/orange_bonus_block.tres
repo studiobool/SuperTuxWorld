@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://lwim6cd2cr06" path="res://textures/bonus_block/orange/orange-2.png" id="3_pvi2m"]
 [ext_resource type="Texture2D" uid="uid://bn63rhvqpjjls" path="res://textures/bonus_block/orange/orange-3.png" id="4_optne"]
 [ext_resource type="Texture2D" uid="uid://dkkqu1gupeedf" path="res://textures/bonus_block/orange/orange-4.png" id="5_tfv0d"]
+[ext_resource type="Texture2D" uid="uid://du0ygbybe8067" path="res://materials/bonus_block/glowing_texture.tres" id="6_7636x"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_ewrtj"]
 frames = 8
@@ -28,6 +29,10 @@ frame_7/duration = 0.12
 [resource]
 diffuse_mode = 3
 specular_mode = 1
+albedo_color = Color(0.9, 0.9, 0.9, 1)
 albedo_texture = SubResource("AnimatedTexture_ewrtj")
 roughness = 0.1
+emission_enabled = true
+emission_energy_multiplier = 0.5
+emission_texture = ExtResource("6_7636x")
 uv1_scale = Vector3(3, 2, 2)

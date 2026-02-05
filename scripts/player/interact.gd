@@ -29,7 +29,7 @@ func _process(_delta: float) -> void:
 		if throw_force:
 			drop_object((-knockback * throw_force) + (master.velocity * object.mass))
 		else:
-			drop_object((-knockback * object.mass * 6) + (master.velocity * object.mass))
+			drop_object((-knockback * object.mass * 8) + (master.velocity * object.mass))
 		marker.rotation = Vector3.ZERO
 	
 	# Detects if raycast finds object then if interacted grabs object

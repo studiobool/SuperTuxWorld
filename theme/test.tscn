@@ -66,16 +66,49 @@ one_shot = true
 
 [node name="Button" type="Button" parent="Panel/VBoxContainer" unique_id=1674800477]
 layout_mode = 2
+text = " "
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Button" unique_id=1799616913]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Testroom Prototype"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Button2" type="Button" parent="Panel/VBoxContainer" unique_id=1224347726]
 layout_mode = 2
+text = " "
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Button2" unique_id=1848412982]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Bowling Test"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Button3" type="Button" parent="Panel/VBoxContainer" unique_id=514697740]
 layout_mode = 2
-text = "Quit
+text = " 
 "
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Button3" unique_id=1753790518]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Label" type="Label" parent="." unique_id=1787980631]
 layout_mode = 1

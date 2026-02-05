@@ -27,6 +27,7 @@ var has_pounded_floor: bool
 # Ready variables
 @export var player_rotation: float
 @export var camera_rotation: Vector2 = Vector2(-22.5, 0)
+@export var camera_zoom: float = 5.0
 
 # Nodes
 @onready var camera = $Camera
@@ -49,7 +50,6 @@ var has_pounded_floor: bool
 
 # Coyote time variables
 @export var coyote_time: float = 0.1
-@export var coyote_float: float = 0.05
 var coyote_timer: float = 0.0
 
 # Jump buffer variables
@@ -73,6 +73,7 @@ func _ready() -> void:
 	model.rotation.y = deg_to_rad(player_rotation)
 	camera.cam_rot2.x = deg_to_rad(camera_rotation.x)
 	camera.cam_rot2.y = deg_to_rad(camera_rotation.y)
+	camera.zoom_level = camera_zoom
 
 func _process(_delta: float) -> void:
 	item_pocket.value = stats.health

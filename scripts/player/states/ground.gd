@@ -26,7 +26,7 @@ func physics_update(delta: float) -> void:
 	else:
 		gravity = player.get_gravity()
 	
-	if player.stand_collision.disabled:
+	if player.stand_collision.disabled && !player.has_pounded_floor:
 		if player.velocity.y <= player.MIN_POUND_THRESHOLD:
 			player.if_pound = true
 		elif player.velocity.y >= 0.1:
@@ -37,9 +37,9 @@ func physics_update(delta: float) -> void:
 	if player.if_pound:
 		if player.is_on_floor() && !player.has_pounded_floor:
 			player.has_pounded_floor = true
-			player.pound_timer.start()
 			player.jump(player.velocity + Vector3(0, 12, 0))
 			player.sfx._brick()
+			player.pound_timer.start()
 	
 	if player.pound_timer.is_stopped():
 		if player.is_on_floor():

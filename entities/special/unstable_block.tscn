@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://n7lq77k1s5k6"]
 
 [ext_resource type="Script" uid="uid://pbmmentbwb75" path="res://scripts/special/unstable.gd" id="1_ebmwq"]
+[ext_resource type="Texture2D" uid="uid://c5n4knln0hx45" path="res://textures/snow-0.png" id="2_g4nyk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8sejj"]
 size = Vector3(2.05, 2.05, 2.05)
@@ -10,6 +11,10 @@ size = Vector3(2, 2, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_owoh6"]
 size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6mj5"]
+albedo_texture = ExtResource("2_g4nyk")
+uv1_scale = Vector3(3, 2, 2)
 
 [node name="Unstable" type="Area3D" unique_id=2035534030]
 collision_mask = 15
@@ -26,6 +31,7 @@ shape = SubResource("BoxShape3D_bmnvl")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2" unique_id=1445058183]
 mesh = SubResource("BoxMesh_owoh6")
+surface_material_override/0 = SubResource("StandardMaterial3D_o6mj5")
 
 [node name="CrackTimer" type="Timer" parent="." unique_id=2025779386]
 wait_time = 0.3
