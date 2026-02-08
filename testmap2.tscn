@@ -5,12 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://bwgeqim2wihbd" path="res://loading_hole.tscn" id="1_wg0fn"]
 [ext_resource type="FontFile" uid="uid://cgcreoeye0gaf" path="res://fonts/SuperTux-Medium.ttf" id="3_xkjb2"]
 [ext_resource type="PackedScene" uid="uid://b18dvehhrjqsq" path="res://models/billboard/billboard.glb" id="4_8sejj"]
-[ext_resource type="Script" uid="uid://ja8m2wqk440i" path="res://scripts/SpringBounce.gd" id="5_35xd0"]
-[ext_resource type="AudioStream" uid="uid://dnhh3onmos53s" path="res://sounds/trampoline.wav" id="6_nsies"]
 [ext_resource type="PackedScene" uid="uid://d1x8iynxnf8th" path="res://entities/player/player.tscn" id="6_xkjb2"]
 [ext_resource type="Script" uid="uid://b1ecuy3ocp6yy" path="res://scripts/special/object.gd" id="7_ltrhx"]
 [ext_resource type="Script" uid="uid://cd7fcjsu2tl1e" path="res://debug_level.gd" id="8_bmnvl"]
 [ext_resource type="PackedScene" uid="uid://n7lq77k1s5k6" path="res://entities/special/unstable_block.tscn" id="9_33b6x"]
+[ext_resource type="PackedScene" uid="uid://b8ya88v2jc60e" path="res://entities/interactive/trampoline.tscn" id="9_vuyj7"]
 [ext_resource type="Script" uid="uid://ctg4eljyhams3" path="res://scripts/Framecounter.gd" id="10_33b6x"]
 [ext_resource type="Script" uid="uid://r8gd6nldjyjs" path="res://scripts/npcs/enemies/snowball/generic.gd" id="13_akcju"]
 [ext_resource type="PackedScene" uid="uid://b61lj5p7p1spc" path="res://entities/interactive/blocks/extends/coins/CoinBlock.tscn" id="14_owoh6"]
@@ -20,7 +19,7 @@
 [ext_resource type="Material" uid="uid://cshtmsc33m2wm" path="res://materials/bonus_block/orange_bonus_block.tres" id="18_ak1ch"]
 [ext_resource type="PackedScene" uid="uid://ccuo1f5km66sq" path="res://entities/interactive/coin.tscn" id="19_06ue2"]
 [ext_resource type="PackedScene" uid="uid://b2r10k4tbwuid" path="res://entities/interactive/blocks/extends/WoodenBlock.tscn" id="21_ak1ch"]
-[ext_resource type="Material" uid="uid://c7mtjk4tlka16" path="res://materials/wooden_brick.tres" id="21_c3e3f"]
+[ext_resource type="PackedScene" uid="uid://b1ndydiw062cn" path="res://entities/interactive/blocks/extends/coins/CoinWoodenBlock.tscn" id="21_c3e3f"]
 [ext_resource type="PackedScene" uid="uid://d1n057rotli5v" path="res://entities/interactive/blocks/extends/coins/ExplodeCoinsBlock.tscn" id="21_vuyj7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_06ue2"]
@@ -53,7 +52,6 @@ albedo_color = Color(0.5, 0.5, 0.5, 1)
 size = Vector3(21, 15, 21)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ynjx"]
-render_priority = 2
 transparency = 1
 cull_mode = 2
 albedo_color = Color(0, 0.24705882, 0.49803922, 0.49803922)
@@ -108,6 +106,8 @@ data = PackedVector3Array(3.8, 2.8, -0.39999998, 3.75, -1.1999999, -0.25, 3.8, -
 [sub_resource type="BoxMesh" id="BoxMesh_ov2oi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_35xd0"]
+stencil_flags = 2
+stencil_outline_thickness = 0.04
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nsies"]
 next_pass = SubResource("StandardMaterial3D_35xd0")
@@ -144,41 +144,18 @@ radius = 1.5
 radius = 1.5
 height = 3.0
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_fnhgr"]
-top_radius = 0.25
-bottom_radius = 0.25
-height = 0.525
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wg0fn"]
-albedo_color = Color(0.5, 0.5, 0.5, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_35xd0"]
-bottom_radius = 0.75
-height = 0.375
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ltrhx"]
-albedo_color = Color(1, 0.05882353, 0.12156863, 1)
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_fnhgr"]
-height = 0.875
-radius = 0.75
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_nsies"]
-height = 0.75
-radius = 0.7
-
 [sub_resource type="GDScript" id="GDScript_akcju"]
 script/source = "extends Area3D
 
 @export var knock_power : float = 25
 @export var damage : float = 25
 
-
-func _on_body_entered(body: Node3D) -> void:
-	if body.has_method(\"hurt\"):
-		var knockback = body.global_position - global_position
-		knockback = Vector3(knockback.x, knockback.y * 0.5, knockback.z)
-		body.hurt(damage,knockback * knock_power)
+func _process(_delta: float) -> void:
+	for body in get_overlapping_bodies():
+		if body.has_method(\"hurt\"):
+			var knockback = (body.global_position - global_position).normalized()
+			knockback = Vector3(knockback.x, knockback.y * 0.5, knockback.z)
+			body.hurt(damage,knockback * knock_power)
 "
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xd3sr"]
@@ -278,7 +255,7 @@ shape = SubResource("BoxShape3D_akcju")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D/CSGBox3D5/Area3D3" unique_id=861342024]
 cast_shadow = 0
-size = Vector3(21, 15, 21)
+size = Vector3(22, 15, 22)
 material = SubResource("StandardMaterial3D_7ynjx")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="CSGBox3D" unique_id=247231572]
@@ -506,39 +483,8 @@ mesh = SubResource("SphereMesh_rlrdj")
 [node name="Node" type="Node" parent="." unique_id=1799438230]
 script = ExtResource("8_bmnvl")
 
-[node name="Area3D" type="Area3D" parent="." unique_id=475702118]
+[node name="Trampoline" parent="." unique_id=1507155356 instance=ExtResource("9_vuyj7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -29)
-collision_layer = 4
-collision_mask = 14
-script = ExtResource("5_35xd0")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Area3D" unique_id=1301389790]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D/StaticBody3D" unique_id=1869289792]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
-mesh = SubResource("CylinderMesh_fnhgr")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_wg0fn")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Area3D/StaticBody3D" unique_id=1591844335]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
-mesh = SubResource("CylinderMesh_35xd0")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_ltrhx")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D/StaticBody3D" unique_id=2082863345]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4375, 0)
-shape = SubResource("CylinderShape3D_fnhgr")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1277993229]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
-shape = SubResource("CylinderShape3D_nsies")
-
-[node name="BounceSound" type="AudioStreamPlayer3D" parent="Area3D" unique_id=699839657]
-stream = ExtResource("6_nsies")
-unit_size = 20.0
-bus = &"SFX"
-attenuation_filter_cutoff_hz = 20500.0
 
 [node name="Area3D2" type="Area3D" parent="." unique_id=1477468384]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -52)
@@ -736,10 +682,8 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.8
 [node name="ExplodeBonusBlock3" parent="." unique_id=527745184 instance=ExtResource("21_vuyj7")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.050000012, -7.25, 15)
 
-[node name="CoinBlock" parent="." unique_id=1878790057 instance=ExtResource("14_owoh6")]
+[node name="CoinWoodenBlock" parent="." unique_id=1074212574 instance=ExtResource("21_c3e3f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
-coins = 5
-full_mat = ExtResource("21_c3e3f")
 
 [node name="WoodenBlock" parent="." unique_id=615100633 instance=ExtResource("21_ak1ch")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 7, 0)
@@ -765,5 +709,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 1.5)
 [node name="WoodenBlock8" parent="." unique_id=2121281397 instance=ExtResource("21_ak1ch")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 7, 1.5)
 
-[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
 [connection signal="body_entered" from="Area3D2" to="Area3D2" method="_on_body_entered"]

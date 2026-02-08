@@ -1,20 +1,31 @@
 extends Area3D
 
-@export var bounce_power : Vector3 = Vector3(0, 42.5, 0)
+var tween
+@export var bounce_power : float = 42.5
 @onready var bounce_sound = $BounceSound
-
+@onready var marker = $Marker3D
+@onready var mesh = $StaticBody3D/trampoline
 
 func _on_body_entered(body: Node3D) -> void:
 	bounce_sound.play()
+	animate(Vector3(1.25, .75, 1.25))
+	var force = (marker.global_position - global_position).normalized()
 	if body is RigidBody3D:
-		body.apply_impulse(bounce_power * body.mass)
+		body.apply_impulse(force * bounce_power * body.mass)
 	if body is CharacterBody3D:
 		if body is Player:
 			body.if_jumped = true
 			body.velocity.y = 0
 			if body.holding_jump:
-				body.jump(bounce_power)
+				body.jump(force * bounce_power)
 			else:
-				body.jump(bounce_power / 1.25)
+				body.jump(force * bounce_power / 1.375)
 		else:
-			body.jump(bounce_power / 1.25)
+			body.jump(force * bounce_power / 1.25)
+
+func animate(scale):
+	if tween:
+		tween.kill()
+	tween = create_tween()
+	tween.tween_property(mesh, "scale", scale, 0.015).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(mesh, "scale", Vector3(1, 1, 1), 0.15).set_trans(Tween.TRANS_SPRING)

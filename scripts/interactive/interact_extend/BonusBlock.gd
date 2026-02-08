@@ -4,8 +4,8 @@ class_name BonusBlock extends InteractBlock
 var tween
 @export var is_usable: bool = true
 @export var mesh: MeshInstance3D
-@export var empty_mat: StandardMaterial3D
-@export var full_mat: StandardMaterial3D
+@export var empty_mat: Material
+@export var full_mat: Material
 @onready var animation = $AnimationPlayer
 
 func _apply_material() -> void:

@@ -3,12 +3,20 @@
 [ext_resource type="Script" uid="uid://7l3nyrpk2acv" path="res://scripts/special/loading_hole.gd" id="1_mnf6c"]
 [ext_resource type="Texture2D" uid="uid://b4njexy18ssld" path="res://images/run_sheet_transparency.png" id="1_qicc2"]
 [ext_resource type="Script" uid="uid://1qgrp0fyjdi0" path="res://scripts/special/animation_loop.gd" id="2_mnf6c"]
+[ext_resource type="Texture2D" uid="uid://b4td4wj7grpue" path="res://images/run_loading/frame0.png" id="4_okxoj"]
+[ext_resource type="Texture2D" uid="uid://cwy16ylm6wbeq" path="res://images/run_loading/frame1.png" id="5_d130p"]
+[ext_resource type="Texture2D" uid="uid://8sk6tstpg15j" path="res://images/run_loading/frame2.png" id="6_oddon"]
+[ext_resource type="Texture2D" uid="uid://c5yqq1x6vu5uj" path="res://images/run_loading/frame3.png" id="7_je2i5"]
+[ext_resource type="Texture2D" uid="uid://c8nin5273wvfk" path="res://images/run_loading/frame4.png" id="8_4ubp1"]
+[ext_resource type="Texture2D" uid="uid://bfmo3obxo1cfe" path="res://images/run_loading/frame5.png" id="9_ejnxx"]
+[ext_resource type="Texture2D" uid="uid://d0308r0kts33t" path="res://images/run_loading/frame6.png" id="10_u7k20"]
+[ext_resource type="Texture2D" uid="uid://cmndjw3cem16o" path="res://images/run_loading/frame7.png" id="11_mjkqo"]
 
 [sub_resource type="Animation" id="Animation_mnf6c"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("Control:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -32,11 +40,35 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/path = NodePath("Control:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.75),
+"update": 0,
+"values": [Vector2(0.01, 0.01)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("TextureRect:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -48,7 +80,7 @@ resource_name = "hole-in"
 length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("Control:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -56,7 +88,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(0.75, 0.75),
 "update": 0,
-"values": [Vector2(100, 100), Vector2(0.2, 0.2)]
+"values": [Vector2(80, 80), Vector2(0.2, 0.2)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -72,7 +104,7 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/path = NodePath("Control:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
@@ -82,13 +114,37 @@ tracks/2/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("TextureRect:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(100, 100), Vector2(0.01, 0.01)]
+}
 
 [sub_resource type="Animation" id="Animation_4bbjm"]
 resource_name = "hole-out"
 length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("Control:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -96,7 +152,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(0.75, 1.25),
 "update": 0,
-"values": [Vector2(0.2, 0.2), Vector2(100, 100)]
+"values": [Vector2(0.2, 0.2), Vector2(80, 80)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -112,7 +168,7 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/path = NodePath("Control:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
@@ -122,6 +178,30 @@ tracks/2/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(0.01, 0.01), Vector2(100, 100)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("TextureRect:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.40000004, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4bbjm"]
 _data = {
@@ -129,6 +209,25 @@ _data = {
 &"hole-in": SubResource("Animation_qicc2"),
 &"hole-out": SubResource("Animation_4bbjm")
 }
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_840oh"]
+frames = 8
+frame_0/texture = ExtResource("4_okxoj")
+frame_0/duration = 0.06
+frame_1/texture = ExtResource("5_d130p")
+frame_1/duration = 0.06
+frame_2/texture = ExtResource("6_oddon")
+frame_2/duration = 0.06
+frame_3/texture = ExtResource("7_je2i5")
+frame_3/duration = 0.06
+frame_4/texture = ExtResource("8_4ubp1")
+frame_4/duration = 0.06
+frame_5/texture = ExtResource("9_ejnxx")
+frame_5/duration = 0.06
+frame_6/texture = ExtResource("10_u7k20")
+frame_6/duration = 0.06
+frame_7/texture = ExtResource("11_mjkqo")
+frame_7/duration = 0.06
 
 [node name="Control" type="Control" unique_id=896839796]
 layout_mode = 3
@@ -157,6 +256,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Control" type="Control" parent="." unique_id=1048950681]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -227,5 +327,71 @@ color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1991032408]
 libraries/ = SubResource("AnimationLibrary_4bbjm")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1318074606]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -80.0
+offset_right = 70.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.01, 0.01)
+pivot_offset = Vector2(70, 80)
+texture = SubResource("AnimatedTexture_840oh")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect" unique_id=460381175]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -84229.15
+offset_top = -30320.0
+offset_right = 0.8515625
+offset_bottom = 19920.0
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="TextureRect" unique_id=494137923]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -53520.0
+offset_right = 83630.0
+offset_bottom = 45520.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="TextureRect" unique_id=1917311047]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -81030.0
+offset_top = -58320.0
+offset_right = 2543.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="TextureRect" unique_id=1342828229]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -81030.0
+offset_right = 2583.0
+offset_bottom = 50320.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="animation_finished"]

@@ -8,4 +8,3 @@ diffuse_mode = 3
 specular_mode = 1
 albedo_texture = ExtResource("1_5plm0")
 roughness = 0.1
-uv1_scale = Vector3(3, 2, 2)

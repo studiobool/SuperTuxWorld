@@ -3,12 +3,10 @@
 [ext_resource type="Script" uid="uid://bsdkd268t5v6h" path="res://scripts/interactive/interact_extend/bonus_extend/ExplodeCoinBlock.gd" id="1_b1h2g"]
 [ext_resource type="Material" uid="uid://dx3xb3or5f7bo" path="res://materials/bonus_block/empty_blue_bonus_block.tres" id="2_00t3l"]
 [ext_resource type="Material" uid="uid://qsnvpe3brhhr" path="res://materials/bonus_block/blue_bonus_block.tres" id="3_opj8l"]
+[ext_resource type="ArrayMesh" uid="uid://cdvu0du2ri1io" path="res://models/bonus_block/block.obj" id="4_hldpc"]
 [ext_resource type="AudioStream" uid="uid://cjhhuqptyro4a" path="res://sounds/upgrade.wav" id="4_twjym"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bmnvl"]
-size = Vector3(1.5, 1.5, 1.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_owoh6"]
 size = Vector3(1.5, 1.5, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_twjym"]
@@ -119,7 +117,7 @@ full_mat = ExtResource("3_opj8l")
 shape = SubResource("BoxShape3D_bmnvl")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=617522294]
-mesh = SubResource("BoxMesh_owoh6")
+mesh = ExtResource("4_hldpc")
 surface_material_override/0 = ExtResource("3_opj8l")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1000279701]

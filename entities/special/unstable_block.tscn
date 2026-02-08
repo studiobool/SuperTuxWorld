@@ -14,7 +14,9 @@ size = Vector3(2, 2, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6mj5"]
 albedo_texture = ExtResource("2_g4nyk")
-uv1_scale = Vector3(3, 2, 2)
+uv1_scale = Vector3(0.455, 0.455, 0.455)
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
 
 [node name="Unstable" type="Area3D" unique_id=2035534030]
 collision_mask = 15

@@ -43,28 +43,31 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("zoom_far"):
 		zoom_level += zoom_factor
 
-func _physics_process(delta: float) -> void:
-	global_position = master.global_position + Vector3(0, 1, 0)
-	springarm.global_position.x = lerp(springarm.global_position.x, global_position.x, delta * 12)
-	springarm.global_position.y = lerp(springarm.global_position.y, springpos.global_position.y, delta * 12)
-	springarm.global_position.y = clamp(springarm.global_position.y, pos_min.global_position.y, pos_max.global_position.y)
-	springarm.global_position.z = lerp(springarm.global_position.z, global_position.z, delta * 12)
+func _process(_delta: float) -> void:
 	camera.global_position = marker.global_position
 	camera.global_rotation = marker.global_rotation
-	springarm.rotation = cam_rot
-	cam_rot2.x = clampf(cam_rot2.x, deg_to_rad(-85), deg_to_rad(45))
-	
-	zoom_level = clamp(zoom_level, min_zoom, max_zoom)
-	springarm.spring_length = lerp(springarm.spring_length, zoom_level, zoom_duration * delta)
 	
 	if !master.stand_collision.disabled or !master.is_on_floor():
 		springpos.position.y = 0.5
 	elif master.is_on_floor() or master.state == "Water":
 		springpos.position.y = -0.5
+
+func _physics_process(delta: float) -> void:
+	global_position = master.global_position + Vector3(0, 1, 0)
+	zoom_level = clamp(zoom_level, min_zoom, max_zoom)
+	
+	springarm.rotation = cam_rot
+	springarm.global_position.x = lerp(springarm.global_position.x, global_position.x, delta * 12)
+	springarm.global_position.y = lerp(springarm.global_position.y, springpos.global_position.y, delta * 12)
+	springarm.global_position.y = clamp(springarm.global_position.y, pos_min.global_position.y, pos_max.global_position.y)
+	springarm.global_position.z = lerp(springarm.global_position.z, global_position.z, delta * 12)
+	
+	springarm.spring_length = lerp(springarm.spring_length, zoom_level, zoom_duration * delta)
 	
 	cam_dir.x = Input.get_action_strength("cam_right") - Input.get_action_strength("cam_left")
 	cam_dir.y = Input.get_action_strength("cam_down") - Input.get_action_strength("cam_up")
 	cam_rot2.x += -cam_dir.y * 4 * delta
+	cam_rot2.x = clampf(cam_rot2.x, deg_to_rad(-90), deg_to_rad(45))
 	cam_rot2.y += -cam_dir.x * 4 * delta
 	cam_rot.x = lerp_angle(cam_rot.x, cam_rot2.x, delta * 12)
 	cam_rot.y = lerp_angle(cam_rot.y, cam_rot2.y, delta * 12)

@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://b8ya88v2jc60e"]
+
+[ext_resource type="Script" uid="uid://ja8m2wqk440i" path="res://scripts/SpringBounce.gd" id="1_xlnqb"]
+[ext_resource type="PackedScene" uid="uid://cb57xofb5a48c" path="res://models/trampoline.obj" id="2_l7xhk"]
+[ext_resource type="AudioStream" uid="uid://dnhh3onmos53s" path="res://sounds/trampoline.wav" id="3_1j6ef"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fnhgr"]
+height = 1.0
+radius = 0.625
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nsies"]
+height = 0.75
+radius = 0.6
+
+[node name="Trampoline" type="Area3D" unique_id=1507155356]
+collision_layer = 4
+collision_mask = 14
+script = ExtResource("1_xlnqb")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=175365]
+
+[node name="trampoline" parent="StaticBody3D" unique_id=236430667 instance=ExtResource("2_l7xhk")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=2011661422]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_fnhgr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1457322681]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+shape = SubResource("CylinderShape3D_nsies")
+
+[node name="BounceSound" type="AudioStreamPlayer3D" parent="." unique_id=660864715]
+stream = ExtResource("3_1j6ef")
+unit_size = 20.0
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=1890053575]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

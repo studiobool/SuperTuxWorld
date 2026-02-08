@@ -35,4 +35,3 @@ roughness = 0.1
 emission_enabled = true
 emission_energy_multiplier = 0.5
 emission_texture = ExtResource("6_7636x")
-uv1_scale = Vector3(3, 2, 2)

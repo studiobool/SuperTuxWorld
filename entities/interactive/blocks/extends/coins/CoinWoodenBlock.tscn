@@ -1,0 +1,167 @@
+[gd_scene format=3 uid="uid://b1ndydiw062cn"]
+
+[ext_resource type="Script" uid="uid://buqkx7tuflr4j" path="res://scripts/interactive/interact_extend/bonus_extend/CoinWoodenBlock.gd" id="1_u4u1b"]
+[ext_resource type="Material" uid="uid://dx3xb3or5f7bo" path="res://materials/bonus_block/empty_blue_bonus_block.tres" id="2_u4u1b"]
+[ext_resource type="ArrayMesh" uid="uid://fmhk2ubojsrm" path="res://models/bonus_block/crate.obj" id="3_kdn6y"]
+[ext_resource type="ArrayMesh" uid="uid://cdvu0du2ri1io" path="res://models/bonus_block/block.obj" id="4_rwxta"]
+[ext_resource type="Material" uid="uid://c7mtjk4tlka16" path="res://materials/wooden_brick.tres" id="5_rwxta"]
+[ext_resource type="AudioStream" uid="uid://b0oyjjlhu3rmw" path="res://sounds/coin.wav" id="5_to5kt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bmnvl"]
+size = Vector3(1.5, 1.5, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8qlkf"]
+size = Vector3(1.475, 0.1, 1.475)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xd3sr"]
+size = Vector3(1.55, 1.55, 1.55)
+
+[sub_resource type="Animation" id="Animation_06ue2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ehfnw"]
+resource_name = "hit_above"
+length = 0.2334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector3(0, -0.125, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector3(1.1, 0.9, 1.1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rkm6k"]
+resource_name = "hit_below"
+length = 0.2334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector3(0, 0.125, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector3(1.1, 0.9, 1.1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vuyj7"]
+_data = {
+&"RESET": SubResource("Animation_06ue2"),
+&"hit_above": SubResource("Animation_ehfnw"),
+&"hit_below": SubResource("Animation_rkm6k")
+}
+
+[node name="CoinBlock" type="StaticBody3D" unique_id=613419284 node_paths=PackedStringArray("mesh")]
+collision_layer = 5
+collision_mask = 15
+script = ExtResource("1_u4u1b")
+empty_mesh = ExtResource("4_rwxta")
+full_mesh = ExtResource("3_kdn6y")
+mesh = NodePath("MeshInstance3D")
+empty_mat = ExtResource("2_u4u1b")
+full_mat = ExtResource("5_rwxta")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1214806408]
+shape = SubResource("BoxShape3D_bmnvl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=617522294]
+mesh = ExtResource("3_kdn6y")
+surface_material_override/0 = ExtResource("5_rwxta")
+surface_material_override/1 = ExtResource("5_rwxta")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=2002681280]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
+collision_layer = 0
+collision_mask = 14
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1989639989]
+shape = SubResource("BoxShape3D_8qlkf")
+debug_color = Color(0, 0.5950001, 0.7, 1)
+
+[node name="Area3D2" type="Area3D" parent="." unique_id=2063085905]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+collision_layer = 0
+collision_mask = 14
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=1592881983]
+shape = SubResource("BoxShape3D_8qlkf")
+debug_color = Color(0, 0.5950001, 0.7, 1)
+
+[node name="Area3D3" type="Area3D" parent="." unique_id=1473219905]
+collision_layer = 0
+collision_mask = 14
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D3" unique_id=562887405]
+shape = SubResource("BoxShape3D_xd3sr")
+debug_color = Color(0, 0.5950001, 0.7, 1)
+
+[node name="CoinSound" type="AudioStreamPlayer3D" parent="." unique_id=1354539798]
+stream = ExtResource("5_to5kt")
+unit_size = 5.0
+max_polyphony = 4
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1046176893]
+libraries/ = SubResource("AnimationLibrary_vuyj7")
+
+[connection signal="body_entered" from="Area3D" to="." method="hit_below"]
+[connection signal="body_entered" from="Area3D2" to="." method="hit_above"]
+[connection signal="body_entered" from="Area3D3" to="." method="hit_water"]

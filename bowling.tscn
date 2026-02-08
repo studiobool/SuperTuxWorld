@@ -6,9 +6,8 @@
 [ext_resource type="FontFile" uid="uid://cgcreoeye0gaf" path="res://fonts/SuperTux-Medium.ttf" id="4_jadr7"]
 [ext_resource type="Script" uid="uid://b1ecuy3ocp6yy" path="res://scripts/special/object.gd" id="5_v0hut"]
 [ext_resource type="PackedScene" uid="uid://d1x8iynxnf8th" path="res://entities/player/player.tscn" id="6_ibas3"]
+[ext_resource type="PackedScene" uid="uid://b8ya88v2jc60e" path="res://entities/interactive/trampoline.tscn" id="7_1jwmk"]
 [ext_resource type="Script" uid="uid://cd7fcjsu2tl1e" path="res://debug_level.gd" id="7_g70ax"]
-[ext_resource type="Script" uid="uid://ja8m2wqk440i" path="res://scripts/SpringBounce.gd" id="8_5msds"]
-[ext_resource type="AudioStream" uid="uid://dnhh3onmos53s" path="res://sounds/trampoline.wav" id="9_wqot7"]
 [ext_resource type="Script" uid="uid://ctg4eljyhams3" path="res://scripts/Framecounter.gd" id="11_kf0ay"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6seei"]
@@ -74,29 +73,6 @@ size = Vector3(5.5, 1, 32)
 
 [sub_resource type="BoxMesh" id="BoxMesh_v0hut"]
 size = Vector3(5.5, 1, 32)
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_jadr7"]
-height = 0.75
-radius = 0.7
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_1jwmk"]
-top_radius = 0.25
-bottom_radius = 0.25
-height = 0.375
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v0hut"]
-albedo_color = Color(0.5, 0.5, 0.5, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_p3h5p"]
-bottom_radius = 0.75
-height = 0.375
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1nn6f"]
-albedo_color = Color(1, 0.05882353, 0.12156863, 1)
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_u5lbr"]
-height = 0.75
-radius = 0.75
 
 [sub_resource type="LabelSettings" id="LabelSettings_v0hut"]
 font = ExtResource("4_jadr7")
@@ -620,39 +596,8 @@ shape = SubResource("BoxShape3D_1jwmk")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1134439166]
 mesh = SubResource("BoxMesh_v0hut")
 
-[node name="Area3D" type="Area3D" parent="." unique_id=11649442]
+[node name="Trampoline" parent="." unique_id=1507155356 instance=ExtResource("7_1jwmk")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -6, 1, -31)
-collision_mask = 14
-script = ExtResource("8_5msds")
-bounce_power = Vector3(0, 0, 15)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1487608353]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
-shape = SubResource("CylinderShape3D_jadr7")
-
-[node name="BounceSound" type="AudioStreamPlayer3D" parent="Area3D" unique_id=762605597]
-stream = ExtResource("9_wqot7")
-unit_size = 20.0
-bus = &"SFX"
-attenuation_filter_cutoff_hz = 20500.0
-
-[node name="StaticBody3D2" type="StaticBody3D" parent="Area3D" unique_id=485866816]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D/StaticBody3D2" unique_id=811482455]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.175, 0)
-mesh = SubResource("CylinderMesh_1jwmk")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_v0hut")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Area3D/StaticBody3D2" unique_id=654647319]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.575, 0)
-mesh = SubResource("CylinderMesh_p3h5p")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_1nn6f")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D/StaticBody3D2" unique_id=492610512]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
-shape = SubResource("CylinderShape3D_u5lbr")
 
 [node name="CSGBox3D13" type="CSGBox3D" parent="." unique_id=1157049001]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 9, -8.5)
@@ -680,39 +625,8 @@ shape = SubResource("BoxShape3D_1jwmk")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2" unique_id=1464023403]
 mesh = SubResource("BoxMesh_v0hut")
 
-[node name="Area3D2" type="Area3D" parent="." unique_id=2062313765]
+[node name="Trampoline2" parent="." unique_id=1778512243 instance=ExtResource("7_1jwmk")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 14, 1, -31)
-collision_mask = 14
-script = ExtResource("8_5msds")
-bounce_power = Vector3(0, 0, 15)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=115016100]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
-shape = SubResource("CylinderShape3D_jadr7")
-
-[node name="BounceSound" type="AudioStreamPlayer3D" parent="Area3D2" unique_id=229438314]
-stream = ExtResource("9_wqot7")
-unit_size = 20.0
-bus = &"SFX"
-attenuation_filter_cutoff_hz = 20500.0
-
-[node name="StaticBody3D2" type="StaticBody3D" parent="Area3D2" unique_id=1142087818]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D2/StaticBody3D2" unique_id=808434813]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.175, 0)
-mesh = SubResource("CylinderMesh_1jwmk")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_v0hut")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Area3D2/StaticBody3D2" unique_id=920998444]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.575, 0)
-mesh = SubResource("CylinderMesh_p3h5p")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_1nn6f")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2/StaticBody3D2" unique_id=1280365855]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
-shape = SubResource("CylinderShape3D_u5lbr")
 
 [node name="Label" type="Label" parent="." unique_id=1156716557]
 anchors_preset = 3
@@ -753,6 +667,3 @@ gravity_direction = Vector3(0, 0, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D4" unique_id=974102222]
 shape = SubResource("BoxShape3D_v0hut")
-
-[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
-[connection signal="body_entered" from="Area3D2" to="Area3D2" method="_on_body_entered"]

@@ -1,9 +1,13 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://c7mtjk4tlka16"]
 
 [ext_resource type="Texture2D" uid="uid://qio4yxmdjgbj" path="res://textures/brick0.png" id="1_norbx"]
+[ext_resource type="Texture2D" uid="uid://dwwl40t5beg2t" path="res://textures/normal_test.png" id="2_eb6ty"]
 
 [resource]
 diffuse_mode = 3
 specular_mode = 1
 albedo_texture = ExtResource("1_norbx")
-uv1_scale = Vector3(3.005, 2, 2)
+normal_enabled = true
+normal_texture = ExtResource("2_eb6ty")
+stencil_flags = 2
+stencil_outline_thickness = 0.04

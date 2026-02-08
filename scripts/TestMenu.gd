@@ -4,6 +4,9 @@ extends VBoxContainer
 @onready var timer = $Timer
 var go_to_scene : String
 
+func _ready() -> void:
+	$Button.grab_focus.call_deferred()
+
 func select_level(scene: String) -> void:
 	hole_transition.hole_in()
 	timer.start()

@@ -41,9 +41,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -125.0
+offset_left = -123.0
 offset_top = -40.0
-offset_right = 125.0
+offset_right = 123.0
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -66,6 +66,8 @@ one_shot = true
 
 [node name="Button" type="Button" parent="Panel/VBoxContainer" unique_id=1674800477]
 layout_mode = 2
+focus_next = NodePath("../Button2")
+focus_previous = NodePath("../Button3")
 text = " "
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer/Button" unique_id=1799616913]
@@ -81,6 +83,8 @@ vertical_alignment = 1
 
 [node name="Button2" type="Button" parent="Panel/VBoxContainer" unique_id=1224347726]
 layout_mode = 2
+focus_next = NodePath("../Button3")
+focus_previous = NodePath("../Button")
 text = " "
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer/Button2" unique_id=1848412982]
@@ -96,6 +100,8 @@ vertical_alignment = 1
 
 [node name="Button3" type="Button" parent="Panel/VBoxContainer" unique_id=514697740]
 layout_mode = 2
+focus_next = NodePath("../Button")
+focus_previous = NodePath("../Button2")
 text = " 
 "
 

@@ -6,7 +6,7 @@ const exploding_coins = preload("res://entities/interactive/exploding_coins.tscn
 func _process(_delta: float) -> void:
 	_apply_material()
 
-func is_hit(body, hit):
+func is_hit(_body, hit):
 	if is_usable:
 		var instance = exploding_coins.instantiate()
 		if hit == "below":

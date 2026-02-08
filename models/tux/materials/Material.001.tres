@@ -14,4 +14,5 @@ albedo_texture = ExtResource("1_w3cor")
 distance_fade_min_distance = 1.5
 distance_fade_max_distance = 1.75
 stencil_flags = 2
+stencil_reference = 3
 stencil_outline_thickness = 0.0
