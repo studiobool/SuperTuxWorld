@@ -3,26 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://bwgeqim2wihbd" path="res://loading_hole.tscn" id="1_p3h5p"]
 [ext_resource type="AudioStream" uid="uid://dqunh1nunphr5" path="res://music/placeholder/snowfort.ogg" id="2_1jwmk"]
 [ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="3_u5lbr"]
+[ext_resource type="Environment" uid="uid://odswkcoqapp5" path="res://default_environment.tres" id="3_v0hut"]
 [ext_resource type="FontFile" uid="uid://cgcreoeye0gaf" path="res://fonts/SuperTux-Medium.ttf" id="4_jadr7"]
 [ext_resource type="Script" uid="uid://b1ecuy3ocp6yy" path="res://scripts/special/object.gd" id="5_v0hut"]
 [ext_resource type="PackedScene" uid="uid://d1x8iynxnf8th" path="res://entities/player/player.tscn" id="6_ibas3"]
 [ext_resource type="PackedScene" uid="uid://b8ya88v2jc60e" path="res://entities/interactive/trampoline.tscn" id="7_1jwmk"]
 [ext_resource type="Script" uid="uid://cd7fcjsu2tl1e" path="res://debug_level.gd" id="7_g70ax"]
 [ext_resource type="Script" uid="uid://ctg4eljyhams3" path="res://scripts/Framecounter.gd" id="11_kf0ay"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6seei"]
-sky_top_color = Color(0.3019608, 0.5058824, 0.8039216, 1)
-sky_horizon_color = Color(0.5860507, 0.82383144, 0.99999994, 1)
-ground_bottom_color = Color(0.1479, 0.1857933, 0.29, 1)
-ground_horizon_color = Color(0.20010002, 0.38789493, 0.69, 1)
-
-[sub_resource type="Sky" id="Sky_dbxb2"]
-sky_material = SubResource("ProceduralSkyMaterial_6seei")
-
-[sub_resource type="Environment" id="Environment_ov2oi"]
-background_mode = 2
-sky = SubResource("Sky_dbxb2")
-tonemap_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xqgq3"]
 transparency = 1
@@ -106,7 +93,7 @@ shadow_enabled = true
 directional_shadow_blend_splits = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1163301256]
-environment = SubResource("Environment_ov2oi")
+environment = ExtResource("3_v0hut")
 
 [node name="Player" parent="." unique_id=1334962843 instance=ExtResource("6_ibas3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 8)

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bhab70nvljhht" path="res://images/menu/frame.png" id="2_15mky"]
 [ext_resource type="PackedScene" uid="uid://bwgeqim2wihbd" path="res://loading_hole.tscn" id="3_fx0a5"]
 [ext_resource type="Script" uid="uid://dwo3p8g7qf2s6" path="res://scripts/TestMenu.gd" id="3_j7aup"]
+[ext_resource type="Script" uid="uid://bl7ef0snho2u2" path="res://theme/button.gd" id="4_qaj5k"]
 
 [node name="Control" type="Control" unique_id=338083596]
 layout_mode = 3
@@ -69,6 +70,7 @@ layout_mode = 2
 focus_next = NodePath("../Button2")
 focus_previous = NodePath("../Button3")
 text = " "
+script = ExtResource("4_qaj5k")
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer/Button" unique_id=1799616913]
 layout_mode = 1
@@ -86,6 +88,7 @@ layout_mode = 2
 focus_next = NodePath("../Button3")
 focus_previous = NodePath("../Button")
 text = " "
+script = ExtResource("4_qaj5k")
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer/Button2" unique_id=1848412982]
 layout_mode = 1
@@ -104,6 +107,7 @@ focus_next = NodePath("../Button")
 focus_previous = NodePath("../Button2")
 text = " 
 "
+script = ExtResource("4_qaj5k")
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer/Button3" unique_id=1753790518]
 layout_mode = 1

@@ -14,8 +14,8 @@ func _on_body_entered(body: Node3D) -> void:
 		body.apply_impulse(force * bounce_power * body.mass)
 	if body is CharacterBody3D:
 		if body is Player:
-			body.if_jumped = true
 			body.velocity.y = 0
+			body.if_jumped = true
 			if body.holding_jump:
 				body.jump(force * bounce_power)
 			else:
@@ -28,4 +28,6 @@ func animate(scale):
 		tween.kill()
 	tween = create_tween()
 	tween.tween_property(mesh, "scale", scale, 0.015).set_trans(Tween.TRANS_BOUNCE)
-	tween.tween_property(mesh, "scale", Vector3(1, 1, 1), 0.15).set_trans(Tween.TRANS_SPRING)
+	tween.tween_property(mesh, "scale", Vector3(.75, 1.25, .75), 0.1).set_trans(Tween.TRANS_SPRING)
+	tween.tween_property(mesh, "scale", Vector3(1.125, .84375, 1.125), 0.1).set_trans(Tween.TRANS_SPRING)
+	tween.tween_property(mesh, "scale", Vector3(1, 1, 1), 0.1).set_trans(Tween.TRANS_SPRING)

@@ -39,6 +39,7 @@
 [ext_resource type="Script" uid="uid://dkmhw5ine7hk8" path="res://scripts/player/Camera.gd" id="21_2h0qb"]
 [ext_resource type="Animation" uid="uid://bqt151akxby6u" path="res://models/tux/animations/Swim Idle.res" id="27_gt4e4"]
 [ext_resource type="Animation" uid="uid://b2o4oo3owme8c" path="res://models/tux/animations/Swimming.res" id="28_24ehl"]
+[ext_resource type="Texture2D" uid="uid://c7id3hvnjkg0k" path="res://images/particles/air_bubble-4.png" id="40_geky7"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_g3pa7"]
 frames = 6
@@ -247,6 +248,18 @@ _data = {
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gt4e4"]
 radius = 0.04
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qwspa"]
+gravity = Vector3(0, 4.9, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r633c"]
+transparency = 1
+albedo_texture = ExtResource("40_geky7")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_pacje"]
+material = SubResource("StandardMaterial3D_r633c")
+size = Vector2(0.15, 0.15)
 
 [node name="Player" type="CharacterBody3D" unique_id=1056028366 node_paths=PackedStringArray("PLAYER_COLLIDER")]
 collision_layer = 2
@@ -534,6 +547,18 @@ one_shot = true
 [node name="PoundTimer" type="Timer" parent="." unique_id=282680117]
 wait_time = 0.1
 one_shot = true
+
+[node name="Node3D" type="Node3D" parent="." unique_id=160310163]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D" unique_id=120756302]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+amount = 4
+amount_ratio = 0.5
+explosiveness = 0.5
+randomness = 1.0
+collision_base_size = 0.1
+process_material = SubResource("ParticleProcessMaterial_qwspa")
+draw_pass_1 = SubResource("QuadMesh_pacje")
 
 [connection signal="area_entered" from="Camera/Camera/Area3D" to="Camera" method="submerge"]
 [connection signal="area_exited" from="Camera/Camera/Area3D" to="Camera" method="emerge"]

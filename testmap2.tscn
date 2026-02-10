@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://i4pv7r0gkvbi" path="res://textures/checker.png" id="1_8sejj"]
 [ext_resource type="AudioStream" uid="uid://gtf2msqqqws6" path="res://music/placeholder/sunset.ogg" id="1_35xd0"]
 [ext_resource type="PackedScene" uid="uid://bwgeqim2wihbd" path="res://loading_hole.tscn" id="1_wg0fn"]
+[ext_resource type="Environment" uid="uid://odswkcoqapp5" path="res://default_environment.tres" id="3_ak1ch"]
 [ext_resource type="FontFile" uid="uid://cgcreoeye0gaf" path="res://fonts/SuperTux-Medium.ttf" id="3_xkjb2"]
 [ext_resource type="PackedScene" uid="uid://b18dvehhrjqsq" path="res://models/billboard/billboard.glb" id="4_8sejj"]
 [ext_resource type="PackedScene" uid="uid://d1x8iynxnf8th" path="res://entities/player/player.tscn" id="6_xkjb2"]
@@ -216,6 +217,7 @@ shadow_enabled = true
 directional_shadow_blend_splits = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2099599865]
+environment = ExtResource("3_ak1ch")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1729782781]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0)
