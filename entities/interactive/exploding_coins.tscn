@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dl30su4kxff0k"]
 
 [ext_resource type="PackedScene" uid="uid://b2mquvl0u27gt" path="res://entities/interactive/phys_coin.tscn" id="1_neswb"]
-[ext_resource type="Script" uid="uid://xkl8igiu6fg7" path="res://scripts/ExplodeForce.gd" id="3_lwgo2"]
+[ext_resource type="Script" uid="uid://xkl8igiu6fg7" path="res://scripts/ExplodeForceParticle.gd" id="3_lwgo2"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1h64e"]
 radius = 1.0

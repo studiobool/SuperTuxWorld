@@ -19,7 +19,8 @@ func _on_body_entered(body: Node3D) -> void:
 		body.stats.coins += 1
 		sound.play()
 		var tween = create_tween()
-		tween.tween_property(mesh, "position", Vector3(0, 2, 0), 0.25).set_trans(Tween.TRANS_SINE)
+		var target_position = mesh.global_position + Vector3(0, 2, 0)
+		tween.tween_property(mesh, "global_position", target_position, 0.25).set_trans(Tween.TRANS_SINE)
 		await tween.finished
 		mesh.visible = false
 		tween.kill()

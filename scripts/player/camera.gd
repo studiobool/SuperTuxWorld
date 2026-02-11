@@ -1,6 +1,7 @@
 extends Node3D
 
 @onready var camera = $Camera
+@onready var shake = $Camera/Shake
 @onready var springarm = $SpringArm3D
 @onready var marker = $SpringArm3D/Marker3D
 @onready var springpos = $SpringPos
@@ -24,6 +25,9 @@ var zoom_duration : float = 5
 var zoom_level : float = 5.0
 
 func _ready() -> void:
+	cam_rot2.x = deg_to_rad(master.camera_rotation.x)
+	cam_rot2.y = deg_to_rad(master.camera_rotation.y)
+	zoom_level = master.camera_zoom
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	top_level = true
 	springarm.top_level = true

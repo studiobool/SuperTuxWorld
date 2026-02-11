@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://caivu06kgpdk2" path="res://scripts/interactive/PhysCoin.gd" id="1_hkk3f"]
 [ext_resource type="AudioStream" uid="uid://d230weatwoe7w" path="res://sounds/coin2.ogg" id="2_0kj36"]
-[ext_resource type="Script" uid="uid://cix1m632p80gp" path="res://scripts/interactive/Coin.gd" id="3_slwfj"]
+[ext_resource type="Script" uid="uid://chm0kbopmdg7b" path="res://scripts/interactive/Coin_PhysicsEdition.gd" id="3_hkk3f"]
 [ext_resource type="AudioStream" uid="uid://b0oyjjlhu3rmw" path="res://sounds/coin.wav" id="4_hav7v"]
 [ext_resource type="Material" uid="uid://4gr84ic7moqf" path="res://models/coin/materials/Material.tres" id="5_kjt8u"]
 [ext_resource type="Material" uid="uid://dlifswosb67e8" path="res://models/coin/materials/Material.001.tres" id="6_lw8im"]
@@ -103,7 +103,7 @@ shape = SubResource("CylinderShape3D_aitf6")
 collision_layer = 0
 collision_mask = 15
 monitorable = false
-script = ExtResource("3_slwfj")
+script = ExtResource("3_hkk3f")
 mesh = NodePath("../MeshInstance3D")
 rotate = false
 

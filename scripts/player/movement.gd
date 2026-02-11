@@ -1,3 +1,4 @@
+@tool
 class_name Player extends StairsCharacterBody3D
 
 # Movement constants
@@ -68,16 +69,18 @@ var temp_safe : bool
 
 var state : String
 
-# Sets player and camera rotation (workaround)
+# Sets player and camera rotation (workaround, code relocated to camera and model scripts)
 func _ready() -> void:
-	model.rotation.y = deg_to_rad(player_rotation)
-	camera.cam_rot2.x = deg_to_rad(camera_rotation.x)
-	camera.cam_rot2.y = deg_to_rad(camera_rotation.y)
-	camera.zoom_level = camera_zoom
+	pass
 
 func _process(_delta: float) -> void:
 	item_pocket.value = stats.health
 	coin_counter.text = str(stats.coins)
+	if Engine.is_editor_hint():
+		model.rotation.y = deg_to_rad(player_rotation)
+		#camera.cam_rot2.x = deg_to_rad(camera_rotation.x)
+		#camera.cam_rot2.y = deg_to_rad(camera_rotation.y)
+		#camera.zoom_level = camera_zoom
 
 func hurt(damage,vector):
 	if !temp_safe:
@@ -86,6 +89,9 @@ func hurt(damage,vector):
 		temp_safe = true
 		safe_timer.start()
 		sfx._hurt()
+
+func add_shake(shake):
+	camera.shake.shake = shake
 
 func jump(vector):
 	velocity += vector

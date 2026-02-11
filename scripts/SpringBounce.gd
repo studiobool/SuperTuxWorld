@@ -30,4 +30,4 @@ func animate(scale):
 	tween.tween_property(mesh, "scale", scale, 0.015).set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_property(mesh, "scale", Vector3(.75, 1.25, .75), 0.1).set_trans(Tween.TRANS_SPRING)
 	tween.tween_property(mesh, "scale", Vector3(1.125, .84375, 1.125), 0.1).set_trans(Tween.TRANS_SPRING)
-	tween.tween_property(mesh, "scale", Vector3(1, 1, 1), 0.1).set_trans(Tween.TRANS_SPRING)
+	tween.tween_property(mesh, "scale", Vector3(1, 1, 1), 0.1).set_trans(Tween.TRANS_SINE)

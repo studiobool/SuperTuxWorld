@@ -40,6 +40,7 @@
 [ext_resource type="Animation" uid="uid://bqt151akxby6u" path="res://models/tux/animations/Swim Idle.res" id="27_gt4e4"]
 [ext_resource type="Animation" uid="uid://b2o4oo3owme8c" path="res://models/tux/animations/Swimming.res" id="28_24ehl"]
 [ext_resource type="Texture2D" uid="uid://c7id3hvnjkg0k" path="res://images/particles/air_bubble-4.png" id="40_geky7"]
+[ext_resource type="Script" uid="uid://cs6ee2h0kdrlc" path="res://scripts/player/Shake.gd" id="40_qwspa"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_g3pa7"]
 frames = 6
@@ -246,6 +247,10 @@ _data = {
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eyb6c"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qwspa"]
+seed = 2
+frequency = 0.05
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_gt4e4"]
 radius = 0.04
 
@@ -319,7 +324,7 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 80.0
 offset_bottom = 80.0
-value = 75.0
+value = 100.0
 fill_mode = 5
 texture_under = ExtResource("3_wuv6x")
 texture_progress = ExtResource("4_qpopc")
@@ -508,7 +513,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="Camera" type="Node3D" parent="Camera" unique_id=1771005642]
 
-[node name="Camera3D" type="Camera3D" parent="Camera/Camera" unique_id=825008445]
+[node name="Shake" type="Node3D" parent="Camera/Camera" unique_id=624104125]
+script = ExtResource("40_qwspa")
+shake_reduct = 2.5
+max_shake = Vector3(0.5, 0.5, 0)
+noise = SubResource("FastNoiseLite_qwspa")
+
+[node name="Camera3D" type="Camera3D" parent="Camera/Camera/Shake" unique_id=825008445]
 current = true
 fov = 80.0
 
@@ -552,6 +563,7 @@ one_shot = true
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D" unique_id=120756302]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+visible = false
 amount = 4
 amount_ratio = 0.5
 explosiveness = 0.5

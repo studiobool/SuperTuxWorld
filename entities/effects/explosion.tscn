@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://5xocbqgg8ntp"]
+
+[ext_resource type="Script" uid="uid://7hlmkl3jirjw" path="res://scripts/Explosion.gd" id="1_4m758"]
+[ext_resource type="Script" uid="uid://cq25gbbcfft0i" path="res://scripts/ExplodeForceDamage.gd" id="1_emv5f"]
+[ext_resource type="Texture2D" uid="uid://cytxci0ptdy34" path="res://images/explosion/explosion-0.png" id="2_7ws1e"]
+[ext_resource type="Script" uid="uid://bi6n24uwndwkq" path="res://scripts/ShakeArea.gd" id="2_snpak"]
+[ext_resource type="Texture2D" uid="uid://dx2skycqe8ht5" path="res://images/explosion/explosion-1.png" id="3_snpak"]
+[ext_resource type="Texture2D" uid="uid://bkeoejjux6sek" path="res://images/explosion/explosion-10.png" id="4_4m758"]
+[ext_resource type="Texture2D" uid="uid://i4m5uhbs6kvt" path="res://images/explosion/explosion-11.png" id="5_a0mbs"]
+[ext_resource type="Texture2D" uid="uid://cuvo7d7sohgye" path="res://images/explosion/explosion-12.png" id="6_h0hdx"]
+[ext_resource type="Texture2D" uid="uid://dgxxmybh803pr" path="res://images/explosion/explosion-2.png" id="7_la10c"]
+[ext_resource type="Texture2D" uid="uid://bhk6ofv4qvlci" path="res://images/explosion/explosion-3.png" id="8_vcam3"]
+[ext_resource type="Texture2D" uid="uid://blhhspldvvfhn" path="res://images/explosion/explosion-4.png" id="9_4s43t"]
+[ext_resource type="Texture2D" uid="uid://4lyqu0ejk4r7" path="res://images/explosion/explosion-5.png" id="10_5ohkj"]
+[ext_resource type="Texture2D" uid="uid://bew0rte2vfk4f" path="res://images/explosion/explosion-6.png" id="11_p6qdu"]
+[ext_resource type="Texture2D" uid="uid://t3l5e0w2i72u" path="res://images/explosion/explosion-7.png" id="12_2qsdh"]
+[ext_resource type="Texture2D" uid="uid://dt1hjp5fmm70f" path="res://images/explosion/explosion-8.png" id="13_it48t"]
+[ext_resource type="Texture2D" uid="uid://nlalohxchagf" path="res://images/explosion/explosion-9.png" id="14_q22cw"]
+[ext_resource type="AudioStream" uid="uid://3qx2efbwaxrd" path="res://sounds/explosion.wav" id="15_7ws1e"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rs42r"]
+radius = 2.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_r56kd"]
+radius = 16.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_57boe"]
+size = Vector2(8, 8)
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_gg2o1"]
+frames = 13
+one_shot = true
+speed_scale = 12.0
+frame_0/texture = ExtResource("2_7ws1e")
+frame_1/texture = ExtResource("3_snpak")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("7_la10c")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("8_vcam3")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("9_4s43t")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("10_5ohkj")
+frame_5/duration = 1.0
+frame_6/texture = ExtResource("11_p6qdu")
+frame_6/duration = 1.0
+frame_7/texture = ExtResource("12_2qsdh")
+frame_7/duration = 1.0
+frame_8/texture = ExtResource("13_it48t")
+frame_8/duration = 1.0
+frame_9/texture = ExtResource("14_q22cw")
+frame_9/duration = 1.0
+frame_10/texture = ExtResource("4_4m758")
+frame_10/duration = 1.0
+frame_11/texture = ExtResource("5_a0mbs")
+frame_11/duration = 1.0
+frame_12/texture = ExtResource("6_h0hdx")
+frame_12/duration = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yjdor"]
+transparency = 1
+albedo_texture = SubResource("AnimatedTexture_gg2o1")
+emission_enabled = true
+emission_energy_multiplier = 2.0
+emission_texture = SubResource("AnimatedTexture_gg2o1")
+billboard_mode = 1
+
+[node name="Node3D" type="Node3D" unique_id=1726046038]
+script = ExtResource("1_4m758")
+
+[node name="Area3D3" type="Area3D" parent="." unique_id=322236079]
+collision_layer = 0
+collision_mask = 270
+collision_priority = 2.0
+script = ExtResource("1_emv5f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D3" unique_id=1909522287]
+shape = SubResource("SphereShape3D_rs42r")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="Marker3D" type="Marker3D" parent="Area3D3" unique_id=224113461]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Area3D4" type="Area3D" parent="." unique_id=1698297182]
+collision_layer = 0
+collision_mask = 258
+collision_priority = 2.0
+script = ExtResource("2_snpak")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D4" unique_id=209268098]
+shape = SubResource("SphereShape3D_r56kd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1664365103]
+mesh = SubResource("QuadMesh_57boe")
+surface_material_override/0 = SubResource("StandardMaterial3D_yjdor")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1223380311]
+light_color = Color(1, 1, 0.49803922, 1)
+light_energy = 32.0
+shadow_enabled = true
+omni_range = 16.0
+omni_attenuation = 0.5
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="." unique_id=361587884]
+stream = ExtResource("15_7ws1e")
+unit_size = 20.0
+autoplay = true
+max_polyphony = 4
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 20500.0
+
+[connection signal="body_entered" from="Area3D4" to="Area3D4" method="do_shake"]
+[connection signal="finished" from="Sound" to="." method="_on_sound_finished"]
