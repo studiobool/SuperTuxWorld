@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://cgcreoeye0gaf" path="res://fonts/SuperTux-Medium.ttf" id="4_avfka"]
 [ext_resource type="PackedScene" uid="uid://d1x8iynxnf8th" path="res://entities/player/player.tscn" id="6_665ig"]
 [ext_resource type="Script" uid="uid://cd7fcjsu2tl1e" path="res://debug_level.gd" id="8_iw3ip"]
+[ext_resource type="PackedScene" uid="uid://5xocbqgg8ntp" path="res://entities/effects/explosion.tscn" id="9_6qmf3"]
 [ext_resource type="Script" uid="uid://ctg4eljyhams3" path="res://scripts/Framecounter.gd" id="12_sarhw"]
 [ext_resource type="PackedScene" uid="uid://b2r10k4tbwuid" path="res://entities/interactive/blocks/extends/WoodenBlock.tscn" id="21_pg3d8"]
 
@@ -904,3 +905,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4.2)
 
 [node name="Node" type="Node" parent="." unique_id=58827972]
 script = ExtResource("8_iw3ip")
+
+[node name="Node3D6" parent="." unique_id=1726046038 instance=ExtResource("9_6qmf3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -19)

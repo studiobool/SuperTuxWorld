@@ -401,7 +401,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27170706, -0.1696207, 0.21
 collision_layer = 256
 collision_mask = 319
 mass = 6.0
-continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 linear_velocity = Vector3(0, 6, 0)
 script = ExtResource("2_clm2r")
 
@@ -416,7 +417,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.044589758, 0.37704405, -0.
 collision_layer = 256
 collision_mask = 319
 mass = 6.0
-continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 linear_velocity = Vector3(0, 6, 0)
 script = ExtResource("2_clm2r")
 
@@ -431,7 +433,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.412673, -0.0846715, -0.1869
 collision_layer = 256
 collision_mask = 319
 mass = 6.0
-continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 linear_velocity = Vector3(0, 6, 0)
 script = ExtResource("2_clm2r")
 
@@ -446,7 +449,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3486867, 0.14064986, 0.3314
 collision_layer = 256
 collision_mask = 319
 mass = 6.0
-continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 linear_velocity = Vector3(0, 6, 0)
 script = ExtResource("2_clm2r")
 
@@ -461,7 +465,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3343861, -0.46425408, 0.409
 collision_layer = 256
 collision_mask = 319
 mass = 6.0
-continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 linear_velocity = Vector3(0, 6, 0)
 script = ExtResource("2_clm2r")
 
@@ -476,7 +481,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12966919, -0.0053836107, -
 collision_layer = 256
 collision_mask = 319
 mass = 6.0
-continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 linear_velocity = Vector3(0, 6, 0)
 script = ExtResource("2_clm2r")
 
@@ -491,7 +497,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1275971, 0.4350626, 0.40529
 collision_layer = 256
 collision_mask = 319
 mass = 6.0
-continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 linear_velocity = Vector3(0, 6, 0)
 script = ExtResource("2_clm2r")
 
@@ -506,7 +513,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5372007, 0.49933973, 0.3289
 collision_layer = 256
 collision_mask = 319
 mass = 6.0
-continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 linear_velocity = Vector3(0, 6, 0)
 script = ExtResource("2_clm2r")
 
@@ -521,7 +529,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, -0.37537864, -0.40667
 collision_layer = 256
 collision_mask = 319
 mass = 6.0
-continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 linear_velocity = Vector3(0, 6, 0)
 script = ExtResource("2_clm2r")
 
@@ -536,7 +545,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41110373, -0.47936302, 0.4
 collision_layer = 256
 collision_mask = 319
 mass = 6.0
-continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 linear_velocity = Vector3(0, 6, 0)
 script = ExtResource("2_clm2r")
 
@@ -551,7 +561,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0.3754106, -0.375)
 collision_layer = 256
 collision_mask = 319
 mass = 6.0
-continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 linear_velocity = Vector3(0, 6, 0)
 script = ExtResource("2_clm2r")
 
@@ -566,7 +577,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.50001264, 0.4252979, 0.374
 collision_layer = 256
 collision_mask = 319
 mass = 6.0
-continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 linear_velocity = Vector3(0, 6, 0)
 script = ExtResource("2_clm2r")
 
@@ -581,7 +593,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.375, -0.4257704, -0.4189365
 collision_layer = 256
 collision_mask = 319
 mass = 6.0
-continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 linear_velocity = Vector3(0, 6, 0)
 script = ExtResource("2_clm2r")
 
@@ -596,7 +609,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69770336, -0.66541576, 0.40
 collision_layer = 256
 collision_mask = 319
 mass = 6.0
-continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 linear_velocity = Vector3(0, 6, 0)
 script = ExtResource("2_clm2r")
 
@@ -611,7 +625,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.375, 0.41341877, -0.4036485
 collision_layer = 256
 collision_mask = 319
 mass = 6.0
-continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 linear_velocity = Vector3(0, 6, 0)
 script = ExtResource("2_clm2r")
 
@@ -626,7 +641,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5860145, 0.6575961, 0.60969
 collision_layer = 256
 collision_mask = 319
 mass = 6.0
-continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 linear_velocity = Vector3(0, 6, 0)
 script = ExtResource("2_clm2r")
 

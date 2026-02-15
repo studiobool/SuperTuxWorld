@@ -19,10 +19,10 @@
 [ext_resource type="AudioStream" uid="uid://3qx2efbwaxrd" path="res://sounds/explosion.wav" id="15_7ws1e"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rs42r"]
-radius = 2.0
+radius = 4.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_r56kd"]
-radius = 16.0
+radius = 32.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_57boe"]
 size = Vector2(8, 8)

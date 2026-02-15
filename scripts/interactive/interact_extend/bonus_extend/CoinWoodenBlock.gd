@@ -19,7 +19,7 @@ func _process(_delta: float) -> void:
 		mesh.mesh = empty_mesh
 
 func is_hit(body, _hit):
-	if is_usable:
+	if is_usable && body is Player:
 		sound.play()
 		body.stats.coins += 1
 		coins -= 1

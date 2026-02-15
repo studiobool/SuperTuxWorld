@@ -71,16 +71,15 @@ var state : String
 
 # Sets player and camera rotation (workaround, code relocated to camera and model scripts)
 func _ready() -> void:
-	pass
+	camera.cam_rot.x = deg_to_rad(camera_rotation.x)
+	camera.cam_rot.y = deg_to_rad(camera_rotation.y)
+	camera.springarm.spring_length = camera_zoom
 
 func _process(_delta: float) -> void:
 	item_pocket.value = stats.health
 	coin_counter.text = str(stats.coins)
 	if Engine.is_editor_hint():
 		model.rotation.y = deg_to_rad(player_rotation)
-		#camera.cam_rot2.x = deg_to_rad(camera_rotation.x)
-		#camera.cam_rot2.y = deg_to_rad(camera_rotation.y)
-		#camera.zoom_level = camera_zoom
 
 func hurt(damage,vector):
 	if !temp_safe:

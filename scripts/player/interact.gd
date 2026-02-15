@@ -37,7 +37,7 @@ func _process(_delta: float) -> void:
 		if raycast.get_collider().has_node("Interact"):
 			if Input.is_action_just_pressed("interact"):
 				if object == null:
-					#marker.global_rotation = raycast.get_collider().global_rotation
+					marker.global_rotation = raycast.get_collider().global_rotation
 					#raycast.get_collider().rotation = Vector3.ZERO
 					raycast.get_collider().freeze = true
 					object = raycast.get_collider()
