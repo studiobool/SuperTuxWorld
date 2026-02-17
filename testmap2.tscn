@@ -22,7 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://b2r10k4tbwuid" path="res://entities/interactive/blocks/extends/WoodenBlock.tscn" id="21_ak1ch"]
 [ext_resource type="PackedScene" uid="uid://b1ndydiw062cn" path="res://entities/interactive/blocks/extends/coins/CoinWoodenBlock.tscn" id="21_c3e3f"]
 [ext_resource type="PackedScene" uid="uid://d1n057rotli5v" path="res://entities/interactive/blocks/extends/coins/ExplodeCoinsBlock.tscn" id="21_vuyj7"]
-[ext_resource type="PackedScene" uid="uid://5xocbqgg8ntp" path="res://entities/effects/explosion.tscn" id="23_c3e3f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_06ue2"]
 render_priority = -1
@@ -711,38 +710,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 1.5)
 
 [node name="WoodenBlock8" parent="." unique_id=2121281397 instance=ExtResource("21_ak1ch")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 7, 1.5)
-
-[node name="Node3D" parent="." unique_id=1726046038 instance=ExtResource("23_c3e3f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 2, 0)
-
-[node name="WoodenBlock9" parent="." unique_id=1920932286 instance=ExtResource("21_ak1ch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 0.75, -1.5)
-
-[node name="WoodenBlock10" parent="." unique_id=3781264 instance=ExtResource("21_ak1ch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.75, -1.5)
-
-[node name="WoodenBlock11" parent="." unique_id=255957776 instance=ExtResource("21_ak1ch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0.75, -1.5)
-
-[node name="WoodenBlock12" parent="." unique_id=438448748 instance=ExtResource("21_ak1ch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 0.75, 0)
-
-[node name="WoodenBlock13" parent="." unique_id=2072660080 instance=ExtResource("21_ak1ch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.75, 0)
-
-[node name="WoodenBlock18" parent="." unique_id=1877634283 instance=ExtResource("21_ak1ch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 2.25, 0)
-
-[node name="WoodenBlock14" parent="." unique_id=41702902 instance=ExtResource("21_ak1ch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0.75, 0)
-
-[node name="WoodenBlock15" parent="." unique_id=195808779 instance=ExtResource("21_ak1ch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 0.75, 1.5)
-
-[node name="WoodenBlock16" parent="." unique_id=1970065881 instance=ExtResource("21_ak1ch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.75, 1.5)
-
-[node name="WoodenBlock17" parent="." unique_id=305585821 instance=ExtResource("21_ak1ch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0.75, 1.5)
 
 [connection signal="body_entered" from="Area3D2" to="Area3D2" method="_on_body_entered"]

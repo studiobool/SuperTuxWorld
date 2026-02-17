@@ -16,7 +16,6 @@ func _process(delta: float) -> void:
 		second_shockwave.enabled = false
 	
 	for a in shockwave.get_overlapping_bodies():
-		print("a")
 		if who is Player:
 			print("b")
 		if a is InteractBlock:
