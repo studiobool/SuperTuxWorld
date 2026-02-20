@@ -161,6 +161,8 @@ common/physics_interpolation=true
 [rendering]
 
 renderer/rendering_method="mobile"
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=1
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=1
 reflections/sky_reflections/texture_array_reflections=false
 shading/overrides/force_lambert_over_burley=true
 anti_aliasing/quality/use_debanding=true

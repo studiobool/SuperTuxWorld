@@ -22,8 +22,8 @@ func physics_update(delta: float) -> void:
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	player.direction = (player.transform.basis * Vector3(input_dir.x, 0, input_dir.y))
+	player.input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	player.direction = (player.transform.basis * Vector3(player.input_dir.x, 0, player.input_dir.y))
 	player.direction = player.direction.rotated(Vector3.UP, player.camera.camera.global_rotation.y)
 	var friction : Vector2
 	friction.x = (player.acceleration if player.direction.x else player.deceleration) * delta

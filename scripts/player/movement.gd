@@ -11,6 +11,7 @@ const ICE_DECEL = 0.75
 const MIN_POUND_THRESHOLD := -18.0
 
 # Movement stuff
+var input_dir : Vector2
 var direction: Vector3
 var move_dir:= Vector3.BACK
 var speed: float
@@ -113,7 +114,7 @@ func _push_away_rigid_bodies():
 			# Don't push object from above/below
 			push_dir.y = 0
 			# 5.0 is a magic number, adjust to your needs
-			var push_force = mass_ratio * 5.0
+			var push_force = mass_ratio * 10.0
 			c.get_collider().apply_impulse(push_dir * velocity_diff_in_push_dir * push_force, c.get_position() - c.get_collider().global_position)
 
 func safe_timeout() -> void:

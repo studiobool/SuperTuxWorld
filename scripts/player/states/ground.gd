@@ -64,7 +64,7 @@ func physics_update(delta: float) -> void:
 	if player.is_on_ceiling_only():
 		player.sfx._brick()
 	
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") && !player.head_detection.is_colliding():
 		player.jump_buffer_pressed = true
 		player.jump_buffer_timer = 0
 	
@@ -115,8 +115,8 @@ func physics_update(delta: float) -> void:
 			player.deceleration = player.deceleration * 2
 	
 	# Get the input direction and handle the movement/deceleration.
-	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	player.direction = (player.transform.basis * Vector3(input_dir.x, 0, input_dir.y))
+	player.input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	player.direction = (player.transform.basis * Vector3(player.input_dir.x, 0, player.input_dir.y))
 	player.direction = player.direction.rotated(Vector3.UP, player.camera.camera.rotation.y)
 	
 	var friction : Vector2
